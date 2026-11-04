@@ -1,0 +1,9 @@
+{
+  "context": "原名 piano-remotion，现名 AI有谱（aiyoupu）；只用于验证冻结历史记录，不是V2活动协议",
+  "approval": "piano-user-approval/v1",
+  "request": "piano-review-request/v1",
+  "response": "piano-user-response/v1",
+  "composition": "PianoRemotion-Song",
+  "performance": "piano-performance/v1",
+  "symbolic": "piano-symbolic-events/v2"
+}

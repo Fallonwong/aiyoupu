@@ -1,11 +1,11 @@
-# Visual configuration (V1.2.0)
+# Visual configuration (V2.1 candidate)
 
 Grounded in the 2026-10-24 decision: 14 kept options, 12 dropped. Retired choices remain readable in old jobs but are rejected for new presets.
 
-V1.2.0 provides the following portable configuration. Use `SCORE_PRESETS` from
+V2.1 candidate provides the following portable configuration. Use `SCORE_PRESETS` from
 `components/ScoreVideoConfig.ts` and `resolveScoreVideoConfig` from
 `components/resolveScoreVideoConfig.ts`. The resolver returns ordinary
-`PianoScoreScene` props: serialize those resolved props before the existing bind,
+`AiyoupuScoreScene` props: serialize those resolved props before the existing bind,
 keyframes and render workflow. Do not bind a wrapper whose settings differ from
 the JSON reviewed by the user.
 
@@ -51,7 +51,7 @@ const props = resolveScoreVideoConfig(config, {
   audioSrc: 'score/my-song/audio.wav',
   pipeline: 'full-score',
 });
-// Save JSON.stringify(props), then bind that file. Render PianoScoreScene.
+// Save JSON.stringify(props), then bind that file. Render AiyoupuScoreScene.
 ```
 
 All portable presets set `avatar: 'none'` and resolve to `overlay: {enabled:false}`.
@@ -59,7 +59,7 @@ No personal character, asset path, duration, aspect ratio or video special case 
 
 ## Configuration record
 
-Keep `piano-production/v2` and the real `confirmationQuote` / `messageRef`.
+Keep `aiyoupu-production/v2` and the real `confirmationQuote` / `messageRef`.
 For new presets, include `visual` with `cameraMode`, `texture`, `pipeline`,
 `typographyStyle`, `showProgress`, and `motionFx` from the selected config.
 Set `rightColor='#b895ff'`, `leftColor='#E95514'`; these are the main colors,

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:mp="http://www.mutopiaproject.org/piece-data/0.1/">
+
+<rdf:Description rdf:about=".">
+    <mp:title>Canon in D</mp:title>
+    <mp:composer>PachelbelJ</mp:composer>
+    <mp:opus/>
+    <mp:lyricist/>
+    <mp:for>Violin</mp:for>
+    <mp:date/>
+    <mp:style>Baroque</mp:style>
+    <mp:metre/>
+    <mp:arranger/>
+    <mp:source>Jim Paterson www.mfiles.co.uk (with permission)</mp:source>
+    <mp:licence>Creative Commons Attribution 3.0</mp:licence>
+
+    <mp:lyFile>CanonInD.ly</mp:lyFile>
+    <mp:midFile>CanonInD.mid</mp:midFile>
+    <mp:psFileA4>CanonInD-a4.ps.gz</mp:psFileA4>
+    <mp:pdfFileA4>CanonInD-a4.pdf</mp:pdfFileA4>
+    <mp:psFileLet>CanonInD-let.ps.gz</mp:psFileLet>
+    <mp:pdfFileLet>CanonInD-let.pdf</mp:pdfFileLet>
+    <mp:pngFile>CanonInD-preview.png</mp:pngFile>
+    <mp:pngHeight>46</mp:pngHeight>
+    <mp:pngWidth>509</mp:pngWidth>
+
+    <mp:id>Mutopia-2009/09/07-1700</mp:id>
+    <mp:maintainer>Anonymous</mp:maintainer>
+    <mp:maintainerEmail/>
+    <mp:maintainerWeb/>
+    <mp:moreInfo/>
+    <mp:lilypondVersion>2.12.2</mp:lilypondVersion>
+</rdf:Description>
+
+</rdf:RDF>

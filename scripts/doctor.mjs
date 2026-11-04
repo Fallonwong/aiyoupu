@@ -31,9 +31,9 @@ try {
   if(propsFileArg){const propsFile=path.resolve(propsFileArg);material=JSON.parse(fs.readFileSync(propsFile,'utf8'));report.assetSelection={mode:'explicit-props',propsFile};}
   else {
     let slug;
-    if(projectPackage?.name==='piano-remotion-portable-runtime'&&fs.existsSync(path.join(target,'src/index.tsx'))) {slug='demo';report.assetSelection={mode:'standalone',slug};}
-    else if(fs.existsSync(path.join(target,'src/piano-remotion-demo/index.tsx'))) {slug='piano-remotion-demo';report.assetSelection={mode:'existing-project',slug};}
-    else if(['demo','piano-remotion-demo'].some(s=>fs.existsSync(path.join(target,'public/score',s,'timeline.json')))) throw new Error('Score directories exist but no Piano installation is identified; pass --props <song-props.json> explicitly.');
+    if(projectPackage?.name==='aiyoupu-portable-runtime'&&fs.existsSync(path.join(target,'src/index.tsx'))) {slug='demo';report.assetSelection={mode:'standalone',slug};}
+    else if(fs.existsSync(path.join(target,'src/aiyoupu-demo/index.tsx'))) {slug='aiyoupu-demo';report.assetSelection={mode:'existing-project',slug};}
+    else if(['demo','aiyoupu-demo'].some(s=>fs.existsSync(path.join(target,'public/score',s,'timeline.json')))) throw new Error('Score directories exist but no AI有谱 installation is identified; pass --props <song-props.json> explicitly.');
     if(slug){const p=path.join(target,'public/score',slug,'timeline.json');material={timeline:JSON.parse(fs.readFileSync(p,'utf8')),scoreSrc:`score/${slug}/score.svg`};}
   }
   if(material){validateTimeline(material.timeline);check('timeline',true,`${material.timeline.events.length} attacks; structural check only`);

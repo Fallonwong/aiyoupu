@@ -1,0 +1,190 @@
+{
+  "schema": "aiyoupu-score-sources/v1",
+  "status": "example-not-production-approved",
+  "lookupOrder": [
+    "IMSLP",
+    "Mutopia",
+    "PDMX",
+    "GitHub",
+    "MuseScore",
+    "commercial"
+  ],
+  "limits": "Live page checks and imported old report entries distinguished; no claim that every library has been exhaustively searched. Unknown metadata remains null.",
+  "candidates": [
+    {
+      "library": "IMSLP",
+      "url": "https://imslp.org/wiki/Dreaming_of_Home_and_Mother_%28Mergen%2C_E._J.%29",
+      "title": "Dreaming of Home and Mother",
+      "composer": "E. J. Mergen",
+      "arranger": null,
+      "key": "F major",
+      "staves": null,
+      "measures": null,
+      "pages": 6,
+      "author": "KGill (uploader)",
+      "license": "Page labels Public Domain; jurisdiction not independently assessed",
+      "accessDate": "2026-11-02",
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "rejected-wrong-composer",
+      "reason": "Mergen piano work is not Ordway melody.",
+      "evidence": "live-page",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "Mutopia",
+      "url": "https://www.mutopiaproject.org/",
+      "title": null,
+      "composer": null,
+      "arranger": null,
+      "key": null,
+      "staves": null,
+      "measures": null,
+      "pages": null,
+      "author": null,
+      "license": null,
+      "accessDate": "2026-11-02",
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "search-no-match",
+      "reason": "Public web search for site:mutopiaproject.org Ordway returned no matched candidate; not an exhaustive catalogue search.",
+      "evidence": "live-page",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "PDMX",
+      "url": "https://github.com/pnlong/PDMX",
+      "title": null,
+      "composer": null,
+      "arranger": null,
+      "key": null,
+      "staves": null,
+      "measures": null,
+      "pages": null,
+      "author": null,
+      "license": null,
+      "accessDate": "2026-11-02",
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "catalogue-entry-only",
+      "reason": "Repository checked; no matching Songbie score downloaded or verified; no entire-dataset licence assumed.",
+      "evidence": "live-page",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "GitHub",
+      "url": "https://github.com/sbl1996/zero",
+      "title": "送别",
+      "composer": "John P. Ordway",
+      "arranger": null,
+      "key": "C major",
+      "staves": 1,
+      "measures": 4,
+      "pages": null,
+      "author": "sbl1996",
+      "license": null,
+      "accessDate": null,
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "melody-lead-only",
+      "reason": "Supplied comparison names rhythmPhrases.ts, 13 melody notes at quarter=80; exact source file and reuse permission not independently verified. Not a grand-staff score.",
+      "evidence": "imported-bundle-public-check-comparison.md; repository landing page accessed",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "MuseScore",
+      "url": null,
+      "title": "送别",
+      "composer": null,
+      "arranger": "Felix Sun",
+      "key": "C major",
+      "staves": 2,
+      "measures": null,
+      "pages": 2,
+      "author": "Felix Sun",
+      "license": null,
+      "accessDate": null,
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "not-adopted-commercial-arrangement",
+      "reason": "Supplied report describes ArrangeMe arrangement; exact URL/licence not supplied. Do not invent URL or download.",
+      "evidence": "imported-bundle-public-check-comparison.md",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "commercial",
+      "url": null,
+      "title": "送别-C调独奏",
+      "composer": null,
+      "arranger": "章鱼哥的钢琴",
+      "key": "C major",
+      "staves": 2,
+      "measures": null,
+      "pages": 1,
+      "author": "章鱼哥的钢琴",
+      "license": null,
+      "accessDate": null,
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "needs-review",
+      "reason": "Supplied report only; approximately quarter=73 and M2 left unresolved. No low-resolution transcription or version substitution.",
+      "evidence": "imported-bundle-public-check-comparison.md",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    },
+    {
+      "library": "commercial",
+      "url": null,
+      "title": "Dreaming of Home and Mother",
+      "composer": "John P. Ordway",
+      "arranger": null,
+      "key": null,
+      "staves": null,
+      "measures": null,
+      "pages": null,
+      "author": null,
+      "license": null,
+      "accessDate": null,
+      "recordDate": "2026-11-02",
+      "fileSha256": null,
+      "hashUnavailableReason": "No score file downloaded",
+      "status": "not-downloaded",
+      "reason": "Supplied report names SheetMusicPlus paid reprint; price and availability not rechecked.",
+      "evidence": "imported-bundle-public-check-comparison.md",
+      "versionCheck": {
+        "scoreMidiAudio": "not-matched; production blocked"
+      }
+    }
+  ],
+  "pilot": {
+    "status": "user-supplied-simplified-test-arrangement",
+    "formalScore": false,
+    "musicxmlFileSha256": "6e0c76ac963a67658244294e13249d289bd506306cd5bb4ee0654702a34bf9c2",
+    "midiFileSha256": "a887cf9dd631e0ca5f49d7dd49877d664f7eeaa98ca3a231d018995a45b474a6",
+    "audioFileSha256": "2f1400dbfe07d5d6d7f2e7d0b723facd95ebb36686d238f41b00fa664e33b363",
+    "versionCheck": "Local XML/MIDI/timeline tested separately; supplied audio provenance still requires approved fresh export/audition",
+    "M4": "C3 E3 G3 whole-note chord only; older G to C paragraph is superseded by v2",
+    "unresolved": [
+      "M2 left",
+      "quarter=73 vs 80",
+      "individual source rights"
+    ]
+  }
+}

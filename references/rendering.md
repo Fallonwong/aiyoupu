@@ -2,7 +2,7 @@
 
 # Geometry, review and rendering workflow
 
-Use `node <skill>/scripts/piano.mjs --help`. Runtime pins remain Remotion/CLI 4.0.515, React 19.2.4, TypeScript 5.9.3. Paths below are placeholders. Review packages/jobs are machine-local; re-bind after relocation.
+Use `node <skill>/scripts/aiyoupu-legacy.mjs --help`. Runtime pins remain Remotion/CLI 4.0.515, React 19.2.4, TypeScript 5.9.3. Paths below are placeholders. Review packages/jobs are machine-local; re-bind after relocation.
 
 ## Discover and prepare notation
 
@@ -11,16 +11,16 @@ Run doctor against the actual project and explicit authorized roots, then instal
 An optional **already installed** Audiveris executable can be used:
 
 ```sh
-node <skill>/scripts/piano.mjs score source --source <original.pdf> --audiveris-exe <Audiveris.exe> --pdftoppm <existing-pdftoppm> --out <new-source-dir> --python <existing-python>
+node <skill>/scripts/aiyoupu-legacy.mjs score source --source <original.pdf> --audiveris-exe <Audiveris.exe> --pdftoppm <existing-pdftoppm> --out <new-source-dir> --python <existing-python>
 ```
 
-The adapter follows the [official CLI](https://audiveris.github.io/audiveris/_pages/guides/advanced/cli/): `-batch -transcribe -export -output DIR -- INPUT`. It retains command/stdout/stderr and accepts one XML/MusicXML/MXL score. Multiple movements need explicit selection; unsafe MXL paths are rejected. Existing piano-omr/v1 wrappers and environment entry points remain supported. Missing OMR yields an actionable report, never invented transcription or forced installation.
+The adapter follows the [official CLI](https://audiveris.github.io/audiveris/_pages/guides/advanced/cli/): `-batch -transcribe -export -output DIR -- INPUT`. It retains command/stdout/stderr and accepts one XML/MusicXML/MXL score. Multiple movements need explicit selection; unsafe MXL paths are rejected. Existing aiyoupu-omr/v1 wrappers and environment entry points remain supported. Missing OMR yields an actionable report, never invented transcription or forced installation.
 
 For Agent-assisted reading, preserve note/measure uncertainties and original crops. Keep editable MusicXML. Start with a representative pilot for difficult scans. Do not silently invent a new per-song recognizer or discard rhythm, voices or ties.
 
 ```sh
-node <skill>/scripts/piano.mjs score check --musicxml <score.musicxml> --out <check-dir> --python <existing-python>
-node <skill>/scripts/piano.mjs music-from-check --check <check-dir/report.json> --placement <placement.json> --fps 30 --out <timeline.json>
+node <skill>/scripts/aiyoupu-legacy.mjs score check --musicxml <score.musicxml> --out <check-dir> --python <existing-python>
+node <skill>/scripts/aiyoupu-legacy.mjs music-from-check --check <check-dir/report.json> --placement <placement.json> --fps 30 --out <timeline.json>
 ```
 
 Placement comes from the actual engraver, never a guessed universal pitch split:
@@ -36,7 +36,7 @@ For an existing timeline, `music --timeline <input.json> --out <compiled.json>` 
 ## Preserve native SVG paths and coordinates
 
 ```sh
-node <skill>/scripts/piano.mjs geometry --svg <score.svg> --timeline <timeline.json> --mapping <timeline.json.mapping.json> --browser <existing-Chromium.exe> --out <new-geometry-dir>
+node <skill>/scripts/aiyoupu-legacy.mjs geometry --svg <score.svg> --timeline <timeline.json> --mapping <timeline.json.mapping.json> --browser <existing-Chromium.exe> --out <new-geometry-dir>
 ```
 
 Mapping uses eventIndex/noteIndex/svgId. The existing browser measures actual notehead IDs with getBBox/getScreenCTM. Original paths, dots, beams and ties are retained. Output contains timeline.json and layout.json; bind remeasures native geometry. External resources/scripts are rejected. Missing IDs require a real adapter. Centres are geometry anchors, not pitch recognition. The bounded fixture adapter does not certify arbitrary engraver exports.
@@ -46,7 +46,7 @@ Generate original/reflow crops with score compare and actual producer sidecars a
 ## First mandatory stop: score
 
 ```sh
-node <skill>/scripts/piano.mjs score-request --source <original.pdf> --source-type pdf --timeline <compiled.json> --comparison <compare-dir/report.json> --notation-audit <audit/report.json> --out <score-review-dir>
+node <skill>/scripts/aiyoupu-legacy.mjs score-request --source <original.pdf> --source-type pdf --timeline <compiled.json> --comparison <compare-dir/report.json> --notation-audit <audit/report.json> --out <score-review-dir>
 ```
 
 For ready SVG/MIDI without MusicXML, omit comparison and supply the original source, compiled timeline and optional --score <display.svg>. This direct branch does not claim XML semantic certification. PDF/staff-image/jianpu-image/musicxml/audio-derived notation requires real structural/crop comparison. Written pitches/durations/ties/slurs are checked against MusicXML before a PDF review request. Original source stays hashed after conversion.
@@ -54,21 +54,21 @@ For ready SVG/MIDI without MusicXML, omit comparison and supply the original sou
 Show the returned HTML, all measures and doubts. **Return WAITING_FOR_SCORE_APPROVAL and END THE TURN.** The user can download a response from the page or confirm in chat. A chat response must quote actual user words and the actual host message reference:
 
 ```json
-{"schema":"piano-user-response/v1","actor":"user","requestId":"displayed ID","bundleSha256":"displayed hash","decision":"approve","message":"actual user words","messageRef":"actual message reference","audioChoice":"synthesize"}
+{"schema":"aiyoupu-user-response/v1","actor":"user","requestId":"displayed ID","bundleSha256":"displayed hash","decision":"approve","message":"actual user words","messageRef":"actual message reference","audioChoice":"synthesize"}
 ```
 
 Audio choice is provided/synthesize/silent. Agent self-check cannot substitute for user confirmation. Local JSON binds versions, not cryptographic human identity. Never fabricate a response. A changes_requested response creates no approval.
 
 ```sh
-node <skill>/scripts/piano.mjs approve --request <score-review-dir/request.json> --response <user-response.json> --out <score-approval.json>
+node <skill>/scripts/aiyoupu-legacy.mjs approve --request <score-review-dir/request.json> --response <user-response.json> --out <score-approval.json>
 # Generate production audio with audio-plan/audio-render/audio-master; see workflow.md.
 ```
 
 Generated audio requires the user's audio choice. Built-in synthesize --preview-only is for calibration drafts; production audio follows [the audio workflow](workflow.md). Set real public-relative scoreSrc/audioSrc and the mapped timeline in song props. New aspect presets use timeline.focusPath from camera-path; props.presentation.cameraPath is a legacy mechanism. Establish [content/time evidence](performance-quality.md) and confirmed production configuration, then bind:
 
 ```sh
-node <skill>/scripts/piano.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original.pdf> --out <quality-result.json>
-node <skill>/scripts/piano.mjs bind --project <project> --props <props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --source-type pdf --score-review <compare-dir/report.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --browser <existing-Chromium.exe> --out <job.json>
+node <skill>/scripts/aiyoupu-legacy.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original.pdf> --out <quality-result.json>
+node <skill>/scripts/aiyoupu-legacy.mjs bind --project <project> --props <props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --source-type pdf --score-review <compare-dir/report.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --browser <existing-Chromium.exe> --out <job.json>
 ```
 
 User-reviewed comparisons can remain pending in the Agent-check layer: no bulk auto-approval is needed. Explicit silence needs --silent-confirmed and the user's silent audio choice. Camera/style changes require fresh keyframes; music changes require renewed score review.
@@ -76,14 +76,14 @@ User-reviewed comparisons can remain pending in the Agent-check layer: no bulk a
 ## Second mandatory stop: frames and audition
 
 ```sh
-node <skill>/scripts/piano.mjs keyframes --job <job.json> --out <frames-dir> --browser <existing-Chromium.exe>
+node <skill>/scripts/aiyoupu-legacy.mjs keyframes --job <job.json> --out <frames-dir> --browser <existing-Chromium.exe>
 ```
 
 Actual Remotion stills, frame timestamps, a short audio audition and a bounded motion clip for tie/slur inputs are retained with command logs. Inspect coverage of both hands/chords/line changes/connections/camera extremes; add representative views when needed. Still PNGs cannot prove legato. **Show the review, return WAITING_FOR_KEYFRAME_APPROVAL, END THE TURN.**
 
 ```sh
-node <skill>/scripts/piano.mjs approve --request <frames-dir/review/request.json> --response <user-response.json> --out <frame-approval.json>
-node <skill>/scripts/piano.mjs render --job <job.json> --approval <frame-approval.json> --out <new.mp4> --browser <existing-Chromium.exe> --confirmed
+node <skill>/scripts/aiyoupu-legacy.mjs approve --request <frames-dir/review/request.json> --response <user-response.json> --out <frame-approval.json>
+node <skill>/scripts/aiyoupu-legacy.mjs render --job <job.json> --approval <frame-approval.json> --out <new.mp4> --browser <existing-Chromium.exe> --confirmed
 ```
 
 Score approval or --confirmed alone cannot export a full song. Input/displayed media changes invalidate approval. Final verify checks actual streams/dimensions/fps/duration/non-silent PCM and sampled **sounding attacks**, excluding tie continuations. It does not certify all pitches or original-PDF accuracy. Legacy Demo/direct Remotion commands cannot be represented as checked completion.

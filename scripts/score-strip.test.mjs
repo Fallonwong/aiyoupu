@@ -14,7 +14,7 @@ ${[0,180,360].map((y,i)=>`<g transform="translate(0,${y})">${[50,60,70,80,90,110
 const timeline={fps:30,durationInFrames:120,scoreWidth:600,scoreHeight:540,events:[0,1,2].flatMap(i=>['right','left'].map(hand=>({frame:10+i*40,hand,systemId:i,x:120,y:(hand==='right'?70:120)+i*180,notes:[{id:hand+i,x:120,y:(hand==='right'?70:120)+i*180,pitch:hand==='right'?'C5':'C3',durationFrames:30,attack:true}]})))};
 const mapping=timeline.events.map((e,eventIndex)=>({eventIndex,noteIndex:0,svgId:(e.hand==='right'?'r':'l')+e.systemId,x:e.x,y:e.y}));
 const layout={scoreSha256:sha256(source),timelineSha256:hashObject(timeline),mapping};
-const packet={schema:'piano-strip-systems/v1',scoreSha256:sha256(source),timelineSha256:hashObject(timeline),systems:[{id:0,x:0,y:0,width:600,height:170,centerY:95},{id:1,x:0,y:180,width:600,height:175,centerY:275},{id:2,x:0,y:360,width:600,height:180,centerY:455}]};
+const packet={schema:'aiyoupu-strip-systems/v1',scoreSha256:sha256(source),timelineSha256:hashObject(timeline),systems:[{id:0,x:0,y:0,width:600,height:170,centerY:95},{id:1,x:0,y:180,width:600,height:175,centerY:275},{id:2,x:0,y:360,width:600,height:180,centerY:455}]};
 const write=(name,data)=>{const p=path.join(out,name);fs.writeFileSync(p,typeof data==='string'?data:JSON.stringify(data));return p;};
 const input={svg:write('source.svg',source),timeline:write('source-timeline.json',timeline),layout:write('source-layout.json',layout),systems:write('systems.json',packet),project,browser,out:path.join(out,'generated'),scale:.8,gap:4};
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS '+name);};

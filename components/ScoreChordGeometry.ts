@@ -1,31 +1,63 @@
-import type {ScoreAttack} from './ScoreNoteLeap';
+import type {ScoreAttack,ScoreNote} from './ScoreNoteLeap';
 
-type Point = {x: number; y: number};
+type Point = ScoreNote;
 export type ChordFlightGeometry = {
   heads: Point[];
   tails: Point[][];
   segments: {p1: Point; p2: Point; t: number}[];
 };
 
+/** Animation visits real attacks only. Written tie continuations extend the
+ * first note's duration, but never become a landing, a head or a launch pad.
+ * Keep the notation timeline intact for engraving, timing and score review. */
+export const scoreAttackEvents = (events:ScoreAttack[]):ScoreAttack[] => {
+  const attacks:ScoreAttack[]=[];
+  const sounding=new Map<string,{note:ScoreNote;frame:number}>();
+  const lane=(n:ScoreNote)=>`${n.part??''}:${n.voice??''}:${n.staff??''}:${n.pitch??''}`;
+  for(const event of events){
+    const notes:ScoreNote[]=[];
+    for(const written of event.notes??[event]){
+      const key=lane(written);
+      if(written.tieStop||written.attack===false){
+        const first=sounding.get(key);
+        const end=written.soundingEndFrame??(written.durationFrames===undefined?undefined:event.frame+written.durationFrames);
+        if(first&&end!==undefined)first.note.durationFrames=Math.max(first.note.durationFrames??0,end-first.frame);
+        continue;
+      }
+      const note={...written};
+      if(note.soundingEndFrame!==undefined)note.durationFrames=note.soundingEndFrame-event.frame;
+      sounding.set(key,{note,frame:event.frame});
+      notes.push(note);
+    }
+    if(notes.length)attacks.push({...event,notes,x:notes.reduce((s,n)=>s+n.x,0)/notes.length,y:notes.reduce((s,n)=>s+n.y,0)/notes.length});
+  }
+  return attacks;
+};
+
 // Geometric ordering only: this does not infer pitches, voices or hand assignments.
 const notesOf = (e: ScoreAttack): Point[] => {
   const notes = e.notes ?? [e];
-  return [...new Map(notes.map(n => [`${n.x}:${n.y}`, {x: n.x, y: n.y}])).values()]
+  return [...new Map(notes.map(n => [`${n.x}:${n.y}`, n])).values()]
     .sort((a, b) => a.y - b.y || a.x - b.x);
 };
 const connected = (a: ScoreAttack, b: ScoreAttack) => {
   const sa = (a as ScoreAttack & {systemId?: string | number}).systemId;
   const sb = (b as ScoreAttack & {systemId?: string | number}).systemId;
   return !(sa !== undefined && sb !== undefined && sa !== sb)
+    && (a.notes??[a]).some(n=>n.durationFrames===undefined||a.frame+n.durationFrames>=b.frame-.1)
     && b.x >= a.x - 200 && Math.abs(b.y - a.y) <= 200;
 };
-const pairsOf = (a: Point[], b: Point[]) => {
+const pairsOf = (a: Point[], b: Point[], span=0) => {
+  // A tied member still sounding through another chord's attack must not
+  // launch with that chord's newly struck members.
+  a=a.filter(n=>!n.tieStart||n.durationFrames===undefined||n.durationFrames<=span+.1);
   if (!a.length || !b.length) return [];
   const count = Math.max(a.length, b.length);
-  return Array.from({length: count}, (_, i) => ({
-    a: a[count === 1 ? 0 : Math.round(i * (a.length - 1) / (count - 1))],
-    b: b[count === 1 ? 0 : Math.round(i * (b.length - 1) / (count - 1))],
-  }));
+  return Array.from({length: count}, (_, i) => {
+    const target=b[count === 1 ? 0 : Math.round(i * (b.length - 1) / (count - 1))];
+    const source=a[count === 1 ? 0 : Math.round(i * (a.length - 1) / (count - 1))];
+    return {a:source,b:target};
+  }).filter(p=>p.a.durationFrames===undefined||p.a.durationFrames>=span-.1);
 };
 const position = (a: Point, b: Point, t: number, arc: number): Point => ({
   x: a.x + (b.x - a.x) * t,
@@ -55,15 +87,17 @@ const flightPoints = (pairs: ReturnType<typeof pairsOf>, t: number, arc: number,
 export const scoreChordGeometry = (
   events: ScoreAttack[] = [], frame = 0, arcHeight = 42, trailFrames = 16, fusionDistance = 18,
 ): ChordFlightGeometry => {
+  events=scoreAttackEvents(events);
   const result: ChordFlightGeometry = {heads: [], tails: [], segments: []};
   if (!events.length || frame < events[0].frame) return result;
   let current = events.findIndex(e => e.frame > frame);
   current = current < 0 ? events.length - 1 : current - 1;
   const a = events[current], b = events[current + 1];
-  if (!b || frame === a.frame) result.heads = notesOf(a);
+  const sounding=notesOf(a).filter(n=>n.durationFrames===undefined||frame<a.frame+n.durationFrames);
+  if (!b || frame === a.frame) result.heads = sounding.map(n=>({x:n.x,y:n.y}));
   else if (connected(a, b)) {
     const t = (frame - a.frame) / (b.frame - a.frame);
-    const points = flightPoints(pairsOf(notesOf(a), notesOf(b)), t, arcHeight, fusionDistance);
+    const points = flightPoints(pairsOf(notesOf(a), notesOf(b),b.frame-a.frame), t, arcHeight, fusionDistance);
     result.heads = [...new Map(points.map(p => [`${p.x}:${p.y}`, p])).values()];
   }
   if (trailFrames <= 0) return result;
@@ -74,7 +108,7 @@ export const scoreChordGeometry = (
     if (to && !connected(from, to)) break;
     if (to && to.frame > start && connected(from, to)) {
       const lo = Math.max(start, from.frame), hi = Math.min(frame, to.frame);
-      const pairs = pairsOf(notesOf(from), notesOf(to));
+      const pairs = pairsOf(notesOf(from), notesOf(to),to.frame-from.frame);
       if (hi > lo) for (let branch = 0; branch < pairs.length; branch++) {
         const count = Math.max(2, Math.ceil((hi - lo) * 3) + 1);
         const tail: Point[] = [];

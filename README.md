@@ -1,16 +1,19 @@
 <div align="center">
 
-# 🎹 Piano Remotion
+# 🎹 AI有谱
+
+> V2.1 预览版（`v2.1.0-rc.1`）：显示名 AI有谱，slug 为 `aiyoupu`。CLI、组合 ID、组件前缀及应用协议均已改名，这是破坏性迁移。旧交付保持冻结；参见 [迁移说明](history/migration-v2/migration-guide.md)。当前为预览版，不代表完整曲目制作已通过验收。
+
 
 **让乐谱随音乐跳起来。**
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.0.0-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.1.0--rc.1-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.0.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0)
+[快速开始](#快速开始) · [工作台预览](#可选工作台先看效果再定方向) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [仓库改名待确认](history/migration-v2/github-checklist.md)
 
 </div>
 
@@ -18,11 +21,11 @@
 
 > 将钢琴乐谱变成跟随音乐演奏的动态画面。先确认谱面，再确认画面与试听，让每一次修改都有清晰的依据。
 
-**核心能力**：四组视觉预设、三类背景与两类谱面质感；原谱多行拼接跑道工具；14 帧和弦合流、58/44 弧高，支持纯音头脉冲。所有预设默认无人物，不含私人 IP、曲目或字体。详见 [版本说明](RELEASE_NOTES.md)、[视觉配置](references/visual-presets.md)、[连续谱带](references/score-strip.md)。
+**核心能力**：工作台四预设、16:9 横屏教学预设（TeachingLandscape）、三类背景与两类谱面质感；原谱多行拼接跑道工具；14 帧和弦合流、58/44 弧高，支持纯音头脉冲。方向台只负责选方向，完整制作由 Agent CLI 接续（见[使用指南](README_使用说明.md)）。所有预设默认无人物，不含私人 IP、曲目或字体。详见 [视觉配置](references/visual-presets.md)、[连续谱带](references/score-strip.md)、[教学预设](references/teaching-landscape-v2.md)。
 
 ## 为钢琴乐谱而设计
 
-Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
+AI有谱 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
 
 - **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
 - **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
@@ -53,19 +56,31 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 以上为预览确认阶段的实际渲染画面。
 
-## 为钢琴乐谱而设计
+## 可选工作台：先看效果，再定方向
 
-Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
+想直观看效果时，可以打开工作台，选择预设、调整构图并预览动效。选好后点击「保存方向并复制」，把提示词交回 Agent，继续后续制作。也可以直接在对话中告诉 Agent 你的选择，全流程无需打开工作台。
 
-- **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
-- **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
-- **先看再出片**：谱面确认、关键帧与试听确认，两次停顿把决定权交给你。
-- **优先复用环境**：发现已有 Remotion、排谱工具和音源，按任务需要补齐能力。
-- **通用素材边界**：个人装饰默认关闭，作品素材由你提供。
+**横屏教学方向**：预览谱面、跟谱与跳动效果，在右侧调整画面参数。
 
-适合钢琴教学片段、曲谱演示、练习分享，以及带有音符跳跃效果的音乐视频。
+![AI有谱工作台：横屏教学方向与参数面板](assets/showcase/workbench-teaching.png)
 
-## 成品展示
+<details>
+<summary>查看竖屏方向预览</summary>
+
+![AI有谱工作台：黑曜石竖屏方向预览](assets/showcase/workbench-direction.png)
+
+</details>
+
+工作台负责确定视觉方向；乐谱校对、音频准备、关键帧审看和视频输出由 Agent 接续。没有提供音频时，预览会明确显示静音状态。
+
+以上为当前工作台的实际界面截图，使用项目内的《Canon in D》公开测试谱，仅展示界面与视觉方向，不代表成片验收。谱面来源及授权见[公开样本说明](workbench/canon-public-test/sources.json)（Mutopia Project，CC BY 3.0）。
+
+## 快速开始
+
+从 [V2.1 预览版下载页](https://github.com/Fallonwong/piano-remotion/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，解压后将 `aiyoupu/` 放入所用 Agent 的 Skill 目录。升级前保留旧 Skill、运行工程和任务资料，历史作品继续在原环境使用。
+
+新对话中告诉 Agent：「使用 $aiyoupu，先查看我的素材和已有环境，再开始制作。」已有依赖直接复用；安装和素材要求见[使用指南](README_使用说明.md)。工作台是可选入口，可以全程在 Agent 中完成。
+
 ## 你可以提供什么
 
 | 素材 | 推荐处理方式 |
@@ -219,7 +234,7 @@ MusicXML 能直接提供音高、节奏、声部和连线。谱面与音频来�
 统一执行入口：
 
 ```sh
-node <skill>/scripts/piano.mjs --help
+node <skill>/scripts/aiyoupu.mjs --help
 ```
 
 环境发现、素材处理、谱面审计、音源导出和视频制作通过脚本执行。Agent 负责理解需求、调用现有能力、展示待确认资料，并在用户确认后继续。
@@ -235,9 +250,9 @@ node <skill>/scripts/piano.mjs --help
 
 <div align="center">
 
-**Piano Remotion · V1.2.0**
+**AI有谱 · V2.1 预览版**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[仓库迁移清单](history/migration-v2/github-checklist.md) · [迁移说明](history/migration-v2/migration-guide.md) · [许可仍未指定：历史通知](history/v130/LICENSE.txt)
 
 </div>

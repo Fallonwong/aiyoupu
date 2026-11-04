@@ -1,7 +1,7 @@
 // Portable configuration; assets are supplied explicitly by each project.
 
 /**
- * 钢琴动效视频统一规范配置体系 (Piano Remotion Configuration Matrix)
+ * 钢琴动效视频统一规范配置体系 (AI有谱 Configuration Matrix)
  * 依据 2026-10-24 用户样式精简决议正式固化（14 保留项 / 12 裁撤项）。
  *
  * ❌ 明确永久剔除项：

@@ -5,7 +5,7 @@
 ## 只有 PDF / 五线谱图片 / 简谱图片
 
 ```text
-使用 $piano-remotion，先读取官方 $remotion-best-practices。
+使用 $aiyoupu，先读取官方 $remotion-best-practices。
 我提供的乐谱是 <路径>，请制作原版钢琴跳跃动效视频。
 优先调用已安装的专业 OMR，保留时值、左右手声部、休止符、和弦、延音线和圆滑线。
 先向我展示逐小节原谱与重排谱对照、疑点和可编辑 MusicXML，停下来等我确认。
@@ -16,7 +16,7 @@
 ## MusicXML / MIDI / SVG 与时间轴
 
 ```text
-使用 $piano-remotion，读取官方 $remotion-best-practices。
+使用 $aiyoupu，读取官方 $remotion-best-practices。
 素材 <路径>，已有工程 <路径>，录音 <MP3 路径，如无则说明>。
 复用兼容依赖，保持原跳跃、发光、高亮和运镜。SVG 必须匹配真实排版的音符坐标。
 保留 MusicXML/MIDI 的真实音高和时值；缺声部或符号时提出疑点。
@@ -26,7 +26,7 @@
 ## 只有 MP3
 
 ```text
-使用 $piano-remotion，读取官方 $remotion-best-practices。
+使用 $aiyoupu，读取官方 $remotion-best-practices。
 我只有 <MP3 路径>，请制作跟谱钢琴视频。先发现现有转谱/排谱/对齐工具，不强制装整套 CLI。
 保留原录音，不额外编配。转谱不确定处要列出；不要假定音频能唯一恢复原谱声部、连线或左右手。
 先展示生成的谱面并等待我确认，再展示关键帧与原录音短试听并等待确认，之后导出和验证。

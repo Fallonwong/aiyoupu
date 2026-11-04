@@ -154,7 +154,7 @@ export async function prepare(args) {
       if (!tool) fail(`preprocessor executable not found: ${args.preprocessor}`);
       if (/\.(cmd|bat)$/i.test(tool)) fail('preprocessor must be a native executable; wrap scripts in an executable (shell execution is disabled)');
       await fs.mkdir(path.dirname(out), { recursive: true });
-      staging = await fs.mkdtemp(path.join(path.dirname(out), '.piano-prepare-'));
+      staging = await fs.mkdtemp(path.join(path.dirname(out), '.aiyoupu-prepare-'));
       const commandArgs = ['--out', staging];
       for (const [key, file] of Object.entries(inputs)) commandArgs.push(`--${key}`, file);
       const result = spawnSync(tool, commandArgs, { shell: false, windowsHide: true, timeout: 120000, maxBuffer: 1024 * 1024, encoding: 'utf8' });
@@ -185,7 +185,7 @@ export async function prepare(args) {
     }
     if (!staging) {
       await fs.mkdir(path.dirname(out), { recursive: true });
-      staging = await fs.mkdtemp(path.join(path.dirname(out), '.piano-prepare-'));
+      staging = await fs.mkdtemp(path.join(path.dirname(out), '.aiyoupu-prepare-'));
     }
     // Only known bundle files are published, never arbitrary preprocessor outputs.
     const bundle = path.join(staging, 'bundle');

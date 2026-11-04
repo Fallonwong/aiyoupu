@@ -1,0 +1,10 @@
+import React from 'react';
+import * as R from 'react';
+import * as RD from 'react-dom/client';
+import * as Rem from 'remotion';
+import {Player} from '@remotion/player';
+import {AiyoupuScoreScene} from '../components/AiyoupuScoreSceneV2';
+window.React = R;
+window.ReactDOM = RD;
+window.Remotion = {...Rem, Player};
+window.AiyoupuWorkbenchScene = AiyoupuScoreScene;

@@ -7,7 +7,7 @@ const fail=(code,message)=>{throw failure(code,message,'Present actual source/au
 export function evaluateQuality({timeline,audio,review,check,originalSourceSha256,sourceScope}){
   const s=timeline.symbolic,map=timeline.map;validateTimeMap(map,s,audio);validateMappedNotation(timeline,check);
   const media=probeMedia(audio);if(!media.streams.some(s=>s.codec_type==='audio')||map.anchors.at(-1).seconds>media.duration+2/timeline.fps)fail('QUALITY_AUDIO_COVERAGE','Mapped score extends beyond actual audio');
-  if(review.schema!=='piano-quality-review/v2'||review.scoreSha256!==s.scoreSha256||review.audioSha256!==map.audioSha256||review.mapSha256!==hashObject(map)||review.checkSha256!==hashObject(check))fail('QUALITY_STALE','Review belongs to other score/audio/map/check');
+  if(review.schema!=='aiyoupu-quality-review/v2'||review.scoreSha256!==s.scoreSha256||review.audioSha256!==map.audioSha256||review.mapSha256!==hashObject(map)||review.checkSha256!==hashObject(check))fail('QUALITY_STALE','Review belongs to other score/audio/map/check');
   if(review.actor!=='user'||!review.messageRef?.trim()||!review.message?.trim())fail('QUALITY_USER_EVIDENCE_REQUIRED','Actual independent user review required; local JSON does not authenticate identity');
   if(!Object.keys(review.fingerprints??{}).length)fail('QUALITY_EVIDENCE_REQUIRED','Source crops/audio annotations required');
   for(const [p,h]of Object.entries(review.fingerprints))if(!fs.existsSync(p)||sha256(fs.readFileSync(p))!==h)fail('QUALITY_STALE',p);
@@ -35,7 +35,7 @@ export function evaluateQuality({timeline,audio,review,check,originalSourceSha25
   errors.sort((a,b)=>a-b);
   const median=errors[Math.floor(errors.length/2)]??null,p95=errors[Math.min(errors.length-1,Math.ceil(errors.length*.95)-1)]??null;
   if(median!==null&&median>1/timeline.fps)issues.push({code:'MEDIAN_TIMING_ERROR',seconds:median});
-  return {schema:'piano-quality-result/v2',status:issues.length?'needs_review':'passed_within_scope',scope:'complete reviewed symbolic occurrences against this exact audio; human evidence, not automatic accuracy certification',scoreSha256:s.scoreSha256,audioSha256:map.audioSha256,mapSha256:hashObject(map),reviewSha256:hashObject(review),reviewedNotes:items.length,expectedNotes:ids.size,coverage:items.length/ids.size,issues,timing:{medianSeconds:errors[Math.floor(errors.length/2)]??null,p95Seconds:errors[Math.min(errors.length-1,Math.ceil(errors.length*.95)-1)]??null},accuracyCertified:false};
+  return {schema:'aiyoupu-quality-result/v2',status:issues.length?'needs_review':'passed_within_scope',scope:'complete reviewed symbolic occurrences against this exact audio; human evidence, not automatic accuracy certification',scoreSha256:s.scoreSha256,audioSha256:map.audioSha256,mapSha256:hashObject(map),reviewSha256:hashObject(review),reviewedNotes:items.length,expectedNotes:ids.size,coverage:items.length/ids.size,issues,timing:{medianSeconds:errors[Math.floor(errors.length/2)]??null,p95Seconds:errors[Math.min(errors.length-1,Math.ceil(errors.length*.95)-1)]??null},accuracyCertified:false};
 }
 export function requireQuality(file,{timeline,audio,originalSourceSha256}){
   const packet=JSON.parse(fs.readFileSync(file,'utf8'));
@@ -45,7 +45,7 @@ export function requireQuality(file,{timeline,audio,originalSourceSha256}){
 }
 export function validateProduction(config,props){
   const failConfig=message=>fail('PRODUCTION_CONFIRMATION_REQUIRED',message);
-  if(config.schema!=='piano-production/v2'||!config.messageRef?.trim()||!config.confirmationQuote?.trim())failConfig('Record actual user configuration confirmation');
+  if(config.schema!=='aiyoupu-production/v2'||!config.messageRef?.trim()||!config.confirmationQuote?.trim())failConfig('Record actual user configuration confirmation');
   if(!['16:9','9:16'].includes(config.aspectRatio)||!['slate','parchment','dark','kraft','pure-white','custom','slate-gray','obsidian-dark','deep-sapphire'].includes(config.theme))failConfig('Choose aspect and theme');
   if(!/^#[0-9a-f]{6}$/i.test(config.rightColor??'')||!/^#[0-9a-f]{6}$/i.test(config.leftColor??'')||!['first-four-keyframes','first-four-pilot'].includes(config.milestone))failConfig('Choose colors and first-four milestone');
   if(!['none','asset'].includes(config.avatar?.kind)||config.avatar.kind==='asset'&&!config.avatar.src)failConfig('Choose no avatar or explicit project asset');

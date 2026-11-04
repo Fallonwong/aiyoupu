@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 const fail=(code,message)=>{throw Object.assign(new Error(message),{code,next:'Preserve note durations, voices and tie/slur declarations from reviewed notation; do not infer missing values.'});};
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 export function musicIdentity(t){
-  if(t.notation?.schema==='piano-symbolic-events/v2'){validateSymbolic(t.symbolic);if(t.symbolic.scoreSha256!==t.notation.scoreSha256)fail('NOTATION_IDENTITY_STALE','Changed symbolic source');return t.notation.scoreSha256;}
+  if(t.notation?.schema==='aiyoupu-symbolic-events/v2'){validateSymbolic(t.symbolic);if(t.symbolic.scoreSha256!==t.notation.scoreSha256)fail('NOTATION_IDENTITY_STALE','Changed symbolic source');return t.notation.scoreSha256;}
   return hash({fps:t.fps,durationInFrames:t.durationInFrames,events:t.events.map(e=>({hand:e.hand,frame:e.frame,notes:e.notes.map(n=>({id:n.id,pitch:n.pitch,durationFrames:n.durationFrames,voice:n.voice,part:n.part,tieStart:n.tieStart,tieStop:n.tieStop,slurs:n.slurs,beams:n.beams}))}))});
 }
 export function performance(t,{strict=false}={}){
@@ -54,7 +54,7 @@ export function compilePerformance(t,options={}){
     const id=n.id??`${e.hand}:${e.frame}:${j}`,span=p.byNote.get(id);
     Object.assign(n,{id,attack:!n.tieStop,soundingStartFrame:span.startFrame,soundingEndFrame:span.endFrame,highlightEndFrame:e.frame+(n.durationFrames??e.durationFrames??.65*t.fps)});serial++;
   }
-  out.music={schema:'piano-performance/v1',musicSha256:musicIdentity(out),writtenNotes:serial,soundingAttacks:p.spans.length,legacyDurations:p.legacyDurations};return out;
+  out.music={schema:'aiyoupu-performance/v1',musicSha256:musicIdentity(out),writtenNotes:serial,soundingAttacks:p.spans.length,legacyDurations:p.legacyDurations};return out;
 }
 export function attackFrames(t){return [...new Set(performance(t).spans.map(s=>s.startFrame))].sort((a,b)=>a-b);}
 export function fromStructuredScore(check,placement,{fps=30,leadFrames=10,tailFrames=15}={}){
@@ -87,7 +87,7 @@ export function fromStructuredScore(check,placement,{fps=30,leadFrames=10,tailFr
   return {timeline:t,mapping:ids};
 }
 export function validateNotationMapping(t,check){
-  if(t.notation?.schema==='piano-symbolic-events/v2')return validateMappedNotation(t,check);
+  if(t.notation?.schema==='aiyoupu-symbolic-events/v2')return validateMappedNotation(t,check);
   if(!check.structuralPassed||!t.tempoBpm||t.sourceMusicxmlSha256!==check.sourceSha256)fail('NOTATION_MAPPING_REQUIRED','Use music-from-check with the actual structural report.');
   const fraction=s=>{const [a,b=1]=String(s).split('/').map(Number);return a/b;};
   const source=new Map(),partOffsets=new Map();for(const m of check.measures){const offset=partOffsets.get(m.part)??0;m.events.forEach((e,i)=>{if(e.kind==='note')source.set(`${m.id}:${i}`,{...e,sourcePart:m.part,absoluteQuarter:offset+fraction(e.onsetQuarter)});});partOffsets.set(m.part,offset+fraction(m.durationQuarter));}

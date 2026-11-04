@@ -1,6 +1,6 @@
 {
-  "name": "piano-remotion",
-  "version": "1.0.0",
+  "name": "aiyoupu",
+  "version": "2.1.0-rc.1",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -8,28 +8,40 @@
     "typescript": "5.9.3"
   },
   "repository": "https://github.com/Fallonwong/piano-remotion",
-  "releaseStatus": "stable",
-  "releaseDate": "2026-10-27",
+  "releaseStatus": "prerelease",
+  "releaseDate": "2026-11-04",
   "files": {
     ".gitattributes": {
       "bytes": 170,
       "sha256": "f9d1a3dcdfeaa85845b0605397d03732b65ee765bb42c6db9b64d60d7f9b779b"
     },
     ".gitignore": {
-      "bytes": 299,
-      "sha256": "f9e7471eb08d255fe7e9c6cb8ac294100728dcea529b38a65b9a23d0c7f543a0"
+      "bytes": 1020,
+      "sha256": "46ae4ad28d7f95a580863c0f1f74d81b60fd5a5737be2fe0259aef8f81b81f5d"
+    },
+    "README.md": {
+      "bytes": 18903,
+      "sha256": "4f963c0912727aa1b7da10ac64b84348dc8bab9ff1ed5a90b0f11abc267a17a4"
+    },
+    "README_使用说明.md": {
+      "bytes": 10702,
+      "sha256": "7ad91fc82a49753fa410e9ad5292d8e0cc56398de17b9e9b66b0de6032fb0ff6"
+    },
+    "SKILL.md": {
+      "bytes": 15079,
+      "sha256": "9bddb7fc6a97c156d0c91cc0aa27291b84285c965debe754150192cde1de8069"
     },
     "agents/openai.yaml": {
-      "bytes": 421,
-      "sha256": "7678783a5c9c90ebb65e47b95ec08e7483a2ffd8b188d3649e834c7ad7a26646"
+      "bytes": 489,
+      "sha256": "76365dc96f2fa94d417d32470fdfba1462766574c0a4fee5770b084a0a17142f"
     },
     "assets/runtime/package-lock.json": {
-      "bytes": 139418,
-      "sha256": "581db31b0a0dbc72085b96f453c92a24550de7180c98cafd258996c8d644fc4b"
+      "bytes": 143228,
+      "sha256": "18eaf238b921fec76dd87e6774002d19c04b7df27145180489f35c60db2ada13"
     },
     "assets/runtime/package.json": {
-      "bytes": 575,
-      "sha256": "cd19690d09655cfdda397f8a7016c238e6614d5899667ff9808d4dff6b9d1242"
+      "bytes": 637,
+      "sha256": "226798788d544855df3d5616f5678ebd559172a58b90c0a033c2eaa90c376478"
     },
     "assets/runtime/public/score/demo/score.svg": {
       "bytes": 5209,
@@ -49,15 +61,23 @@
     },
     "assets/runtime/src/index.tsx": {
       "bytes": 834,
-      "sha256": "d7b8bd045ebc00304a00b8bb889b27e8a25df47d62cb09b4e7be38ab8e309639"
+      "sha256": "b8b065d7c29bf9a759faac8b435d9b8f6ea19037f0404efd9c4b56c434cfc583"
+    },
+    "assets/runtime/src/song-v2.tsx": {
+      "bytes": 1100,
+      "sha256": "2c14d36bc0ab18e0e9a791c944e0fdcb00edcdbcdf431daacc41eb0096fbb739"
     },
     "assets/runtime/src/song.tsx": {
-      "bytes": 1078,
-      "sha256": "0db762bae5660fcb59472b11eb0e32babed28c68bfc9b4e894904ce9a022c4f6"
+      "bytes": 1084,
+      "sha256": "c6ec25e6392287376375ce78c6da17749804ecd932d60ac9ece2b89424179b61"
     },
     "assets/runtime/tsconfig.json": {
       "bytes": 242,
       "sha256": "5e1bcd3ddc193b2fd7178fdf9cd803a84193687c430ed7064093c5875230d561"
+    },
+    "assets/showcase/douyin-cover.jpg": {
+      "bytes": 384197,
+      "sha256": "dec6f575241924fc4ffea3f4be1dacaa419d13d7637b527cf853ca22398640ae"
     },
     "assets/showcase/lalaland-cover.jpg": {
       "bytes": 97703,
@@ -66,6 +86,10 @@
     "assets/showcase/lalaland-score.jpg": {
       "bytes": 2998848,
       "sha256": "bdbaf1385e7447903f39ecddb86afa582dd87a9e73f9adc037b068970af7858e"
+    },
+    "assets/showcase/real-gallery.jpg": {
+      "bytes": 251965,
+      "sha256": "d2297635dcff56a9c75b103bbf9d9597751504a608638270d75aef4af5146453"
     },
     "assets/showcase/real-landscape-16x9.jpg": {
       "bytes": 287825,
@@ -83,6 +107,30 @@
       "bytes": 307293,
       "sha256": "ef3a6858ab7d713a5e44e6ca5bffa14190ac42e69117a5f0924bcf30c641bde2"
     },
+    "assets/showcase/workbench-direction.png": {
+      "bytes": 139009,
+      "sha256": "2a3470031a59b5923d9b3f3041c6c07cd2a479628d23b70d3aedf9f67a9001ec"
+    },
+    "assets/showcase/workbench-teaching.png": {
+      "bytes": 118051,
+      "sha256": "66f006d4ff04f361d4f089aacb27e38e5fa6d0c4db3572c6db9ce95219e74a13"
+    },
+    "components/Aiyoupu.tsx": {
+      "bytes": 144,
+      "sha256": "0354e8f5feec60a8c9c18ed475b1fcc5b5c746bbf061deb2fd7260c881ef97ae"
+    },
+    "components/AiyoupuPresentation.ts": {
+      "bytes": 1385,
+      "sha256": "8040e454567310495ca814df693336948be02b374b5bf51ccf03591f520335eb"
+    },
+    "components/AiyoupuScoreScene.tsx": {
+      "bytes": 13544,
+      "sha256": "f1bd3e6af03a8d6b8cf1ffe552f9046c2d5bf7a2d1851a0a0e7adf5d34469821"
+    },
+    "components/AiyoupuScoreSceneV2.tsx": {
+      "bytes": 10318,
+      "sha256": "ab61c08ec741ac9caaa3c2db672c9143dc4367ae4a032728d20327b93a89d4b3"
+    },
     "components/CosmicNebula.tsx": {
       "bytes": 9179,
       "sha256": "ced9af5d25d709ff8713dfe36e9e16450a05ca4c698c173b6093ac8383348105"
@@ -91,229 +139,453 @@
       "bytes": 2924,
       "sha256": "9dc6fbab86811087b1add76656dc1b52e9fbccc4f93f94ab5486bfe84ef52ae1"
     },
-    "components/PianoPresentation.ts": {
-      "bytes": 1385,
-      "sha256": "8040e454567310495ca814df693336948be02b374b5bf51ccf03591f520335eb"
-    },
-    "components/PianoRemotion.tsx": {
-      "bytes": 156,
-      "sha256": "298ce310c2dabee52043d2841689eb8d3c8e6f442f633222b88813339621d0eb"
-    },
-    "components/PianoScoreScene.tsx": {
-      "bytes": 13204,
-      "sha256": "a606ea04236d23776f44102be0a911875c785e8f7c52c47e7b74466e8af31757"
-    },
-    "components/resolveScoreVideoConfig.ts": {
-      "bytes": 3769,
-      "sha256": "6ed26346403e41a1dbeeb3dd43d3caa61a6f4895b12aae8b2fcf03f96239b8ed"
-    },
     "components/ScoreCameraPresets.ts": {
       "bytes": 2477,
       "sha256": "9e18f2bc06e204f7501c5d1e88e632b38415e3c727790729630d54ecb659e24b"
     },
     "components/ScoreChordGeometry.ts": {
-      "bytes": 4740,
-      "sha256": "44de360f25c652a95512b3e81ed660bb8846ae4c594648fca3522089732d9f6f"
+      "bytes": 6732,
+      "sha256": "8236fe206695bf93770ecf8002a4e0003ac5beaa74134757508f2173c4b34431"
     },
     "components/ScoreNoteLeap.tsx": {
-      "bytes": 7705,
-      "sha256": "bf0af961848b2e5e804123974d91bfce4c152cba6b83712b10031d807543c491"
+      "bytes": 9281,
+      "sha256": "d29744fdacb356f295ee88b5985b88085ac0b01ce0d4a11f26c51bc59507e44a"
     },
     "components/ScoreVideoConfig.ts": {
-      "bytes": 8910,
-      "sha256": "cd13877f16f4bd5d70608b5f49b153abfd92c03e9a925f3e4c56625d58d86c5d"
+      "bytes": 8904,
+      "sha256": "fb9810aacb32a1339f3f1fec5e615f401c5b9b151024d62cbee27433a73a275e"
+    },
+    "components/ScoreVideoConfigV2.ts": {
+      "bytes": 1493,
+      "sha256": "8886452d4d6f94eb3427db167b3bc95fffaf62acc44fe6acc8c709097f87bb22"
     },
     "components/SunsetOcean.tsx": {
       "bytes": 9972,
       "sha256": "94f6f8e3d9282a7027b6fefb2d85dc2684feae9d0d3c2326b7429796b4e13344"
     },
-    "examples/agent-prompts.md": {
-      "bytes": 3407,
-      "sha256": "31ca5ad7d1b5f48961a17784e670f5249cbb0c261bc31a85f662c556eaf64cef"
+    "components/TeachingFocusV2.ts": {
+      "bytes": 4704,
+      "sha256": "f464523b63b9e653efb10ca2baf7ab52b319fe994d6260b82596300e84ab6c48"
     },
-    "LICENSE.txt": {
+    "components/resolveScoreVideoConfig.ts": {
+      "bytes": 3779,
+      "sha256": "14faff2e2624a8921e6bf5f4383e23685a95c0771e62ba80c3ab72ff6d6be5cb"
+    },
+    "components/resolveScoreVideoConfigV2.ts": {
+      "bytes": 3107,
+      "sha256": "e1145d579bb0b57c15bef6b0ae26bb6d18521cbe432b4747cf50fd6ea02be7cd"
+    },
+    "examples/agent-prompts.md": {
+      "bytes": 3386,
+      "sha256": "4804c0e52e037d47d9ba750624846b75e93c2e8e28068e70ddfb286a14e09cf8"
+    },
+    "examples/sources-v2.json": {
+      "bytes": 6737,
+      "sha256": "f825e057d56649d3a6213bbb7c069cf71e0fc6a0cc1ae62953e0edf33671419d"
+    },
+    "history/README.md": {
+      "bytes": 592,
+      "sha256": "1367cd19b2cd9861add104c1e01572eb15c22bbf60842e939302bac1a24c7277"
+    },
+    "history/migration-v2/github-checklist.md": {
+      "bytes": 1105,
+      "sha256": "d40c6b9dfb1d62d68a777a90707b4b3c6faedf133d5416fc7e7a467afc0c5649"
+    },
+    "history/migration-v2/legacy-protocol.json": {
+      "bytes": 382,
+      "sha256": "9f13be680f156248e23d4143dbdbf6f297a6e6d66fc55c54352c9a5560e5a468"
+    },
+    "history/migration-v2/mapping-corrections-v2.csv": {
+      "bytes": 710,
+      "sha256": "9c742723cf2736f3a215161805b82660a4dee9d0fb9e40340a505e723e2602f6"
+    },
+    "history/migration-v2/migration-guide.md": {
+      "bytes": 1594,
+      "sha256": "b4671854551f8475624d1a71a616142e0235fb8a293fcb7dc9117577e31cb95c"
+    },
+    "history/migration-v2/rename-map-before-v2.csv": {
+      "bytes": 41076,
+      "sha256": "50d748e9c7ccf9a3baa6033a4ac2d6afdc81c0d9dea86628722f749f1ea772f0"
+    },
+    "history/migration-v2/rename-map-final-v2.csv": {
+      "bytes": 160992,
+      "sha256": "f1ba68c7171fb8a7c0321ca529721ce6c3dd1e56d0d6b9a76639c8577df2afa1"
+    },
+    "history/migration-v2/rename-plan-v2.json": {
+      "bytes": 109815,
+      "sha256": "44d410643616a2cd3cfd20accf7b1ffbc4c5b59c31fcf51caa7756df16edd2c6"
+    },
+    "history/migration-v2/改名前映射表-v2.md": {
+      "bytes": 1713,
+      "sha256": "7b6eb11faf6486256cc940e6b25a8e05cc6c7b8857202a8215a5477a636e3951"
+    },
+    "history/v130/LICENSE.txt": {
       "bytes": 829,
       "sha256": "01ab0d10a7db9600319490601bb8c10d378b71f636d9f6384584c91004a23000"
     },
-    "README.md": {
-      "bytes": 17569,
-      "sha256": "b780ae9b519e9c061f83ae934b58641a87d63b5ba5654bf8d9c6e0aaf6eb48f6"
+    "history/v130/LICENSE.txt.context.md": {
+      "bytes": 156,
+      "sha256": "ac37ce22b2f5c99942bcaaaca813bae9474c9e5ae33b6973c8bca6c17299d3d4"
     },
-    "README_使用说明.md": {
-      "bytes": 5451,
-      "sha256": "0f7f0d647c361f6228f05e8d08ebb167b6247f719c6d20f5c2dd5066a1ca4100"
+    "history/v130/RELEASE_NOTES.md": {
+      "bytes": 902,
+      "sha256": "94ed4c02a68963f741578c0e19834c017158f0ad0f32d5fe97489a2e6b5730ab"
+    },
+    "history/v130/RELEASE_NOTES.md.context.md": {
+      "bytes": 156,
+      "sha256": "ac37ce22b2f5c99942bcaaaca813bae9474c9e5ae33b6973c8bca6c17299d3d4"
+    },
+    "history/v130/RELEASE_NOTES_V130.md": {
+      "bytes": 1887,
+      "sha256": "ecf40db2ee832eb80f9b497f992519359b99338ba27f55c6e059d761053dad81"
+    },
+    "history/v130/RELEASE_NOTES_V130.md.context.md": {
+      "bytes": 156,
+      "sha256": "ac37ce22b2f5c99942bcaaaca813bae9474c9e5ae33b6973c8bca6c17299d3d4"
     },
     "references/assets-policy.md": {
       "bytes": 1327,
       "sha256": "d1c7ce22757b464c4b7715588e7055f6cbc606a866bd62a3804c27c32a7e59b9"
     },
     "references/data-contract.md": {
-      "bytes": 5089,
-      "sha256": "4a305c56005a9df6eb3b2ec9f788775c22ca98b8ddde035a185c3775e5f64f92"
+      "bytes": 5085,
+      "sha256": "be54b03667995b87edd1a5186f9c76b598deb64324bc5cb723e65c8a1fcb3d34"
     },
     "references/environment.md": {
-      "bytes": 1875,
-      "sha256": "27bd5efec972a5ef38dbd335f91f4e876367c0075ae4e596f4d0422fdc7079d1"
+      "bytes": 2015,
+      "sha256": "50c0ba982ad9f81856d3f737e6ec3bd2e545c14669c97eccf5c6f8734f0682eb"
     },
     "references/input-preparation.md": {
-      "bytes": 8392,
-      "sha256": "d3ebcb1aabea786254c4bb2667c1a62dd940aa77e31e10de32d6bcffe44c2183"
+      "bytes": 8403,
+      "sha256": "a92c4d32b8e6eaf52a9aa7f41aad418b94de8cd92d1d87e5058f6f9c45312d3d"
     },
     "references/input-routes.md": {
-      "bytes": 9213,
-      "sha256": "31d39b4296d239657520686c34020fcdf4ea764dc3679225e93653113c4b960c"
+      "bytes": 9231,
+      "sha256": "3bd3f76f1fa18138becb9c21b67660f158e51f71046e2fc7b088a31578eee989"
     },
     "references/material-preparation.md": {
       "bytes": 11559,
       "sha256": "130bd91e6c98471442868b8d3eddf308bd5cdb1dfea8694fee5ea0faf2d5046c"
     },
+    "references/music-motion-semantics.md": {
+      "bytes": 1659,
+      "sha256": "359648818a27fd4ba8adf098ff73e2748edf0104d4346daa49c5ac84a848d774"
+    },
     "references/performance-quality.md": {
-      "bytes": 8720,
-      "sha256": "d9cd8dca7e8c3c7916de6c45fd745169cd82830157010be4332d495bef4c55e4"
+      "bytes": 8728,
+      "sha256": "76816a6e8b8f760d6e160e43f10372b6b79824a28249aeeae05c682b9e585cfe"
     },
     "references/portrait-runway.md": {
-      "bytes": 4238,
-      "sha256": "794e544351360b2cdc6d7f1ea71decb916cd180eff7779fc97dd76bba1d76332"
+      "bytes": 4242,
+      "sha256": "de211b3e017f555e31411a13f4a94ff932520678d97ed9db79a7abe1750c2c66"
     },
     "references/production.md": {
-      "bytes": 4164,
-      "sha256": "01982d2975cbd8a5ccf5aa17e8ac96af076416943ab25b4b15b62eaaa551254a"
+      "bytes": 4166,
+      "sha256": "5995558eaae33ff354f09de0c9a2c668cef546b7548506f829d083ef8688d76c"
+    },
+    "references/public-score-sources-v2.md": {
+      "bytes": 1786,
+      "sha256": "c5241e62aa13ec46417097334fcbb3c3442d8bdde16a020f4ec939df0a8b37c0"
     },
     "references/rendering.md": {
-      "bytes": 8865,
-      "sha256": "d1b963bc6587760ca6491d9ca1681bfe2d6fa9f17810afa9075dc5db15e04e95"
+      "bytes": 8977,
+      "sha256": "2a29ddad08e8485b73a0d8f06cd2eb49bb3f0f1c9bdca6925bef4894116870a9"
     },
     "references/score-strip.md": {
-      "bytes": 4454,
-      "sha256": "e82bf4ba2a47af5d7b7594d708ea4143a3f4a6a3968deb26064c108fb8fde1b6"
+      "bytes": 4465,
+      "sha256": "168e5ca1880eb799a5efe82b074eb6ac7ab9a6b2126416f44b5b46db40a20605"
     },
     "references/score-validation.md": {
-      "bytes": 12835,
-      "sha256": "f5a8563b5d1b4a3642c9bda0bdc71e03b3a60237904d42df62fa41878eb1bd3c"
+      "bytes": 12848,
+      "sha256": "f60f2c2a1357f4770508d890eaaf94e7193bc52c00cd888fb85ddfb13e6d78ac"
+    },
+    "references/teaching-landscape-v2.md": {
+      "bytes": 6403,
+      "sha256": "9d6dba6406e7cda542fb11430b982b839076e0891d4938dd1f233bd0b240857a"
     },
     "references/upgrade-status.md": {
-      "bytes": 3710,
-      "sha256": "574c9f13f91174596a055ce8f792debf990c9ada40a19fd49238c95599abe1dd"
+      "bytes": 3988,
+      "sha256": "f91d7399b31e8114226020e2c20332ca009a1937aaa1c1b565a1dadab00bb7b5"
     },
     "references/visual-presets.md": {
-      "bytes": 7491,
-      "sha256": "967ae296bfb0254dbb47d18b0bda913c6c15ffe601676d8c47e97f159fb17397"
+      "bytes": 7513,
+      "sha256": "6253b94d8ff9ec892385d24a170698e906eee8b25b553b5a0be0089424063c43"
+    },
+    "references/workbench-approval.md": {
+      "bytes": 6528,
+      "sha256": "ac10afc01c62de72895c2ea3afcfda5143f6fa08dc9dea95df7046c02ac7a06c"
     },
     "references/workflow.md": {
-      "bytes": 8505,
-      "sha256": "35baa7182dc7ba540ed131dddc372ffbcff52f44212bf91fd1b87e6753777b2c"
+      "bytes": 8588,
+      "sha256": "98ff54e224af6438653da7bfe591a18bbd5d2ee8efdbc5c378237e1b3d98f1b7"
     },
-    "RELEASE_NOTES.md": {
-      "bytes": 902,
-      "sha256": "94ed4c02a68963f741578c0e19834c017158f0ad0f32d5fe97489a2e6b5730ab"
+    "scripts/aiyoupu-legacy.mjs": {
+      "bytes": 38680,
+      "sha256": "628c39a41e19f98b4f7d242c3bbc4d94dbc14a37d141894e176f75b622ae82fc"
+    },
+    "scripts/aiyoupu-workbench-approval.mjs": {
+      "bytes": 6888,
+      "sha256": "01617a232a24bf94122cc6d76f53a03d91e62492a89d527e220cdd51c705ec18"
+    },
+    "scripts/aiyoupu.mjs": {
+      "bytes": 45467,
+      "sha256": "fafa2c74e6c0d256f6f8fb604ce14312ac852bf589a0af2666f6d23859eb67e9"
     },
     "scripts/audio-analysis.py": {
-      "bytes": 11392,
-      "sha256": "923a21a34311d24d1b43ca998117bcc5a7cf38fa8ddb618e8b23c79743353f15"
+      "bytes": 11394,
+      "sha256": "95a37874e259fea83adb04a3ca76c77cd024d8551fc82f45a08550515a671ce0"
     },
     "scripts/audio-production.mjs": {
-      "bytes": 9753,
-      "sha256": "a48937dec41117c2a4733663536c2bf908f92ab4ecf79a581f71fda3bc9bfd3e"
+      "bytes": 9759,
+      "sha256": "33b03e0e0acebe52c4a834e637f02d6afef2277d8448100abc3a28aa7d6ea7df"
+    },
+    "scripts/audio-transfer-v2.mjs": {
+      "bytes": 2772,
+      "sha256": "173338591b0b6dc7e675d2a05aa06ee76abdb1f70149589cc3b2497920f60e7a"
     },
     "scripts/audio.mjs": {
       "bytes": 10059,
       "sha256": "0c28a6d5b9331e716292d0207afe7b1bd44b067489d3a108b551dd470bf252ff"
     },
+    "scripts/build-manifest.mjs": {
+      "bytes": 2752,
+      "sha256": "119f47ddd087d26ccdd01605179804580f6f6b9d3dcd01ccfef3cbc68b0343b4"
+    },
+    "scripts/build-workbench.mjs": {
+      "bytes": 1434,
+      "sha256": "bfd1658687784b090ee87fbcec5a65ddc226444265e3c6700bc4cd6f0c4db532"
+    },
     "scripts/camera-path.mjs": {
       "bytes": 2153,
       "sha256": "73eea33f7de50f5322f67930e85f5ebd482908229e20b7928d1fb836745334ba"
     },
+    "scripts/direction-cli.mjs": {
+      "bytes": 7421,
+      "sha256": "3a90913d0342e63a47d7ac2d0268b447afb5bb090619173e5a4ab11e7b587098"
+    },
+    "scripts/direction-engine.mjs": {
+      "bytes": 21091,
+      "sha256": "ea88a0520075a1f1063f3c01a09439e1bc41e2e01f4cde784ade8aee84685b06"
+    },
     "scripts/doctor.mjs": {
-      "bytes": 4039,
-      "sha256": "f672a711846dd570bce78d7c5a4dfb30302085ae75f6dc737fcf375db510b71f"
+      "bytes": 4014,
+      "sha256": "3bd686359fff9c73466429514dde186b135585e3307f9973e88cd1b2ad79ccaa"
+    },
+    "scripts/engrave-teaching-v2.py": {
+      "bytes": 2513,
+      "sha256": "17f8d5afde739570fe801f663efa19371c3734b9d9601ea15dfec3c1d9b684f3"
     },
     "scripts/entry.mjs": {
       "bytes": 283,
       "sha256": "c662a49b0e30936dd7cb46b7d6547529dadc922b8a79128275c47ed5ecd9a921"
     },
     "scripts/environment.mjs": {
-      "bytes": 15662,
-      "sha256": "91f8dfdb702899e86f301a1ca6a8b0709f1aa1c156307dc92932aa221a89f578"
+      "bytes": 16623,
+      "sha256": "550e1fa4451618f52dd8f0fc3ef703f91479426efea3a8800a50c84ad5752e38"
     },
     "scripts/execution.mjs": {
       "bytes": 942,
       "sha256": "2bf64fcb616dbc49b125ed0ba2cd0a86c2fe9e9b5d0d43df8fd386d88b17626d"
     },
+    "scripts/gates.mjs": {
+      "bytes": 4386,
+      "sha256": "7c0b82d665ca5283c6f897b8d575c0fd365ff8d4897a2d13d27873563ad45147"
+    },
+    "scripts/geometry-v2.mjs": {
+      "bytes": 4339,
+      "sha256": "1b2da64de9269cb640dcb01996b4155145209462bc24743b08b3dfd348938d16"
+    },
     "scripts/geometry.mjs": {
-      "bytes": 4322,
-      "sha256": "5ac9677529219eeeef8fe15ad18a9e4e41b0a3a23a861e667c85d9910b3046c5"
+      "bytes": 4324,
+      "sha256": "15d4a71e86923e3e44a8c4887e537d2813433534aadf5e000aca42726b579feb"
+    },
+    "scripts/install-v2.mjs": {
+      "bytes": 9448,
+      "sha256": "46b1c1ca2c0c3369738fdb9729f396e86ea49cbe28cc38d64a26bbb409988df0"
     },
     "scripts/install.mjs": {
-      "bytes": 7042,
-      "sha256": "324faa324c7a6bae942eee71424de76adf7bd58e7b3ed1eb74042652f165815d"
+      "bytes": 6993,
+      "sha256": "da85651037150c38b8c36372f7ebf5ef1c119da09c47acba99b4a86f2b617263"
     },
     "scripts/midi.mjs": {
       "bytes": 5690,
       "sha256": "dbbf8660eb26b00ca75817263623719e5d1b222423aa5b9f936a50b5c46104ad"
     },
+    "scripts/migration-v2.mjs": {
+      "bytes": 4646,
+      "sha256": "28c5e7817518a00c341e4e2b2a3f7a8b6d66d1a890776884a205553b840972ec"
+    },
     "scripts/music.mjs": {
-      "bytes": 9641,
-      "sha256": "8bf142e509352e337963def08e84021ea9f18d43df98b7cb1ce946fde3d5d355"
+      "bytes": 9647,
+      "sha256": "83dec53bc90840de9336a8abeaa7311b9f3be7a1ff5dd7af05f0d31eaa5f01c3"
     },
     "scripts/notation-audit.mjs": {
-      "bytes": 8800,
-      "sha256": "9d12c4bba9a8cb33171dd1ac64fdf6521c7aa9e7a69d25f7d79ef9c0d0e95af4"
+      "bytes": 8804,
+      "sha256": "37e5eca197b92bd14a6fd9a7f2283a7a272a97498b9af633d4a9484f114ea445"
     },
     "scripts/performance-map.mjs": {
-      "bytes": 9795,
-      "sha256": "08b8482abc64d4c8b92b69c9ea81700c874dd81f6b179295c380b4ef11a41127"
+      "bytes": 9809,
+      "sha256": "9b475925ec20d0cf7d6e91c12d8e0608f8cbbcf13952f98d3886455a1420b028"
     },
-    "scripts/piano.mjs": {
-      "bytes": 38340,
-      "sha256": "af457386976c67461eb88e5eb7dbf64afcd4c7b169166fc6d6971a5428153290"
+    "scripts/prepare-canon-sample.mjs": {
+      "bytes": 15674,
+      "sha256": "518b69673d08e9849c6f9f6b36ecc4bf26a70897b558d6f8ffe1ebcbcb7bff96"
     },
     "scripts/prepare.mjs": {
-      "bytes": 13985,
-      "sha256": "d3abe3d28e1f0749a016335533a7887c9dbe6f37c0d5828439ee98adc0f13db6"
+      "bytes": 13989,
+      "sha256": "317dbf5f8df01aca3b0231042ecc48e2810427b773a11d0131bb000d76d27fdb"
     },
     "scripts/quality-review.mjs": {
-      "bytes": 6853,
-      "sha256": "deac3f53bacdc7c1433a798495396e0ddc22fd23ad0d6a75b1c8374745c16d73"
+      "bytes": 6855,
+      "sha256": "7bf539125d1242122d8c6caa8eacccbaac534c44a35345dfce73e32be25ab2f0"
+    },
+    "scripts/quality-v2.mjs": {
+      "bytes": 12948,
+      "sha256": "32c13b79548888d39c6093c8758a11ed43f282243953a4b7ea9aa502a282cd91"
     },
     "scripts/quality.mjs": {
-      "bytes": 11376,
-      "sha256": "5f7ff933309d490d5761fae6930a6be12ef53f258d671723922f8208b43d6d9f"
+      "bytes": 11382,
+      "sha256": "108034c482f599d28c882338c4e9e39d0e4e897aef40c714c026c92906e15981"
     },
     "scripts/review.mjs": {
-      "bytes": 11051,
-      "sha256": "58983f2cb638d2e2487fbdffd1e58a66e34824e53a6a9dfc8615251a99c954aa"
+      "bytes": 15742,
+      "sha256": "a3e9bb719f1001b58952849cf98e03eb440ccebebace338cd5767a50a3925b79"
     },
     "scripts/score-strip.mjs": {
-      "bytes": 12016,
-      "sha256": "6c53f617f4ea059dd273522e08e6e686e28e57e26e0fa25d20c4b37bebf75807"
-    },
-    "scripts/score-strip.test.mjs": {
-      "bytes": 5433,
-      "sha256": "81848ff8946e60b3f58b716d5dce30b2b956aa9817fdeede32be75e206bef258"
+      "bytes": 12022,
+      "sha256": "f80cf237c9adc58b25adfc6ad4590b7471601f54e35cf8567cf6ab1dd1931779"
     },
     "scripts/score.mjs": {
-      "bytes": 4349,
-      "sha256": "f16b4065f389407b0deae7219e626fe48496e19e23a732fa41c8dfef118a3234"
+      "bytes": 4355,
+      "sha256": "7d16d9debcc0d46c746ea545df14894cedd602fc2750e8b50e82671ee2e43fd6"
     },
     "scripts/score.py": {
-      "bytes": 43428,
-      "sha256": "22469882de1026525825b30fb8639a1acc82324681bd3f03a6fa121d9f8c9eea"
+      "bytes": 43436,
+      "sha256": "206bfb71b8707215a75aaa50ba65e5a3c09a1c840637de67972ec70ab1fe6104"
     },
     "scripts/source-scope.mjs": {
-      "bytes": 2645,
-      "sha256": "e74e775d10532c8bf26d3870bb79051040c0010597ed5356135811b7fa70e1e4"
+      "bytes": 2649,
+      "sha256": "501600b6cb1100d0dfd1d33f9fa781ea2e465101da67d6abac11357c1a7596af"
     },
-    "SKILL.md": {
-      "bytes": 10474,
-      "sha256": "7453718c091f1d2cdd9b9f91eee98efc8bcc3b036fc268c96361ec5377f199fb"
+    "scripts/sync-installed.mjs": {
+      "bytes": 2654,
+      "sha256": "d3418b94e8ca0626a2a636552f5a6128fd1977c54c74e1e34be99c7565b508b6"
     },
-    "assets/showcase/real-gallery.jpg": {
-      "bytes": 251965,
-      "sha256": "d2297635dcff56a9c75b103bbf9d9597751504a608638270d75aef4af5146453"
+    "scripts/workbench-approval.mjs": {
+      "bytes": 12611,
+      "sha256": "7f3bfd769805fc8b66c1991c5eb5dbc11e1dc61c4012ebe06766d8c6f0e5b6ae"
     },
-    "assets/showcase/douyin-cover.jpg": {
-      "bytes": 384197,
-      "sha256": "dec6f575241924fc4ffea3f4be1dacaa419d13d7637b527cf853ca22398640ae"
+    "scripts/workbench-core.mjs": {
+      "bytes": 21484,
+      "sha256": "8ab1576f973d54bd47867fdfb45a8e6990264225be2c33ae24d8b7995b5e5634"
+    },
+    "scripts/workbench-engrave-bridge.mjs": {
+      "bytes": 4414,
+      "sha256": "b48d79b25cc902bc0fa6c435dd517c431bb6ba9f200ee92bfd69202ea0615ddf"
+    },
+    "scripts/workbench-export-v2.mjs": {
+      "bytes": 5510,
+      "sha256": "eb12fba4ef6c53d22fae915ffb29f74c7e29e0cc2adbd29131d200f0f4be466f"
+    },
+    "scripts/workbench-launch-child.mjs": {
+      "bytes": 732,
+      "sha256": "3c53bb4103352f62c020b70b846fafd4263cde7149ec2afbad6b993dff46e522"
+    },
+    "scripts/workbench-open.mjs": {
+      "bytes": 3767,
+      "sha256": "462deaffec461609bff72fe9254847bd227760a16a6cfa18580b6df2426f0ef5"
+    },
+    "scripts/workbench-prepare.py": {
+      "bytes": 18463,
+      "sha256": "3ed5a8356912bd29e8e2b693d43c52251a49638413702965a23af7838589f637"
+    },
+    "scripts/workbench-server.mjs": {
+      "bytes": 6834,
+      "sha256": "4ef8cfa25912c4a0a3934d9d57aa7476997a1609140d177f14b10f36cec35bee"
+    },
+    "workbench/README-工作台.md": {
+      "bytes": 4191,
+      "sha256": "7a2c1b67f77e06135609d4e0b39b112f5d0c0c8107bed6f32f157ff8138ab829"
+    },
+    "workbench/app.js": {
+      "bytes": 18258,
+      "sha256": "db77cf8cd38a00f099384637f52cd3eb6461754810c8bfe228bee0f84720664e"
+    },
+    "workbench/brand-logo.png": {
+      "bytes": 877561,
+      "sha256": "5ecbf90a6e48f7c6cf414af8f0e2b67517519009af413f6d7b9f9107fa02e9ef"
+    },
+    "workbench/canon-public-test/CanonInD-a4.pdf": {
+      "bytes": 46421,
+      "sha256": "c21dfb5b95c92d23b5628c419cde16f558816453ff1d58de8b08da6678f8d036"
+    },
+    "workbench/canon-public-test/CanonInD-musescore-1.svg": {
+      "bytes": 154059,
+      "sha256": "d406b8a074ab8cdc5d36e2dd419c2cd3e770cfbd5ffec83f5a6d8bc3f6ab7709"
+    },
+    "workbench/canon-public-test/CanonInD-musescore.mp3": {
+      "bytes": 2865109,
+      "sha256": "c2ce93e1a0b239c9ea2bb0865aa706f26921dee18ed1f729fa2aec126beceaba"
+    },
+    "workbench/canon-public-test/CanonInD-preview.png": {
+      "bytes": 5009,
+      "sha256": "aca0cc4dae277857be9f0d5e66408c8326dec50fe59d3b92114b151dce1627a1"
+    },
+    "workbench/canon-public-test/CanonInD.mid": {
+      "bytes": 1370,
+      "sha256": "1358ba0799aeb727be0ef155fc9090ea55762a3b41f85d3dbb02918f4ac66515"
+    },
+    "workbench/canon-public-test/CanonInD.musicxml": {
+      "bytes": 54106,
+      "sha256": "e08ec49391fb2ac7177d502852b86664fcce9eec65a63437a137f717ccc3cfed"
+    },
+    "workbench/canon-public-test/CanonInD.rdf": {
+      "bytes": 1193,
+      "sha256": "85020f746e118e2ecfcd1fbac47afd338da39ba5f5cf508b413af7fe288d53a9"
+    },
+    "workbench/canon-public-test/README-准备报告.md": {
+      "bytes": 4631,
+      "sha256": "90d5260dc1a66b6736087e45a03eb2a9df574b759693a452a17614732a87cb6b"
+    },
+    "workbench/canon-public-test/prepared/canon-score-ids.svg": {
+      "bytes": 156789,
+      "sha256": "029949b34545c4e3389e4f69a1fe80f1eaf5d50e53b39152e9b72852c7b956a7"
+    },
+    "workbench/canon-public-test/prepared/layout.json": {
+      "bytes": 2141,
+      "sha256": "671ed26e5d26992c13fce255d02f890d97484f44e94a36a607ef134ea96468b6"
+    },
+    "workbench/canon-public-test/prepared/summary.json": {
+      "bytes": 385,
+      "sha256": "b25171e96517e1e10eee280e8ce0f23d46813af5d1ecdac2aea2f2fb7df9666e"
+    },
+    "workbench/canon-public-test/prepared/timeline.json": {
+      "bytes": 371865,
+      "sha256": "277cd55592efb879a3a7a72a571cf759cbc86bbb6ed52b99263010560c4d02eb"
+    },
+    "workbench/canon-public-test/sources.json": {
+      "bytes": 1317,
+      "sha256": "98688da18b7b39dc07347bb39d537772da973c7724eb0aea45a518e30fc3f0b3"
+    },
+    "workbench/entry.mjs": {
+      "bytes": 364,
+      "sha256": "c06ff641e2be141e099636edfcc75f656d7af8624ac348e76ad0274553dc64ba"
+    },
+    "workbench/index.html": {
+      "bytes": 11939,
+      "sha256": "a3f8c484acca9432d382fbbfa4831a67072fbbe87c57172642570ed1852909a0"
+    },
+    "workbench/local-assets.example.json": {
+      "bytes": 188,
+      "sha256": "e32e4d3077a764899b1bf2f26e95fcc1d85787d0964d20eebdd1c951f05fcb4c"
+    },
+    "workbench/react-bundle.js": {
+      "bytes": 600298,
+      "sha256": "cbb69d9fde1f8316fa6693a62a1207a83b1339c5abbaa6ff8374a72809d4c56b"
     }
-  }
+  },
+  "displayName": "AI有谱",
+  "preparedDate": "2026-11-02",
+  "repositoryName": "Fallonwong/aiyoupu",
+  "remoteRenameStatus": "pending-owner-interface-confirmation"
 }

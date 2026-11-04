@@ -18,7 +18,7 @@ Supply a measured system packet:
 
 ```json
 {
-  "schema": "piano-strip-systems/v1",
+  "schema": "aiyoupu-strip-systems/v1",
   "scoreSha256": "SHA256 of source SVG bytes",
   "timelineSha256": "hashObject(source timeline) from scripts/audio.mjs",
   "systems": [
@@ -35,7 +35,7 @@ The array determines left-to-right reading order. Numbers above are illustrative
 not default geometry for a song.
 
 ```text
-node <skill>/scripts/piano.mjs score-strip --svg <source.svg> --timeline <timeline.json> --layout <layout.json> --systems <systems.json> --project <existing-remotion-project> --browser <existing-Chrome-executable> --out <new-directory> --scale 1 --gap 0
+node <skill>/scripts/aiyoupu-legacy.mjs score-strip --svg <source.svg> --timeline <timeline.json> --layout <layout.json> --systems <systems.json> --project <existing-remotion-project> --browser <existing-Chrome-executable> --out <new-directory> --scale 1 --gap 0
 ```
 
 No dependencies/browser are installed. The output directory must be new. Existing

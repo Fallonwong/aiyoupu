@@ -11,12 +11,12 @@ This is a separate evidence pipeline. It does not modify the renderer/core or in
 node scripts/score.mjs capabilities --out NEW_DIR --python PYTHON_EXE
 node scripts/score.mjs check --musicxml FILE --out NEW_DIR [--python PYTHON_EXE]
 node scripts/score.mjs source --source PDF_OR_IMAGE --out NEW_DIR [--python PYTHON_EXE]
-node scripts/score.mjs source --source PDF_OR_IMAGE --out NEW_DIR --omr EXECUTABLE --adapter piano-omr/v1 [--python PYTHON_EXE]
+node scripts/score.mjs source --source PDF_OR_IMAGE --out NEW_DIR --omr EXECUTABLE --adapter aiyoupu-omr/v1 [--python PYTHON_EXE]
 node scripts/score.mjs source --source PDF_OR_IMAGE --out NEW_DIR --omr-module ENTRY_POINT_NAME [--python PYTHON_EXE]
 node scripts/score.mjs compare --source PDF_OR_IMAGE --musicxml FILE --svg FILE --timeline FILE --layout PDF_OR_IMAGE --out NEW_DIR [--mapping FILE] [--review FILE] [--layout-evidence FILE] [--pdftoppm EXECUTABLE] [--python PYTHON_EXE]
 ```
 
-Python precedence is explicit `--python`, then `PIANO_SCORE_PYTHON`, then the shared `environment.mjs` `discoverEnvironment`. Automatic selection considers only actually probed existing Python 3.10+ interpreters and skips Windows Store aliases. For `compare`/`source`, the chosen interpreter must also pass a real isolated Pillow import/image-operation probe, not just module presence. `check` uses stdlib only. Optional `--project ROOT` and repeatable `--authorized-project ROOT` are consumed only by discovery and stripped before Python invocation; they do not install, copy or modify projects. Results include `pythonSelection` with executable, method and Pillow requirement. The CLI never creates an environment or installs packages. PDF rasterization additionally needs installed Poppler `pdftoppm` (`--pdftoppm` also works with `source`). No executable command strings or shell interpolation are accepted. Output directories must be new. A pre-existing directory is not changed, including its old report.
+Python precedence is explicit `--python`, then `AIYOUPU_SCORE_PYTHON`, then the shared `environment.mjs` `discoverEnvironment`. Automatic selection considers only actually probed existing Python 3.10+ interpreters and skips Windows Store aliases. For `compare`/`source`, the chosen interpreter must also pass a real isolated Pillow import/image-operation probe, not just module presence. `check` uses stdlib only. Optional `--project ROOT` and repeatable `--authorized-project ROOT` are consumed only by discovery and stripped before Python invocation; they do not install, copy or modify projects. Results include `pythonSelection` with executable, method and Pillow requirement. The CLI never creates an environment or installs packages. PDF rasterization additionally needs installed Poppler `pdftoppm` (`--pdftoppm` also works with `source`). No executable command strings or shell interpolation are accepted. Output directories must be new. A pre-existing directory is not changed, including its old report.
 
 Stdout is one JSON object, also written to `NEW_DIR/report.json` after output creation. Every result contains `code`, `status`, and actionable `next`. Exit codes:
 
@@ -40,19 +40,19 @@ Checks include part declarations, pitch step/alter/octave, A0–C8 piano range w
 
 ## OMR adapter contract
 
-`source` first validates the source (PDF is actually rasterized, image is decoded), and preserves original bytes. It discovers installed module names (`audiveris`, `homr`, `oemer`), registered entry points, and `PIANO_OMR_ADAPTER`. A module being importable does not prove a usable CLI; raw vendor executables are never invoked with guessed arguments. No professional OMR adapter available means `OMR_UNAVAILABLE`, exit 3, no transcribed MusicXML, and actionable integration instructions. MuseScore is an engraver and is not counted as OMR.
+`source` first validates the source (PDF is actually rasterized, image is decoded), and preserves original bytes. It discovers installed module names (`audiveris`, `homr`, `oemer`), registered entry points, and `AIYOUPU_OMR_ADAPTER`. A module being importable does not prove a usable CLI; raw vendor executables are never invoked with guessed arguments. No professional OMR adapter available means `OMR_UNAVAILABLE`, exit 3, no transcribed MusicXML, and actionable integration instructions. MuseScore is an engraver and is not counted as OMR.
 
-Explicit `--omr EXE` requires `--adapter piano-omr/v1`. The environment variable `PIANO_OMR_ADAPTER` means an already configured executable implementing this exact protocol. Invocation (no shell):
+Explicit `--omr EXE` requires `--adapter aiyoupu-omr/v1`. The environment variable `AIYOUPU_OMR_ADAPTER` means an already configured executable implementing this exact protocol. Invocation (no shell):
 
 ```text
-EXE --protocol piano-omr/v1 --source ABSOLUTE_INPUT --out ABSOLUTE_ADAPTER_DIR
+EXE --protocol aiyoupu-omr/v1 --source ABSOLUTE_INPUT --out ABSOLUTE_ADAPTER_DIR
 ```
 
 The adapter must use a real installed professional OMR engine, write MusicXML inside the supplied directory, return zero, and emit exactly one JSON response:
 
 ```json
 {
-  "protocol": "piano-omr/v1",
+  "protocol": "aiyoupu-omr/v1",
   "status": "transcribed",
   "sourceSha256": "SHA256_OF_EXACT_SOURCE_BYTES",
   "engine": {"name": "actual professional engine", "version": "verified version"},
@@ -60,7 +60,7 @@ The adapter must use a real installed professional OMR engine, write MusicXML in
 }
 ```
 
-No package-specific adapter is bundled or asserted to work. Integrators verify their engine's real interface and wrap it, without auto-installation. An environment-provided Python module can register an `importlib.metadata` entry point in group `piano_remotion.omr`; `--omr-module NAME` loads only that registered entry point. Its callable receives `{protocol, source, sourceSha256, out}` and returns the same response object. Registration and explicit selection constitute trust in that integration. The engine's claims are not independently authenticated by this script.
+No package-specific adapter is bundled or asserted to work. Integrators verify their engine's real interface and wrap it, without auto-installation. An environment-provided Python module can register an `importlib.metadata` entry point in group `aiyoupu.omr`; `--omr-module NAME` loads only that registered entry point. Its callable receives `{protocol, source, sourceSha256, out}` and returns the same response object. Registration and explicit selection constitute trust in that integration. The engine's claims are not independently authenticated by this script.
 
 Requests, adapter responses, stdout/stderr, and structural checks are saved. `OMR_TRANSCRIBED_UNREVIEWED` is only a transcription result. It always remains `needs_review`, including when structural checks pass. Bad output paths, stale source hashes, invalid response formats, and failing exits are rejected.
 
@@ -72,7 +72,7 @@ The HTML includes a page viewer. Select measure/side/page and click two corners 
 
 ```json
 {
-  "schema": "piano-score-mapping/v1",
+  "schema": "aiyoupu-score-mapping/v1",
   "bindings": {
     "sourceSha256": "...", "musicxmlSha256": "...", "svgSha256": "...",
     "timelineSha256": "...", "layoutSha256": "..."
@@ -91,7 +91,7 @@ The producer of SVG and timeline must also supply evidence that both belong to t
 
 ```json
 {
-  "schema": "piano-score-layout/v1",
+  "schema": "aiyoupu-score-layout/v1",
   "runId": "unique-id-of-one-layout-job",
   "producer": "actual producer and version",
   "sameRun": true,
@@ -108,7 +108,7 @@ After supplying actual mapping and actual producer evidence, rerun `compare` and
 
 ```json
 {
-  "schema": "piano-score-review/v1",
+  "schema": "aiyoupu-score-review/v1",
   "bindings": {"sourceSha256": "...", "musicxmlSha256": "...", "svgSha256": "...", "timelineSha256": "...", "layoutSha256": "..."},
   "mappingSha256": "canonical mapping hash from report/template",
   "layoutEvidenceSha256": "canonical producer evidence hash from template",

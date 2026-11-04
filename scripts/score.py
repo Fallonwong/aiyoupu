@@ -191,7 +191,7 @@ def inspect_musicxml(file):
                             else:
                                 midi = 12 * (octave + 1) + dict(C=0, D=2, E=4, F=5, G=7, A=9, B=11)[step] + alter
                                 if not 21 <= midi <= 108:
-                                    issue('PIANO_RANGE', 'Written pitch outside A0..C8; verify instrument/transposition.', mid, event=ni)
+                                    issue('AIYOUPU_RANGE', 'Written pitch outside A0..C8; verify instrument/transposition.', mid, event=ni)
                                 if alter.denominator != 1:
                                     issue('MICROTONAL', 'Fractional alteration retained; renderer support requires review.', mid, event=ni)
                         elif child.find('unpitched') is not None:
@@ -306,12 +306,12 @@ def inspect_musicxml(file):
 
 
 def capabilities():
-    entries = importlib.metadata.entry_points(group='piano_remotion.omr')
+    entries = importlib.metadata.entry_points(group='aiyoupu.omr')
     return dict(python=sys.executable, version=sys.version, pillow=importlib.util.find_spec('PIL') is not None,
                 pdftoppm=shutil.which('pdftoppm'),
                 omrModules={n: importlib.util.find_spec(n) is not None for n in ('audiveris', 'homr', 'oemer')},
                 adapters=[dict(name=e.name, value=e.value) for e in entries],
-                environmentAdapter=os.environ.get('PIANO_OMR_ADAPTER'))
+                environmentAdapter=os.environ.get('AIYOUPU_OMR_ADAPTER'))
 
 
 def audiveris_source(src, out, executable):
@@ -373,29 +373,29 @@ def source(args, out):
             raise Failure('OMR_ADAPTER_REQUIRED', 'Choose one recognition engine only.')
         return audiveris_source(src, out, args.audiveris_exe)
     cap = capabilities()
-    executable = args.omr or os.environ.get('PIANO_OMR_ADAPTER')
-    entries = {e.name: e for e in importlib.metadata.entry_points(group='piano_remotion.omr')}
-    if args.omr and args.adapter != 'piano-omr/v1':
-        raise Failure('OMR_ADAPTER_REQUIRED', 'Explicit --omr requires --adapter piano-omr/v1; raw vendor CLI is not assumed compatible.')
-    request = dict(protocol='piano-omr/v1', source=str(src), sourceSha256=src_hash, out=str(out / 'omr'))
+    executable = args.omr or os.environ.get('AIYOUPU_OMR_ADAPTER')
+    entries = {e.name: e for e in importlib.metadata.entry_points(group='aiyoupu.omr')}
+    if args.omr and args.adapter != 'aiyoupu-omr/v1':
+        raise Failure('OMR_ADAPTER_REQUIRED', 'Explicit --omr requires --adapter aiyoupu-omr/v1; raw vendor CLI is not assumed compatible.')
+    request = dict(protocol='aiyoupu-omr/v1', source=str(src), sourceSha256=src_hash, out=str(out / 'omr'))
     if not executable and not args.omr_module:
         return report('OMR_UNAVAILABLE', 'needs_review', structuralPassed=False, visualReview=dict(status='pending', complete=False),
                       sourceSha256=src_hash, capabilities=cap, next=[
-                          'Provide an installed professional OMR wrapper: --omr EXE --adapter piano-omr/v1,',
-                          'or registered environment module: --omr-module NAME (entry point group piano_remotion.omr).',
+                          'Provide an installed professional OMR wrapper: --omr EXE --adapter aiyoupu-omr/v1,',
+                          'or registered environment module: --omr-module NAME (entry point group aiyoupu.omr).',
                           'No transcription was produced. MuseScore/VexFlow engraving is not OMR.'])
     (out / 'omr').mkdir()
     write_json(out / 'omr-request.json', request)
     if args.omr_module:
         if executable or args.omr_module not in entries:
-            raise Failure('OMR_UNAVAILABLE', 'Module must be one installed piano_remotion.omr entry point; choose only one adapter.')
+            raise Failure('OMR_UNAVAILABLE', 'Module must be one installed aiyoupu.omr entry point; choose only one adapter.')
         # Registered entry point is an explicit trusted environment integration, not a guessed vendor interface.
         response = entries[args.omr_module].load()(request)
     else:
         resolved = shutil.which(executable)
         if not resolved:
             raise Failure('OMR_UNAVAILABLE', f'Adapter not found: {executable}')
-        completed = subprocess.run([resolved, '--protocol', 'piano-omr/v1', '--source', str(src), '--out', request['out']],
+        completed = subprocess.run([resolved, '--protocol', 'aiyoupu-omr/v1', '--source', str(src), '--out', request['out']],
                                    capture_output=True, text=True, encoding='utf-8', timeout=120, shell=False)
         (out / 'omr-stdout.txt').write_text(completed.stdout, encoding='utf-8')
         (out / 'omr-stderr.txt').write_text(completed.stderr, encoding='utf-8')
@@ -403,7 +403,7 @@ def source(args, out):
             raise Failure('OMR_FAILED', f'Adapter exit {completed.returncode}; see saved stdout/stderr.')
         response = json.loads(completed.stdout)
     write_json(out / 'omr-response.json', response)
-    if response.get('protocol') != 'piano-omr/v1' or response.get('sourceSha256') != src_hash or response.get('status') != 'transcribed' or not response.get('engine'):
+    if response.get('protocol') != 'aiyoupu-omr/v1' or response.get('sourceSha256') != src_hash or response.get('status') != 'transcribed' or not response.get('engine'):
         raise Failure('OMR_PROTOCOL_ERROR', 'Adapter must return protocol, sourceSha256, status=transcribed, engine and MusicXML path.')
     xml = Path(response.get('musicxml', ''))
     if not xml.is_absolute():
@@ -479,9 +479,9 @@ def compare(args, out):
     for key in ('source', 'layout', 'musicxml', 'svg', 'timeline'):
         shutil.copyfile(getattr(args, key), out / f'original-{key}{Path(getattr(args, key)).suffix}')
     ids = [m['id'] for m in checked['measures']]
-    mapping = read_json(args.mapping) if args.mapping else dict(schema='piano-score-mapping/v1', bindings=bindings,
+    mapping = read_json(args.mapping) if args.mapping else dict(schema='aiyoupu-score-mapping/v1', bindings=bindings,
                     measures=[dict(id=mid, source=None, layout=None) for mid in ids])
-    if mapping.get('schema') != 'piano-score-mapping/v1' or mapping.get('bindings') != bindings:
+    if mapping.get('schema') != 'aiyoupu-score-mapping/v1' or mapping.get('bindings') != bindings:
         raise Failure('STALE_MAPPING', 'Mapping schema/hashes differ from current source/layout inputs.')
     rows = mapping.get('measures', [])
     if not isinstance(rows, list) or [r.get('id') for r in rows] != ids:
@@ -489,17 +489,17 @@ def compare(args, out):
     write_json(out / 'mapping.json', mapping)
     mapping_hash = canonical(mapping)
     layout_evidence = read_json(args.layout_evidence) if args.layout_evidence else {}
-    evidence_ok = (layout_evidence.get('schema') == 'piano-score-layout/v1' and
+    evidence_ok = (layout_evidence.get('schema') == 'aiyoupu-score-layout/v1' and
                    layout_evidence.get('bindings') == bindings and layout_evidence.get('sameRun') is True and
                    isinstance(layout_evidence.get('runId'), str) and bool(layout_evidence['runId'].strip()) and
                    isinstance(layout_evidence.get('producer'), str) and bool(layout_evidence['producer'].strip()))
     if args.layout_evidence and not evidence_ok:
         raise Failure('STALE_LAYOUT_EVIDENCE', 'Same-run producer declaration/hashes missing or stale.')
     evidence_hash = canonical(layout_evidence)
-    write_json(out / 'layout-evidence.json', layout_evidence or dict(schema='piano-score-layout/v1', bindings=bindings,
+    write_json(out / 'layout-evidence.json', layout_evidence or dict(schema='aiyoupu-score-layout/v1', bindings=bindings,
                sameRun=False, runId=None, producer=None, status='pending', next='Engraver/timeline producer must supply same-run declaration; this tool cannot attest it.'))
     review = read_json(args.review) if args.review else None
-    if review and (review.get('schema') != 'piano-score-review/v1' or review.get('bindings') != bindings or
+    if review and (review.get('schema') != 'aiyoupu-score-review/v1' or review.get('bindings') != bindings or
                    review.get('mappingSha256') != mapping_hash or review.get('layoutEvidenceSha256') != evidence_hash):
         raise Failure('STALE_REVIEW', 'Review hashes do not match current source/layout/mapping/same-run evidence.')
     approvals = {}
@@ -535,7 +535,7 @@ def compare(args, out):
                           'Use review-template.json or the HTML controls to export review.json; rerun with --review.',
                           'Provide producer same-run layout-evidence.json; approval covers visual review only, not audio synchronization or renderer readiness.'] if not ready else
                          ['Visual review approved; separately validate timeline coordinates, hand declarations, repeat expansion and audio alignment.'])
-    write_json(out / 'review-template.json', dict(schema='piano-score-review/v1', bindings=bindings,
+    write_json(out / 'review-template.json', dict(schema='aiyoupu-score-review/v1', bindings=bindings,
                mappingSha256=mapping_hash, layoutEvidenceSha256=evidence_hash, measures=template))
     build_html(out, result, mapping, read_json(out / 'review-template.json'))
     return result
@@ -584,7 +584,7 @@ def main():
     sub = parser.add_subparsers(dest='command', required=True, parser_class=Parser)
     p = sub.add_parser('check'); p.add_argument('--musicxml', required=True); p.add_argument('--out', required=True)
     p = sub.add_parser('source'); p.add_argument('--source', required=True); p.add_argument('--out', required=True)
-    p.add_argument('--omr'); p.add_argument('--adapter', choices=['piano-omr/v1']); p.add_argument('--omr-module')
+    p.add_argument('--omr'); p.add_argument('--adapter', choices=['aiyoupu-omr/v1']); p.add_argument('--omr-module')
     p.add_argument('--pdftoppm'); p.add_argument('--audiveris-exe')
     p = sub.add_parser('compare')
     for key in ('source', 'musicxml', 'svg', 'timeline', 'layout', 'out'):
@@ -617,8 +617,8 @@ def main():
         result = report('INVALID_INPUT_OR_TOOL_FAILURE', 'error', structuralPassed=False,
                         visualReview=dict(status='pending', complete=False), message=f'{type(exc).__name__}: {exc}',
                         next=['Inspect input paths/formats and installed tool capabilities; no success is inferred.'])
-    if os.environ.get('PIANO_SCORE_PYTHON_SELECTION'):
-        result['pythonSelection'] = json.loads(os.environ['PIANO_SCORE_PYTHON_SELECTION'])
+    if os.environ.get('AIYOUPU_SCORE_PYTHON_SELECTION'):
+        result['pythonSelection'] = json.loads(os.environ['AIYOUPU_SCORE_PYTHON_SELECTION'])
     if out:
         result['reportPath'] = str(out / 'report.json')
         write_json(out / 'report.json', result)

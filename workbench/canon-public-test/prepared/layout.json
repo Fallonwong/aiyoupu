@@ -1,0 +1,90 @@
+{
+  "schema": "aiyoupu-canon-layout/v1",
+  "geometryMethod": "browser-native-svg/getBBox+getScreenCTM",
+  "scoreSha256": "d406b8a074ab8cdc5d36e2dd419c2cd3e770cfbd5ffec83f5a6d8bc3f6ab7709",
+  "preparedScoreSha256": "029949b34545c4e3389e4f69a1fe80f1eaf5d50e53b39152e9b72852c7b956a7",
+  "xmlSha256": "e08ec49391fb2ac7177d502852b86664fcce9eec65a63437a137f717ccc3cfed",
+  "audioSha256": "c2ce93e1a0b239c9ea2bb0865aa706f26921dee18ed1f729fa2aec126beceaba",
+  "timelineSha256": "70b0d61d7d6aa4bef2d120ce17e3b59ab24c880ed11caf9b2d4a04e3bf6f1ae4",
+  "noteheadCount": 142,
+  "staffSystems": 8,
+  "pairing": {
+    "method": "reading order within each staff system",
+    "pitchCheckMaxDeviationHalfSteps": 0.001,
+    "clefClusters": [
+      {
+        "system": 0,
+        "notes": 14,
+        "clefClusters": [
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 1,
+        "notes": 19,
+        "clefClusters": [
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 2,
+        "notes": 25,
+        "clefClusters": [
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 3,
+        "notes": 20,
+        "clefClusters": [
+          18,
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 4,
+        "notes": 18,
+        "clefClusters": [
+          18,
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 5,
+        "notes": 23,
+        "clefClusters": [
+          18,
+          30
+        ],
+        "spread": 0
+      },
+      {
+        "system": 6,
+        "notes": 22,
+        "clefClusters": [
+          18,
+          30
+        ],
+        "spread": 0.001
+      },
+      {
+        "system": 7,
+        "notes": 1,
+        "clefClusters": [
+          17.99
+        ],
+        "spread": 0
+      }
+    ]
+  },
+  "limits": [
+    "Coordinates prove engraving position only; they do not grant notation approval.",
+    "The MuseScore export is a single treble staff with one voice; no left-hand staff exists in this file.",
+    "Audio comes from the same MuseScore export and is not an independently recorded performance."
+  ]
+}

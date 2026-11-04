@@ -6,7 +6,7 @@ import {execFile} from 'node:child_process';
 
 export const BASELINE = Object.freeze({remotion:'4.0.515','@remotion/cli':'4.0.515',react:'19.2.4','react-dom':'19.2.4',typescript:'5.9.3'});
 const TIMEOUT = 5000;
-const CLI_TIMEOUT = Math.max(1,Math.min(120000,Number(process.env.PIANO_CLI_PROBE_TIMEOUT_MS)||15000));
+const CLI_TIMEOUT = Math.max(1,Math.min(120000,Number(process.env.AIYOUPU_CLI_PROBE_TIMEOUT_MS)||15000));
 const exists = p => {try{return fs.statSync(p).isFile();}catch{return false;}};
 const dirs = p => {try{return fs.readdirSync(p,{withFileTypes:true}).filter(e=>e.isDirectory()).map(e=>path.join(p,e.name));}catch{return [];}};
 const canonical = p => {try{return fs.realpathSync(p);}catch{return path.resolve(p);}};
@@ -57,7 +57,7 @@ async function inspectProject(project) {
       const banner=p.stdout.replace(/\x1b\[[0-9;]*m/g,'');
       p.version= /(?:^|\n)@remotion\/cli (\d+\.\d+\.\d+)(?:\r?\n|$)/.exec(banner)?.[1]??null;
       p.ok=!p.timedOut&&[0,1].includes(p.exitCode)&&!p.stderr&&p.version===BASELINE['@remotion/cli'];
-      if(!p.ok)result.issues.push(p.timedOut?'ENVIRONMENT_VERIFICATION_PENDING: installed packages match, but CLI probe timed out. Do not reinstall; inspect the process/cache and retry with PIANO_CLI_PROBE_TIMEOUT_MS (max 120000).':'Remotion help/version banner probe failed; see cliProbe');
+      if(!p.ok)result.issues.push(p.timedOut?'ENVIRONMENT_VERIFICATION_PENDING: installed packages match, but CLI probe timed out. Do not reinstall; inspect the process/cache and retry with AIYOUPU_CLI_PROBE_TIMEOUT_MS (max 120000).':'Remotion help/version banner probe failed; see cliProbe');
     }
   }catch(e){result.issues.push(e.message);}
   if(Number(process.versions.node.split('.')[0])<20)result.issues.push('Node >=20 required');
@@ -148,6 +148,12 @@ async function discoverPackageManagers(projects) {
  * selectedProject is an absolute project path or null, never an implicit install.
  */
 export async function discoverEnvironment({project=process.cwd(),authorizedProjects=[],pythonPaths=[],toolPaths=[]}={}) {
+  // Accept explicit configuration for environments outside PATH and the
+  // standard installed locations. These are existing files/directories, never
+  // an implicit install.
+  const configuredPython=[process.env.AIYOUPU_PYTHON].filter(Boolean);
+  const configuredTools=[['AIYOUPU_VEROVIO','verovio'],['AIYOUPU_MUSESCORE','MuseScore4'],['AIYOUPU_FFMPEG','ffmpeg'],['AIYOUPU_FFPROBE','ffprobe']].map(([k,name])=>{const value=process.env[k];return value?{value,name}:null;}).filter(Boolean);
+  pythonPaths=[...pythonPaths,...configuredPython];
   const roots=[];
   for(const p of [project,...authorizedProjects].map(p=>path.resolve(p)))if(!roots.some(r=>key(r)===key(p)))roots.push(p);
   const projects=[];
@@ -156,6 +162,8 @@ export async function discoverEnvironment({project=process.cwd(),authorizedProje
   const pythonCandidates=new Map(), toolCandidates=new Map(), launchers=[];
   const addPython=p=>{if(exists(p))pythonCandidates.set(key(p),canonical(p));};
   const addTool=(p,name)=>{if(exists(p))toolCandidates.set(key(p),{name:name??path.basename(p,path.extname(p)),path:canonical(p)});};
+  const configuredDirectories={};
+  for(const configured of configuredTools){const target=path.resolve(configured.value),dir=fs.statSync(target,{throwIfNoEntry:false})?.isDirectory();if(dir){configuredDirectories[configured.name]=canonical(target);for(const n of toolNames)candidatesAt(target,[n],f=>addTool(f,n));}else if(exists(target))addTool(target,configured.name);}
   const addLauncher=(p,name)=>{if(exists(p)&&!launchers.some(x=>key(x.path)===key(p)))launchers.push({name,path:canonical(p)});};
   for(const p of pythonPaths)addPython(path.resolve(p));
   for(const root of roots)for(const v of ['.venv','venv'])for(const bin of ['Scripts/python.exe','bin/python','bin/python3'])addPython(path.join(root,v,bin));
@@ -219,5 +227,5 @@ export async function discoverEnvironment({project=process.cwd(),authorizedProje
     const entry=tools[n]??={paths:[],probes:[],available:false};
     entry.paths.push(item.path);entry.probes.push(result);entry.available ||= result.ok;
   }
-  return {baseline:BASELINE,compatibilityPolicy:'Exact installed versions, local module resolution, Node >=20 and actual Remotion CLI version probe required; timeouts mean unverified, not absent.',projects,selectedProject:projects.find(p=>p.compatible)?.project??null,verificationPending:projects.some(p=>p.cliProbe?.timedOut),packageManagers,pythons,selectedPython:pythons.find(p=>p.valid)?.path??null,pythonRequired:false,tools,launcherProbes,probeTimeoutMs:TIMEOUT,cliProbeTimeoutMs:CLI_TIMEOUT};
+  return {baseline:BASELINE,compatibilityPolicy:'Exact installed versions, local module resolution, Node >=20 and actual Remotion CLI version probe required; timeouts mean unverified, not absent.',projects,selectedProject:projects.find(p=>p.compatible)?.project??null,verificationPending:projects.some(p=>p.cliProbe?.timedOut),packageManagers,pythons,selectedPython:pythons.find(p=>p.valid)?.path??null,pythonRequired:false,tools,configuredModules:configuredDirectories,launcherProbes,probeTimeoutMs:TIMEOUT,cliProbeTimeoutMs:CLI_TIMEOUT};
 }

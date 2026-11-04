@@ -1,0 +1,18 @@
+{
+  "status": "canon_prepared",
+  "notes": 142,
+  "events": 142,
+  "measures": 44,
+  "systems": 8,
+  "durationInFrames": 5373,
+  "scoreSeconds": 176,
+  "audioSeconds": 179.069313,
+  "audioTailSeconds": 3.069,
+  "scoreWidth": 1600,
+  "scoreHeight": 2261.671,
+  "pairingDeviation": 0.001,
+  "files": {
+    "timeline": "prepared/timeline.json",
+    "layout": "prepared/layout.json"
+  }
+}

@@ -26,4 +26,4 @@ Each written note needs a stable id, pitch, durationFrames, explicit part/staff/
 
 Geometry may change without changing music identity. Use props.presentation.cameraPath for new camera samples, leaving musical evidence stable. Changed musical timing needs renewed score approval; changed presentation needs renewed keyframe approval. Approval/job files are local, version-bound evidence, not portable paths or cryptographic human authentication.
 
-The original ScoreNoteLeap leap, trail and camera equations remain; optional sustain metadata extends highlight behavior. PianoScoreScene and PianoRemotion remain unchanged. See [geometry and rendering workflow](rendering.md) for native SVG measurements, review responses and unsupported notation cases.
+The original ScoreNoteLeap leap, trail and camera equations remain; optional sustain metadata extends highlight behavior. AiyoupuScoreScene and Aiyoupu remain unchanged. See [geometry and rendering workflow](rendering.md) for native SVG measurements, review responses and unsupported notation cases.

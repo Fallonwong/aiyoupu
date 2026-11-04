@@ -3,7 +3,7 @@
 
 # Portable piano asset import
 
-For new song work use `piano.mjs prepare`, then the [review/alignment/bind workflow](rendering.md). The importer is a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.
+For new song work use `aiyoupu-legacy.mjs prepare`, then the [review/alignment/bind workflow](rendering.md). The importer is a structural transport layer; imported does not mean score-approved or audio-verified. `--pdf <file>` records a PDF source for the preparation adapter or explicit incomplete handoff; it does not perform built-in OMR.
 
 For missing standard data, use the [Agent material-preparation workflow](material-preparation.md) first. It covers MusicXML, MIDI, SVG, MP3, staff images and jianpu images, reusing available Agent tools instead of mandating a complete CLI suite. A script's incomplete status is an Agent handoff, not a requirement that the user write a timeline manually.
 
@@ -97,7 +97,7 @@ captured stdout/stderr combined limit: 1 MiB. A normal CLI generally needs an ad
 to implement this protocol; passing MuseScore directly is not sufficient.
 
 Failed validation produces no destination bundle. Staging is cleaned on handled
-failures; an abrupt process termination can leave `.piano-prepare-*` scratch files
+failures; an abrupt process termination can leave `.aiyoupu-prepare-*` scratch files
 or a partial newly reserved destination. A new destination is reserved exclusively
 before publication; an existing destination is never merged or overwritten.
 
