@@ -1,8 +1,8 @@
-import type {PianoScoreSceneProps, PianoTimeline} from './PianoScoreScene';
+import type {AiyoupuScoreSceneProps, AiyoupuTimeline} from './AiyoupuScoreScene';
 import {OFFICIAL_HAND_PALETTE, type ScoreVideoConfig} from './ScoreVideoConfig';
 
 export type ScoreVideoAssets = {
-  timeline: PianoTimeline;
+  timeline: AiyoupuTimeline;
   scoreSrc: string;
   audioSrc?: string;
   /** Declare the supplied geometry; this resolver never generates a strip. */
@@ -10,7 +10,7 @@ export type ScoreVideoAssets = {
 };
 
 /** Resolve once, persist these plain JSON props, then bind/review that exact file. */
-export function resolveScoreVideoConfig(config: ScoreVideoConfig, assets: ScoreVideoAssets): PianoScoreSceneProps {
+export function resolveScoreVideoConfig(config: ScoreVideoConfig, assets: ScoreVideoAssets): AiyoupuScoreSceneProps {
   const {aspectRatio, cameraMode, theme, texture, motionFx, typography, pipeline} = config;
   if (!['9:16','16:9'].includes(aspectRatio) ||
       !['portrait-focus','portrait-runway','landscape-classic'].includes(cameraMode) ||

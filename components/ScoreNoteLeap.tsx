@@ -1,8 +1,10 @@
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
-import {scoreChordGeometry} from './ScoreChordGeometry';
+import {scoreAttackEvents,scoreChordGeometry} from './ScoreChordGeometry';
 
-export type ScoreAttack = {frame:number; x:number; y:number; notes?:{x:number;y:number;pitch?:string}[]};
+export type ScoreNote = {x:number;y:number;pitch?:string;attack?:boolean;tieStart?:boolean;tieStop?:boolean;
+  part?:string;voice?:string;staff?:number;durationFrames?:number;soundingEndFrame?:number};
+export type ScoreAttack = ScoreNote & {frame:number;systemId?:string|number;notes?:ScoreNote[]};
 export type ScoreNoteLeapProps = {
   events?: ScoreAttack[]; color?:string; coreColor?:string; width?:number; height?:number;
   arcHeight?:number; trailFrames?:number; highlightFrames?:number;
@@ -12,20 +14,27 @@ export type ScoreNoteLeapProps = {
   followChordNotes?:boolean;
   /** Only the struck notehead breathes; no moving head or air trail. */
   pulseOnly?:boolean;
+  /** Consecutive frame count for a struck note's breathing pulse. */
+  pulseFrames?:number;
+  /** Screen-space correction for the notehead glow. */
+  pulseScale?:number;
   rippleRing?:boolean; rippleFrames?:number; rippleMaxRadius?:number; rippleColor?:string;
   rippleOpacity?:number; inactiveNoteOpacity?:number;
   className?:string; style?:React.CSSProperties;
 };
 /** Coordinates share the score's pixel space. Every time value is in frames. */
 export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
-  events=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,
+  events:writtenEvents=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,
   trailFrames=5,highlightFrames=10,holdHighlightUntilNext=false,glowColor=color,
   glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,pulseOnly=false,
+  pulseFrames=18,
+  pulseScale=1,
   rippleRing=false,rippleFrames=14,rippleMaxRadius=38,rippleColor,
   rippleOpacity=1,inactiveNoteOpacity=.24,
   className,style
 }) => {
   const frame=useCurrentFrame();
+  const events=React.useMemo(()=>scoreAttackEvents(writtenEvents),[writtenEvents]);
   const point=(f:number) => {
     if(!events.length || f<events[0].frame) return null;
     const index=events.findIndex((e)=>e.frame>f);
@@ -64,32 +73,47 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
     }
   }
 
-  const chord=followChordNotes?scoreChordGeometry(events,frame,arcHeight,trailFrames):null;
+  const semantic=events.some(e=>(e.notes??[e]).some(n=>n.tieStart||n.tieStop||n.attack===false||n.durationFrames!==undefined));
+  const chord=followChordNotes||semantic?scoreChordGeometry(events,frame,arcHeight,trailFrames):null;
   const visibleSegments=pulseOnly?[]:chord?.segments??segments;
   const visibleHeads=pulseOnly?[]:chord?.heads??(head?[head]:[]);
   const visibleTails=pulseOnly?[]:chord?.tails??[tail];
 
   return <svg className={className} width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{overflow:'visible',...style}}>
-    {events.map((event,i)=>{
+    {(() => {
+    let lastActive = -1;
+    if (pulseOnly) {
+      for (let i=events.length-1; i>=0; i--) {
+        if (frame-events[i].frame >= 0 && frame-events[i].frame < pulseFrames) { lastActive = i; break; }
+      }
+    }
+    return events.map((event,i)=>{
       const age=frame-event.frame;
       if(age<0) return null;
       const isHeld=holdHighlightUntilNext&&(i===events.length-1||frame<events[i+1].frame);
-      const strength=isHeld?Math.max(.7,1-age/highlightFrames):Math.max(0,1-age/highlightFrames);
+      const life=pulseOnly?Math.max(1,pulseFrames):highlightFrames;
+      // Once a notehead has finished glowing it has no remaining visual role.
+      // Unmount it instead of accumulating hundreds of invisible SVG filters.
+      if(!isHeld&&inactiveNoteOpacity===0&&age>=Math.max(life,rippleRing?rippleFrames:0)) return null;
+      const strength=isHeld?Math.max(.7,1-age/life):Math.max(0,1-age/life);
       const showRipple=rippleRing&&age<rippleFrames;
       const rippleT=showRipple?age/rippleFrames:0;
       const rippleEase=1-Math.pow(1-rippleT,2.5);
       const rippleRadius=10+(rippleMaxRadius-10)*rippleEase;
       const ringOpacity=showRipple?Math.max(0,(1-rippleT)*(1-0.2*rippleT))*rippleOpacity:0;
       const rippleStroke=Math.max(0.8,3.2*(1-rippleT*0.7));
-      return <g key={i}>{(event.notes??[event]).map((n,j)=><g key={j}>
+      // Only the most recently struck notehead breathes. Older notes return to
+      // their engraved state, so teaching mode has one pulse instead of a stack.
+      if (pulseOnly && i !== lastActive) return null;
+      return <g key={i}>{(event.notes??[event]).filter(n=>n.attack!==false&&!n.tieStop).map((n,j)=><g key={j}>
         {showRipple&&<>
           <ellipse cx={n.x} cy={n.y} rx={rippleRadius*1.15} ry={rippleRadius*0.85} fill="none" stroke={glowColor} strokeWidth={rippleStroke+2.5} opacity={ringOpacity*0.45} style={{filter:`blur(${2+glowStrength*2}px)`}}/>
           <ellipse cx={n.x} cy={n.y} rx={rippleRadius*1.15} ry={rippleRadius*0.85} fill="none" stroke={rippleColor??(glowStrength>0?glowColor:color)} strokeWidth={rippleStroke} opacity={ringOpacity*0.9} style={{filter:`drop-shadow(0 0 6px ${glowColor})`}}/>
         </>}
-        {glowStrength>0&&strength>0&&<ellipse cx={n.x} cy={n.y} rx={15} ry={10} fill={glowColor} opacity={strength*.5} style={{filter:`blur(${4+glowStrength}px)`}}/>}
-        <ellipse cx={n.x} cy={n.y} rx={10+strength*3} ry={6+strength*2} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={strength*.25} stroke={glowStrength>0&&strength>.2?glowColor:color} strokeWidth={1.5+strength} opacity={inactiveNoteOpacity+strength*(1-inactiveNoteOpacity)} style={{filter:`drop-shadow(0 0 ${2+strength*7}px ${glowStrength>0?glowColor:color})`}} />
+        {glowStrength>0&&strength>0&&<ellipse cx={n.x} cy={n.y} rx={15*pulseScale} ry={10*pulseScale} fill={glowColor} opacity={strength*.5} style={{filter:`blur(${Math.max(2,(4+glowStrength)*pulseScale)}px)`}}/>}
+        <ellipse cx={n.x} cy={n.y} rx={(10+strength*3)*pulseScale} ry={(6+strength*2)*pulseScale} transform={`rotate(-18 ${n.x} ${n.y})`} fill={color} fillOpacity={strength*.25} stroke={glowStrength>0&&strength>.2?glowColor:color} strokeWidth={Math.max(.6,(1.5+strength)*pulseScale)} opacity={inactiveNoteOpacity+strength*(1-inactiveNoteOpacity)} style={{filter:`drop-shadow(0 0 ${Math.max(1,(2+strength*7)*pulseScale)}px ${glowStrength>0?glowColor:color})`}} />
       </g>)}</g>;
-    })}
+    })})()}
     {taperTrail ? (
       <>
         {glowStrength > 0 && visibleSegments.length > 0 && (

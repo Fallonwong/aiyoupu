@@ -15,7 +15,7 @@ export async function buildScoreStrip({svg,timeline,layout,systems,project,brows
   const svgBytes=fs.readFileSync(svg),source=svgBytes.toString('utf8');
   const original=read(timeline),t=validateTimeline(original),l=read(layout),packet=read(systems);
   requireValue(l.scoreSha256===sha256(svgBytes)&&l.timelineSha256===hashObject(original),'stale source geometry evidence');
-  requireValue(packet.schema==='piano-strip-systems/v1'&&packet.scoreSha256===sha256(svgBytes)&&packet.timelineSha256===hashObject(original),'stale system bounds');
+  requireValue(packet.schema==='aiyoupu-strip-systems/v1'&&packet.scoreSha256===sha256(svgBytes)&&packet.timelineSha256===hashObject(original),'stale system bounds');
   const rows=packet.systems;
   requireValue(Array.isArray(rows)&&rows.length>0&&new Set(rows.map(s=>s.id)).size===rows.length,'unique measured systems required');
   const ids=new Map(rows.map((s,i)=>[s.id,i]));
@@ -142,8 +142,8 @@ export async function buildScoreStrip({svg,timeline,layout,systems,project,brows
   result.timeline.pipeline='score-strip';
   result.timeline.alignmentStatus='Timing retained from source; not newly certified';
   // Mapping was independently measured in the browser after placement.
-  const geometry={geometryMethod:'browser-native-svg/v1',scoreSha256:sha256(result.svg),timelineSha256:hashObject(result.timeline),producer:{tool:'piano score-strip / existing Chromium',runId:hashObject({svg:sha256(svgBytes),timeline:hashObject(original),packet,scale,gap})},mapping:result.mapping};
-  const evidence={schema:'piano-score-strip/v1',status:'geometry_checked',sourceSvgSha256:sha256(svgBytes),sourceTimelineSha256:hashObject(original),systemBoundsSha256:hashObject(packet),outputSvgSha256:geometry.scoreSha256,outputTimelineSha256:geometry.timelineSha256,mappedNoteheads:noteCount,systems:result.systems,scale,gap,pitchesAndTiming:'preserved',userApproved:false,limitations:['One self-contained SVG; supplied measured system crops and note IDs','No automatic recognition, repeat unfolding or time alignment','Inspect beams/slurs/labels at joins; notehead checks cannot prove crop completeness']};
+  const geometry={geometryMethod:'browser-native-svg/v1',scoreSha256:sha256(result.svg),timelineSha256:hashObject(result.timeline),producer:{tool:'aiyoupu score-strip / existing Chromium',runId:hashObject({svg:sha256(svgBytes),timeline:hashObject(original),packet,scale,gap})},mapping:result.mapping};
+  const evidence={schema:'aiyoupu-score-strip/v1',status:'geometry_checked',sourceSvgSha256:sha256(svgBytes),sourceTimelineSha256:hashObject(original),systemBoundsSha256:hashObject(packet),outputSvgSha256:geometry.scoreSha256,outputTimelineSha256:geometry.timelineSha256,mappedNoteheads:noteCount,systems:result.systems,scale,gap,pitchesAndTiming:'preserved',userApproved:false,limitations:['One self-contained SVG; supplied measured system crops and note IDs','No automatic recognition, repeat unfolding or time alignment','Inspect beams/slurs/labels at joins; notehead checks cannot prove crop completeness']};
   // No original file is overwritten. All validation precedes output creation.
   fs.mkdirSync(out,{recursive:true});
   const write=(name,data)=>fs.writeFileSync(path.join(out,name),typeof data==='string'?data:JSON.stringify(data,null,2)+'\n',{flag:'wx'});

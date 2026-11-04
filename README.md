@@ -1,16 +1,19 @@
 <div align="center">
 
-# 🎹 Piano Remotion
+# 🎹 AI有谱
+
+> V2.1 本地发布候选：显示名 AI有谱，slug 为 `aiyoupu`，CLI、组合 ID、组件前缀及应用协议均已改名，这是破坏性迁移。旧交付保持冻结；参见 [迁移说明](history/migration-v2/migration-guide.md) 和 [仓库改名检查单](history/migration-v2/github-checklist.md)。远程仓库与 Release 尚未发布。
+
 
 **让乐谱随音乐跳起来。**
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V1.0.0-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-V2.1%20candidate-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [下载 V1.0.0](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0)
+[快速开始](#快速开始) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [仓库改名待确认](history/migration-v2/github-checklist.md)
 
 </div>
 
@@ -18,11 +21,11 @@
 
 > 将钢琴乐谱变成跟随音乐演奏的动态画面。先确认谱面，再确认画面与试听，让每一次修改都有清晰的依据。
 
-**核心能力**：四组视觉预设、三类背景与两类谱面质感；原谱多行拼接跑道工具；14 帧和弦合流、58/44 弧高，支持纯音头脉冲。所有预设默认无人物，不含私人 IP、曲目或字体。详见 [版本说明](RELEASE_NOTES.md)、[视觉配置](references/visual-presets.md)、[连续谱带](references/score-strip.md)。
+**核心能力**：工作台四预设、16:9 横屏教学预设（TeachingLandscape）、三类背景与两类谱面质感；原谱多行拼接跑道工具；14 帧和弦合流、58/44 弧高，支持纯音头脉冲。方向台只负责选方向，完整制作由 Agent CLI 接续（见[使用指南](README_使用说明.md)）。所有预设默认无人物，不含私人 IP、曲目或字体。详见 [视觉配置](references/visual-presets.md)、[连续谱带](references/score-strip.md)、[教学预设](references/teaching-landscape-v2.md)。
 
 ## 为钢琴乐谱而设计
 
-Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
+AI有谱 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
 
 - **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
 - **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
@@ -55,7 +58,7 @@ Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整�
 
 ## 为钢琴乐谱而设计
 
-Piano Remotion 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
+AI有谱 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、音频接入、画面预览与视频导出连接起来，让 Codex、WorkBuddy 等 Agent 按同一套流程制作钢琴跟谱视频。
 
 - **双手分轨**：左右手以独立光点和轨迹跟随演奏，和弦中的音符同步高亮。
 - **完整乐句**：区分延音线、圆滑线与符杠，保留音符时值、休止符和声部关系。
@@ -219,7 +222,7 @@ MusicXML 能直接提供音高、节奏、声部和连线。谱面与音频来�
 统一执行入口：
 
 ```sh
-node <skill>/scripts/piano.mjs --help
+node <skill>/scripts/aiyoupu.mjs --help
 ```
 
 环境发现、素材处理、谱面审计、音源导出和视频制作通过脚本执行。Agent 负责理解需求、调用现有能力、展示待确认资料，并在用户确认后继续。
@@ -235,9 +238,9 @@ node <skill>/scripts/piano.mjs --help
 
 <div align="center">
 
-**Piano Remotion · V1.2.0**
+**AI有谱 · V2.1 本地候选**
 为认真对待每一个音符的创作者而做。
 
-[GitHub](https://github.com/Fallonwong/piano-remotion) · [下载](https://github.com/Fallonwong/piano-remotion/releases/tag/v1.0.0) · [反馈问题](https://github.com/Fallonwong/piano-remotion/issues) · [授权信息](LICENSE.txt)
+[仓库迁移清单](history/migration-v2/github-checklist.md) · [迁移说明](history/migration-v2/migration-guide.md) · [许可仍未指定：历史通知](history/v130/LICENSE.txt)
 
 </div>

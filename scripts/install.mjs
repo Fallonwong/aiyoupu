@@ -23,11 +23,11 @@ if(mode==='--standalone') {
 } else {
   const pkg=JSON.parse(fs.readFileSync(path.join(target,'package.json'),'utf8'));
   if(!({...pkg.dependencies,...pkg.devDependencies}).remotion) throw new Error('Expected an existing Remotion project');
-  add(path.join(root,'assets/runtime/public/score/demo'),path.join(target,'public/score/piano-remotion-demo'));
-  const entry=fs.readFileSync(path.join(root,'assets/runtime/src/index.tsx'),'utf8').replaceAll('../public/score/demo/','../../public/score/piano-remotion-demo/').replaceAll("'./animations/score/","'../animations/score/").replaceAll('score/demo/','score/piano-remotion-demo/');
-  plan.push([null,path.join(target,'src/piano-remotion-demo/index.tsx'),entry]);
+  add(path.join(root,'assets/runtime/public/score/demo'),path.join(target,'public/score/aiyoupu-demo'));
+  const entry=fs.readFileSync(path.join(root,'assets/runtime/src/index.tsx'),'utf8').replaceAll('../public/score/demo/','../../public/score/aiyoupu-demo/').replaceAll("'./animations/score/","'../animations/score/").replaceAll('score/demo/','score/aiyoupu-demo/');
+  plan.push([null,path.join(target,'src/aiyoupu-demo/index.tsx'),entry]);
   const song=fs.readFileSync(path.join(root,'assets/runtime/src/song.tsx'),'utf8').replaceAll("'./animations/score/","'../animations/score/").replaceAll('"./animations/score/','"../animations/score/');
-  plan.push([null,path.join(target,'src/piano-remotion-demo/song.tsx'),song]);
+  plan.push([null,path.join(target,'src/aiyoupu-demo/song.tsx'),song]);
 }
 add(path.join(root,'components'),path.join(target,'src/animations/score'));
 // Preflight the entire plan before any writes. Identical files may be reused.
@@ -62,7 +62,7 @@ const result={mode,target,planOnly,files:plan.map(([,destination])=>destination)
   dependencies:{action:reuse?'link':ready?'reuse-existing':'confirmation_required',source:dependencySource,target:dependencyTarget,versions:reuse?.versions??environment.projects[0]?.versions??{},expectedVersions:BASELINE},
   confirmation_required:!ready,
   npmCi:{executed:false,command:'npm ci',cwd:target,expected:{dependencies:targetPkg.dependencies??{},devDependencies:targetPkg.devDependencies??{},lockedPackageCount:targetLock?.packages?Object.keys(targetLock.packages).length-1:null,lockfile:path.join(target,'package-lock.json')},reason:ready?'Compatible existing dependencies found; no npm operation needed.':mode==='--standalone'?'No compatible existing environment selected. npm ci would install the bundled exact lockfile including development dependencies; separate explicit confirmation is required.':'No compatible existing environment selected. Review the target package.json and lockfile before authorizing its package manager; bundled lockfile must not replace the project lockfile.'},
-  entry:mode==='--standalone'?'src/index.tsx':'src/piano-remotion-demo/index.tsx',songEntry:mode==='--standalone'?'src/song.tsx':'src/piano-remotion-demo/song.tsx'};
+  entry:mode==='--standalone'?'src/index.tsx':'src/aiyoupu-demo/index.tsx',songEntry:mode==='--standalone'?'src/song.tsx':'src/aiyoupu-demo/song.tsx'};
 if(!planOnly) {
   for(const [src,dst,content] of plan) {fs.mkdirSync(path.dirname(dst),{recursive:true});if(!fs.existsSync(dst)) src?fs.copyFileSync(src,dst,fs.constants.COPYFILE_EXCL):fs.writeFileSync(dst,content,{flag:'wx'});}
   if(reuse)fs.symlinkSync(dependencySource,dependencyTarget,process.platform==='win32'?'junction':'dir');

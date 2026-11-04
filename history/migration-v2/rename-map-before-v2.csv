@@ -1,0 +1,345 @@
+﻿file,line,category,old,new,targetFile,action,count
+.gitignore,8,品牌,piano-prepare-,aiyoupu-prepare-,.gitignore,replace-exact,1
+LICENSE.txt,1,历史,Piano Remotion,原样冻结；参见同目录迁移注明,history/v130/LICENSE.txt,archive-unchanged,
+LICENSE.txt,4,历史,piano-remotion,原样冻结；参见同目录迁移注明,history/v130/LICENSE.txt,archive-unchanged,
+README.md,5,品牌,references/public-score-sources-v130.md,references/public-score-sources-v2.md,README.md,replace-exact,1
+README.md,5,品牌,references/teaching-landscape-v130.md,references/teaching-landscape-v2.md,README.md,replace-exact,1
+README.md,16,品牌,piano-remotion,aiyoupu,README.md,replace-exact,1
+README.md,225,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,README.md,replace-exact,1
+README.md,244,品牌,piano-remotion,aiyoupu,README.md,replace-exact,3
+README_使用说明.md,9,品牌,piano-remotion,aiyoupu,README_使用说明.md,replace-exact,2
+README_使用说明.md,12,品牌,piano-remotion,aiyoupu,README_使用说明.md,replace-exact,2
+README_使用说明.md,17,品牌,piano-remotion,aiyoupu,README_使用说明.md,replace-exact,1
+README_使用说明.md,49,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,README_使用说明.md,replace-exact,1
+RELEASE_NOTES.md,1,历史,Piano Remotion,原样冻结；参见同目录迁移注明,history/v130/RELEASE_NOTES.md,archive-unchanged,
+RELEASE_NOTES_V130.md,7,历史,piano-remotion,原样冻结；参见同目录迁移注明,history/v130/RELEASE_NOTES_V130.md,archive-unchanged,
+SKILL.md,2,品牌,piano-remotion,aiyoupu,SKILL.md,replace-exact,1
+SKILL.md,3,品牌,piano-score,aiyoupu-score,SKILL.md,replace-exact,1
+SKILL.md,8,品牌,piano-remotion,aiyoupu,SKILL.md,replace-exact,1
+SKILL.md,11,品牌,references/public-score-sources-v130.md,references/public-score-sources-v2.md,SKILL.md,replace-exact,1
+SKILL.md,11,品牌,references/teaching-landscape-v130.md,references/teaching-landscape-v2.md,SKILL.md,replace-exact,1
+SKILL.md,13,品牌,PianoScoreScene,AiyoupuScoreScene,SKILL.md,replace-exact,1
+SKILL.md,15,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,SKILL.md,replace-exact,1
+SKILL.md,15,品牌,piano.mjs,aiyoupu-legacy.mjs,SKILL.md,replace-exact,1
+SKILL.md,23,品牌,piano-production/v2,aiyoupu-production/v2,SKILL.md,replace-exact,1
+agents/openai.yaml,3,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,agents/openai.yaml,retain-term,
+agents/openai.yaml,4,品牌,piano-remotion,aiyoupu,agents/openai.yaml,replace-exact,1
+assets/runtime/package-lock.json,2,品牌,piano-remotion-portable-runtime,aiyoupu-portable-runtime,assets/runtime/package-lock.json,replace-exact,1
+assets/runtime/package-lock.json,8,品牌,piano-remotion-portable-runtime,aiyoupu-portable-runtime,assets/runtime/package-lock.json,replace-exact,1
+assets/runtime/package.json,2,品牌,piano-remotion-portable-runtime,aiyoupu-portable-runtime,assets/runtime/package.json,replace-exact,1
+assets/runtime/package.json,9,品牌,PianoRemotion,Aiyoupu,assets/runtime/package.json,replace-exact,2
+assets/runtime/public/score/demo/timing.musicxml,1,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,assets/runtime/public/score/demo/timing.musicxml,retain-term,
+assets/runtime/src/index.tsx,3,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/index.tsx,replace-exact,2
+assets/runtime/src/index.tsx,5,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/index.tsx,5,品牌,PianoTimeline,AiyoupuTimeline,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/index.tsx,6,品牌,PianoTimeline,AiyoupuTimeline,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/index.tsx,8,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/index.tsx,8,品牌,PianoRemotion,Aiyoupu,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/index.tsx,10,品牌,Piano Remotion,AI有谱,assets/runtime/src/index.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,3,品牌,PianoPresentation,AiyoupuPresentation,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,4,品牌,PianoScoreSceneV130,AiyoupuScoreSceneV2,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,4,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,4,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,5,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,6,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song-v130.tsx,10,品牌,PianoRemotion,Aiyoupu,assets/runtime/src/song-v2.tsx,replace-exact,1
+assets/runtime/src/song.tsx,3,品牌,PianoPresentation,AiyoupuPresentation,assets/runtime/src/song.tsx,replace-exact,1
+assets/runtime/src/song.tsx,4,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,assets/runtime/src/song.tsx,replace-exact,1
+assets/runtime/src/song.tsx,4,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/song.tsx,replace-exact,2
+assets/runtime/src/song.tsx,5,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,assets/runtime/src/song.tsx,replace-exact,1
+assets/runtime/src/song.tsx,6,品牌,PianoScoreScene,AiyoupuScoreScene,assets/runtime/src/song.tsx,replace-exact,1
+assets/runtime/src/song.tsx,10,品牌,PianoRemotion,Aiyoupu,assets/runtime/src/song.tsx,replace-exact,1
+components/PianoRemotion.tsx,1,品牌,PianoRemotion,Aiyoupu,components/Aiyoupu.tsx,replace-exact,1
+components/PianoRemotion.tsx,2,品牌,PianoRemotionProps,AiyoupuProps,components/Aiyoupu.tsx,replace-exact,1
+components/PianoScoreScene.tsx,7,品牌,PianoPresentation,AiyoupuPresentation,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreScene.tsx,10,品牌,PianoTimeline,AiyoupuTimeline,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreScene.tsx,17,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreScene.tsx,19,品牌,PianoTimeline,AiyoupuTimeline,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreScene.tsx,34,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreScene.tsx,34,品牌,PianoScoreScene,AiyoupuScoreScene,components/AiyoupuScoreScene.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,3,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,3,品牌,PianoScoreScene,AiyoupuScoreScene,components/AiyoupuScoreSceneV2.tsx,replace-exact,2
+components/PianoScoreSceneV130.tsx,5,品牌,PianoScoreScene,AiyoupuScoreScene,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,5,品牌,PianoTimeline,AiyoupuTimeline,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,6,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,9,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,9,品牌,PianoScoreScene,AiyoupuScoreScene,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/PianoScoreSceneV130.tsx,13,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/AiyoupuScoreSceneV2.tsx,replace-exact,1
+components/ScoreVideoConfig.ts,4,品牌,Piano Remotion,AI有谱,components/ScoreVideoConfig.ts,replace-exact,1
+components/ScoreVideoConfig.ts,143,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,components/ScoreVideoConfig.ts,retain-term,
+components/ScoreVideoConfig.ts,164,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,components/ScoreVideoConfig.ts,retain-term,
+components/ScoreVideoConfig.ts,185,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,components/ScoreVideoConfig.ts,retain-term,
+components/ScoreVideoConfig.ts,206,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,components/ScoreVideoConfig.ts,retain-term,
+components/TeachingFocusV130.ts,1,品牌,PianoScoreScene,AiyoupuScoreScene,components/TeachingFocusV2.ts,replace-exact,1
+components/TeachingFocusV130.ts,1,品牌,PianoTimeline,AiyoupuTimeline,components/TeachingFocusV2.ts,replace-exact,1
+components/TeachingFocusV130.ts,3,品牌,PianoTimeline,AiyoupuTimeline,components/TeachingFocusV2.ts,replace-exact,1
+components/resolveScoreVideoConfig.ts,1,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/resolveScoreVideoConfig.ts,replace-exact,1
+components/resolveScoreVideoConfig.ts,1,品牌,PianoScoreScene,AiyoupuScoreScene,components/resolveScoreVideoConfig.ts,replace-exact,1
+components/resolveScoreVideoConfig.ts,1,品牌,PianoTimeline,AiyoupuTimeline,components/resolveScoreVideoConfig.ts,replace-exact,1
+components/resolveScoreVideoConfig.ts,5,品牌,PianoTimeline,AiyoupuTimeline,components/resolveScoreVideoConfig.ts,replace-exact,1
+components/resolveScoreVideoConfig.ts,13,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/resolveScoreVideoConfig.ts,replace-exact,1
+components/resolveScoreVideoConfigV130.ts,4,品牌,PianoScoreSceneV130,AiyoupuScoreSceneV2,components/resolveScoreVideoConfigV2.ts,replace-exact,1
+components/resolveScoreVideoConfigV130.ts,4,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/resolveScoreVideoConfigV2.ts,replace-exact,1
+components/resolveScoreVideoConfigV130.ts,7,品牌,PianoScoreSceneProps,AiyoupuScoreSceneProps,components/resolveScoreVideoConfigV2.ts,replace-exact,1
+examples/agent-prompts.md,8,品牌,piano-remotion,aiyoupu,examples/agent-prompts.md,replace-exact,1
+examples/agent-prompts.md,19,品牌,piano-remotion,aiyoupu,examples/agent-prompts.md,replace-exact,1
+examples/agent-prompts.md,29,品牌,piano-remotion,aiyoupu,examples/agent-prompts.md,replace-exact,1
+examples/sources-v130.json,31,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,examples/sources-v2.json,retain-term,
+manifest.json,2,品牌,piano-remotion,aiyoupu,manifest.json,replace-exact,1
+manifest.json,10,品牌,piano-remotion,aiyoupu,manifest.json,replace-exact,1
+manifest.json,94,品牌,components/PianoPresentation.ts,components/AiyoupuPresentation.ts,manifest.json,replace-exact,1
+manifest.json,98,品牌,components/PianoRemotion.tsx,components/Aiyoupu.tsx,manifest.json,replace-exact,1
+manifest.json,102,品牌,components/PianoScoreScene.tsx,components/AiyoupuScoreScene.tsx,manifest.json,replace-exact,1
+manifest.json,266,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,manifest.json,replace-exact,1
+manifest.json,322,品牌,assets/runtime/src/song-v130.tsx,assets/runtime/src/song-v2.tsx,manifest.json,replace-exact,1
+manifest.json,326,品牌,components/PianoScoreSceneV130.tsx,components/AiyoupuScoreSceneV2.tsx,manifest.json,replace-exact,1
+manifest.json,330,品牌,components/ScoreVideoConfigV130.ts,components/ScoreVideoConfigV2.ts,manifest.json,replace-exact,1
+manifest.json,334,品牌,components/TeachingFocusV130.ts,components/TeachingFocusV2.ts,manifest.json,replace-exact,1
+manifest.json,338,品牌,components/resolveScoreVideoConfigV130.ts,components/resolveScoreVideoConfigV2.ts,manifest.json,replace-exact,1
+manifest.json,342,品牌,examples/sources-v130.json,examples/sources-v2.json,manifest.json,replace-exact,1
+manifest.json,346,品牌,references/public-score-sources-v130.md,references/public-score-sources-v2.md,manifest.json,replace-exact,1
+manifest.json,350,品牌,references/teaching-landscape-v130.md,references/teaching-landscape-v2.md,manifest.json,replace-exact,1
+manifest.json,354,品牌,scripts/engrave-teaching-v130.py,scripts/engrave-teaching-v2.py,manifest.json,replace-exact,1
+manifest.json,358,品牌,scripts/install-v130.mjs,scripts/install-v2.mjs,manifest.json,replace-exact,1
+manifest.json,362,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,manifest.json,replace-exact,1
+manifest.json,366,品牌,scripts/quality-v130.mjs,scripts/quality-v2.mjs,manifest.json,replace-exact,1
+manifest.json,370,品牌,scripts/workbench-export-v130.mjs,scripts/workbench-export-v2.mjs,manifest.json,replace-exact,1
+manifest.json,374,品牌,scripts/geometry-v130.mjs,scripts/geometry-v2.mjs,manifest.json,replace-exact,1
+manifest.json,378,品牌,scripts/audio-transfer-v130.mjs,scripts/audio-transfer-v2.mjs,manifest.json,replace-exact,1
+references/assets-policy.md,3,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,references/assets-policy.md,retain-term,
+references/data-contract.md,29,品牌,PianoScoreScene,AiyoupuScoreScene,references/data-contract.md,replace-exact,1
+references/data-contract.md,29,品牌,PianoRemotion,Aiyoupu,references/data-contract.md,replace-exact,1
+references/environment.md,4,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/environment.md,replace-exact,1
+references/environment.md,5,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/environment.md,replace-exact,1
+references/environment.md,13,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/environment.md,replace-exact,1
+references/input-preparation.md,4,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,references/input-preparation.md,retain-term,
+references/input-preparation.md,6,品牌,piano.mjs,aiyoupu-legacy.mjs,references/input-preparation.md,replace-exact,1
+references/input-preparation.md,100,品牌,piano-prepare-,aiyoupu-prepare-,references/input-preparation.md,replace-exact,1
+references/input-routes.md,73,品牌,piano.mjs,aiyoupu-legacy.mjs,references/input-routes.md,replace-exact,1
+references/input-routes.md,75,品牌,piano.mjs,aiyoupu-legacy.mjs,references/input-routes.md,replace-exact,1
+references/performance-quality.md,8,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,references/performance-quality.md,replace-exact,1
+references/performance-quality.md,12,品牌,piano-time-map/v2,aiyoupu-time-map/v2,references/performance-quality.md,replace-exact,1
+references/performance-quality.md,18,品牌,piano-quality-review/v2,aiyoupu-quality-review/v2,references/performance-quality.md,replace-exact,1
+references/performance-quality.md,26,品牌,piano-source-inventory/v1,aiyoupu-source-inventory/v1,references/performance-quality.md,replace-exact,1
+references/portrait-runway.md,13,品牌,PianoScoreScene,AiyoupuScoreScene,references/portrait-runway.md,replace-exact,1
+references/portrait-runway.md,16,品牌,PianoScoreScene,AiyoupuScoreScene,references/portrait-runway.md,replace-exact,1
+references/production.md,7,品牌,piano-production/v2,aiyoupu-production/v2,references/production.md,replace-exact,1
+references/public-score-sources-v130.md,21,品牌,examples/sources-v130.json,examples/sources-v2.json,references/public-score-sources-v2.md,replace-exact,1
+references/rendering.md,5,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,14,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,17,品牌,piano-omr/v1,aiyoupu-omr/v1,references/rendering.md,replace-exact,1
+references/rendering.md,22,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,23,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,34,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,references/rendering.md,retain-term,
+references/rendering.md,39,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,49,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,57,品牌,piano-user-response/v1,aiyoupu-user-response/v1,references/rendering.md,replace-exact,1
+references/rendering.md,63,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,70,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,71,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,79,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,85,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/rendering.md,86,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/rendering.md,replace-exact,1
+references/score-strip.md,21,品牌,piano-strip-systems/v1,aiyoupu-strip-systems/v1,references/score-strip.md,replace-exact,1
+references/score-strip.md,38,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/score-strip.md,replace-exact,1
+references/score-validation.md,14,品牌,piano-omr/v1,aiyoupu-omr/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,19,品牌,PIANO_,AIYOUPU_,references/score-validation.md,replace-exact,1
+references/score-validation.md,37,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,references/score-validation.md,retain-term,
+references/score-validation.md,43,品牌,PIANO_,AIYOUPU_,references/score-validation.md,replace-exact,1
+references/score-validation.md,45,品牌,PIANO_,AIYOUPU_,references/score-validation.md,replace-exact,1
+references/score-validation.md,45,品牌,piano-omr/v1,aiyoupu-omr/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,48,品牌,piano-omr/v1,aiyoupu-omr/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,55,品牌,piano-omr/v1,aiyoupu-omr/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,63,品牌,piano_remotion,aiyoupu,references/score-validation.md,replace-exact,1
+references/score-validation.md,75,品牌,piano-score-mapping/v1,aiyoupu-score-mapping/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,94,品牌,piano-score-layout/v1,aiyoupu-score-layout/v1,references/score-validation.md,replace-exact,1
+references/score-validation.md,111,品牌,piano-score-review/v1,aiyoupu-score-review/v1,references/score-validation.md,replace-exact,1
+references/teaching-landscape-v130.md,4,品牌,resolveScoreVideoConfigV130.ts,resolveScoreVideoConfigV2.ts,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,4,品牌,PianoScoreSceneV130.tsx,AiyoupuScoreSceneV2.tsx,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,4,品牌,ScoreVideoConfigV130.ts,ScoreVideoConfigV2.ts,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,5,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,6,品牌,song-v130.tsx,song-v2.tsx,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,6,品牌,PianoRemotion,Aiyoupu,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,31,品牌,scripts/engrave-teaching-v130.py,scripts/engrave-teaching-v2.py,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,41,品牌,piano-v130.mjs,aiyoupu.mjs,references/teaching-landscape-v2.md,replace-exact,1
+references/teaching-landscape-v130.md,54,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,references/teaching-landscape-v2.md,replace-exact,1
+references/visual-presets.md,8,品牌,PianoScoreScene,AiyoupuScoreScene,references/visual-presets.md,replace-exact,1
+references/visual-presets.md,46,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,references/visual-presets.md,retain-term,
+references/visual-presets.md,54,品牌,PianoScoreScene,AiyoupuScoreScene,references/visual-presets.md,replace-exact,1
+references/visual-presets.md,62,品牌,piano-production/v2,aiyoupu-production/v2,references/visual-presets.md,replace-exact,1
+references/workflow.md,3,品牌,PianoScoreScene,AiyoupuScoreScene,references/workflow.md,replace-exact,1
+references/workflow.md,8,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,9,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,19,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,27,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,35,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,43,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,44,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,66,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+references/workflow.md,67,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,references/workflow.md,replace-exact,1
+scripts/audio-analysis.py,171,品牌,piano-analysis-candidate/v2,aiyoupu-analysis-candidate/v2,scripts/audio-analysis.py,replace-exact,1
+scripts/audio-production.mjs,29,品牌,piano-audio-plan/v1,aiyoupu-audio-plan/v1,scripts/audio-production.mjs,replace-exact,1
+scripts/audio-production.mjs,34,品牌,piano-audio-evidence/v1,aiyoupu-audio-evidence/v1,scripts/audio-production.mjs,replace-exact,1
+scripts/audio-production.mjs,53,品牌,piano-audio-evidence/v1,aiyoupu-audio-evidence/v1,scripts/audio-production.mjs,replace-exact,1
+scripts/audio.mjs,78,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/audio.mjs,retain-term,
+scripts/audio.mjs,89,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/audio.mjs,retain-term,
+scripts/doctor.mjs,34,品牌,piano-remotion-portable-runtime,aiyoupu-portable-runtime,scripts/doctor.mjs,replace-exact,1
+scripts/doctor.mjs,35,品牌,piano-remotion-demo,aiyoupu-demo,scripts/doctor.mjs,replace-exact,2
+scripts/doctor.mjs,36,品牌,piano-remotion-demo,aiyoupu-demo,scripts/doctor.mjs,replace-exact,1
+scripts/doctor.mjs,36,品牌,no Piano installation,no AI有谱 installation,scripts/doctor.mjs,replace-exact,1
+scripts/environment.mjs,9,品牌,PIANO_,AIYOUPU_,scripts/environment.mjs,replace-exact,1
+scripts/environment.mjs,60,品牌,PIANO_,AIYOUPU_,scripts/environment.mjs,replace-exact,1
+scripts/geometry-v130.mjs,12,品牌,piano-svg-,aiyoupu-svg-,scripts/geometry-v2.mjs,replace-exact,1
+scripts/geometry.mjs,12,品牌,piano-svg-,aiyoupu-svg-,scripts/geometry.mjs,replace-exact,1
+scripts/install-v130.mjs,26,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install-v2.mjs,replace-exact,1
+scripts/install-v130.mjs,27,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install-v2.mjs,replace-exact,2
+scripts/install-v130.mjs,28,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install-v2.mjs,replace-exact,1
+scripts/install-v130.mjs,29,品牌,assets/runtime/src/song-v130.tsx,assets/runtime/src/song-v2.tsx,scripts/install-v2.mjs,replace-exact,1
+scripts/install-v130.mjs,30,品牌,song-v130.tsx,song-v2.tsx,scripts/install-v2.mjs,replace-exact,1
+scripts/install-v130.mjs,30,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install-v2.mjs,replace-exact,1
+scripts/install-v130.mjs,65,品牌,song-v130.tsx,song-v2.tsx,scripts/install-v2.mjs,replace-exact,2
+scripts/install-v130.mjs,65,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install-v2.mjs,replace-exact,2
+scripts/install.mjs,26,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install.mjs,replace-exact,1
+scripts/install.mjs,27,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install.mjs,replace-exact,2
+scripts/install.mjs,28,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install.mjs,replace-exact,1
+scripts/install.mjs,30,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install.mjs,replace-exact,1
+scripts/install.mjs,65,品牌,piano-remotion-demo,aiyoupu-demo,scripts/install.mjs,replace-exact,2
+scripts/music.mjs,6,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/music.mjs,replace-exact,1
+scripts/music.mjs,57,品牌,piano-performance/v1,aiyoupu-performance/v1,scripts/music.mjs,replace-exact,1
+scripts/music.mjs,90,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/music.mjs,replace-exact,1
+scripts/notation-audit.mjs,39,品牌,piano-notation-audit/v1,aiyoupu-notation-audit/v1,scripts/notation-audit.mjs,replace-exact,1
+scripts/notation-audit.mjs,45,品牌,piano-notation-audit/v1,aiyoupu-notation-audit/v1,scripts/notation-audit.mjs,replace-exact,1
+scripts/performance-map.mjs,14,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,36,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,40,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,45,品牌,piano-time-map/v2,aiyoupu-time-map/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,69,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,69,品牌,piano-time-map/v2,aiyoupu-time-map/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/performance-map.mjs,73,品牌,piano-midi-check/v2,aiyoupu-midi-check/v2,scripts/performance-map.mjs,replace-exact,1
+scripts/piano-v130.mjs,9,品牌,audio-transfer-v130.mjs,audio-transfer-v2.mjs,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,14,品牌,geometry-v130.mjs,geometry-v2.mjs,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,21,品牌,quality-v130.mjs,quality-v2.mjs,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,23,品牌,workbench-export-v130.mjs,workbench-export-v2.mjs,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,39,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,52,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,68,品牌,piano-score-layout/v1,aiyoupu-score-layout/v1,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,88,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,96,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,104,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,124,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,129,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,130,品牌,song-v130.tsx,song-v2.tsx,scripts/aiyoupu.mjs,replace-exact,4
+scripts/piano-v130.mjs,130,品牌,piano-remotion-demo,aiyoupu-demo,scripts/aiyoupu.mjs,replace-exact,4
+scripts/piano-v130.mjs,131,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,133,品牌,PianoScoreSceneV130.tsx,AiyoupuScoreSceneV2.tsx,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,133,品牌,song-v130.tsx,song-v2.tsx,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,136,品牌,PianoRemotion,Aiyoupu,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,138,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,141,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,143,品牌,PianoRemotion,Aiyoupu,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,152,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,161,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu.mjs,replace-exact,2
+scripts/piano-v130.mjs,204,品牌,piano-keyframes/v1,aiyoupu-keyframes/v1,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,210,品牌,install-v130.mjs,install-v2.mjs,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,218,品牌,piano-midi-check/v2,aiyoupu-midi-check/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,238,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,239,品牌,piano-audio-evidence/v1,aiyoupu-audio-evidence/v1,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,239,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu.mjs,retain-term,
+scripts/piano-v130.mjs,241,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano-v130.mjs,248,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu.mjs,replace-exact,1
+scripts/piano.mjs,37,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,50,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,66,品牌,piano-score-layout/v1,aiyoupu-score-layout/v1,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,86,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,94,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,102,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,110,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,115,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,116,品牌,piano-remotion-demo,aiyoupu-demo,scripts/aiyoupu-legacy.mjs,replace-exact,2
+scripts/piano.mjs,117,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,119,品牌,PianoRemotion,Aiyoupu,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,121,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,123,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,125,品牌,PianoRemotion,Aiyoupu,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,134,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,143,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu-legacy.mjs,replace-exact,2
+scripts/piano.mjs,177,品牌,piano-keyframes/v1,aiyoupu-keyframes/v1,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,190,品牌,piano-midi-check/v2,aiyoupu-midi-check/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,210,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,211,品牌,piano-audio-evidence/v1,aiyoupu-audio-evidence/v1,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,211,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/aiyoupu-legacy.mjs,retain-term,
+scripts/piano.mjs,213,品牌,piano-symbolic-events/v2,aiyoupu-symbolic-events/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/piano.mjs,220,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/aiyoupu-legacy.mjs,replace-exact,1
+scripts/prepare.mjs,157,品牌,piano-prepare-,aiyoupu-prepare-,scripts/prepare.mjs,replace-exact,1
+scripts/prepare.mjs,188,品牌,piano-prepare-,aiyoupu-prepare-,scripts/prepare.mjs,replace-exact,1
+scripts/quality-review.mjs,16,品牌,piano-quality-review/v2,aiyoupu-quality-review/v2,scripts/quality-review.mjs,replace-exact,1
+scripts/quality-v130.mjs,10,品牌,piano-quality-review/v2,aiyoupu-quality-review/v2,scripts/quality-v2.mjs,replace-exact,1
+scripts/quality-v130.mjs,38,品牌,piano-quality-result/v2,aiyoupu-quality-result/v2,scripts/quality-v2.mjs,replace-exact,1
+scripts/quality-v130.mjs,48,品牌,piano-production/v2,aiyoupu-production/v2,scripts/quality-v2.mjs,replace-exact,1
+scripts/quality.mjs,10,品牌,piano-quality-review/v2,aiyoupu-quality-review/v2,scripts/quality.mjs,replace-exact,1
+scripts/quality.mjs,38,品牌,piano-quality-result/v2,aiyoupu-quality-result/v2,scripts/quality.mjs,replace-exact,1
+scripts/quality.mjs,48,品牌,piano-production/v2,aiyoupu-production/v2,scripts/quality.mjs,replace-exact,1
+scripts/review.mjs,16,品牌,piano-review-request/v1,aiyoupu-review-request/v1,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,22,品牌,piano-user-response/v1,aiyoupu-user-response/v1,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,22,品牌,Piano ${stage} review,AI有谱 ${stage} review,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,28,品牌,piano-review-request/v1,aiyoupu-review-request/v1,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,35,品牌,piano-user-response/v1,aiyoupu-user-response/v1,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,40,品牌,piano-user-approval/v1,aiyoupu-user-approval/v1,scripts/review.mjs,replace-exact,1
+scripts/review.mjs,46,品牌,piano-user-approval/v1,aiyoupu-user-approval/v1,scripts/review.mjs,replace-exact,1
+scripts/score-strip.mjs,18,品牌,piano-strip-systems/v1,aiyoupu-strip-systems/v1,scripts/score-strip.mjs,replace-exact,1
+scripts/score-strip.mjs,145,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/score-strip.mjs,retain-term,
+scripts/score-strip.mjs,146,品牌,piano-score-strip/v1,aiyoupu-score-strip/v1,scripts/score-strip.mjs,replace-exact,1
+scripts/score-strip.test.mjs,17,品牌,piano-strip-systems/v1,aiyoupu-strip-systems/v1,scripts/score-strip.test.mjs,replace-exact,1
+scripts/score.mjs,21,品牌,PIANO_,AIYOUPU_,scripts/score.mjs,replace-exact,1
+scripts/score.mjs,23,品牌,PIANO_,AIYOUPU_,scripts/score.mjs,replace-exact,1
+scripts/score.mjs,48,品牌,PIANO_,AIYOUPU_,scripts/score.mjs,replace-exact,1
+scripts/score.py,194,品牌,PIANO_,AIYOUPU_,scripts/score.py,replace-exact,1
+scripts/score.py,198,通用,piano (instrument / score / like timbre),保留乐器或谱面术语,scripts/score.py,retain-term,
+scripts/score.py,309,品牌,piano_remotion,aiyoupu,scripts/score.py,replace-exact,1
+scripts/score.py,314,品牌,PIANO_,AIYOUPU_,scripts/score.py,replace-exact,1
+scripts/score.py,376,品牌,PIANO_,AIYOUPU_,scripts/score.py,replace-exact,1
+scripts/score.py,377,品牌,piano_remotion,aiyoupu,scripts/score.py,replace-exact,1
+scripts/score.py,378,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,379,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,380,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,384,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,385,品牌,piano_remotion,aiyoupu,scripts/score.py,replace-exact,1
+scripts/score.py,391,品牌,piano_remotion,aiyoupu,scripts/score.py,replace-exact,1
+scripts/score.py,398,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,406,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,482,品牌,piano-score-mapping/v1,aiyoupu-score-mapping/v1,scripts/score.py,replace-exact,1
+scripts/score.py,484,品牌,piano-score-mapping/v1,aiyoupu-score-mapping/v1,scripts/score.py,replace-exact,1
+scripts/score.py,492,品牌,piano-score-layout/v1,aiyoupu-score-layout/v1,scripts/score.py,replace-exact,1
+scripts/score.py,499,品牌,piano-score-layout/v1,aiyoupu-score-layout/v1,scripts/score.py,replace-exact,1
+scripts/score.py,502,品牌,piano-score-review/v1,aiyoupu-score-review/v1,scripts/score.py,replace-exact,1
+scripts/score.py,538,品牌,piano-score-review/v1,aiyoupu-score-review/v1,scripts/score.py,replace-exact,1
+scripts/score.py,587,品牌,piano-omr/v1,aiyoupu-omr/v1,scripts/score.py,replace-exact,1
+scripts/score.py,620,品牌,PIANO_,AIYOUPU_,scripts/score.py,replace-exact,1
+scripts/score.py,621,品牌,PIANO_,AIYOUPU_,scripts/score.py,replace-exact,1
+scripts/source-scope.mjs,6,品牌,piano-source-inventory/v1,aiyoupu-source-inventory/v1,scripts/source-scope.mjs,replace-exact,1
+scripts/source-scope.mjs,19,品牌,piano-source-scope/v1,aiyoupu-source-scope/v1,scripts/source-scope.mjs,replace-exact,1
+scripts/workbench-export-v130.mjs,3,品牌,piano.mjs,aiyoupu-legacy.mjs,scripts/workbench-export-v2.mjs,replace-exact,1
+scripts/workbench-export-v130.mjs,15,品牌,piano-checked/v2,aiyoupu-checked/v2,scripts/workbench-export-v2.mjs,replace-exact,1
+scripts/workbench-export-v130.mjs,22,品牌,piano-remotion,aiyoupu,scripts/workbench-export-v2.mjs,replace-exact,1
+LICENSE.txt,0,历史,LICENSE.txt,history/v130/LICENSE.txt,history/v130/LICENSE.txt,move-file,
+RELEASE_NOTES.md,0,历史,RELEASE_NOTES.md,history/v130/RELEASE_NOTES.md,history/v130/RELEASE_NOTES.md,move-file,
+RELEASE_NOTES_V130.md,0,历史,RELEASE_NOTES_V130.md,history/v130/RELEASE_NOTES_V130.md,history/v130/RELEASE_NOTES_V130.md,move-file,
+assets/runtime/src/song-v130.tsx,0,品牌,assets/runtime/src/song-v130.tsx,assets/runtime/src/song-v2.tsx,assets/runtime/src/song-v2.tsx,move-file,
+components/PianoPresentation.ts,0,品牌,components/PianoPresentation.ts,components/AiyoupuPresentation.ts,components/AiyoupuPresentation.ts,move-file,
+components/PianoRemotion.tsx,0,品牌,components/PianoRemotion.tsx,components/Aiyoupu.tsx,components/Aiyoupu.tsx,move-file,
+components/PianoScoreScene.tsx,0,品牌,components/PianoScoreScene.tsx,components/AiyoupuScoreScene.tsx,components/AiyoupuScoreScene.tsx,move-file,
+components/PianoScoreSceneV130.tsx,0,品牌,components/PianoScoreSceneV130.tsx,components/AiyoupuScoreSceneV2.tsx,components/AiyoupuScoreSceneV2.tsx,move-file,
+components/ScoreVideoConfigV130.ts,0,品牌,components/ScoreVideoConfigV130.ts,components/ScoreVideoConfigV2.ts,components/ScoreVideoConfigV2.ts,move-file,
+components/TeachingFocusV130.ts,0,品牌,components/TeachingFocusV130.ts,components/TeachingFocusV2.ts,components/TeachingFocusV2.ts,move-file,
+components/resolveScoreVideoConfigV130.ts,0,品牌,components/resolveScoreVideoConfigV130.ts,components/resolveScoreVideoConfigV2.ts,components/resolveScoreVideoConfigV2.ts,move-file,
+examples/sources-v130.json,0,品牌,examples/sources-v130.json,examples/sources-v2.json,examples/sources-v2.json,move-file,
+references/public-score-sources-v130.md,0,品牌,references/public-score-sources-v130.md,references/public-score-sources-v2.md,references/public-score-sources-v2.md,move-file,
+references/teaching-landscape-v130.md,0,品牌,references/teaching-landscape-v130.md,references/teaching-landscape-v2.md,references/teaching-landscape-v2.md,move-file,
+scripts/audio-transfer-v130.mjs,0,品牌,scripts/audio-transfer-v130.mjs,scripts/audio-transfer-v2.mjs,scripts/audio-transfer-v2.mjs,move-file,
+scripts/engrave-teaching-v130.py,0,品牌,scripts/engrave-teaching-v130.py,scripts/engrave-teaching-v2.py,scripts/engrave-teaching-v2.py,move-file,
+scripts/geometry-v130.mjs,0,品牌,scripts/geometry-v130.mjs,scripts/geometry-v2.mjs,scripts/geometry-v2.mjs,move-file,
+scripts/install-v130.mjs,0,品牌,scripts/install-v130.mjs,scripts/install-v2.mjs,scripts/install-v2.mjs,move-file,
+scripts/piano-v130.mjs,0,品牌,scripts/piano-v130.mjs,scripts/aiyoupu.mjs,scripts/aiyoupu.mjs,move-file,
+scripts/piano.mjs,0,品牌,scripts/piano.mjs,scripts/aiyoupu-legacy.mjs,scripts/aiyoupu-legacy.mjs,move-file,
+scripts/quality-v130.mjs,0,品牌,scripts/quality-v130.mjs,scripts/quality-v2.mjs,scripts/quality-v2.mjs,move-file,
+scripts/workbench-export-v130.mjs,0,品牌,scripts/workbench-export-v130.mjs,scripts/workbench-export-v2.mjs,scripts/workbench-export-v2.mjs,move-file,

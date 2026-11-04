@@ -26,12 +26,12 @@ export function audioPlan({musescore,soundfont,authorizedProjects=[]}={}){
     return {path:p,available:r.status===0&&!r.error,version:(r.stdout||r.stderr||'').trim(),error:r.error?.message??null};
   });
   const soundfonts=unique(fonts).filter(p=>fs.statSync(p,{throwIfNoEntry:false})?.isFile()).map(p=>({path:p,bytes:fs.statSync(p).size,sha256:hash(p),licenseFile:fs.existsSync(path.join(path.dirname(p),'MS Basic_License.md'))?path.join(path.dirname(p),'MS Basic_License.md'):null}));
-  return {schema:'piano-audio-plan/v1',status:engines.some(e=>e.available)&&soundfonts.length?'EXISTING_AUDIO_CANDIDATE':'AUDIO_SETUP_REQUIRED',engines,soundfonts,installed:false,limits:'Candidates are not proof of selected instrument or audible quality. MuseScore Basic selects its bundled MS Basic; arbitrary SoundFonts need a separately verified adapter.',next:'Reuse available tools, render a short audition, then obtain actual listening approval. Report missing tools and download sizes before requesting any installation.'};
+  return {schema:'aiyoupu-audio-plan/v1',status:engines.some(e=>e.available)&&soundfonts.length?'EXISTING_AUDIO_CANDIDATE':'AUDIO_SETUP_REQUIRED',engines,soundfonts,installed:false,limits:'Candidates are not proof of selected instrument or audible quality. MuseScore Basic selects its bundled MS Basic; arbitrary SoundFonts need a separately verified adapter.',next:'Reuse available tools, render a short audition, then obtain actual listening approval. Report missing tools and download sizes before requesting any installation.'};
 }
 function receipt(audio,timeline,extra){
   const media=probeMedia(audio),features=audioFeatures(audio);
   if(!media.streams.some(s=>s.codec_type==='audio'))throw failure('AUDIO_STREAM_MISSING',audio,'Provide decoded audible audio.');
-  return {schema:'piano-audio-evidence/v1',audio:path.resolve(audio),audioSha256:hash(audio),musicSha256:musicIdentity(timeline),duration:media.duration,audibility:{rms:features.rms,peak:features.peak},...extra};
+  return {schema:'aiyoupu-audio-evidence/v1',audio:path.resolve(audio),audioSha256:hash(audio),musicSha256:musicIdentity(timeline),duration:media.duration,audibility:{rms:features.rms,peak:features.peak},...extra};
 }
 export function renderScoreAudio({musicxml,timeline,musescore,soundfont,out}){
   fresh(out);fresh(out+'.audio.json');fresh(out+'.command.json');
@@ -50,7 +50,7 @@ export function renderScoreAudio({musicxml,timeline,musescore,soundfont,out}){
 }
 export function validateAudioEvidence(file,audio,timeline,{draft=false}={}){
   const r=read(file);
-  if(r.schema!=='piano-audio-evidence/v1'||r.audioSha256!==hash(audio)||r.musicSha256!==musicIdentity(timeline))throw failure('AUDIO_EVIDENCE_STALE','Audio or music differs from its production evidence','Rebuild audio from the approved song, then obtain new keyframe/audition approval.');
+  if(r.schema!=='aiyoupu-audio-evidence/v1'||r.audioSha256!==hash(audio)||r.musicSha256!==musicIdentity(timeline))throw failure('AUDIO_EVIDENCE_STALE','Audio or music differs from its production evidence','Rebuild audio from the approved song, then obtain new keyframe/audition approval.');
   if(!['sampled-score-export','provided-recording','calibration-preview'].includes(r.kind)||r.scope!=='full-score')throw failure('AUDIO_PROVENANCE_REQUIRED','Missing full-song audio provenance','Retain the real source/engine/mastering chain; never register an excerpt as a full song.');
   if(r.kind==='calibration-preview'&&!draft)throw failure('PREVIEW_AUDIO_NOT_PRODUCTION','Simple waveform synthesis is calibration-only','Use a recording or auditioned sampled instrument for production. Explicit draft remains available.');
   for(const [p,h]of Object.entries(r.fingerprints??{}))if(!fs.existsSync(p)||hash(p)!==h)throw failure('AUDIO_EVIDENCE_STALE',p,'Source, engine, font or production logs changed.');

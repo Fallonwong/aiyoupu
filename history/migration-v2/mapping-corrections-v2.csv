@@ -1,0 +1,7 @@
+file,line,category,old,new,reason
+SKILL.md,3,通用,piano-score,piano-score,乐器与谱面术语；纠正初稿误分类，最终保留
+SKILL.md,8,品牌,V1.3.0 additive/nonbreaking text,V2.0 breaking migration text,明确破坏性变更及独立审批
+README.md,5,品牌,旧显示名升级描述,V2全量迁移描述,明确slug与组合变更
+README.md,244,历史,LICENSE.txt,history/v130/LICENSE.txt,历史许可通知原字节保留不写新许可
+README_使用说明.md,9,品牌,直接推荐新远程命令,标明待用户GitHub界面改名后才能使用,不把计划仓库冒充已上线
+scripts/*,0,品牌,piano command hints,aiyoupu command hints,仅CLI命令上下文；通用piano乐器术语保留

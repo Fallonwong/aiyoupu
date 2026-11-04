@@ -1,4 +1,6 @@
-# V1.2.0: implemented behavior and limits
+# AI有谱: implemented behavior and limits
+
+The current package is a **V2.1 local release candidate**. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
 
 ## Implemented
 
@@ -23,8 +25,8 @@ Automatic calibrated polyphonic transcription, reliable automatic arrangement id
 
 Real-song pitch/structure recall, false-positive rate and P95 alignment error. Controlled generated signals can test algorithms and gates but cannot establish those real-recording metrics. Keep missing results not_measured; never count abstention or gate rejection as successful detection.
 
-This is release 1.2.0. Existing component defaults are retained; new formal exports require the current configuration, time-map and quality evidence. No private song media, annotations, fonts or personal avatars belong in the portable package.
+Release 1.2.0 introduced these checks. Existing component defaults are retained; new formal exports require the current configuration, time-map and quality evidence. No private song media, annotations, fonts or personal avatars belong in the portable package.
 
-## Visual and strip additions in V1.2.0
+## Visual and strip additions since V1.2.0
 
 Four presets resolve to plain scene props with no personal character overlays. New configuration records bind the resolved camera and motion styles. Existing direct camera calls preserve defaults. The score-strip command requires supplied measured system bounds, source hashes and notehead mapping; it preserves original engraving and timing. It does not automatically recognize notes, unfold repeats, join separate page files or certify audio alignment. Engineering tests and approved visual review do not replace musical content/time review for a new song.

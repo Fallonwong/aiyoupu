@@ -18,9 +18,9 @@ export async function run(argv = process.argv.slice(2)) {
     else if (flag === '--project') project = path.resolve(value);
     else explicitPython = value;
   }
-  let python = explicitPython || process.env.PIANO_SCORE_PYTHON;
+  let python = explicitPython || process.env.AIYOUPU_SCORE_PYTHON;
   const requiresPillow = ['compare', 'source'].includes(args[0]);
-  let method = explicitPython ? 'explicit' : 'PIANO_SCORE_PYTHON';
+  let method = explicitPython ? 'explicit' : 'AIYOUPU_SCORE_PYTHON';
   if (!python) {
     method = 'discoverEnvironment';
     let environment;
@@ -45,7 +45,7 @@ export async function run(argv = process.argv.slice(2)) {
   const result = spawnSync(python, ['-B', path.join(path.dirname(fileURLToPath(import.meta.url)), 'score.py'), ...args], {
     encoding: 'utf8', windowsHide: true, timeout: 180000, maxBuffer: 32 * 1024 * 1024,
     env: {...process.env, PYTHONUTF8: '1', PYTHONDONTWRITEBYTECODE: '1',
-      PIANO_SCORE_PYTHON_SELECTION: JSON.stringify({path: python, method, requiresPillow})},
+      AIYOUPU_SCORE_PYTHON_SELECTION: JSON.stringify({path: python, method, requiresPillow})},
   });
   if (result.error) return {exit: 2, report: {code: 'PYTHON_UNAVAILABLE', status: 'error', message: result.error.message, next: ['Verify a Python 3.10+ interpreter; pass --python EXE. No environment is created.']}};
   try {return {exit: result.status ?? 2, report: {...JSON.parse(result.stdout), pythonSelection: {path: python, method, requiresPillow}}};}

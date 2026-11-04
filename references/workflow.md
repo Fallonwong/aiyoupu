@@ -1,12 +1,12 @@
 # 音源生产与谱面修订流程
 
-V1.0.0 保持原 ScoreNoteLeap/PianoScoreScene 动效和两次内容确认。新增脚本不依赖 Python 音频库，不自动下载音源；这里的路径均为占位符。
+V1.0.0 保持原 ScoreNoteLeap/AiyoupuScoreScene 动效和两次内容确认。新增脚本不依赖 Python 音频库，不自动下载音源；这里的路径均为占位符。
 
 ## 音源选择与完整音频
 
 ```sh
-node <skill>/scripts/piano.mjs audio-plan
-node <skill>/scripts/piano.mjs audio-plan --musescore <MuseScore4.exe> --soundfont <MS-Basic.sf3> --authorized-project <explicit-root>
+node <skill>/scripts/aiyoupu-legacy.mjs audio-plan
+node <skill>/scripts/aiyoupu-legacy.mjs audio-plan --musescore <MuseScore4.exe> --soundfont <MS-Basic.sf3> --authorized-project <explicit-root>
 ```
 
 优先用户录音，其次现有音源。检测当前系统常见 MuseScore 4 路径、PATH 和显式授权目录的 sound/SoundFonts 子目录；候选不等于已完成试听。已安装软件或音色不在 PATH 时不得直接要求重装。非 Windows 可显式提供程序和音色；本轮仅验证 Windows。
@@ -16,7 +16,7 @@ node <skill>/scripts/piano.mjs audio-plan --musescore <MuseScore4.exe> --soundfo
 谱面确认的 audioChoice=synthesize 表示同意生成音频，不代表用户已经批准未知音色。优先复用实际音源。以下入口采用 MuseScore Basic profile，只支持该程序自己的 bundled MS Basic；不能传另一份 SoundFont 就声称已加载它。实际乐器分配还需检查与试听。其他音源/引擎走经过验证的适配器并保留日志，当前脚本尚未实现通用 FluidSynth/任意 SoundFont 渲染。
 
 ```sh
-node <skill>/scripts/piano.mjs audio-render --musicxml <full-approved.musicxml> --timeline <compiled.json> --score-approval <score-approval.json> --musescore <MuseScore4.exe> --soundfont <bundled-MS-Basic.sf3> --out <new-full-raw.wav>
+node <skill>/scripts/aiyoupu-legacy.mjs audio-render --musicxml <full-approved.musicxml> --timeline <compiled.json> --score-approval <score-approval.json> --musescore <MuseScore4.exe> --soundfont <bundled-MS-Basic.sf3> --out <new-full-raw.wav>
 ```
 
 必须从完整已批准 MusicXML 导出；脚本检查它和 timeline.sourceMusicxmlSha256 一致，截取的小节试听不能替换全曲。输出 WAV、实际 command 日志和 .audio.json 来源记录，状态为未校准。导出记录绑定原谱、程序、音色文件及日志；它不是音色好听或钢琴乐器设置正确的证明。
@@ -24,7 +24,7 @@ node <skill>/scripts/piano.mjs audio-render --musicxml <full-approved.musicxml> 
 需要补前导静音、整体增益或处理近静音尾巴时：
 
 ```sh
-node <skill>/scripts/piano.mjs audio-master --evidence <full-raw.wav.audio.json> --timeline <compiled.json> --out <new-master.wav> --lead-seconds 0.1666667 --gain-db 3 --duration-seconds <actual-composition-seconds>
+node <skill>/scripts/aiyoupu-legacy.mjs audio-master --evidence <full-raw.wav.audio.json> --timeline <compiled.json> --out <new-master.wav> --lead-seconds 0.1666667 --gain-db 3 --duration-seconds <actual-composition-seconds>
 ```
 
 只做显式整体处理，输出新文件；不重写 note envelope。尾部裁切要通过近静音 RMS/peak 检查；可听尾音阻止裁切，应保留尾巴或重新规划 composition。不会按固定秒数盲裁混响。整段增益在任务允许的混音范围内一次决定，纳入最终试听，无须逐数值微审批。保留动态、避免削波。
@@ -32,7 +32,7 @@ node <skill>/scripts/piano.mjs audio-master --evidence <full-raw.wav.audio.json>
 用户已有录音：
 
 ```sh
-node <skill>/scripts/piano.mjs audio-recording --audio <provided.mp3> --timeline <compiled.json> --out <recording-evidence.json>
+node <skill>/scripts/aiyoupu-legacy.mjs audio-recording --audio <provided.mp3> --timeline <compiled.json> --out <recording-evidence.json>
 ```
 
 这是用户提供录音的声明和字节绑定，不是自动来源鉴真；不得把 Agent 自写波形登记成用户录音。绑定前仍须全曲时长、声音和同步检查。外部专业音源路径未接入时说明适配缺口，不伪造 receipt。
@@ -40,8 +40,8 @@ node <skill>/scripts/piano.mjs audio-recording --audio <provided.mp3> --timeline
 新 checked bind 增加 `--audio-evidence <master.wav.audio.json 或 recording-evidence.json>`；之后的 job 把来源、音源及混音日志固定下来：
 
 ```sh
-node <skill>/scripts/piano.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original-source> --out <quality-result.json>
-node <skill>/scripts/piano.mjs bind --project <project> --props <actual-song-props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --out <job.json>
+node <skill>/scripts/aiyoupu-legacy.mjs quality --timeline <mapped-timeline.json> --audio <master.wav> --quality <review-packet.json> --source <original-source> --out <quality-result.json>
+node <skill>/scripts/aiyoupu-legacy.mjs bind --project <project> --props <actual-song-props.json> --layout <layout.json> --production <production.json> --quality <review-packet.json> --score-approval <score-approval.json> --audio-evidence <master.wav.audio.json> --out <job.json>
 ```
 
 PDF/图片等还须提供 [谱面审阅与渲染](rendering.md) 中的 source-type、score-review、browser 参数。录音源与生成音频选择应对应，不能更名绕过来源记录。源文件复制到 public 后只要字节一致可以验证；绝对路径记录是本地证据，迁移需重新绑定。
@@ -63,8 +63,8 @@ PDF/图片等还须提供 [谱面审阅与渲染](rendering.md) 中的 source-ty
 每轮识别保存可编辑 MusicXML。用同一次排版的 SVG/坐标，生成原件与重排谱逐小节裁切。结构通过不能代替原谱核对；平衡拍数也不能证明音高/节奏正确。
 
 ```sh
-node <skill>/scripts/piano.mjs notation-audit --source <original.pdf> --check <compare-dir/check.json> --out <new-audit-dir>
-node <skill>/scripts/piano.mjs notation-audit --source <original.pdf> --check <new-compare/check.json> --previous <previous-compare/check.json> --expected-measures P1:3,P1:4 --observations <observations.json> --out <new-revision-audit-dir>
+node <skill>/scripts/aiyoupu-legacy.mjs notation-audit --source <original.pdf> --check <compare-dir/check.json> --out <new-audit-dir>
+node <skill>/scripts/aiyoupu-legacy.mjs notation-audit --source <original.pdf> --check <new-compare/check.json> --previous <previous-compare/check.json> --expected-measures P1:3,P1:4 --observations <observations.json> --out <new-revision-audit-dir>
 ```
 
 新 PDF/图片 CLI score-request 要求 `--notation-audit <audit/report.json>`。请使用 compare 输出里的 check.json，确保审阅所见与审计字节相同，不混用带 CLI 元信息的其他报告。报告包含：

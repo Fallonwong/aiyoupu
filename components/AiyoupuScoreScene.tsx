@@ -4,36 +4,40 @@ import {SunsetOcean} from './SunsetOcean';
 import {DeepSapphire} from './DeepSapphire';
 import type {ScoreSurfaceTexture, ScorePipelineMode, ScoreTypographyHud} from './ScoreVideoConfig';
 import {AbsoluteFill, Audio, Img, Loop, OffthreadVideo, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {depthPreset,themePreset,dimensions,type AspectRatio,type ScoreTheme} from './PianoPresentation';
+import {depthPreset,themePreset,dimensions,type AspectRatio,type ScoreTheme} from './AiyoupuPresentation';
 import {ScoreNoteLeap, type ScoreAttack, type ScoreNoteLeapProps} from './ScoreNoteLeap';
 
-export type PianoTimeline = {
+export type AiyoupuTimeline = {
   fps: number; durationInFrames: number; scoreWidth: number; scoreHeight: number;
   events: (ScoreAttack & {hand: 'left' | 'right'})[];
   cameraPath?: {cameraX: number; cameraY: number}[];
   focusPath?: {focusX:number;focusY:number}[];
+  systemBands?: {centerY:number;top:number;bottom:number}[];
+  systemBounds?: {top:number;bottom:number;left?:number;right?:number}[];
   status?: string;
 };
-export type PianoScoreSceneProps = {
+export type AiyoupuScoreSceneProps = {
   aspectRatio?:AspectRatio; theme?:ScoreTheme; backgroundSrc?:string;
-  timeline: PianoTimeline; scoreSrc: string; audioSrc?: string;
+  timeline: AiyoupuTimeline; scoreSrc: string; audioSrc?: string;
   title?: string; subtitle?: string; label?: string; credit?: string;
   background?: string; fontFamily?: string;
   backgroundScene?: 'sunset-ocean' | 'deep-sapphire' | 'none';
-  texture?: ScoreSurfaceTexture; pipeline?: ScorePipelineMode; typographyStyle?: ScoreTypographyHud['style']; chineseTitle?: string;
+  texture?: ScoreSurfaceTexture; pipeline?: ScorePipelineMode; typographyStyle?: ScoreTypographyHud['style']; chineseTitle?: string; titleScale?: number;
   scoreImage?: {x?: number; y?: number; width?: number; height?: number; filter?:string; blendMode?: React.CSSProperties['mixBlendMode']};
   cameraMode?: ScoreCameraMode; runwayCamera?: RunwayCameraOptions;
   camera?: {scale?: number; rotateZ?: number; rotateX?: number; anchorX?: number; anchorY?: number; follow?: boolean; left?: number; top?: number};
   rightStyle?: Partial<ScoreNoteLeapProps>; leftStyle?: Partial<ScoreNoteLeapProps>;
+  /** Workbench-only mute: timeline animation still runs, audio is not mounted. */
+  disableAudio?:boolean;
   vignette?: boolean; showProgress?: boolean; fadeFrames?: number;
   overlay?: {enabled?: boolean; src?: string; kind?: 'image' | 'video'; loopFrames?: number; transparent?: boolean; width?: number; height?: number; right?: number; bottom?: number};
 };
 /** Extracted shared score/camera/glow/layout from the existing full-score composition.
  * All asset paths are public-relative. The score and both hands share ONE transform.
  */
-export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
-  aspectRatio, theme, backgroundSrc, backgroundScene, texture, pipeline, typographyStyle, chineseTitle, timeline, scoreSrc, audioSrc, title='', subtitle='', label='', credit='', background='#6b6561', fontFamily='Arial, sans-serif',
-  scoreImage={}, camera={}, cameraMode='classic', runwayCamera={}, rightStyle={}, leftStyle={}, vignette=true, showProgress=true, fadeFrames=8, overlay,
+export const AiyoupuScoreScene: React.FC<AiyoupuScoreSceneProps> = ({
+  aspectRatio, theme, backgroundSrc, backgroundScene, texture, pipeline, typographyStyle, chineseTitle, titleScale=1, timeline, scoreSrc, audioSrc, title='', subtitle='', label='', credit='', background='#6b6561', fontFamily='Arial, sans-serif',
+  scoreImage={}, camera={}, cameraMode='classic', runwayCamera={}, rightStyle={}, leftStyle={}, vignette=true, showProgress=true, fadeFrames=8, overlay, disableAudio=false,
 }) => {
   const frame = useCurrentFrame();
   const {width, height, fps, durationInFrames} = useVideoConfig();
@@ -82,7 +86,7 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
     {backgroundScene==='sunset-ocean'&&<SunsetOcean width={width} height={height}/>}
     {backgroundScene==='deep-sapphire'&&<DeepSapphire width={width} height={height}/>}
     {modern&&backgroundSrc&&<Img src={staticFile(backgroundSrc)} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}
-    {audioSrc&&<Audio src={staticFile(audioSrc)} volume={modern?1:f=>interpolate(f,[Math.max(0,D-6),D],[1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})}/>}
+    {audioSrc&&!disableAudio&&<Audio src={staticFile(audioSrc)} volume={modern?1:f=>interpolate(f,[Math.max(0,D-6),D],[1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})}/>}
     <div style={modern?{position:'absolute',inset:0,perspective:runway?.perspective??preset.perspective,perspectiveOrigin:'50% 50%',zIndex:10,mixBlendMode:texture?(texture==='black-multiply'?undefined:'screen'):(theme==='custom'?'screen':undefined)}:{display:'contents'}}>
     <div style={{position:'absolute',left:cameraX,top:cameraY,width:timeline.scoreWidth,height:timeline.scoreHeight,transformOrigin:modern?`${focus!.focusX}px ${focus!.focusY}px`:'0 0',transformStyle:modern?'preserve-3d':undefined,transform:runway?`rotateZ(${z}deg) rotateY(${runway.rotateY}deg) rotateX(${rx}deg) scale(${scale}) scaleX(${runway.stretchX})`:`rotateZ(${z}deg) rotateX(${rx}deg) scale(${scale})`}}>
       {!modern&&<div style={{position:'absolute',left:-3000,top:-3000,width:Math.max(8000,timeline.scoreWidth+6000),height:Math.max(16000,timeline.scoreHeight+6000),background:surface}}/>}
@@ -96,7 +100,7 @@ export const PianoScoreScene: React.FC<PianoScoreSceneProps> = ({
     {vignette&&!modern&&<><AbsoluteFill style={{background:'radial-gradient(ellipse at 45% 52%,transparent 30%,rgba(58,50,68,.35) 70%,rgba(30,26,38,.7) 100%)',pointerEvents:'none'}}/><AbsoluteFill style={{background:'radial-gradient(ellipse at 100% 100%,rgba(0,0,0,.55) 0%,rgba(0,0,0,.24) 34%,transparent 72%)',pointerEvents:'none'}}/></>}
     <div style={{position:'absolute',left:110*uiScale,top:85*uiScale,opacity:fade,zIndex:modern?300:200,fontFamily:modern?'\"Bodoni MT\", Didot, Georgia, serif':fontFamily,color:uiText,textShadow:'0 2px 14px rgba(20,12,36,.5)'}}>
       <div style={{fontSize:17*uiScale,letterSpacing:6*uiScale,color:modern?uiText:'#d8cfe4'}}>{label}</div>
-      <div style={{fontStyle:typographyStyle==='chinese-2x'?'normal':modern?'italic':undefined,fontSize:(typographyStyle==='chinese-2x'?208:104)*uiScale,maxWidth:width-180*uiScale,overflowWrap:'anywhere',letterSpacing:3*uiScale,marginTop:16*uiScale,lineHeight:1,fontFamily:typographyStyle==='chinese-2x'?'"Alimama ShuHeiTi Bold", Arial, sans-serif':typographyStyle==='clean'?'Arial, sans-serif':undefined}}>{chineseTitle??title}</div>
+      <div style={{fontStyle:typographyStyle==='chinese-2x'?'normal':modern?'italic':undefined,fontSize:(typographyStyle==='chinese-2x'?208:104)*uiScale*titleScale,maxWidth:width-180*uiScale,overflowWrap:'anywhere',letterSpacing:3*uiScale,marginTop:16*uiScale,lineHeight:1,fontFamily:typographyStyle==='chinese-2x'?'"Alimama ShuHeiTi Bold", Arial, sans-serif':typographyStyle==='clean'?'Arial, sans-serif':undefined}}>{chineseTitle??title}</div>
       <div style={{fontFamily:typographyStyle==='chinese-2x'?'"Bodoni MT", Didot, Georgia, serif':modern?'\"Alimama ShuHeiTi Bold\", Arial, sans-serif':'Georgia, serif',fontStyle:typographyStyle==='chinese-2x'?'italic':undefined,fontSize:23*uiScale,color:modern?uiText:'#d9d0dd',marginTop:12*uiScale}}>{subtitle}</div>
     </div>
     {showProgress&&<div style={{position:'absolute',left:110*uiScale,right:170*uiScale,bottom:62*uiScale,zIndex:150,pointerEvents:'none'}}>

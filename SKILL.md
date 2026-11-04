@@ -1,15 +1,34 @@
 ---
-name: piano-remotion
+name: aiyoupu
 description: Make piano-score videos with original two-hand leaps, glow trails and camera. Review notation revisions, reuse sampled audio tools, and stop for score approval then actual keyframe/audition approval before exporting.
 ---
 
-# Piano Remotion V1.2.0
+# AI有谱 V2.1 本地候选
 
-V1.2.0 includes the refined visual configuration, original-engraving continuous score strips, and no personal character overlays. For new configurations read [visual presets and compatibility](references/visual-presets.md). Use the four preset factories through `resolveScoreVideoConfig`, persist the resolved props, and keep actual content approvals. For multi-system SVG to continuous runway geometry, use [score-strip](references/score-strip.md) with measured bounds and an existing geometry map. Song-specific timing repairs remain excluded.
+The V2.0 rename introduced AI有谱: use $aiyoupu, the aiyoupu CLI, and Aiyoupu composition/component names. This V2.1 package is a local release candidate, not a published release. Old task files remain frozen and require explicit migration to new files. Read [migration and invalidated references](history/migration-v2/migration-guide.md). Visual parameters, notation and sampled audio remain unchanged. For configurations read [visual presets](references/visual-presets.md); for continuous geometry read [score-strip](references/score-strip.md).
 
-Read the installed official `remotion-best-practices` first. Reuse compatible authorized environments; Python/OMR are optional. First installs or large downloads require paths, versions, content, size/reason and user permission. Preserve private sources, personal overlays off, original ScoreNoteLeap/PianoScoreScene visuals. No license has been assigned.
 
-Use `node <skill>/scripts/piano.mjs`. V1.1.0 adds symbolic, analyze-audio, map-time, camera-path, production-check, source-scope, quality-request and quality. Read [capabilities and honest limits](references/upgrade-status.md), [audio and recognition workflow](references/workflow.md), and [geometry and rendering workflow](references/rendering.md). For runtime reuse and installation, see [environment setup](references/environment.md). Use production evidence and notation-audit arguments with those commands. Do not use legacy Demo calls as checked song completion.
+For flat 16:9 teaching read [TeachingLandscape](references/teaching-landscape-v2.md) and use the V2 config/resolver/scene files. For title-only requests read [public score discovery](references/public-score-sources-v2.md). Workbench export requires both source approvals. Preserve the historical 14 kept / 12 retired options and old defaults. The Songbie source pilot was approved in the previous generation; its renamed V2 preview still needs actual V2 keyframe review and is not an authoritative arrangement. No license is assigned until the owner explicitly decides.
+
+Read the installed official `remotion-best-practices` first. Reuse compatible authorized environments; Python/OMR are optional. First installs or large downloads require paths, versions, content, size/reason and user permission. Preserve private sources, personal overlays off, original ScoreNoteLeap/AiyoupuScoreScene visuals. No license has been assigned.
+
+Use `node <skill>/scripts/aiyoupu.mjs`. The internal `aiyoupu-legacy.mjs` also uses V2 names and cannot read frozen older task protocols. Read [capabilities and honest limits](references/upgrade-status.md), [audio workflow](references/workflow.md), [rendering](references/rendering.md), and [environment reuse](references/environment.md). No automatic migration grants new keyframe approval; retain actual human decisions and frozen evidence.
+
+## Direction workflow: Agent is the full path; the workbench is optional
+
+The Agent must be able to complete the whole production path in the CLI without opening a browser: prepare MusicXML/MIDI, create a versioned direction preview, validate/export a direction, render a real still, save the direction, and derive the job/props for the existing keyframe review. `aiyoupu direction` is that path. `aiyoupu direction prepare --musicxml <score.musicxml> --audio <same-arrangement.mp3> --title <title> --out <preview-dir>` engraves with the installed Verovio/browser tools and measures the noteheads; `--midi` first uses the installed MuseScore 4 CLI. PDF/images require Agent notation recognition and a corrected MusicXML before this command; neither path invents notes. Use `direction validate`, `direction save`, `direction derive`, and `direction still` to produce an actual PNG without the browser UI. A generated score, direction, still or preview is not a human approval.
+
+The direction console is the optional visual chooser for one already-prepared preview:
+
+```sh
+node <skill>/scripts/aiyoupu.mjs workbench open --preview <preview-dir>/preview.json --port 7801
+```
+
+Its first screen is the real Remotion canvas, transport, presets, common parameters, collapsed advanced parameters, and save-and-copy. It does not upload materials, prepare scores, list tasks, review notation, create keyframes, or record approvals. It reads only the named preview folder. Changing parameters keeps the current frame and audio state. Missing score/audio or a stale preview is reported explicitly; optional audio never triggers re-engraving. The saved short prompt contains only the direction ID and direction-file path. Both the Agent and this console call the same preset extraction, direction normalization, props derivation, and hash functions.
+
+After a direction is saved, run `direction derive --direction <saved-direction.json> --project <existing Remotion project> --out <job-dir>`. This creates a visual-direction draft and keeps its assets under the job's `public` tree. Continue formal production through `aiyoupu bind` with `--asset-project <job-dir>`, the frozen props/production, real score review and v2 quality evidence; then use the existing `keyframes` command. The derived job explicitly marks a new keyframe review as required. Never reuse a previous keyframe approval. Do not treat `direction_draft` as a formal bound job.
+
+The Agent conversation is the default human content gate: show the actual review material and quote the user's real response. An optional local page may be opened separately with `aiyoupu workbench review --request <review/request.json>` on another port only when every required item can be displayed; the score stage also records the audio choice. It is not part of the direction console, and its click credential still binds the actual displayed content. If the page cannot show all required content, use the Agent conversation instead.
 
 ## Optional camera styles
 
@@ -17,7 +36,7 @@ For reference-inspired portrait depth tracking, read [竖屏纵深跟谱 / portr
 
 ## Before new video production
 
-Use [production configuration and visual contracts](references/production.md). Before notation parsing/rendering, confirm missing choices once using the visual-presets matrix: recommend 9:16, slate-gray, black-multiply and no character overlay, with the standard lilac/orange hand palette. Also confirm camera, the converge-arc or pulse-only motion, typography/status and the compatible pipeline. Retired themes/surfaces are not offered for new work. Default milestone recommendation is first-four keyframes. Old theme names remain available for historical calls. Reuse actual choices already given in this task; defaults are suggestions, not consent. Keep the confirmation quote/message reference in `piano-production/v2`. All portable presets disable character overlays. Do not add personal characters or media to the package, defaults, examples or generated preview. This configuration gate is separate from the two content approvals below. Audits and tool diagnostics are not new video production.
+Use [production configuration and visual contracts](references/production.md). Before notation parsing/rendering, confirm missing choices once using the visual-presets matrix: recommend 9:16, slate-gray, black-multiply and no character overlay, with the standard lilac/orange hand palette. Also confirm camera, the converge-arc or pulse-only motion, typography/status and the compatible pipeline. Retired themes/surfaces are not offered for new work. Default milestone recommendation is first-four keyframes. Old theme names remain available for historical calls. Reuse actual choices already given in this task; defaults are suggestions, not consent. Keep the confirmation quote/message reference in `aiyoupu-production/v2`. All portable presets disable character overlays. Do not add personal characters or media to the package, defaults, examples or generated preview. This configuration gate is separate from the two content approvals below. Audits and tool diagnostics are not new video production.
 
 New formal audio jobs require [content and performance-time evidence](references/performance-quality.md). New `bind` requires `--production`; `--quality` is required for formal audible jobs. Three energy onsets, a DTW path, successful import, or Agent-generated confidence cannot certify content. Do not relabel candidate anchors as observed. Keep unresolved pitches/arrangements/repeats blocked or explicitly draft. Legacy jobs remain inspectable; rebind before a new formal export.
 
@@ -28,6 +47,16 @@ For material guidance, use [recommended input combinations](README.md#哪些素�
 When comparing completion likelihood or choosing among mixed inputs, read [input-specific routes and evidence](references/input-routes.md). Distinguish MP3+PDF/image, MP3+MusicXML, and MP3+MIDI; name missing external stages and never imply they are bundled. Audio candidates require symbolic events first. Report input-specific real completion rates only with a denominator and an independent content/time reference; otherwise use recommendation tiers and not_measured. A rendered preview or protocol-test pass is not a verified song completion.
 
 Use direct wording in user-facing input advice: explain whether the input can be used and what must happen first. Say “最推荐”, “可以做，先识谱并校对”, or “建议先补对应乐谱”, with the applicable material named. Avoid vague labels such as “条件推荐” without a concrete next action. Preserve actual tool-availability and content/time review requirements.
+
+## Read the gate before acting
+
+Run `node <skill>/scripts/aiyoupu.mjs gate --job <frozen-job.json> [--approval <keyframe-approval.json>]` before each review stage and immediately after the user replies. It reports which of the three states you are in and what that state forbids.
+
+- `WAITING_FOR_SCORE_APPROVAL` (gate 1): produce the review, show per-measure comparison, revision differences and remaining doubts, then end the turn. Ask the user in plain words.
+- `WAITING_FOR_KEYFRAME_APPROVAL` (gate 2): render real keyframes plus short audition and motion clip, show them with the audio source/profile/mix and camera path, then end the turn.
+- `READY_FOR_RENDER` (gate 3): both approvals recorded. Export with the same frozen job and props; never regenerate or edit them between review and render.
+
+The command also returns `showBeforeAsking` (what must be on screen first), `askUser` (what to ask), and `mustNot` (what invalidates the gate). Treat a non-null `stale` field as blocking: the approval belongs to a different job, so re-review instead of reusing it. Never answer a gate from memory; run it.
 
 ## Execute the task with two content review stops
 
@@ -44,4 +73,4 @@ Inspect scan quality, page/crop provenance, accidentals/key/clef/octave, dots/be
 
 Two failures on one path require diagnosis/alternatives. If no reviewable result exists after roughly ten minutes, report blockers; do not silently run an hour. Complete routine work autonomously inside each stage; do not ask micro-permission for ordinary reversible steps or authorized mixing adjustments.
 
-Use an installed professional OMR adapter when available. Judge notation against the original source; successful engraving or video export does not replace source review. See [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with V1.2.0 configuration, notation, time-map and quality evidence rather than overwriting finished artifacts.
+Use an installed professional OMR adapter when available. Judge notation against the original source; successful engraving or video export does not replace source review. See [usage](README_使用说明.md) and [prompts](examples/agent-prompts.md). Preserve legacy jobs for inspection; re-bind new work with the current V2 configuration, notation, time-map and quality evidence rather than overwriting finished artifacts.

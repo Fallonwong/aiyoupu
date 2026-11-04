@@ -1,0 +1,3837 @@
+{
+  "source": "E:\\remotion-workspace\\.cache\\piano-remediation\\piano-remotion",
+  "target": "E:\\remotion-workspace\\.cache\\aiyoupu-v200\\aiyoupu",
+  "version": "2.0.0",
+  "displayName": "AI有谱",
+  "slug": "aiyoupu",
+  "fileMap": {
+    "scripts/piano.mjs": "scripts/aiyoupu-legacy.mjs",
+    "scripts/piano-v130.mjs": "scripts/aiyoupu.mjs",
+    "components/PianoRemotion.tsx": "components/Aiyoupu.tsx",
+    "components/PianoPresentation.ts": "components/AiyoupuPresentation.ts",
+    "components/PianoScoreScene.tsx": "components/AiyoupuScoreScene.tsx",
+    "components/PianoScoreSceneV130.tsx": "components/AiyoupuScoreSceneV2.tsx",
+    ".gitattributes": ".gitattributes",
+    ".gitignore": ".gitignore",
+    "LICENSE.txt": "history/v130/LICENSE.txt",
+    "README.md": "README.md",
+    "README_使用说明.md": "README_使用说明.md",
+    "RELEASE_NOTES.md": "history/v130/RELEASE_NOTES.md",
+    "RELEASE_NOTES_V130.md": "history/v130/RELEASE_NOTES_V130.md",
+    "SKILL.md": "SKILL.md",
+    "agents/openai.yaml": "agents/openai.yaml",
+    "assets/runtime/package-lock.json": "assets/runtime/package-lock.json",
+    "assets/runtime/package.json": "assets/runtime/package.json",
+    "assets/runtime/public/score/demo/score.svg": "assets/runtime/public/score/demo/score.svg",
+    "assets/runtime/public/score/demo/timeline.json": "assets/runtime/public/score/demo/timeline.json",
+    "assets/runtime/public/score/demo/timing.mid": "assets/runtime/public/score/demo/timing.mid",
+    "assets/runtime/public/score/demo/timing.musicxml": "assets/runtime/public/score/demo/timing.musicxml",
+    "assets/runtime/src/index.tsx": "assets/runtime/src/index.tsx",
+    "assets/runtime/src/song-v130.tsx": "assets/runtime/src/song-v2.tsx",
+    "assets/runtime/src/song.tsx": "assets/runtime/src/song.tsx",
+    "assets/runtime/tsconfig.json": "assets/runtime/tsconfig.json",
+    "assets/showcase/douyin-cover.jpg": "assets/showcase/douyin-cover.jpg",
+    "assets/showcase/lalaland-cover.jpg": "assets/showcase/lalaland-cover.jpg",
+    "assets/showcase/lalaland-score.jpg": "assets/showcase/lalaland-score.jpg",
+    "assets/showcase/real-gallery.jpg": "assets/showcase/real-gallery.jpg",
+    "assets/showcase/real-landscape-16x9.jpg": "assets/showcase/real-landscape-16x9.jpg",
+    "assets/showcase/real-obsidian-dark.jpg": "assets/showcase/real-obsidian-dark.jpg",
+    "assets/showcase/real-portrait-focus.jpg": "assets/showcase/real-portrait-focus.jpg",
+    "assets/showcase/real-portrait-runway.jpg": "assets/showcase/real-portrait-runway.jpg",
+    "components/CosmicNebula.tsx": "components/CosmicNebula.tsx",
+    "components/DeepSapphire.tsx": "components/DeepSapphire.tsx",
+    "components/ScoreCameraPresets.ts": "components/ScoreCameraPresets.ts",
+    "components/ScoreChordGeometry.ts": "components/ScoreChordGeometry.ts",
+    "components/ScoreNoteLeap.tsx": "components/ScoreNoteLeap.tsx",
+    "components/ScoreVideoConfig.ts": "components/ScoreVideoConfig.ts",
+    "components/ScoreVideoConfigV130.ts": "components/ScoreVideoConfigV2.ts",
+    "components/SunsetOcean.tsx": "components/SunsetOcean.tsx",
+    "components/TeachingFocusV130.ts": "components/TeachingFocusV2.ts",
+    "components/resolveScoreVideoConfig.ts": "components/resolveScoreVideoConfig.ts",
+    "components/resolveScoreVideoConfigV130.ts": "components/resolveScoreVideoConfigV2.ts",
+    "examples/agent-prompts.md": "examples/agent-prompts.md",
+    "examples/sources-v130.json": "examples/sources-v2.json",
+    "manifest.json": "manifest.json",
+    "references/assets-policy.md": "references/assets-policy.md",
+    "references/data-contract.md": "references/data-contract.md",
+    "references/environment.md": "references/environment.md",
+    "references/input-preparation.md": "references/input-preparation.md",
+    "references/input-routes.md": "references/input-routes.md",
+    "references/material-preparation.md": "references/material-preparation.md",
+    "references/performance-quality.md": "references/performance-quality.md",
+    "references/portrait-runway.md": "references/portrait-runway.md",
+    "references/production.md": "references/production.md",
+    "references/public-score-sources-v130.md": "references/public-score-sources-v2.md",
+    "references/rendering.md": "references/rendering.md",
+    "references/score-strip.md": "references/score-strip.md",
+    "references/score-validation.md": "references/score-validation.md",
+    "references/teaching-landscape-v130.md": "references/teaching-landscape-v2.md",
+    "references/upgrade-status.md": "references/upgrade-status.md",
+    "references/visual-presets.md": "references/visual-presets.md",
+    "references/workflow.md": "references/workflow.md",
+    "scripts/audio-analysis.py": "scripts/audio-analysis.py",
+    "scripts/audio-production.mjs": "scripts/audio-production.mjs",
+    "scripts/audio-transfer-v130.mjs": "scripts/audio-transfer-v2.mjs",
+    "scripts/audio.mjs": "scripts/audio.mjs",
+    "scripts/camera-path.mjs": "scripts/camera-path.mjs",
+    "scripts/doctor.mjs": "scripts/doctor.mjs",
+    "scripts/engrave-teaching-v130.py": "scripts/engrave-teaching-v2.py",
+    "scripts/entry.mjs": "scripts/entry.mjs",
+    "scripts/environment.mjs": "scripts/environment.mjs",
+    "scripts/execution.mjs": "scripts/execution.mjs",
+    "scripts/geometry-v130.mjs": "scripts/geometry-v2.mjs",
+    "scripts/geometry.mjs": "scripts/geometry.mjs",
+    "scripts/install-v130.mjs": "scripts/install-v2.mjs",
+    "scripts/install.mjs": "scripts/install.mjs",
+    "scripts/midi.mjs": "scripts/midi.mjs",
+    "scripts/music.mjs": "scripts/music.mjs",
+    "scripts/notation-audit.mjs": "scripts/notation-audit.mjs",
+    "scripts/performance-map.mjs": "scripts/performance-map.mjs",
+    "scripts/prepare.mjs": "scripts/prepare.mjs",
+    "scripts/quality-review.mjs": "scripts/quality-review.mjs",
+    "scripts/quality-v130.mjs": "scripts/quality-v2.mjs",
+    "scripts/quality.mjs": "scripts/quality.mjs",
+    "scripts/review.mjs": "scripts/review.mjs",
+    "scripts/score-strip.mjs": "scripts/score-strip.mjs",
+    "scripts/score-strip.test.mjs": "scripts/score-strip.test.mjs",
+    "scripts/score.mjs": "scripts/score.mjs",
+    "scripts/score.py": "scripts/score.py",
+    "scripts/source-scope.mjs": "scripts/source-scope.mjs",
+    "scripts/workbench-export-v130.mjs": "scripts/workbench-export-v2.mjs"
+  },
+  "rules": [
+    [
+      "components/resolveScoreVideoConfigV130.ts",
+      "components/resolveScoreVideoConfigV2.ts"
+    ],
+    [
+      "references/public-score-sources-v130.md",
+      "references/public-score-sources-v2.md"
+    ],
+    [
+      "references/teaching-landscape-v130.md",
+      "references/teaching-landscape-v2.md"
+    ],
+    [
+      "components/PianoScoreSceneV130.tsx",
+      "components/AiyoupuScoreSceneV2.tsx"
+    ],
+    [
+      "components/ScoreVideoConfigV130.ts",
+      "components/ScoreVideoConfigV2.ts"
+    ],
+    [
+      "scripts/workbench-export-v130.mjs",
+      "scripts/workbench-export-v2.mjs"
+    ],
+    [
+      "scripts/engrave-teaching-v130.py",
+      "scripts/engrave-teaching-v2.py"
+    ],
+    [
+      "assets/runtime/src/song-v130.tsx",
+      "assets/runtime/src/song-v2.tsx"
+    ],
+    [
+      "components/PianoPresentation.ts",
+      "components/AiyoupuPresentation.ts"
+    ],
+    [
+      "components/TeachingFocusV130.ts",
+      "components/TeachingFocusV2.ts"
+    ],
+    [
+      "scripts/audio-transfer-v130.mjs",
+      "scripts/audio-transfer-v2.mjs"
+    ],
+    [
+      "components/PianoScoreScene.tsx",
+      "components/AiyoupuScoreScene.tsx"
+    ],
+    [
+      "resolveScoreVideoConfigV130.ts",
+      "resolveScoreVideoConfigV2.ts"
+    ],
+    [
+      "public-score-sources-v130.md",
+      "public-score-sources-v2.md"
+    ],
+    [
+      "components/PianoRemotion.tsx",
+      "components/Aiyoupu.tsx"
+    ],
+    [
+      "teaching-landscape-v130.md",
+      "teaching-landscape-v2.md"
+    ],
+    [
+      "examples/sources-v130.json",
+      "examples/sources-v2.json"
+    ],
+    [
+      "scripts/geometry-v130.mjs",
+      "scripts/geometry-v2.mjs"
+    ],
+    [
+      "workbench-export-v130.mjs",
+      "workbench-export-v2.mjs"
+    ],
+    [
+      "engrave-teaching-v130.py",
+      "engrave-teaching-v2.py"
+    ],
+    [
+      "scripts/install-v130.mjs",
+      "scripts/install-v2.mjs"
+    ],
+    [
+      "scripts/quality-v130.mjs",
+      "scripts/quality-v2.mjs"
+    ],
+    [
+      "PianoScoreSceneV130.tsx",
+      "AiyoupuScoreSceneV2.tsx"
+    ],
+    [
+      "audio-transfer-v130.mjs",
+      "audio-transfer-v2.mjs"
+    ],
+    [
+      "ScoreVideoConfigV130.ts",
+      "ScoreVideoConfigV2.ts"
+    ],
+    [
+      "scripts/piano-v130.mjs",
+      "scripts/aiyoupu.mjs"
+    ],
+    [
+      "PianoPresentation.ts",
+      "AiyoupuPresentation.ts"
+    ],
+    [
+      "TeachingFocusV130.ts",
+      "TeachingFocusV2.ts"
+    ],
+    [
+      "PianoScoreScene.tsx",
+      "AiyoupuScoreScene.tsx"
+    ],
+    [
+      "sources-v130.json",
+      "sources-v2.json"
+    ],
+    [
+      "PianoRemotion.tsx",
+      "Aiyoupu.tsx"
+    ],
+    [
+      "geometry-v130.mjs",
+      "geometry-v2.mjs"
+    ],
+    [
+      "scripts/piano.mjs",
+      "scripts/aiyoupu-legacy.mjs"
+    ],
+    [
+      "quality-v130.mjs",
+      "quality-v2.mjs"
+    ],
+    [
+      "install-v130.mjs",
+      "install-v2.mjs"
+    ],
+    [
+      "piano-v130.mjs",
+      "aiyoupu.mjs"
+    ],
+    [
+      "song-v130.tsx",
+      "song-v2.tsx"
+    ],
+    [
+      "piano.mjs",
+      "aiyoupu-legacy.mjs"
+    ],
+    [
+      "PianoScoreSceneV130",
+      "AiyoupuScoreSceneV2"
+    ],
+    [
+      "PianoScoreSceneProps",
+      "AiyoupuScoreSceneProps"
+    ],
+    [
+      "PianoScoreScene",
+      "AiyoupuScoreScene"
+    ],
+    [
+      "PianoPresentation",
+      "AiyoupuPresentation"
+    ],
+    [
+      "PianoTimeline",
+      "AiyoupuTimeline"
+    ],
+    [
+      "PianoRemotionProps",
+      "AiyoupuProps"
+    ],
+    [
+      "PianoRemotion",
+      "Aiyoupu"
+    ],
+    [
+      "PianoReMotion",
+      "AI有谱"
+    ],
+    [
+      "Piano Remotion",
+      "AI有谱"
+    ],
+    [
+      "piano-remotion-portable-runtime",
+      "aiyoupu-portable-runtime"
+    ],
+    [
+      "piano-remotion-demo",
+      "aiyoupu-demo"
+    ],
+    [
+      "piano-remotion",
+      "aiyoupu"
+    ],
+    [
+      "piano_remotion",
+      "aiyoupu"
+    ],
+    [
+      "PIANO_",
+      "AIYOUPU_"
+    ],
+    [
+      "piano-remotion/releases/tag/v1",
+      "aiyoupu-remotion/releases/tag/v1"
+    ],
+    [
+      "piano-remotion-demo/song-v130",
+      "aiyoupu-remotion-demo/song-v130"
+    ],
+    [
+      "piano-analysis-candidate/v2",
+      "aiyoupu-analysis-candidate/v2"
+    ],
+    [
+      "piano-remotion-demo/index",
+      "aiyoupu-remotion-demo/index"
+    ],
+    [
+      "piano-source-inventory/v1",
+      "aiyoupu-source-inventory/v1"
+    ],
+    [
+      "piano-symbolic-events/v2",
+      "aiyoupu-symbolic-events/v2"
+    ],
+    [
+      "piano-remotion-demo/song",
+      "aiyoupu-remotion-demo/song"
+    ],
+    [
+      "piano-quality-review/v2",
+      "aiyoupu-quality-review/v2"
+    ],
+    [
+      "piano-notation-audit/v1",
+      "aiyoupu-notation-audit/v1"
+    ],
+    [
+      "piano-quality-result/v2",
+      "aiyoupu-quality-result/v2"
+    ],
+    [
+      "piano-review-request/v1",
+      "aiyoupu-review-request/v1"
+    ],
+    [
+      "piano-audio-evidence/v1",
+      "aiyoupu-audio-evidence/v1"
+    ],
+    [
+      "piano-user-approval/v1",
+      "aiyoupu-user-approval/v1"
+    ],
+    [
+      "piano-score-mapping/v1",
+      "aiyoupu-score-mapping/v1"
+    ],
+    [
+      "piano-user-response/v1",
+      "aiyoupu-user-response/v1"
+    ],
+    [
+      "piano-strip-systems/v1",
+      "aiyoupu-strip-systems/v1"
+    ],
+    [
+      "piano-remotion/issues",
+      "aiyoupu-remotion/issues"
+    ],
+    [
+      "piano-score-layout/v1",
+      "aiyoupu-score-layout/v1"
+    ],
+    [
+      "piano-source-scope/v1",
+      "aiyoupu-source-scope/v1"
+    ],
+    [
+      "piano-score-review/v1",
+      "aiyoupu-score-review/v1"
+    ],
+    [
+      "piano-performance/v1",
+      "aiyoupu-performance/v1"
+    ],
+    [
+      "piano-score-strip/v1",
+      "aiyoupu-score-strip/v1"
+    ],
+    [
+      "piano-midi-check/v2",
+      "aiyoupu-midi-check/v2"
+    ],
+    [
+      "piano-production/v2",
+      "aiyoupu-production/v2"
+    ],
+    [
+      "piano-audio-plan/v1",
+      "aiyoupu-audio-plan/v1"
+    ],
+    [
+      "piano-keyframes/v1",
+      "aiyoupu-keyframes/v1"
+    ],
+    [
+      "piano-time-map/v2",
+      "aiyoupu-time-map/v2"
+    ],
+    [
+      "piano-checked/v2",
+      "aiyoupu-checked/v2"
+    ],
+    [
+      "piano-prepare-",
+      "aiyoupu-prepare-"
+    ],
+    [
+      "piano-omr/v1",
+      "aiyoupu-omr/v1"
+    ],
+    [
+      "piano-score",
+      "aiyoupu-score"
+    ],
+    [
+      "piano-v130",
+      "aiyoupu-v130"
+    ],
+    [
+      "piano-svg-",
+      "aiyoupu-svg-"
+    ],
+    [
+      "Piano ${stage} review",
+      "AI有谱 ${stage} review"
+    ],
+    [
+      "no Piano installation",
+      "no AI有谱 installation"
+    ]
+  ],
+  "historical": [
+    "LICENSE.txt",
+    "RELEASE_NOTES.md",
+    "RELEASE_NOTES_V130.md"
+  ],
+  "rows": [
+    {
+      "file": ".gitignore",
+      "line": 8,
+      "category": "品牌",
+      "old": "piano-prepare-",
+      "new": "aiyoupu-prepare-",
+      "targetFile": ".gitignore",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "LICENSE.txt",
+      "line": 1,
+      "category": "历史",
+      "old": "Piano Remotion",
+      "new": "原样冻结；参见同目录迁移注明",
+      "targetFile": "history/v130/LICENSE.txt",
+      "action": "archive-unchanged"
+    },
+    {
+      "file": "LICENSE.txt",
+      "line": 4,
+      "category": "历史",
+      "old": "piano-remotion",
+      "new": "原样冻结；参见同目录迁移注明",
+      "targetFile": "history/v130/LICENSE.txt",
+      "action": "archive-unchanged"
+    },
+    {
+      "file": "README.md",
+      "line": 5,
+      "category": "品牌",
+      "old": "references/public-score-sources-v130.md",
+      "new": "references/public-score-sources-v2.md",
+      "targetFile": "README.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "README.md",
+      "line": 5,
+      "category": "品牌",
+      "old": "references/teaching-landscape-v130.md",
+      "new": "references/teaching-landscape-v2.md",
+      "targetFile": "README.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "README.md",
+      "line": 16,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "README.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "README.md",
+      "line": 225,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "README.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "README.md",
+      "line": 244,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "README.md",
+      "action": "replace-exact",
+      "count": 3
+    },
+    {
+      "file": "README_使用说明.md",
+      "line": 9,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "README_使用说明.md",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "README_使用说明.md",
+      "line": 12,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "README_使用说明.md",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "README_使用说明.md",
+      "line": 17,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "README_使用说明.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "README_使用说明.md",
+      "line": 49,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "README_使用说明.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "RELEASE_NOTES.md",
+      "line": 1,
+      "category": "历史",
+      "old": "Piano Remotion",
+      "new": "原样冻结；参见同目录迁移注明",
+      "targetFile": "history/v130/RELEASE_NOTES.md",
+      "action": "archive-unchanged"
+    },
+    {
+      "file": "RELEASE_NOTES_V130.md",
+      "line": 7,
+      "category": "历史",
+      "old": "piano-remotion",
+      "new": "原样冻结；参见同目录迁移注明",
+      "targetFile": "history/v130/RELEASE_NOTES_V130.md",
+      "action": "archive-unchanged"
+    },
+    {
+      "file": "SKILL.md",
+      "line": 2,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 3,
+      "category": "品牌",
+      "old": "piano-score",
+      "new": "aiyoupu-score",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 8,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 11,
+      "category": "品牌",
+      "old": "references/public-score-sources-v130.md",
+      "new": "references/public-score-sources-v2.md",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 11,
+      "category": "品牌",
+      "old": "references/teaching-landscape-v130.md",
+      "new": "references/teaching-landscape-v2.md",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 13,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 15,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 15,
+      "category": "品牌",
+      "old": "piano.mjs",
+      "new": "aiyoupu-legacy.mjs",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "SKILL.md",
+      "line": 23,
+      "category": "品牌",
+      "old": "piano-production/v2",
+      "new": "aiyoupu-production/v2",
+      "targetFile": "SKILL.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "agents/openai.yaml",
+      "line": 3,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "agents/openai.yaml",
+      "action": "retain-term"
+    },
+    {
+      "file": "agents/openai.yaml",
+      "line": 4,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "agents/openai.yaml",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/package-lock.json",
+      "line": 2,
+      "category": "品牌",
+      "old": "piano-remotion-portable-runtime",
+      "new": "aiyoupu-portable-runtime",
+      "targetFile": "assets/runtime/package-lock.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/package-lock.json",
+      "line": 8,
+      "category": "品牌",
+      "old": "piano-remotion-portable-runtime",
+      "new": "aiyoupu-portable-runtime",
+      "targetFile": "assets/runtime/package-lock.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/package.json",
+      "line": 2,
+      "category": "品牌",
+      "old": "piano-remotion-portable-runtime",
+      "new": "aiyoupu-portable-runtime",
+      "targetFile": "assets/runtime/package.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/package.json",
+      "line": 9,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "assets/runtime/package.json",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "assets/runtime/public/score/demo/timing.musicxml",
+      "line": 1,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "assets/runtime/public/score/demo/timing.musicxml",
+      "action": "retain-term"
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 6,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 8,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 8,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/index.tsx",
+      "line": 10,
+      "category": "品牌",
+      "old": "Piano Remotion",
+      "new": "AI有谱",
+      "targetFile": "assets/runtime/src/index.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoPresentation",
+      "new": "AiyoupuPresentation",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneV130",
+      "new": "AiyoupuScoreSceneV2",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 6,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 10,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoPresentation",
+      "new": "AiyoupuPresentation",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 6,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "assets/runtime/src/song.tsx",
+      "line": 10,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "assets/runtime/src/song.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoRemotion.tsx",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "components/Aiyoupu.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoRemotion.tsx",
+      "line": 2,
+      "category": "品牌",
+      "old": "PianoRemotionProps",
+      "new": "AiyoupuProps",
+      "targetFile": "components/Aiyoupu.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 7,
+      "category": "品牌",
+      "old": "PianoPresentation",
+      "new": "AiyoupuPresentation",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 10,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 17,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 19,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 34,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 34,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 6,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 9,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 9,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 13,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/ScoreVideoConfig.ts",
+      "line": 4,
+      "category": "品牌",
+      "old": "Piano Remotion",
+      "new": "AI有谱",
+      "targetFile": "components/ScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/ScoreVideoConfig.ts",
+      "line": 143,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "components/ScoreVideoConfig.ts",
+      "action": "retain-term"
+    },
+    {
+      "file": "components/ScoreVideoConfig.ts",
+      "line": 164,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "components/ScoreVideoConfig.ts",
+      "action": "retain-term"
+    },
+    {
+      "file": "components/ScoreVideoConfig.ts",
+      "line": 185,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "components/ScoreVideoConfig.ts",
+      "action": "retain-term"
+    },
+    {
+      "file": "components/ScoreVideoConfig.ts",
+      "line": 206,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "components/ScoreVideoConfig.ts",
+      "action": "retain-term"
+    },
+    {
+      "file": "components/TeachingFocusV130.ts",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/TeachingFocusV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/TeachingFocusV130.ts",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/TeachingFocusV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/TeachingFocusV130.ts",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/TeachingFocusV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfig.ts",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/resolveScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfig.ts",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "components/resolveScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfig.ts",
+      "line": 1,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/resolveScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfig.ts",
+      "line": 5,
+      "category": "品牌",
+      "old": "PianoTimeline",
+      "new": "AiyoupuTimeline",
+      "targetFile": "components/resolveScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfig.ts",
+      "line": 13,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/resolveScoreVideoConfig.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfigV130.ts",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneV130",
+      "new": "AiyoupuScoreSceneV2",
+      "targetFile": "components/resolveScoreVideoConfigV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfigV130.ts",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/resolveScoreVideoConfigV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "components/resolveScoreVideoConfigV130.ts",
+      "line": 7,
+      "category": "品牌",
+      "old": "PianoScoreSceneProps",
+      "new": "AiyoupuScoreSceneProps",
+      "targetFile": "components/resolveScoreVideoConfigV2.ts",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "examples/agent-prompts.md",
+      "line": 8,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "examples/agent-prompts.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "examples/agent-prompts.md",
+      "line": 19,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "examples/agent-prompts.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "examples/agent-prompts.md",
+      "line": 29,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "examples/agent-prompts.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "examples/sources-v130.json",
+      "line": 31,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "examples/sources-v2.json",
+      "action": "retain-term"
+    },
+    {
+      "file": "manifest.json",
+      "line": 2,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 10,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 94,
+      "category": "品牌",
+      "old": "components/PianoPresentation.ts",
+      "new": "components/AiyoupuPresentation.ts",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 98,
+      "category": "品牌",
+      "old": "components/PianoRemotion.tsx",
+      "new": "components/Aiyoupu.tsx",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 102,
+      "category": "品牌",
+      "old": "components/PianoScoreScene.tsx",
+      "new": "components/AiyoupuScoreScene.tsx",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 266,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 322,
+      "category": "品牌",
+      "old": "assets/runtime/src/song-v130.tsx",
+      "new": "assets/runtime/src/song-v2.tsx",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 326,
+      "category": "品牌",
+      "old": "components/PianoScoreSceneV130.tsx",
+      "new": "components/AiyoupuScoreSceneV2.tsx",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 330,
+      "category": "品牌",
+      "old": "components/ScoreVideoConfigV130.ts",
+      "new": "components/ScoreVideoConfigV2.ts",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 334,
+      "category": "品牌",
+      "old": "components/TeachingFocusV130.ts",
+      "new": "components/TeachingFocusV2.ts",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 338,
+      "category": "品牌",
+      "old": "components/resolveScoreVideoConfigV130.ts",
+      "new": "components/resolveScoreVideoConfigV2.ts",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 342,
+      "category": "品牌",
+      "old": "examples/sources-v130.json",
+      "new": "examples/sources-v2.json",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 346,
+      "category": "品牌",
+      "old": "references/public-score-sources-v130.md",
+      "new": "references/public-score-sources-v2.md",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 350,
+      "category": "品牌",
+      "old": "references/teaching-landscape-v130.md",
+      "new": "references/teaching-landscape-v2.md",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 354,
+      "category": "品牌",
+      "old": "scripts/engrave-teaching-v130.py",
+      "new": "scripts/engrave-teaching-v2.py",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 358,
+      "category": "品牌",
+      "old": "scripts/install-v130.mjs",
+      "new": "scripts/install-v2.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 362,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 366,
+      "category": "品牌",
+      "old": "scripts/quality-v130.mjs",
+      "new": "scripts/quality-v2.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 370,
+      "category": "品牌",
+      "old": "scripts/workbench-export-v130.mjs",
+      "new": "scripts/workbench-export-v2.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 374,
+      "category": "品牌",
+      "old": "scripts/geometry-v130.mjs",
+      "new": "scripts/geometry-v2.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "manifest.json",
+      "line": 378,
+      "category": "品牌",
+      "old": "scripts/audio-transfer-v130.mjs",
+      "new": "scripts/audio-transfer-v2.mjs",
+      "targetFile": "manifest.json",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/assets-policy.md",
+      "line": 3,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "references/assets-policy.md",
+      "action": "retain-term"
+    },
+    {
+      "file": "references/data-contract.md",
+      "line": 29,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/data-contract.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/data-contract.md",
+      "line": 29,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "references/data-contract.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/environment.md",
+      "line": 4,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/environment.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/environment.md",
+      "line": 5,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/environment.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/environment.md",
+      "line": 13,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/environment.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/input-preparation.md",
+      "line": 4,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "references/input-preparation.md",
+      "action": "retain-term"
+    },
+    {
+      "file": "references/input-preparation.md",
+      "line": 6,
+      "category": "品牌",
+      "old": "piano.mjs",
+      "new": "aiyoupu-legacy.mjs",
+      "targetFile": "references/input-preparation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/input-preparation.md",
+      "line": 100,
+      "category": "品牌",
+      "old": "piano-prepare-",
+      "new": "aiyoupu-prepare-",
+      "targetFile": "references/input-preparation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/input-routes.md",
+      "line": 73,
+      "category": "品牌",
+      "old": "piano.mjs",
+      "new": "aiyoupu-legacy.mjs",
+      "targetFile": "references/input-routes.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/input-routes.md",
+      "line": 75,
+      "category": "品牌",
+      "old": "piano.mjs",
+      "new": "aiyoupu-legacy.mjs",
+      "targetFile": "references/input-routes.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/performance-quality.md",
+      "line": 8,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "references/performance-quality.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/performance-quality.md",
+      "line": 12,
+      "category": "品牌",
+      "old": "piano-time-map/v2",
+      "new": "aiyoupu-time-map/v2",
+      "targetFile": "references/performance-quality.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/performance-quality.md",
+      "line": 18,
+      "category": "品牌",
+      "old": "piano-quality-review/v2",
+      "new": "aiyoupu-quality-review/v2",
+      "targetFile": "references/performance-quality.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/performance-quality.md",
+      "line": 26,
+      "category": "品牌",
+      "old": "piano-source-inventory/v1",
+      "new": "aiyoupu-source-inventory/v1",
+      "targetFile": "references/performance-quality.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/portrait-runway.md",
+      "line": 13,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/portrait-runway.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/portrait-runway.md",
+      "line": 16,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/portrait-runway.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/production.md",
+      "line": 7,
+      "category": "品牌",
+      "old": "piano-production/v2",
+      "new": "aiyoupu-production/v2",
+      "targetFile": "references/production.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/public-score-sources-v130.md",
+      "line": 21,
+      "category": "品牌",
+      "old": "examples/sources-v130.json",
+      "new": "examples/sources-v2.json",
+      "targetFile": "references/public-score-sources-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 5,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 14,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 17,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 22,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 23,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 34,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "references/rendering.md",
+      "action": "retain-term"
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 39,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 49,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 57,
+      "category": "品牌",
+      "old": "piano-user-response/v1",
+      "new": "aiyoupu-user-response/v1",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 63,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 70,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 71,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 79,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 85,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/rendering.md",
+      "line": 86,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/rendering.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-strip.md",
+      "line": 21,
+      "category": "品牌",
+      "old": "piano-strip-systems/v1",
+      "new": "aiyoupu-strip-systems/v1",
+      "targetFile": "references/score-strip.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-strip.md",
+      "line": 38,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/score-strip.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 14,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 19,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 37,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "references/score-validation.md",
+      "action": "retain-term"
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 43,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 45,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 45,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 48,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 55,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 63,
+      "category": "品牌",
+      "old": "piano_remotion",
+      "new": "aiyoupu",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 75,
+      "category": "品牌",
+      "old": "piano-score-mapping/v1",
+      "new": "aiyoupu-score-mapping/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 94,
+      "category": "品牌",
+      "old": "piano-score-layout/v1",
+      "new": "aiyoupu-score-layout/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/score-validation.md",
+      "line": 111,
+      "category": "品牌",
+      "old": "piano-score-review/v1",
+      "new": "aiyoupu-score-review/v1",
+      "targetFile": "references/score-validation.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 4,
+      "category": "品牌",
+      "old": "resolveScoreVideoConfigV130.ts",
+      "new": "resolveScoreVideoConfigV2.ts",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 4,
+      "category": "品牌",
+      "old": "PianoScoreSceneV130.tsx",
+      "new": "AiyoupuScoreSceneV2.tsx",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 4,
+      "category": "品牌",
+      "old": "ScoreVideoConfigV130.ts",
+      "new": "ScoreVideoConfigV2.ts",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 5,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 6,
+      "category": "品牌",
+      "old": "song-v130.tsx",
+      "new": "song-v2.tsx",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 6,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 31,
+      "category": "品牌",
+      "old": "scripts/engrave-teaching-v130.py",
+      "new": "scripts/engrave-teaching-v2.py",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 41,
+      "category": "品牌",
+      "old": "piano-v130.mjs",
+      "new": "aiyoupu.mjs",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 54,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/visual-presets.md",
+      "line": 8,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/visual-presets.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/visual-presets.md",
+      "line": 46,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "references/visual-presets.md",
+      "action": "retain-term"
+    },
+    {
+      "file": "references/visual-presets.md",
+      "line": 54,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/visual-presets.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/visual-presets.md",
+      "line": 62,
+      "category": "品牌",
+      "old": "piano-production/v2",
+      "new": "aiyoupu-production/v2",
+      "targetFile": "references/visual-presets.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 3,
+      "category": "品牌",
+      "old": "PianoScoreScene",
+      "new": "AiyoupuScoreScene",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 8,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 9,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 19,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 27,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 35,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 43,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 44,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 66,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "references/workflow.md",
+      "line": 67,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "references/workflow.md",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/audio-analysis.py",
+      "line": 171,
+      "category": "品牌",
+      "old": "piano-analysis-candidate/v2",
+      "new": "aiyoupu-analysis-candidate/v2",
+      "targetFile": "scripts/audio-analysis.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/audio-production.mjs",
+      "line": 29,
+      "category": "品牌",
+      "old": "piano-audio-plan/v1",
+      "new": "aiyoupu-audio-plan/v1",
+      "targetFile": "scripts/audio-production.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/audio-production.mjs",
+      "line": 34,
+      "category": "品牌",
+      "old": "piano-audio-evidence/v1",
+      "new": "aiyoupu-audio-evidence/v1",
+      "targetFile": "scripts/audio-production.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/audio-production.mjs",
+      "line": 53,
+      "category": "品牌",
+      "old": "piano-audio-evidence/v1",
+      "new": "aiyoupu-audio-evidence/v1",
+      "targetFile": "scripts/audio-production.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/audio.mjs",
+      "line": 78,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/audio.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/audio.mjs",
+      "line": 89,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/audio.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/doctor.mjs",
+      "line": 34,
+      "category": "品牌",
+      "old": "piano-remotion-portable-runtime",
+      "new": "aiyoupu-portable-runtime",
+      "targetFile": "scripts/doctor.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/doctor.mjs",
+      "line": 35,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/doctor.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/doctor.mjs",
+      "line": 36,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/doctor.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/doctor.mjs",
+      "line": 36,
+      "category": "品牌",
+      "old": "no Piano installation",
+      "new": "no AI有谱 installation",
+      "targetFile": "scripts/doctor.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/environment.mjs",
+      "line": 9,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/environment.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/environment.mjs",
+      "line": 60,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/environment.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/geometry-v130.mjs",
+      "line": 12,
+      "category": "品牌",
+      "old": "piano-svg-",
+      "new": "aiyoupu-svg-",
+      "targetFile": "scripts/geometry-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/geometry.mjs",
+      "line": 12,
+      "category": "品牌",
+      "old": "piano-svg-",
+      "new": "aiyoupu-svg-",
+      "targetFile": "scripts/geometry.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 26,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 27,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 28,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 29,
+      "category": "品牌",
+      "old": "assets/runtime/src/song-v130.tsx",
+      "new": "assets/runtime/src/song-v2.tsx",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 30,
+      "category": "品牌",
+      "old": "song-v130.tsx",
+      "new": "song-v2.tsx",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 30,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 65,
+      "category": "品牌",
+      "old": "song-v130.tsx",
+      "new": "song-v2.tsx",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 65,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/install.mjs",
+      "line": 26,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install.mjs",
+      "line": 27,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/install.mjs",
+      "line": 28,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install.mjs",
+      "line": 30,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/install.mjs",
+      "line": 65,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/install.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/music.mjs",
+      "line": 6,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/music.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/music.mjs",
+      "line": 57,
+      "category": "品牌",
+      "old": "piano-performance/v1",
+      "new": "aiyoupu-performance/v1",
+      "targetFile": "scripts/music.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/music.mjs",
+      "line": 90,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/music.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/notation-audit.mjs",
+      "line": 39,
+      "category": "品牌",
+      "old": "piano-notation-audit/v1",
+      "new": "aiyoupu-notation-audit/v1",
+      "targetFile": "scripts/notation-audit.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/notation-audit.mjs",
+      "line": 45,
+      "category": "品牌",
+      "old": "piano-notation-audit/v1",
+      "new": "aiyoupu-notation-audit/v1",
+      "targetFile": "scripts/notation-audit.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 14,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 36,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 40,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 45,
+      "category": "品牌",
+      "old": "piano-time-map/v2",
+      "new": "aiyoupu-time-map/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 69,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 69,
+      "category": "品牌",
+      "old": "piano-time-map/v2",
+      "new": "aiyoupu-time-map/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/performance-map.mjs",
+      "line": 73,
+      "category": "品牌",
+      "old": "piano-midi-check/v2",
+      "new": "aiyoupu-midi-check/v2",
+      "targetFile": "scripts/performance-map.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 9,
+      "category": "品牌",
+      "old": "audio-transfer-v130.mjs",
+      "new": "audio-transfer-v2.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 14,
+      "category": "品牌",
+      "old": "geometry-v130.mjs",
+      "new": "geometry-v2.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 21,
+      "category": "品牌",
+      "old": "quality-v130.mjs",
+      "new": "quality-v2.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 23,
+      "category": "品牌",
+      "old": "workbench-export-v130.mjs",
+      "new": "workbench-export-v2.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 39,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 52,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 68,
+      "category": "品牌",
+      "old": "piano-score-layout/v1",
+      "new": "aiyoupu-score-layout/v1",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 88,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 96,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 104,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 124,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 129,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 130,
+      "category": "品牌",
+      "old": "song-v130.tsx",
+      "new": "song-v2.tsx",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 4
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 130,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 4
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 131,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 133,
+      "category": "品牌",
+      "old": "PianoScoreSceneV130.tsx",
+      "new": "AiyoupuScoreSceneV2.tsx",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 133,
+      "category": "品牌",
+      "old": "song-v130.tsx",
+      "new": "song-v2.tsx",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 136,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 138,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 141,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 143,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 152,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 161,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 204,
+      "category": "品牌",
+      "old": "piano-keyframes/v1",
+      "new": "aiyoupu-keyframes/v1",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 210,
+      "category": "品牌",
+      "old": "install-v130.mjs",
+      "new": "install-v2.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 218,
+      "category": "品牌",
+      "old": "piano-midi-check/v2",
+      "new": "aiyoupu-midi-check/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 238,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 239,
+      "category": "品牌",
+      "old": "piano-audio-evidence/v1",
+      "new": "aiyoupu-audio-evidence/v1",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 239,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 241,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 248,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 37,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 50,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 66,
+      "category": "品牌",
+      "old": "piano-score-layout/v1",
+      "new": "aiyoupu-score-layout/v1",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 86,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 94,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 102,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 110,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 115,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 116,
+      "category": "品牌",
+      "old": "piano-remotion-demo",
+      "new": "aiyoupu-demo",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 117,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 119,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 121,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 123,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 125,
+      "category": "品牌",
+      "old": "PianoRemotion",
+      "new": "Aiyoupu",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 134,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 143,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 2
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 177,
+      "category": "品牌",
+      "old": "piano-keyframes/v1",
+      "new": "aiyoupu-keyframes/v1",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 190,
+      "category": "品牌",
+      "old": "piano-midi-check/v2",
+      "new": "aiyoupu-midi-check/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 210,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 211,
+      "category": "品牌",
+      "old": "piano-audio-evidence/v1",
+      "new": "aiyoupu-audio-evidence/v1",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 211,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 213,
+      "category": "品牌",
+      "old": "piano-symbolic-events/v2",
+      "new": "aiyoupu-symbolic-events/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 220,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/prepare.mjs",
+      "line": 157,
+      "category": "品牌",
+      "old": "piano-prepare-",
+      "new": "aiyoupu-prepare-",
+      "targetFile": "scripts/prepare.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/prepare.mjs",
+      "line": 188,
+      "category": "品牌",
+      "old": "piano-prepare-",
+      "new": "aiyoupu-prepare-",
+      "targetFile": "scripts/prepare.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality-review.mjs",
+      "line": 16,
+      "category": "品牌",
+      "old": "piano-quality-review/v2",
+      "new": "aiyoupu-quality-review/v2",
+      "targetFile": "scripts/quality-review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality-v130.mjs",
+      "line": 10,
+      "category": "品牌",
+      "old": "piano-quality-review/v2",
+      "new": "aiyoupu-quality-review/v2",
+      "targetFile": "scripts/quality-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality-v130.mjs",
+      "line": 38,
+      "category": "品牌",
+      "old": "piano-quality-result/v2",
+      "new": "aiyoupu-quality-result/v2",
+      "targetFile": "scripts/quality-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality-v130.mjs",
+      "line": 48,
+      "category": "品牌",
+      "old": "piano-production/v2",
+      "new": "aiyoupu-production/v2",
+      "targetFile": "scripts/quality-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality.mjs",
+      "line": 10,
+      "category": "品牌",
+      "old": "piano-quality-review/v2",
+      "new": "aiyoupu-quality-review/v2",
+      "targetFile": "scripts/quality.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality.mjs",
+      "line": 38,
+      "category": "品牌",
+      "old": "piano-quality-result/v2",
+      "new": "aiyoupu-quality-result/v2",
+      "targetFile": "scripts/quality.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/quality.mjs",
+      "line": 48,
+      "category": "品牌",
+      "old": "piano-production/v2",
+      "new": "aiyoupu-production/v2",
+      "targetFile": "scripts/quality.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 16,
+      "category": "品牌",
+      "old": "piano-review-request/v1",
+      "new": "aiyoupu-review-request/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 22,
+      "category": "品牌",
+      "old": "piano-user-response/v1",
+      "new": "aiyoupu-user-response/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 22,
+      "category": "品牌",
+      "old": "Piano ${stage} review",
+      "new": "AI有谱 ${stage} review",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 28,
+      "category": "品牌",
+      "old": "piano-review-request/v1",
+      "new": "aiyoupu-review-request/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 35,
+      "category": "品牌",
+      "old": "piano-user-response/v1",
+      "new": "aiyoupu-user-response/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 40,
+      "category": "品牌",
+      "old": "piano-user-approval/v1",
+      "new": "aiyoupu-user-approval/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/review.mjs",
+      "line": 46,
+      "category": "品牌",
+      "old": "piano-user-approval/v1",
+      "new": "aiyoupu-user-approval/v1",
+      "targetFile": "scripts/review.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score-strip.mjs",
+      "line": 18,
+      "category": "品牌",
+      "old": "piano-strip-systems/v1",
+      "new": "aiyoupu-strip-systems/v1",
+      "targetFile": "scripts/score-strip.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score-strip.mjs",
+      "line": 145,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/score-strip.mjs",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/score-strip.mjs",
+      "line": 146,
+      "category": "品牌",
+      "old": "piano-score-strip/v1",
+      "new": "aiyoupu-score-strip/v1",
+      "targetFile": "scripts/score-strip.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score-strip.test.mjs",
+      "line": 17,
+      "category": "品牌",
+      "old": "piano-strip-systems/v1",
+      "new": "aiyoupu-strip-systems/v1",
+      "targetFile": "scripts/score-strip.test.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.mjs",
+      "line": 21,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.mjs",
+      "line": 23,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.mjs",
+      "line": 48,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 194,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 198,
+      "category": "通用",
+      "old": "piano (instrument / score / like timbre)",
+      "new": "保留乐器或谱面术语",
+      "targetFile": "scripts/score.py",
+      "action": "retain-term"
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 309,
+      "category": "品牌",
+      "old": "piano_remotion",
+      "new": "aiyoupu",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 314,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 376,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 377,
+      "category": "品牌",
+      "old": "piano_remotion",
+      "new": "aiyoupu",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 378,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 379,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 380,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 384,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 385,
+      "category": "品牌",
+      "old": "piano_remotion",
+      "new": "aiyoupu",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 391,
+      "category": "品牌",
+      "old": "piano_remotion",
+      "new": "aiyoupu",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 398,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 406,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 482,
+      "category": "品牌",
+      "old": "piano-score-mapping/v1",
+      "new": "aiyoupu-score-mapping/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 484,
+      "category": "品牌",
+      "old": "piano-score-mapping/v1",
+      "new": "aiyoupu-score-mapping/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 492,
+      "category": "品牌",
+      "old": "piano-score-layout/v1",
+      "new": "aiyoupu-score-layout/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 499,
+      "category": "品牌",
+      "old": "piano-score-layout/v1",
+      "new": "aiyoupu-score-layout/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 502,
+      "category": "品牌",
+      "old": "piano-score-review/v1",
+      "new": "aiyoupu-score-review/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 538,
+      "category": "品牌",
+      "old": "piano-score-review/v1",
+      "new": "aiyoupu-score-review/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 587,
+      "category": "品牌",
+      "old": "piano-omr/v1",
+      "new": "aiyoupu-omr/v1",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 620,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/score.py",
+      "line": 621,
+      "category": "品牌",
+      "old": "PIANO_",
+      "new": "AIYOUPU_",
+      "targetFile": "scripts/score.py",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/source-scope.mjs",
+      "line": 6,
+      "category": "品牌",
+      "old": "piano-source-inventory/v1",
+      "new": "aiyoupu-source-inventory/v1",
+      "targetFile": "scripts/source-scope.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/source-scope.mjs",
+      "line": 19,
+      "category": "品牌",
+      "old": "piano-source-scope/v1",
+      "new": "aiyoupu-source-scope/v1",
+      "targetFile": "scripts/source-scope.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/workbench-export-v130.mjs",
+      "line": 3,
+      "category": "品牌",
+      "old": "piano.mjs",
+      "new": "aiyoupu-legacy.mjs",
+      "targetFile": "scripts/workbench-export-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/workbench-export-v130.mjs",
+      "line": 15,
+      "category": "品牌",
+      "old": "piano-checked/v2",
+      "new": "aiyoupu-checked/v2",
+      "targetFile": "scripts/workbench-export-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "scripts/workbench-export-v130.mjs",
+      "line": 22,
+      "category": "品牌",
+      "old": "piano-remotion",
+      "new": "aiyoupu",
+      "targetFile": "scripts/workbench-export-v2.mjs",
+      "action": "replace-exact",
+      "count": 1
+    },
+    {
+      "file": "LICENSE.txt",
+      "line": 0,
+      "category": "历史",
+      "old": "LICENSE.txt",
+      "new": "history/v130/LICENSE.txt",
+      "targetFile": "history/v130/LICENSE.txt",
+      "action": "move-file"
+    },
+    {
+      "file": "RELEASE_NOTES.md",
+      "line": 0,
+      "category": "历史",
+      "old": "RELEASE_NOTES.md",
+      "new": "history/v130/RELEASE_NOTES.md",
+      "targetFile": "history/v130/RELEASE_NOTES.md",
+      "action": "move-file"
+    },
+    {
+      "file": "RELEASE_NOTES_V130.md",
+      "line": 0,
+      "category": "历史",
+      "old": "RELEASE_NOTES_V130.md",
+      "new": "history/v130/RELEASE_NOTES_V130.md",
+      "targetFile": "history/v130/RELEASE_NOTES_V130.md",
+      "action": "move-file"
+    },
+    {
+      "file": "assets/runtime/src/song-v130.tsx",
+      "line": 0,
+      "category": "品牌",
+      "old": "assets/runtime/src/song-v130.tsx",
+      "new": "assets/runtime/src/song-v2.tsx",
+      "targetFile": "assets/runtime/src/song-v2.tsx",
+      "action": "move-file"
+    },
+    {
+      "file": "components/PianoPresentation.ts",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/PianoPresentation.ts",
+      "new": "components/AiyoupuPresentation.ts",
+      "targetFile": "components/AiyoupuPresentation.ts",
+      "action": "move-file"
+    },
+    {
+      "file": "components/PianoRemotion.tsx",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/PianoRemotion.tsx",
+      "new": "components/Aiyoupu.tsx",
+      "targetFile": "components/Aiyoupu.tsx",
+      "action": "move-file"
+    },
+    {
+      "file": "components/PianoScoreScene.tsx",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/PianoScoreScene.tsx",
+      "new": "components/AiyoupuScoreScene.tsx",
+      "targetFile": "components/AiyoupuScoreScene.tsx",
+      "action": "move-file"
+    },
+    {
+      "file": "components/PianoScoreSceneV130.tsx",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/PianoScoreSceneV130.tsx",
+      "new": "components/AiyoupuScoreSceneV2.tsx",
+      "targetFile": "components/AiyoupuScoreSceneV2.tsx",
+      "action": "move-file"
+    },
+    {
+      "file": "components/ScoreVideoConfigV130.ts",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/ScoreVideoConfigV130.ts",
+      "new": "components/ScoreVideoConfigV2.ts",
+      "targetFile": "components/ScoreVideoConfigV2.ts",
+      "action": "move-file"
+    },
+    {
+      "file": "components/TeachingFocusV130.ts",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/TeachingFocusV130.ts",
+      "new": "components/TeachingFocusV2.ts",
+      "targetFile": "components/TeachingFocusV2.ts",
+      "action": "move-file"
+    },
+    {
+      "file": "components/resolveScoreVideoConfigV130.ts",
+      "line": 0,
+      "category": "品牌",
+      "old": "components/resolveScoreVideoConfigV130.ts",
+      "new": "components/resolveScoreVideoConfigV2.ts",
+      "targetFile": "components/resolveScoreVideoConfigV2.ts",
+      "action": "move-file"
+    },
+    {
+      "file": "examples/sources-v130.json",
+      "line": 0,
+      "category": "品牌",
+      "old": "examples/sources-v130.json",
+      "new": "examples/sources-v2.json",
+      "targetFile": "examples/sources-v2.json",
+      "action": "move-file"
+    },
+    {
+      "file": "references/public-score-sources-v130.md",
+      "line": 0,
+      "category": "品牌",
+      "old": "references/public-score-sources-v130.md",
+      "new": "references/public-score-sources-v2.md",
+      "targetFile": "references/public-score-sources-v2.md",
+      "action": "move-file"
+    },
+    {
+      "file": "references/teaching-landscape-v130.md",
+      "line": 0,
+      "category": "品牌",
+      "old": "references/teaching-landscape-v130.md",
+      "new": "references/teaching-landscape-v2.md",
+      "targetFile": "references/teaching-landscape-v2.md",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/audio-transfer-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/audio-transfer-v130.mjs",
+      "new": "scripts/audio-transfer-v2.mjs",
+      "targetFile": "scripts/audio-transfer-v2.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/engrave-teaching-v130.py",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/engrave-teaching-v130.py",
+      "new": "scripts/engrave-teaching-v2.py",
+      "targetFile": "scripts/engrave-teaching-v2.py",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/geometry-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/geometry-v130.mjs",
+      "new": "scripts/geometry-v2.mjs",
+      "targetFile": "scripts/geometry-v2.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/install-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/install-v130.mjs",
+      "new": "scripts/install-v2.mjs",
+      "targetFile": "scripts/install-v2.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/piano-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/piano-v130.mjs",
+      "new": "scripts/aiyoupu.mjs",
+      "targetFile": "scripts/aiyoupu.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/piano.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/piano.mjs",
+      "new": "scripts/aiyoupu-legacy.mjs",
+      "targetFile": "scripts/aiyoupu-legacy.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/quality-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/quality-v130.mjs",
+      "new": "scripts/quality-v2.mjs",
+      "targetFile": "scripts/quality-v2.mjs",
+      "action": "move-file"
+    },
+    {
+      "file": "scripts/workbench-export-v130.mjs",
+      "line": 0,
+      "category": "品牌",
+      "old": "scripts/workbench-export-v130.mjs",
+      "new": "scripts/workbench-export-v2.mjs",
+      "targetFile": "scripts/workbench-export-v2.mjs",
+      "action": "move-file"
+    }
+  ]
+}

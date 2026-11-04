@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Canon in D",
+    "composer": "Johann Pachelbel",
+    "arranger": null,
+    "key": null,
+    "staves": "Mutopia 原谱；MuseScore MIDI 导入后拆为两个谱表，待人工核对",
+    "measureCount": 44,
+    "url": "https://www.mutopiaproject.org/ftp/PachelbelJ/CanonInD/",
+    "author": "Mutopia Project",
+    "license": "Creative Commons Attribution 3.0",
+    "accessedAt": "2026-11-03",
+    "fileSha256": null,
+    "result": "accepted-as-local-test-source",
+    "sourceId": "Mutopia-2009/09/07-1700"
+  },
+  {
+    "title": "CanonInD.mid",
+    "url": "https://www.mutopiaproject.org/ftp/PachelbelJ/CanonInD/CanonInD.mid",
+    "license": "Creative Commons Attribution 3.0",
+    "accessedAt": "2026-11-03",
+    "fileSha256": "1358ba0799aeb727be0ef155fc9090ea55762a3b41f85d3dbb02918f4ac66515",
+    "result": "imported; MuseScore Studio 4.7.5 converted to MusicXML/SVG/MP3; timeline preparation not claimed"
+  },
+  {
+    "title": "CanonInD-a4.pdf",
+    "url": "https://www.mutopiaproject.org/ftp/PachelbelJ/CanonInD/CanonInD-a4.pdf",
+    "license": "Creative Commons Attribution 3.0",
+    "accessedAt": "2026-11-03",
+    "fileSha256": "c21dfb5b95c92d23b5628c419cde16f558816453ff1d58de8b08da6678f8d036",
+    "result": "downloaded for original comparison; not used as proof of MIDI alignment"
+  }
+]

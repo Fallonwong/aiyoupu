@@ -10,10 +10,10 @@
 
 ## 调用
 
-现有 PianoScoreScene 增加可选 cameraMode 和 runwayCamera，默认 classic。ScoreNoteLeap 新增可选 followChordNotes（默认false），此模式开启逐音头分叉/汇聚；保留原有发光、渐细拖尾和延音高亮语义。
+现有 AiyoupuScoreScene 增加可选 cameraMode 和 runwayCamera，默认 classic。ScoreNoteLeap 新增可选 followChordNotes（默认false），此模式开启逐音头分叉/汇聚；保留原有发光、渐细拖尾和延音高亮语义。
 
 ```tsx
-<PianoScoreScene
+<AiyoupuScoreScene
   {...approvedSongProps}
   aspectRatio="9:16"
   cameraMode="portrait-runway"

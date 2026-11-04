@@ -5,7 +5,7 @@ node_modules/
 out/
 dist/
 .test-run-*/
-.piano-prepare-*/
+.aiyoupu-prepare-*/
 __pycache__/
 *.pyc
 *.log
@@ -15,6 +15,33 @@ __pycache__/
 .env
 .env.*
 !.env.example
+workbench/local-assets.json
+workbench/imports/
+workbench/tasks.json
+# Runtime records created by local previews; keep them out of the portable Skill.
+workbench/directions/
+workbench/runs/run-*/
+workbench/renders/
+workbench/approvals/*/
+workbench/approvals/sessions.json
+workbench/verify-*/
+workbench/verification-*.png
+workbench/verification-*.json
+workbench/verify-direction.json
+workbench/verify-direction.png
+workbench/direction-*.json
+workbench/*-smoke/
+workbench/*-final-preview/
+workbench/*-v21-preview/
+workbench/canon-final-job*/
+workbench/canon-final-still*.png
+workbench/now-*.png
+workbench/v1[0-9]-*.png
+workbench/workbench-*.png
+workbench/slider-*.png
+workbench/v1[0-9]-*.json
+workbench/preset-*.png
+.tmp-*
 
 # OS metadata
 .DS_Store

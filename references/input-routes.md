@@ -70,9 +70,9 @@ XML 检查、谱面确认与符号事件 → 同份谱排版 → `audio-plan` �
 | 源音频/采样导出 | `scripts/audio-production.mjs` → `registerRecording()`、`renderScoreAudio()`、`masterAudio()` | 记录来源并保护尾音；音频导出或登记不等于已对齐。 |
 | 时间与频谱候选 | `scripts/audio-analysis.py` → `features()`、`align()`、`onset_alignment()` | 全部 needs_review；不提供校准的音高/改编结论。 |
 | 演奏映射 | `scripts/performance-map.mjs` → `validateTimeMap()`、`mappedTimeline()` | 经核对锚点、无越界外推；符号音尾插值不等于实测释放。 |
-| 原生坐标 | `scripts/geometry.mjs` → `measureNative()`；`piano.mjs` → `validateLayout()` | SVG 与坐标同次排版；几何正确不等于音符正确。 |
+| 原生坐标 | `scripts/geometry.mjs` → `measureNative()`；`aiyoupu-legacy.mjs` → `validateLayout()` | SVG 与坐标同次排版；几何正确不等于音符正确。 |
 | 复核与质量 | `scripts/quality-review.mjs` → `qualityRequest()`；`quality.mjs` → `evaluateQuality()` | 未审项不自动批准；正式全量内容与时间证据重新计算。 |
-| 镜头/绑定/审片/导出 | `camera-path.mjs` → `focusPath()`；`piano.mjs` → `bindJob()`、`keyframes()`、`verifyOutput()` 及 render 分支 | 制作选择及实际谱面、关键帧/试听确认；冻结同版数据/代码，输出流检查不代替音乐内容检查。 |
+| 镜头/绑定/审片/导出 | `camera-path.mjs` → `focusPath()`；`aiyoupu-legacy.mjs` → `bindJob()`、`keyframes()`、`verifyOutput()` 及 render 分支 | 制作选择及实际谱面、关键帧/试听确认；冻结同版数据/代码，输出流检查不代替音乐内容检查。 |
 
 共同顺序：确认内容与来源 → 建立经核对的映射和质量证据 → 生成镜头、绑定同版参数 → 关键帧/试听确认 → Remotion 导出 → 画面元数据与原音频保留检查。必要的几何、内容、时间数据可以迭代准备，正式输出前必须一致。
 
