@@ -1,6 +1,6 @@
 # AI有谱: implemented behavior and limits
 
-The current package is a **V2.1 local release candidate**. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
+The current package is the **V2.1 prerelease (v2.1.0-rc.1)**. Actual-song end-to-end production acceptance remains outstanding. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
 
 ## Implemented
 

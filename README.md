@@ -2,14 +2,14 @@
 
 # 🎹 AI有谱
 
-> V2.1 发布候选：显示名 AI有谱，slug 为 `aiyoupu`，CLI、组合 ID、组件前缀及应用协议均已改名，这是破坏性迁移。旧交付保持冻结；参见 [迁移说明](history/migration-v2/migration-guide.md) 和 [仓库改名检查单](history/migration-v2/github-checklist.md)。正式版本尚未发布。
+> V2.1 预览版（`v2.1.0-rc.1`）：显示名 AI有谱，slug 为 `aiyoupu`。CLI、组合 ID、组件前缀及应用协议均已改名，这是破坏性迁移。旧交付保持冻结；参见 [迁移说明](history/migration-v2/migration-guide.md)。当前为预览版，不代表完整曲目制作已通过验收。
 
 
 **让乐谱随音乐跳起来。**
 
 双手音符跳跃 · 发光轨迹 · 和弦高亮 · 跟谱运镜
 
-![Version](https://img.shields.io/badge/version-V2.1%20candidate-C9A86A?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.1.0--rc.1-C9A86A?style=flat-square)
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
@@ -74,6 +74,12 @@ AI有谱 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、�
 工作台负责确定视觉方向；乐谱校对、音频准备、关键帧审看和视频输出由 Agent 接续。没有提供音频时，预览会明确显示静音状态。
 
 以上为当前工作台的实际界面截图，使用项目内的《Canon in D》公开测试谱，仅展示界面与视觉方向，不代表成片验收。谱面来源及授权见[公开样本说明](workbench/canon-public-test/sources.json)（Mutopia Project，CC BY 3.0）。
+
+## 快速开始
+
+从 [V2.1 预览版下载页](https://github.com/Fallonwong/piano-remotion/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，解压后将 `aiyoupu/` 放入所用 Agent 的 Skill 目录。升级前保留旧 Skill、运行工程和任务资料，历史作品继续在原环境使用。
+
+新对话中告诉 Agent：「使用 $aiyoupu，先查看我的素材和已有环境，再开始制作。」已有依赖直接复用；安装和素材要求见[使用指南](README_使用说明.md)。工作台是可选入口，可以全程在 Agent 中完成。
 
 ## 你可以提供什么
 
@@ -244,7 +250,7 @@ node <skill>/scripts/aiyoupu.mjs --help
 
 <div align="center">
 
-**AI有谱 · V2.1 本地候选**
+**AI有谱 · V2.1 预览版**
 为认真对待每一个音符的创作者而做。
 
 [仓库迁移清单](history/migration-v2/github-checklist.md) · [迁移说明](history/migration-v2/migration-guide.md) · [许可仍未指定：历史通知](history/v130/LICENSE.txt)

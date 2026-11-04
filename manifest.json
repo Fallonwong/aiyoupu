@@ -1,15 +1,15 @@
 {
   "name": "aiyoupu",
-  "version": "2.1.0",
+  "version": "2.1.0-rc.1",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
     "react": "19.2.4",
     "typescript": "5.9.3"
   },
-  "repository": null,
-  "releaseStatus": "local-v2.1-release-candidate",
-  "releaseDate": null,
+  "repository": "https://github.com/Fallonwong/piano-remotion",
+  "releaseStatus": "prerelease",
+  "releaseDate": "2026-11-04",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -20,16 +20,16 @@
       "sha256": "46ae4ad28d7f95a580863c0f1f74d81b60fd5a5737be2fe0259aef8f81b81f5d"
     },
     "README.md": {
-      "bytes": 18351,
-      "sha256": "e3d0c14f6e99b4d2f8491c6e8f8064cc3af452d30eaa5987e827b61668984106"
+      "bytes": 18903,
+      "sha256": "4f963c0912727aa1b7da10ac64b84348dc8bab9ff1ed5a90b0f11abc267a17a4"
     },
     "README_使用说明.md": {
-      "bytes": 10615,
-      "sha256": "945a87014a3d0ef18b9c46010a88354f8f618edfa290c2b2475fac592f4a334e"
+      "bytes": 10702,
+      "sha256": "7ad91fc82a49753fa410e9ad5292d8e0cc56398de17b9e9b66b0de6032fb0ff6"
     },
     "SKILL.md": {
-      "bytes": 15044,
-      "sha256": "988e4bd03047ba81be0b0516396cc26ff2cdd4c7679b45a855ce2a2aea34a60a"
+      "bytes": 15079,
+      "sha256": "9bddb7fc6a97c156d0c91cc0aa27291b84285c965debe754150192cde1de8069"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -304,8 +304,8 @@
       "sha256": "9d6dba6406e7cda542fb11430b982b839076e0891d4938dd1f233bd0b240857a"
     },
     "references/upgrade-status.md": {
-      "bytes": 3919,
-      "sha256": "0a3b12892b158d77bfba5cd67e57e22f123760d07701f3810877b7dc3bd5cd8e"
+      "bytes": 3988,
+      "sha256": "f91d7399b31e8114226020e2c20332ca009a1937aaa1c1b565a1dadab00bb7b5"
     },
     "references/visual-presets.md": {
       "bytes": 7513,

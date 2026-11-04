@@ -6,11 +6,9 @@
 
 ```sh
 npx skills add remotion-dev/skills --skill remotion-best-practices
-# 仅在所有者确认远程仓库改名后使用以下计划命令；当前请使用本地V2副本。
-npx skills add Fallonwong/aiyoupu --skill aiyoupu
 ```
 
-按提示选择 Agent 和安装范围。也可从 [仓库改名待确认](history/migration-v2/github-checklist.md) 下载完整 ZIP，将 `aiyoupu/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。
+按提示安装官方 Remotion Skill。再从 [V2.1 预览版](https://github.com/Fallonwong/piano-remotion/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，将 `aiyoupu/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。仓库地址仍为 `Fallonwong/piano-remotion`，本次未改名。升级前保留旧 Skill、运行环境和历史任务，不覆盖旧任务文件。
 
 ## 发起制作
 
@@ -114,7 +112,7 @@ node <skill>/scripts/aiyoupu.mjs workbench open --preview <preview-dir>/preview.
 
 PDF/图片还需要先用已安装 OMR 或 Agent 的识谱能力产出、校对 MusicXML；工作台和 `direction prepare` 都不会伪造识谱。MIDI 经已安装 MuseScore 4 转成 MusicXML 后才能测坐标。
 
-本页版本是 **V2.1 本地发布候选**，未上线。工程目录的基线依赖版本与历史发布记录分别保留；内部生成的工作台预览工程协议仍标为 v2，不据此宣称已发布 V2.1。
+本页版本是 **V2.1 预览版（v2.1.0-rc.1）**。工程目录的基线依赖版本与历史发布记录分别保留；内部生成的工作台预览工程协议仍标为 v2，与发布版本独立。当前曲目的完整正式制作与成片尚未完成实际验收。
 
 ## 公开找谱
 
