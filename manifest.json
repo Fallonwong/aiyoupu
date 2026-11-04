@@ -20,8 +20,8 @@
       "sha256": "46ae4ad28d7f95a580863c0f1f74d81b60fd5a5737be2fe0259aef8f81b81f5d"
     },
     "README.md": {
-      "bytes": 18039,
-      "sha256": "17dd4bb8e2e5a7e014d2fad442ff9d142f951ff5ac1fc90e15256987365d065f"
+      "bytes": 18351,
+      "sha256": "e3d0c14f6e99b4d2f8491c6e8f8064cc3af452d30eaa5987e827b61668984106"
     },
     "README_使用说明.md": {
       "bytes": 10615,
@@ -106,6 +106,14 @@
     "assets/showcase/real-portrait-runway.jpg": {
       "bytes": 307293,
       "sha256": "ef3a6858ab7d713a5e44e6ca5bffa14190ac42e69117a5f0924bcf30c641bde2"
+    },
+    "assets/showcase/workbench-direction.png": {
+      "bytes": 139009,
+      "sha256": "2a3470031a59b5923d9b3f3041c6c07cd2a479628d23b70d3aedf9f67a9001ec"
+    },
+    "assets/showcase/workbench-teaching.png": {
+      "bytes": 118051,
+      "sha256": "66f006d4ff04f361d4f089aacb27e38e5fa6d0c4db3572c6db9ce95219e74a13"
     },
     "components/Aiyoupu.tsx": {
       "bytes": 144,
