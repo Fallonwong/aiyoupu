@@ -7,7 +7,7 @@
     "react": "19.2.4",
     "typescript": "5.9.3"
   },
-  "repository": "https://github.com/Fallonwong/piano-remotion",
+  "repository": "https://github.com/Fallonwong/aiyoupu",
   "releaseStatus": "prerelease",
   "releaseDate": "2026-11-04",
   "files": {
@@ -20,12 +20,12 @@
       "sha256": "46ae4ad28d7f95a580863c0f1f74d81b60fd5a5737be2fe0259aef8f81b81f5d"
     },
     "README.md": {
-      "bytes": 18903,
-      "sha256": "4f963c0912727aa1b7da10ac64b84348dc8bab9ff1ed5a90b0f11abc267a17a4"
+      "bytes": 18886,
+      "sha256": "6daffc536af8922a4ed6d9b47a29f47786fd49d91a0fac8dd77ca14577aff1d3"
     },
     "README_使用说明.md": {
-      "bytes": 10702,
-      "sha256": "7ad91fc82a49753fa410e9ad5292d8e0cc56398de17b9e9b66b0de6032fb0ff6"
+      "bytes": 10676,
+      "sha256": "6d93eb1df33e1c0c5ff98ede326d69d4a6f17e52a21b556e073af7d2bc00a61f"
     },
     "SKILL.md": {
       "bytes": 15079,
