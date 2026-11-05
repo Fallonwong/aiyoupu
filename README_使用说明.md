@@ -8,7 +8,7 @@
 npx skills add remotion-dev/skills --skill remotion-best-practices
 ```
 
-按提示安装官方 Remotion Skill。再从 [V2.1 预览版](https://github.com/Fallonwong/piano-remotion/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，将 `aiyoupu/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。仓库地址仍为 `Fallonwong/piano-remotion`，本次未改名。升级前保留旧 Skill、运行环境和历史任务，不覆盖旧任务文件。
+按提示安装官方 Remotion Skill。再从 [V2.1 预览版](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，将 `aiyoupu/` 放入当前 Agent 的 Skill 目录，保留组件、脚本和 references。安装后开启新对话。仓库已统一更名为 `Fallonwong/aiyoupu`。升级前保留旧 Skill、运行环境和历史任务，不覆盖旧任务文件。
 
 ## 发起制作
 

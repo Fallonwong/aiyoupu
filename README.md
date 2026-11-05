@@ -13,7 +13,7 @@
 ![Remotion](https://img.shields.io/badge/built_with-Remotion-0B84F3?style=flat-square)
 ![Agents](https://img.shields.io/badge/agents-Codex%20%7C%20WorkBuddy-555555?style=flat-square)
 
-[快速开始](#快速开始) · [工作台预览](#可选工作台先看效果再定方向) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [仓库改名待确认](history/migration-v2/github-checklist.md)
+[快速开始](#快速开始) · [工作台预览](#可选工作台先看效果再定方向) · [素材输入](#你可以提供什么) · [制作流程](#从素材到成片) · [常见问题](#使用建议与常见问题) · [迁移说明](history/migration-v2/migration-guide.md)
 
 </div>
 
@@ -77,7 +77,7 @@ AI有谱 是一个基于 Remotion 的专项 Agent Skill。它把乐谱整理、�
 
 ## 快速开始
 
-从 [V2.1 预览版下载页](https://github.com/Fallonwong/piano-remotion/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，解压后将 `aiyoupu/` 放入所用 Agent 的 Skill 目录。升级前保留旧 Skill、运行工程和任务资料，历史作品继续在原环境使用。
+从 [V2.1 预览版下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.1.0-rc.1) 下载 `aiyoupu-2.1.0-rc.1.zip`，解压后将 `aiyoupu/` 放入所用 Agent 的 Skill 目录。升级前保留旧 Skill、运行工程和任务资料，历史作品继续在原环境使用。
 
 新对话中告诉 Agent：「使用 $aiyoupu，先查看我的素材和已有环境，再开始制作。」已有依赖直接复用；安装和素材要求见[使用指南](README_使用说明.md)。工作台是可选入口，可以全程在 Agent 中完成。
 
