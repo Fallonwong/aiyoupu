@@ -54,7 +54,7 @@
 
 ## 快速开始
 
-1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.1.0-rc.2)下载 `aiyoupu-2.1.0-rc.2.zip`。
+1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.1.0)下载 `aiyoupu-2.1.0.zip`。
 2. 解压后，将 `aiyoupu` 文件夹放入所用 Agent 的 Skill 目录。不同 Agent 的安装位置见[使用指南](README_使用说明.md)。
 3. 开启新对话，提供素材，并告诉 Agent：
 
@@ -65,7 +65,7 @@
 先让我确认谱面，再看画面和试听。
 ```
 
-当前提供预览版，建议先用一小段乐谱体验。如果已经安装过旧版，先保留原目录和作品资料，再单独安装新版。
+第一次使用，建议先用一小段乐谱体验。如果已经安装过旧版，先保留原目录和作品资料，再单独安装新版。
 
 ## 准备什么素材
 

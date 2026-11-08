@@ -3,9 +3,9 @@ name: aiyoupu
 description: Make piano-score videos with original two-hand leaps, glow trails and camera. Review notation revisions, reuse sampled audio tools, and stop for score approval then actual keyframe/audition approval before exporting.
 ---
 
-# AI有谱 V2.1 预览版
+# AI有谱 V2.1
 
-The V2.0 rename introduced AI有谱: use $aiyoupu, the aiyoupu CLI, and Aiyoupu composition/component names. This V2.1 package is the v2.1.0-rc.2 prerelease, not a stable release or a certified end-to-end song delivery. Old task files remain frozen and require explicit migration to new files. Read [migration and invalidated references](history/migration-v2/migration-guide.md). Visual parameters, notation and sampled audio remain unchanged. For configurations read [visual presets](references/visual-presets.md); for continuous geometry read [score-strip](references/score-strip.md).
+The V2.0 rename introduced AI有谱: use $aiyoupu, the aiyoupu CLI, and Aiyoupu composition/component names. This package is v2.1.0. Each new song still requires its own content reviews before delivery. Old task files remain frozen and require explicit migration to new files. Read [migration and invalidated references](history/migration-v2/migration-guide.md). Visual parameters, notation and sampled audio remain unchanged. For configurations read [visual presets](references/visual-presets.md); for continuous geometry read [score-strip](references/score-strip.md).
 
 
 For flat 16:9 teaching read [TeachingLandscape](references/teaching-landscape-v2.md) and use the V2 config/resolver/scene files. For title-only requests read [public score discovery](references/public-score-sources-v2.md). Workbench export requires both source approvals. Preserve the historical 14 kept / 12 retired options and old defaults. The Songbie source pilot was approved in the previous generation; its renamed V2 preview still needs actual V2 keyframe review and is not an authoritative arrangement. No license is assigned until the owner explicitly decides.

@@ -1,6 +1,6 @@
 {
   "name": "aiyoupu",
-  "version": "2.1.0-rc.2",
+  "version": "2.1.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -8,8 +8,8 @@
     "typescript": "5.9.3"
   },
   "repository": "https://github.com/Fallonwong/aiyoupu",
-  "releaseStatus": "prerelease",
-  "releaseDate": "2026-11-05",
+  "releaseStatus": "stable",
+  "releaseDate": "2026-11-08",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -20,20 +20,20 @@
       "sha256": "46ae4ad28d7f95a580863c0f1f74d81b60fd5a5737be2fe0259aef8f81b81f5d"
     },
     "DEVELOPMENT.md": {
-      "bytes": 2887,
-      "sha256": "f2dd47b98c448cbdc6faf6c9eddabe32b7b35f8bad3e7fb48f2daf49a15203eb"
+      "bytes": 2873,
+      "sha256": "f8afc477e40f173e347d148b7af9f5e2935ab2857288e4ea35f411bfb81dea3d"
     },
     "README.md": {
-      "bytes": 5235,
-      "sha256": "047c7873ab9143d0f548a406bf71d2e1f0e536e652217c425a04061d2b656d77"
+      "bytes": 5219,
+      "sha256": "c22fedf7361d08d9544a562dfe1dfcc5bdb0dc133819395f4b137c9d458a845c"
     },
     "README_使用说明.md": {
-      "bytes": 3563,
-      "sha256": "59978c54476636dc494f309c96500fc27d6f42f7b23eb4865260705756c428dd"
+      "bytes": 3544,
+      "sha256": "5a4d4603f2b0b0e09ca65d34becd13af9fcdeb3818d117ce63df9cf9ccbc2b90"
     },
     "SKILL.md": {
-      "bytes": 15058,
-      "sha256": "f3ad95aa0238107b330b7636080c0354530ee3690b78fdb3c539da2195f186c9"
+      "bytes": 15031,
+      "sha256": "5f721c62a363c7a86c4b5f3bab279ad5d0da88c87f49f9934e9550955b4a652c"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -308,8 +308,8 @@
       "sha256": "9d6dba6406e7cda542fb11430b982b839076e0891d4938dd1f233bd0b240857a"
     },
     "references/upgrade-status.md": {
-      "bytes": 3988,
-      "sha256": "3f3e26db0d5ee40598eeefd442f7db7ef30be3ca84d06eee7d6dc8d473167067"
+      "bytes": 3968,
+      "sha256": "0fcf5df12b2feb113d70c17672611acc3aedc8bdec1071d302b89f59a6b4509b"
     },
     "references/visual-presets.md": {
       "bytes": 7513,
