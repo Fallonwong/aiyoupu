@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { parseMidi } from './midi.mjs';
 import {isMain} from './entry.mjs';
+import {focusContinuityReport} from './focus-continuity.mjs';
 
 const HELP = `Usage: node prepare.mjs --svg score.svg --timeline timeline.json
   [--audio performance.mp3] [--midi score.mid] [--musicxml score.musicxml]
@@ -51,6 +52,11 @@ export function validateTimeline(t) {
     t.cameraPath.forEach((p,i)=>{if(!object(p)||!finite(p.cameraX)||!finite(p.cameraY))fail(`cameraPath[${i}] needs finite cameraX/cameraY`);});
   }
   if(t.focusPath!==undefined&&(!Array.isArray(t.focusPath)||t.focusPath.length!==t.durationInFrames||t.focusPath.some(p=>!object(p)||!finite(p.focusX)||!finite(p.focusY))))fail('focusPath must contain one finite focusX/focusY sample per frame');
+  // A path of the right length can still be a slideshow: one coordinate per
+  // attack, held across the note value and then cut. That passes every shape
+  // check above and renders as a still picture that jumps. Reject it here so a
+  // formal job cannot be bound from a camera that never moves.
+  if(t.focusPath!==undefined){const continuity=focusContinuityReport(t);if(continuity.hops?.length)fail(`focusPath jumps ${continuity.hops.length} time(s) between motionless frames (first at frame ${continuity.hops[0].frame}). That renders as a slideshow camera. Rebuild the path with camera-path, or repair it explicitly with focus-continuity --timeline IN --fix --out NEW.`);}
   const last = { left: -Infinity, right: -Infinity };
   const point = (p, at) => {
     if (!object(p) || !finite(p.x) || !finite(p.y)) fail(`${at}: x/y must be finite numbers`);

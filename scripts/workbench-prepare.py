@@ -311,14 +311,39 @@ def main():
          if value['ys'] else 0}
         for key, value in system_points.items() if value['ys']), key=lambda item: item['frame'])
 
+    # The camera must travel, not step. Taking one coordinate per attack and
+    # holding it until the next attack leaves the picture identical for the
+    # whole note value and then cuts, which renders as a slideshow. The easing
+    # here keeps every measured attack position exact (so a landing is never
+    # smeared past its note) while filling the frames between attacks.
+    landing = sorted({e['frame'] for e in events})
+    x_at = {}
+    for e in events:
+        x_at.setdefault(e['frame'], e['x'])
     focus = []
+    cursor = 0
     for f in range(duration):
         active = [s for s in systems if s['frame'] <= f] or systems[:1]
         current = active[-1] if active else {'frame': 0, 'y': 0}
         current_index = systems.index(current) if current in systems else 0
         upcoming = [s for s in systems if s['frame'] > current['frame']]
         next_system = upcoming[0] if upcoming else None
-        cx = next((e['x'] for e in reversed(events) if e['frame'] <= f), 0)
+        # Advance the cursor to the last landing at or before this frame so the
+        # loop stays linear in frame count instead of rescanning every event.
+        while cursor + 1 < len(landing) and landing[cursor + 1] <= f:
+            cursor += 1
+        if not landing:
+            cx = 0
+        elif landing[cursor] > f:
+            cx = x_at[landing[0]]
+        elif cursor + 1 >= len(landing):
+            cx = x_at[landing[cursor]]
+        else:
+            # Names must not shadow the argparse namespace held in `a`.
+            prev_frame, next_frame = landing[cursor], landing[cursor + 1]
+            t = (f - prev_frame) / max(1, next_frame - prev_frame)
+            eased = t * t * (3 - 2 * t)
+            cx = x_at[prev_frame] + (x_at[next_frame] - x_at[prev_frame]) * eased
         cy = current.get('y', 0) if current else 0
         if current and next_system:
             transition = 14

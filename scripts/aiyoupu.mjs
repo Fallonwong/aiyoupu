@@ -20,6 +20,7 @@ import {parseMidi} from './midi.mjs';
 import {qualityRequest} from './quality-review.mjs';
 import {checkSourceScope} from './source-scope.mjs';
 import {focusPath} from './camera-path.mjs';
+import {focusContinuityReport,assertFocusContinuity,repairFocusContinuity} from './focus-continuity.mjs';
 import {requireQuality,validateProduction,evaluateQuality} from './quality-v2.mjs';
 import {notationAudit} from './notation-audit.mjs';
 import {exportWorkbench} from './workbench-export-v2.mjs';
@@ -232,7 +233,7 @@ function openWorkbench(a){
 export async function main(argv){
   const [command,...rest]=argv;
   if(['doctor','install','prepare','score'].includes(command)){const child=spawnSync(process.execPath,[path.join(scripts,command==='install'?'install-v2.mjs':`${command}.mjs`),...rest],{stdio:'inherit',windowsHide:true});return {exitCode:child.status??2,delegated:true};}
-  if(!command||command==='--help')return {status:'help',commands:['direction','workbench-export','workbench','workbench-approval','score-strip','quality-request','source-scope','production-check','symbolic','analyze-audio','map-time','camera-path','quality','audio-plan','audio-render','audio-master','audio-recording','notation-audit','doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','open','gate','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Agent full path: direction prepare/inspect/validate/save/derive/still; optional direction console: workbench open --preview; separate human content gate: workbench review --request. Two real human gates remain: score-request then keyframes, each followed by an actual user response. No automatic installs or approvals.'};
+  if(!command||command==='--help')return {status:'help',commands:['direction','workbench-export','workbench','workbench-approval','score-strip','quality-request','source-scope','production-check','symbolic','analyze-audio','map-time','camera-path','focus-continuity','quality','audio-plan','audio-render','audio-master','audio-recording','notation-audit','doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','open','gate','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Agent full path: direction prepare/inspect/validate/save/derive/still; optional direction console: workbench open --preview; separate human content gate: workbench review --request. Two real human gates remain: score-request then keyframes, each followed by an actual user response. No automatic installs or approvals.'};
   if(command==='workbench'){
    const [sub,...subRest]=rest,a2=args(subRest);
   if(sub==='open')return await openWorkbench(a2);
@@ -255,7 +256,22 @@ export async function main(argv){
   if(command==='symbolic'){const data=scoreEvents(readJSON(need(a,'check')),{playback:a.playback?readJSON(a.playback):undefined});writeJSON(need(a,'out'),data);return {status:data.status,scoreSha256:data.scoreSha256,events:data.events.length};}
   if(command==='analyze-audio'){const r=spawnSync(need(a,'python'),['-B',path.join(scripts,'audio-analysis.py'),'--events',need(a,'events'),'--audio',need(a,'audio'),'--bpm',need(a,'bpm'),'--out',need(a,'out'),'--ffmpeg',a.ffmpeg??'ffmpeg'],{encoding:'utf8',windowsHide:true,timeout:180000,maxBuffer:2*1024*1024});if(r.error||r.status!==0)throw failure('ANALYSIS_UNAVAILABLE',r.error?.message??r.stdout??r.stderr,'Use an existing Python with NumPy; no install is performed.');return JSON.parse(r.stdout);}
   if(command==='map-time'){const t=mappedTimeline({symbolic:readJSON(need(a,'events')),map:readJSON(need(a,'map')),audio:need(a,'audio'),placement:readJSON(need(a,'placement')),fps:Number(a.fps??30)});const compiled=compilePerformance(t,{strict:true});writeJSON(need(a,'out'),compiled);return {status:'needs_content_and_timing_review',file:path.resolve(a.out)};}
-  if(command==='camera-path'){const t=readJSON(need(a,'timeline'));t.focusPath=focusPath({timeline:t,systems:readJSON(need(a,'systems')),transitionFrames:Number(a['transition-frames']??14)});writeJSON(need(a,'out'),t);return {status:'camera_proposed',file:path.resolve(a.out)};}
+  if(command==='focus-continuity'){
+  // Accept either a bare timeline file or a prepared preview manifest that
+  // carries the timeline under its own key; both are real inputs for review.
+  const raw=readJSON(need(a,'timeline'));
+  const timeline=raw?.timeline&&typeof raw.timeline==='object'?raw.timeline:raw;
+  if(a.fix||a.repair){
+    const result=repairFocusContinuity(timeline,{windowFrames:Number(a['window-frames']??12)});
+    writeJSON(need(a,'out'),result.timeline);
+    return {status:'focus_path_repaired',out:path.resolve(a.out),repaired:result.repaired,residual:result.residual,before:result.before.status,after:result.after.status,note:result.note};
+  }
+  const report=focusContinuityReport(timeline);
+  if(a.out)writeJSON(a.out,report);
+  let gate='pass';try{assertFocusContinuity(timeline,{strict:!!a.strict});}catch(e){gate=e.code;}
+  return {...report,commandGate:gate,exitCode:gate==='pass'?0:3};
+}
+if(command==='camera-path'){const t=readJSON(need(a,'timeline'));t.focusPath=focusPath({timeline:t,systems:readJSON(need(a,'systems')),transitionFrames:Number(a['transition-frames']??14)});writeJSON(need(a,'out'),t);return {status:'camera_proposed',file:path.resolve(a.out)};}
   if(command==='quality'){const packet=readJSON(need(a,'quality'));const result=evaluateQuality({timeline:readJSON(need(a,'timeline')),audio:need(a,'audio'),check:packet.check,review:packet.review,sourceScope:packet.sourceScope,originalSourceSha256:a.source?sha256(fs.readFileSync(a.source)):undefined});writeJSON(need(a,'out'),result);return {...result,exitCode:result.status==='passed_within_scope'?0:3};}
   if(command==='geometry')return nativeGeometry({svg:need(a,'svg'),timeline:need(a,'timeline'),mapping:need(a,'mapping'),browser:need(a,'browser'),out:need(a,'out')});
   if(command==='music-from-check'){const result=fromStructuredScore(readJSON(need(a,'check')),readJSON(need(a,'placement')),{fps:Number(a.fps??30)});writeJSON(need(a,'out'),result.timeline);writeJSON(`${a.out}.mapping.json`,result.mapping);return {status:'notation_compiled_unreviewed',timeline:path.resolve(a.out),mapping:path.resolve(`${a.out}.mapping.json`),next:'Measure native SVG geometry, create comparison, then ask the user to approve the notation.'};}
