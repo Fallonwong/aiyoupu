@@ -32,8 +32,8 @@
       "sha256": "5a4d4603f2b0b0e09ca65d34becd13af9fcdeb3818d117ce63df9cf9ccbc2b90"
     },
     "SKILL.md": {
-      "bytes": 15031,
-      "sha256": "5f721c62a363c7a86c4b5f3bab279ad5d0da88c87f49f9934e9550955b4a652c"
+      "bytes": 15462,
+      "sha256": "3b6c8e68f0731e96d3ef247575cb7eb372e328e4f32b6581faa99a956c1638e2"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -284,8 +284,8 @@
       "sha256": "de211b3e017f555e31411a13f4a94ff932520678d97ed9db79a7abe1750c2c66"
     },
     "references/production.md": {
-      "bytes": 4166,
-      "sha256": "5995558eaae33ff354f09de0c9a2c668cef546b7548506f829d083ef8688d76c"
+      "bytes": 5928,
+      "sha256": "e276f783e6f6686ec9a53d055b0ea8d8833bba51d92ac6ef83f97a58a11a32fd"
     },
     "references/public-score-sources-v2.md": {
       "bytes": 1786,
@@ -332,8 +332,8 @@
       "sha256": "01617a232a24bf94122cc6d76f53a03d91e62492a89d527e220cdd51c705ec18"
     },
     "scripts/aiyoupu.mjs": {
-      "bytes": 45467,
-      "sha256": "fafa2c74e6c0d256f6f8fb604ce14312ac852bf589a0af2666f6d23859eb67e9"
+      "bytes": 46510,
+      "sha256": "e45f384709b843e2ce5806e52f0a99e15a042b56f8058022732531b7ab3ec045"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11394,
@@ -391,6 +391,10 @@
       "bytes": 942,
       "sha256": "2bf64fcb616dbc49b125ed0ba2cd0a86c2fe9e9b5d0d43df8fd386d88b17626d"
     },
+    "scripts/focus-continuity.mjs": {
+      "bytes": 9166,
+      "sha256": "55766d7d04165db6c9b19191a11063861e1bda51b03022bf48e616814c575ff0"
+    },
     "scripts/gates.mjs": {
       "bytes": 4386,
       "sha256": "7c0b82d665ca5283c6f897b8d575c0fd365ff8d4897a2d13d27873563ad45147"
@@ -436,8 +440,8 @@
       "sha256": "518b69673d08e9849c6f9f6b36ecc4bf26a70897b558d6f8ffe1ebcbcb7bff96"
     },
     "scripts/prepare.mjs": {
-      "bytes": 13989,
-      "sha256": "317dbf5f8df01aca3b0231042ecc48e2810427b773a11d0131bb000d76d27fdb"
+      "bytes": 14729,
+      "sha256": "f945199bf657d95bf9b9ccd2fbfe2a78d1ef69f551f2a870b72552ea96279db9"
     },
     "scripts/quality-review.mjs": {
       "bytes": 6855,
@@ -480,8 +484,8 @@
       "sha256": "7f3bfd769805fc8b66c1991c5eb5dbc11e1dc61c4012ebe06766d8c6f0e5b6ae"
     },
     "scripts/workbench-core.mjs": {
-      "bytes": 21484,
-      "sha256": "8ab1576f973d54bd47867fdfb45a8e6990264225be2c33ae24d8b7995b5e5634"
+      "bytes": 21839,
+      "sha256": "203d8f4b3360aaa92d1aabad2345b0dc719be1c2dd6088471771367ad7869885"
     },
     "scripts/workbench-engrave-bridge.mjs": {
       "bytes": 4414,
@@ -500,8 +504,8 @@
       "sha256": "462deaffec461609bff72fe9254847bd227760a16a6cfa18580b6df2426f0ef5"
     },
     "scripts/workbench-prepare.py": {
-      "bytes": 18463,
-      "sha256": "3ed5a8356912bd29e8e2b693d43c52251a49638413702965a23af7838589f637"
+      "bytes": 19704,
+      "sha256": "5610116617e846e36092475ed9adebe72222fa5ac945f7a71b70d29120de3d4a"
     },
     "scripts/workbench-server.mjs": {
       "bytes": 6834,

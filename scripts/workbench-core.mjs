@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {failure,hashObject} from './audio.mjs';
+import {focusContinuityReport} from './focus-continuity.mjs';
 
 export const CAMERA_LIMITS={scale:[.5,5],rotateX:[-80,80],rotateZ:[-90,10],focusX:[-120,120],focusY:[-120,120]};
 export const TEACHING_MULTI_SYSTEM_SCALE=2.4;
@@ -192,8 +193,12 @@ export function validatePreparedPreview(base,{pipelineAvailable=false}={}){
  if(!timeline||!Number.isFinite(timeline.fps)||!Number.isInteger(timeline.durationInFrames)||!Number.isFinite(timeline.scoreWidth)||!Number.isFinite(timeline.scoreHeight))throw failure('PREVIEW_INVALID','Timeline metadata is incomplete','Regenerate the prepared preview.');
  if(!Array.isArray(timeline.events)||!timeline.events.length||!Array.isArray(timeline.focusPath)||timeline.focusPath.length!==timeline.durationInFrames)throw failure('PREVIEW_INVALID','Timeline events or focusPath is incomplete','Prepare the score before opening the direction workbench.');
  if(typeof base.scoreSrc!=='string'||!base.scoreSrc.trim())throw failure('PREVIEW_INVALID','Score source is missing','Supply the same-run SVG with the timeline.');
+  // Cameras that only move on an attack look like a slideshow in the real
+  // canvas. Report it here, where a direction is about to be chosen, instead
+  // of discovering it after a full render.
+  base.cameraContinuity=focusContinuityReport(timeline);
  if(base.audioSrc!==undefined&&base.audioSrc!==null&&typeof base.audioSrc!=='string')throw failure('PREVIEW_INVALID','Audio source must be a path string or null','Supply the optional same-arrangement audio.');
- return {timeline:{...timeline},pipelineAvailable:!!pipelineAvailable,measureMapping:measureMappingStatus(timeline)};
+ return {timeline:{...timeline},pipelineAvailable:!!pipelineAvailable,measureMapping:measureMappingStatus(timeline),cameraContinuity:base.cameraContinuity};
 }
 
 export function directionPrompt(id,file){if(!/^D-[A-Za-z0-9_-]+$/.test(String(id)))throw failure('DIRECTION_ID_INVALID',String(id),'Use an ID created by aiyoupu direction save.');if(typeof file!=='string'||!file)throw failure('DIRECTION_FILE_INVALID',String(file),'Pass the saved direction file.');
