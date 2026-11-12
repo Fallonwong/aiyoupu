@@ -1,6 +1,6 @@
 {
   "name": "aiyoupu",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -9,7 +9,7 @@
   },
   "repository": "https://github.com/Fallonwong/aiyoupu",
   "releaseStatus": "stable",
-  "releaseDate": "2026-11-08",
+  "releaseDate": "2026-11-13",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -21,19 +21,19 @@
     },
     "DEVELOPMENT.md": {
       "bytes": 2873,
-      "sha256": "f8afc477e40f173e347d148b7af9f5e2935ab2857288e4ea35f411bfb81dea3d"
+      "sha256": "5a8a84364f2c5d1595674011458a999e9189b4b8bf7c55157b59f5db12908861"
     },
     "README.md": {
-      "bytes": 5219,
-      "sha256": "c22fedf7361d08d9544a562dfe1dfcc5bdb0dc133819395f4b137c9d458a845c"
+      "bytes": 5826,
+      "sha256": "f874fb5f11766412e57babe8df6120f406aa06b63e8cb33cd8f272eac68d3211"
     },
     "README_使用说明.md": {
       "bytes": 3544,
-      "sha256": "5a4d4603f2b0b0e09ca65d34becd13af9fcdeb3818d117ce63df9cf9ccbc2b90"
+      "sha256": "99882a806d06c5421c4ddd04866628769c945fc168b34610a6ffc8ced3a003f3"
     },
     "SKILL.md": {
       "bytes": 15462,
-      "sha256": "3b6c8e68f0731e96d3ef247575cb7eb372e328e4f32b6581faa99a956c1638e2"
+      "sha256": "2f17e7850e766a4d64b2fa3d4d31c086d0013b6d913f9ae8c42bff89bea1df1f"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -309,7 +309,7 @@
     },
     "references/upgrade-status.md": {
       "bytes": 3968,
-      "sha256": "0fcf5df12b2feb113d70c17672611acc3aedc8bdec1071d302b89f59a6b4509b"
+      "sha256": "12c1788683f2577119d2cc77e9399d6fde5d6950012c97d952d5bd76101ff4f5"
     },
     "references/visual-presets.md": {
       "bytes": 7513,
@@ -354,6 +354,10 @@
     "scripts/build-manifest.mjs": {
       "bytes": 2752,
       "sha256": "119f47ddd087d26ccdd01605179804580f6f6b9d3dcd01ccfef3cbc68b0343b4"
+    },
+    "scripts/build-release.mjs": {
+      "bytes": 6509,
+      "sha256": "7225c92094e0ae038bf018d732539dccef1edb54438f8793dfa12c9d11e45ab5"
     },
     "scripts/build-workbench.mjs": {
       "bytes": 1434,
@@ -493,7 +497,7 @@
     },
     "scripts/workbench-export-v2.mjs": {
       "bytes": 5510,
-      "sha256": "eb12fba4ef6c53d22fae915ffb29f74c7e29e0cc2adbd29131d200f0f4be466f"
+      "sha256": "b41cd1cac83c75f6cb7e4f8a6a1103068c76d44054359d23b768b07afe019c42"
     },
     "scripts/workbench-launch-child.mjs": {
       "bytes": 732,
@@ -593,7 +597,7 @@
     }
   },
   "displayName": "AI有谱",
-  "preparedDate": "2026-11-02",
+  "preparedDate": "2026-11-13",
   "repositoryName": "Fallonwong/aiyoupu",
   "remoteRenameStatus": "pending-owner-interface-confirmation"
 }
