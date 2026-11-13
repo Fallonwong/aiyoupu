@@ -49,4 +49,23 @@ assert.equal(exact(wraps,254).segments.length,0,'no cross-row trail');
 assert.deepEqual(exact(wraps,256).heads,[{x:370,y:650}],'new row first attack lands even without a following arc');
 assert.equal(exact(rest,20).heads.length,0,'a real rest remains dark');
 assert.ok(!exact(tied,30).heads.some(p=>p.x===200&&p.y===100),'tie still does not re-attack');
-console.log(JSON.stringify({status:'PASS',checks:['ties','untied repeated notes','slurs','mixed tied chord','rests','release','system breaks','fractional landings','row exit and entrance']}));
+// Reproduce the first We Never barline: one held pitch, a tied continuation
+// at the barline, and a different real attack in the same chord.
+const barline=[
+  {...event(55.89,[note(659,{pitch:'Ab4',tieStart:true,durationFrames:7.98})]),systemId:0},
+  {...event(63.87,[note(723,{pitch:'Ab4',tieStop:true,attack:false,durationFrames:7.98}),
+    note(723,{pitch:'F4',y:118,durationFrames:7.98})]),systemId:0},
+  {...event(71.85,[note(760,{pitch:'Eb4',y:127})]),systemId:0},
+];
+const crossing=[56,57,58,59,60,61,62,63,64].map(f=>exact(barline,f));
+assert.deepEqual(crossing[0].heads,[{x:659,y:100}]);
+assert.deepEqual(crossing.at(-1).heads,[{x:723,y:118}]);
+for(let i=1;i<crossing.length;i++){
+  assert.equal(crossing[i].heads.length,1);
+  assert.ok(crossing[i].heads[0].x>crossing[i-1].heads[0].x,'no stall or teleport over the barline');
+  assert.ok(crossing[i].segments.length>0,'cross-bar trail remains visible through landing');
+}
+assert.ok(crossing[4].heads[0].y<100,'barline is crossed in the air');
+assert.deepEqual(scoreAttackEvents(barline)[1].notes.map(n=>n.pitch),['F4']);
+assert.equal(exact(mixed,15).heads.length,1,'a moving member takes priority over a sustaining tie');
+console.log(JSON.stringify({status:'PASS',checks:['ties','untied repeated notes','slurs','mixed tied chord','rests','release','system breaks','fractional landings','row exit and entrance','same-row barline flight from a sustaining tie']}));

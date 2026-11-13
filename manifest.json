@@ -1,6 +1,6 @@
 {
   "name": "aiyoupu",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -21,19 +21,19 @@
     },
     "DEVELOPMENT.md": {
       "bytes": 2873,
-      "sha256": "293cd49e2381455fa515bf0d6d1502e3925d7577438988c8080003b11c7c75b8"
+      "sha256": "45e5026c9157f5d89c602b68f14cbfd49bc0de785ed9c9f89ccdcd26c01c1634"
     },
     "README.md": {
-      "bytes": 6236,
-      "sha256": "94cfa5ee49ff73b41482534cccfa1dd72ef48d324c3ad0c240e3a6a2060e34b2"
+      "bytes": 6472,
+      "sha256": "f1abbca96225343fb5914d858049380958218cb6227f34ce6a23182a6ee8ad0d"
     },
     "README_使用说明.md": {
       "bytes": 3562,
-      "sha256": "0e93097dc7297227264213f89bfec8f8ad374fd37bb3a379cb8dcff08bf6b6d5"
+      "sha256": "700cea85fc1ffea6dab3b4c5619ab093f42804217b2738f1274b0a99f0df9058"
     },
     "SKILL.md": {
       "bytes": 15853,
-      "sha256": "3e3499178e6099f68f8d0744589df4ad35d279d4f99074d8a5fc66904b573e18"
+      "sha256": "90c2cdacec2af1cbea2293aef86b2a425588d1c2a23c6e1868c809f810d46969"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -148,8 +148,8 @@
       "sha256": "9e18f2bc06e204f7501c5d1e88e632b38415e3c727790729630d54ecb659e24b"
     },
     "components/ScoreChordGeometry.ts": {
-      "bytes": 7310,
-      "sha256": "773caf3c7909b4934459dcf373d27247bc6453f49eacd86c2a3efb6709b48be3"
+      "bytes": 8228,
+      "sha256": "238fad333e3469cdbc3b21deea0927c53d7e9054f0b6ca4a4408766c63c5820f"
     },
     "components/ScoreNoteLeap.tsx": {
       "bytes": 9350,
@@ -272,8 +272,8 @@
       "sha256": "130bd91e6c98471442868b8d3eddf308bd5cdb1dfea8694fee5ea0faf2d5046c"
     },
     "references/music-motion-semantics.md": {
-      "bytes": 1997,
-      "sha256": "348a71399e06eb674e77f4fb3aa84d6b9a1448f474e206aedfb95117cc7c63b2"
+      "bytes": 2318,
+      "sha256": "8f03bcc98d4d8fdfebd7b6612132739a1e39323ec0a4357d6599f977888b6a15"
     },
     "references/performance-quality.md": {
       "bytes": 8728,
@@ -309,7 +309,7 @@
     },
     "references/upgrade-status.md": {
       "bytes": 3994,
-      "sha256": "98e67acb0dd35906d986eb484fe9eee7b0b24a6917746e3763cc4ada8724ac1f"
+      "sha256": "ab4ac65a2bc7f62e65e887d71d4a08c0d79bdde417aed2c52b57a5263a600363"
     },
     "references/visual-presets.md": {
       "bytes": 7513,
@@ -501,7 +501,7 @@
     },
     "scripts/workbench-export-v2.mjs": {
       "bytes": 5488,
-      "sha256": "9fd1aad977b6a29e9264955c286f77d8dbda9c04a4ff63888a878cf0d79c0451"
+      "sha256": "b6c44704b5a9f85cc9167a4dd98d041e55fddc1bd42c53ab437209b2cdb18df7"
     },
     "scripts/workbench-launch-child.mjs": {
       "bytes": 732,
@@ -596,8 +596,8 @@
       "sha256": "e32e4d3077a764899b1bf2f26e95fcc1d85787d0964d20eebdd1c951f05fcb4c"
     },
     "workbench/react-bundle.js": {
-      "bytes": 600989,
-      "sha256": "db5bc80c1385375bb26a6515bdedd27a9218ac4deaaa0abceda39fd6cf158119"
+      "bytes": 601271,
+      "sha256": "70a2587cf9173497d3f433e7c6832dfcd0a7562a81c4c1e83911b455a717b449"
     }
   },
   "displayName": "AI有谱",
