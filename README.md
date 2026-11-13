@@ -54,7 +54,7 @@
 
 ## 快速开始
 
-1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.0)下载 `aiyoupu-2.3.0.zip`。
+1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.1)下载 `aiyoupu-2.3.1.zip`。
 2. 解压后，将 `aiyoupu` 文件夹放入所用 Agent 的 Skill 目录。不同 Agent 的安装位置见[使用指南](README_使用说明.md)。
 3. 开启新对话，提供素材，并告诉 Agent：
 
@@ -91,6 +91,10 @@
 
 
 ## 更新记录
+
+**v2.3.1（2026-11-13）**
+
+- 修复同一谱行跨小节时，紫色光点停在原处、随后突然出现在新音上的问题。现在会沿弧线越过小节线，落到新弹的符头上；延音不重击，休止保持安静。
 
 **v2.3.0（2026-11-13）**
 

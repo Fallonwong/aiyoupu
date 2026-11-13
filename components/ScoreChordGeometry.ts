@@ -47,17 +47,29 @@ const connected = (a: ScoreAttack, b: ScoreAttack, precise = false) => {
     && (a.notes??[a]).some(n=>n.durationFrames===undefined||a.frame+n.durationFrames>=b.frame-.1)
     && (precise && sa!==undefined && sb!==undefined || b.x >= a.x - 200 && Math.abs(b.y - a.y) <= 200);
 };
-const pairsOf = (a: Point[], b: Point[], span=0) => {
+const pairsOf = (a: Point[], b: Point[], span=0, precise=false) => {
   // A tied member still sounding through another chord's attack must not
   // launch with that chord's newly struck members.
-  a=a.filter(n=>!n.tieStart||n.durationFrames===undefined||n.durationFrames<=span+.1);
+  const live=(n:Point)=>n.durationFrames===undefined||n.durationFrames>=span-.1;
+  const available=a.filter(n=>!n.tieStart||n.durationFrames===undefined||n.durationFrames<=span+.1);
+  if(precise){
+    const sustainingTies=a.filter(n=>n.tieStart&&n.durationFrames!==undefined&&n.durationFrames>span+.1);
+    a=available.filter(live);
+    // If the whole outgoing attack is tied past the next real attack, carry
+    // one visual core forward. This never visits a written continuation and
+    // does not create a new attack or change the source's sounding duration.
+    if(!a.length&&b.length&&sustainingTies.length){
+      const distance=(n:Point)=>Math.min(...b.map(m=>Math.hypot(n.x-m.x,n.y-m.y)));
+      a=[sustainingTies.reduce((best,n)=>distance(n)<distance(best)?n:best)];
+    }
+  }else a=available;
   if (!a.length || !b.length) return [];
   const count = Math.max(a.length, b.length);
   return Array.from({length: count}, (_, i) => {
     const target=b[count === 1 ? 0 : Math.round(i * (b.length - 1) / (count - 1))];
     const source=a[count === 1 ? 0 : Math.round(i * (a.length - 1) / (count - 1))];
     return {a:source,b:target};
-  }).filter(p=>p.a.durationFrames===undefined||p.a.durationFrames>=span-.1);
+  }).filter(p=>live(p.a));
 };
 const position = (a: Point, b: Point, t: number, arc: number): Point => ({
   x: a.x + (b.x - a.x) * t,
@@ -99,7 +111,7 @@ export const scoreChordGeometry = (
   else if (!b || frame === a.frame) result.heads = sounding.map(n=>({x:n.x,y:n.y}));
   else if (connected(a, b, preciseLandings)) {
     const t = (frame - a.frame) / (b.frame - a.frame);
-    const points = flightPoints(pairsOf(notesOf(a), notesOf(b),b.frame-a.frame), t, arcHeight, fusionDistance);
+    const points = flightPoints(pairsOf(notesOf(a), notesOf(b),b.frame-a.frame,preciseLandings), t, arcHeight, fusionDistance);
     result.heads = [...new Map(points.map(p => [`${p.x}:${p.y}`, p])).values()];
   }
   // A break blocks flight, not the light at a note that is still sounding.
@@ -111,10 +123,15 @@ export const scoreChordGeometry = (
   for (let i = current; i >= 0; i--) {
     // Stop after the first segment crossing the start of the visible tail window.
     const from = events[i], to = events[i + 1];
-    if (to && !connected(from, to, preciseLandings)) break;
+    if (to && !connected(from, to, preciseLandings)) {
+      // A gap after the current attack must not erase the trail that has
+      // just arrived there. Older gaps still terminate the tail.
+      if(preciseLandings&&i===current)continue;
+      break;
+    }
     if (to && to.frame > start && connected(from, to, preciseLandings)) {
       const lo = Math.max(start, from.frame), hi = Math.min(landing?a.frame:frame, to.frame);
-      const pairs = pairsOf(notesOf(from), notesOf(to),to.frame-from.frame);
+      const pairs = pairsOf(notesOf(from), notesOf(to),to.frame-from.frame,preciseLandings);
       if (hi > lo) for (let branch = 0; branch < pairs.length; branch++) {
         const count = Math.max(2, Math.ceil((hi - lo) * 3) + 1);
         const tail: Point[] = [];
