@@ -19,7 +19,7 @@
 
 ## 版本与迁移
 
-当前下载版本为v2.3.1。V2由Piano Remotion更名为AI有谱，slug为aiyoupu；命令、Composition ID、组件名和数据协议存在不兼容变化，见[历史迁移说明](history/migration-v2/migration-guide.md)。仓库现为Fallonwong/aiyoupu，历史检查清单只代表当时状态。
+当前下载版本为v2.3.2。V2由Piano Remotion更名为AI有谱，slug为aiyoupu；命令、Composition ID、组件名和数据协议存在不兼容变化，见[历史迁移说明](history/migration-v2/migration-guide.md)。仓库现为Fallonwong/aiyoupu，历史检查清单只代表当时状态。
 
 历史任务保持原环境，新版本另存props、layout、job和审批资料。不同版本的内容确认不能自动互用；方向保存不是谱面或关键帧批准。正式有声任务需要对应的谱面、排版、音频与质量证据，direction_draft不可冒充正式绑定任务。
 

@@ -11,7 +11,8 @@ export type AiyoupuTimeline = {
   fps: number; durationInFrames: number; scoreWidth: number; scoreHeight: number;
   events: (ScoreAttack & {hand: 'left' | 'right'})[];
   cameraPath?: {cameraX: number; cameraY: number}[];
-  focusPath?: {focusX:number;focusY:number}[];
+  focusPath?: {focusX:number;focusY:number;zoom?:number}[];
+  rowPans?: {frame:number;start:number;end:number;pullback:number}[];
   focusHandoffs?: {frame:number;dipFrames:number}[];
   noteheadGeometry?: 'glyph-center/v1';
   systemBands?: {centerY:number;top:number;bottom:number}[];
@@ -80,7 +81,7 @@ export const AiyoupuScoreScene: React.FC<AiyoupuScoreSceneProps> = ({
   const fade = interpolate(frame,[0,fadeN,D-fadeN,D],[0,1,1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'});
   const melody = timeline.events.filter(e=>e.hand==='right');
   const bass = timeline.events.filter(e=>e.hand==='left');
-  const scale = camera.scale ?? (modern?(runway?.scale??preset.scale):1.5);
+  const scale = (camera.scale ?? (modern?(runway?.scale??preset.scale):1.5)) * (modern&&!runway?(measuredFocus?.zoom??1):1);
   const z = camera.rotateZ ?? (modern?(runway?.rotateZ??preset.tiltZ):-15);
   const rx = camera.rotateX ?? (modern?(runway?.rotateX??preset.tiltX):38);
   const track = melody.length ? melody : bass;

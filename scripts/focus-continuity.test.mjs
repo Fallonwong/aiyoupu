@@ -90,20 +90,37 @@ check('strict review catches a fast multi-frame rewind and repeated same-row bra
   assert.throws(()=>assertFocusContinuity({...wrap,focusPath},{strict:true}),e=>e.code==='FOCUS_MOTION_REVIEW_REQUIRED');
 });
 
-check('measured rebuild preserves attack anchors and uses a handoff only at a real row entrance',()=>{
+check('a long return pans through the row entrance without changing the music',()=>{
   const rebuilt={...wrap,...buildReadingCamera(wrap)};
-  assert.deepEqual(rebuilt.focusHandoffs,[{frame:250,dipFrames:5}]);
-  assert.equal(rebuilt.focusPath[249].focusX,1490);
-  assert.equal(rebuilt.focusPath[250].focusX,365);
-  for(const [frame,x] of anchors)assert.equal(rebuilt.focusPath[frame].focusX,x);
+  assert.deepEqual(rebuilt.events,wrap.events);
+  assert.deepEqual(rebuilt.focusHandoffs,[]);
+  const [pan]=rebuilt.rowPans;
+  assert.ok(pan.start<234&&pan.frame===250&&pan.end>250);
+  assert.equal(rebuilt.focusPath[pan.start].zoom,1);
+  assert.equal(rebuilt.focusPath[pan.end].zoom,1);
+  assert.ok(rebuilt.focusPath[250].focusX>365&&rebuilt.focusPath[250].focusX<1490);
+  const minimum=Math.min(...rebuilt.focusPath.map(p=>p.zoom??1));
+  assert.ok(minimum>=.88&&minimum<.95);
+  for(let f=pan.start+1;f<=pan.end;f++){
+    const a=rebuilt.focusPath[f-1],b=rebuilt.focusPath[f];
+    assert.ok(b.focusY>a.focusY,'the camera keeps moving toward the next row');
+    assert.ok(Math.abs(b.focusX-a.focusX)<50,'no single-frame return');
+  }
+  for(const [frame,x] of anchors.filter(([f])=>f<pan.start||f>pan.end))assert.equal(rebuilt.focusPath[frame].focusX,x);
   assert.equal(assertFocusContinuity(rebuilt,{strict:true}).status,'continuous');
-  assert.throws(()=>assertFocusContinuity({...rebuilt,focusHandoffs:[{frame:249,dipFrames:5}]},{strict:true}),e=>e.code==='FOCUS_HANDOFF_INVALID');
+  const cut={...wrap,focusHandoffs:[{frame:250,dipFrames:5}],
+    focusPath:rebuilt.focusPath.map((p,f)=>f<pan.start||f>pan.end?p:
+      f<250?{focusX:1490,focusY:225}:{focusX:365,focusY:650})};
+  assert.throws(()=>assertFocusContinuity(cut,{strict:true}),e=>e.code==='FOCUS_LEGACY_ROW_CUT');
+  const disguised={...cut,rowPans:rebuilt.rowPans,focusHandoffs:[]};
+  assert.throws(()=>assertFocusContinuity(disguised,{strict:true}),e=>['FOCUS_PATH_DISCONTINUOUS','FOCUS_MOTION_REVIEW_REQUIRED'].includes(e.code));
 });
 
 check('a nearby row with enough musical time still pans instead of cutting',()=>{
   const input={...wrap,events:[{frame:0,x:400,y:225},{frame:60,x:370,y:650}]};
   const result={...input,...buildReadingCamera(input)};
   assert.deepEqual(result.focusHandoffs,[]);
+  assert.deepEqual(result.rowPans,[]);
   assert.ok(result.focusPath[55].focusY>225&&result.focusPath[55].focusY<650);
   assert.equal(assertFocusContinuity(result,{strict:true}).status,'continuous');
 });

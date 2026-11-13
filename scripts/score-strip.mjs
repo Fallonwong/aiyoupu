@@ -117,7 +117,7 @@ export async function buildScoreStrip({svg,timeline,layout,systems,project,brows
       output.events=t.events.map(e=>{const i=byId.get(e.systemId??e.sys),s=placed[i];return {...transform(e,s),systemId:s.id,notes:e.notes.map(n=>transform(n,s))};});
       if(output.allNotes)output.allNotes=output.allNotes.map(n=>{const s=placed[byId.get(n.systemId??n.sys)];check(s,'allNotes requires systemId');return transform(n,s);});
       output.scoreWidth=x;output.scoreHeight=height;if(output.width!==undefined)output.width=x;
-      delete output.cameraPath;delete output.focusPath;delete output.focusHandoffs;
+      delete output.cameraPath;delete output.focusPath;delete output.focusHandoffs;delete output.rowPans;
       output.systems=placed.map(s=>({...s,centerY:center,focusY:center}));
       document.body.append(root);
       const mapping=l.mapping.map(m=>{

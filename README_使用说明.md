@@ -4,7 +4,7 @@ AI有谱帮助你把钢琴乐谱做成跟随音乐演奏的视频。你负责提
 
 ## 安装
 
-1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.1)下载 `aiyoupu-2.3.1.zip` 并解压。
+1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.2)下载 `aiyoupu-2.3.2.zip` 并解压。
 2. 将解压得到的 `aiyoupu` 文件夹放入当前 Agent 的 Skill 目录。Codex 常见位置是用户目录下的 `.agents/skills/`；其他 Agent 使用各自的技能安装目录。如果不清楚位置，可以让 Agent 帮你查找。
 3. 开启新对话，告诉 Agent 使用 `$aiyoupu`。
 

@@ -54,7 +54,7 @@
 
 ## 快速开始
 
-1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.1)下载 `aiyoupu-2.3.1.zip`。
+1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.2)下载 `aiyoupu-2.3.2.zip`。
 2. 解压后，将 `aiyoupu` 文件夹放入所用 Agent 的 Skill 目录。不同 Agent 的安装位置见[使用指南](README_使用说明.md)。
 3. 开启新对话，提供素材，并告诉 Agent：
 
@@ -91,6 +91,10 @@
 
 
 ## 更新记录
+
+**v2.3.2（2026-11-13）**
+
+- 换行时镜头连续移动。距离较长时，镜头会轻微拉远，移到下一行后恢复原来的读谱距离。音符和声音的时序不变。
 
 **v2.3.1（2026-11-13）**
 

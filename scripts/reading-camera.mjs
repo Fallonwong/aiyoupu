@@ -3,6 +3,7 @@ import {failure} from './audio.mjs';
 // Normalized score travel per frame, at 30 fps. A diagnostic limit, not a
 // guarantee of readability at every zoom or projection.
 export const cameraSpeedLimit = fps => 0.022 * 30 / (fps || 30);
+export const rowPanSpeedLimit = fps => 0.026 * 30 / (fps || 30);
 export const cameraTravel = (dx, dy, timeline) =>
   Math.hypot(dx / (timeline.scoreWidth || 1600), dy / (timeline.scoreHeight || 1600));
 
@@ -58,11 +59,15 @@ export function buildReadingCamera(timeline, systems, {transitionFrames=14}={}) 
     // Smoothstep peaks at 1.5 times the average velocity.
     const span=Math.max(transitionFrames,Math.ceil(1.5*distance/cameraSpeedLimit(timeline.fps)));
     const available=b.frame-a.frame;
-    // Reserve the first attack on the new system and the last on the old one.
-    // If both cannot fit a gentle pan, use a deliberate score-only dip.
-    return span<=available
-      ? {start:b.frame-span}
-      : {start:b.frame,handoff:{frame:Math.ceil(b.frame),dipFrames:Math.min(5,Math.max(0,Math.ceil(available)-2))}};
+    if(span<=available)return {start:b.frame-span};
+    const fps=timeline.fps||30,frame=Math.ceil(b.frame);
+    const frames=Math.min(Math.round(fps*1.45),Math.max(Math.round(fps*.7),Math.ceil(distance*54*fps/30)));
+    const lead=Math.round(frames*.68);
+    // Use time on both sides of the entrance; camera and musical time are
+    // independent. Midpoints leave a complete reading interval between wraps.
+    const lower=i?Math.ceil((Math.ceil(runs[i].frame)+frame)/2):0;
+    const upper=i+2<runs.length?Math.floor((frame+Math.ceil(runs[i+2].frame))/2):timeline.durationInFrames-1;
+    return {pan:{frame,start:Math.max(lower,frame-lead),end:Math.min(upper,frame+frames-lead),pullback:Math.min(.12,distance*.17)}};
   });
   let row=0,k=0;
   const focusPath=Array.from({length:timeline.durationInFrames},(_,f)=>{
@@ -75,11 +80,23 @@ export function buildReadingCamera(timeline, systems, {transitionFrames=14}={}) 
       const x=(2*t3-3*t2+1)*a.x+(t3-2*t2+t)*dt*slopes[k]+(-2*t3+3*t2)*b.x+(t3-t2)*dt*slopes[k+1];
       return {focusX:x,focusY:a.y};
     }
-    if(next&&wrap&&!wrap.handoff&&f>=wrap.start){
+    if(next&&wrap?.start!==undefined&&f>=wrap.start){
       const t=(f-wrap.start)/(next.frame-wrap.start),s=t*t*(3-2*t);
       return {focusX:a.x+(next.x-a.x)*s,focusY:a.y+(next.y-a.y)*s};
     }
     return {focusX:a.x,focusY:a.y};
   });
-  return {focusPath,focusHandoffs:transitions.flatMap(t=>t.handoff?[t.handoff]:[])};
+  const rowPans=transitions.flatMap(t=>t.pan?[t.pan]:[]);
+  for(const {frame,start,end,pullback} of rowPans){
+    const exit=focusPath[frame-1],entry=focusPath[frame];
+    if(!exit||!entry||start>=frame||end<=frame)
+      throw failure('CAMERA_WINDOW','Not enough frames for a continuous row change','Review the engraved layout and transition in motion.');
+    for(let f=start;f<=end;f++){
+      const u=(f-start)/(end-start),s=u*u*(3-2*u);
+      const from=f<frame?focusPath[f]:exit,to=f>=frame?focusPath[f]:entry;
+      focusPath[f]={focusX:from.focusX+(to.focusX-from.focusX)*s,
+        focusY:from.focusY+(to.focusY-from.focusY)*s,zoom:1-pullback*Math.sin(Math.PI*u)**2};
+    }
+  }
+  return {focusPath,focusHandoffs:[],rowPans};
 }
