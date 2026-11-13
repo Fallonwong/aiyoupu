@@ -156,13 +156,14 @@ def main():
         'document.getElementById("host").innerHTML=svgText;'
         'const ids=' + json.dumps(note_ids).replace('<', '\\u003c') + ';'
         'const root=document.querySelector("svg");const inv=root.getScreenCTM().inverse();'
-        'const res=ids.map(id=>{const el=document.getElementById(id);if(!el)return{id,missing:true};'
+        'const res=ids.map(id=>{const heads=document.getElementById(id)?.querySelectorAll(".notehead");'
+        'if(heads?.length!==1)return{id,missing:true};const el=heads[0];'
         'const b=el.getBBox();const p=new DOMPoint(b.x+b.width/2,b.y+b.height/2)'
         '.matrixTransform(el.getScreenCTM()).matrixTransform(inv);'
         'return{id,x:p.x,y:p.y,w:b.width,h:b.height};});'
         'const systems=[...root.querySelectorAll("g.system")].map(el=>{const b=el.getBBox(),m=el.getScreenCTM();'
         'const p=new DOMPoint(b.x,b.y).matrixTransform(m).matrixTransform(inv),q=new DOMPoint(b.x+b.width,b.y+b.height).matrixTransform(m).matrixTransform(inv);'
-        'return {top:p.y,bottom:q.y,left:p.x,right:q.x};});'
+        'return {id:el.id,top:p.y,bottom:q.y,left:p.x,right:q.x};});'
         'document.getElementById("result").textContent=JSON.stringify({viewBox:[root.viewBox.baseVal.x,root.viewBox.baseVal.y,root.viewBox.baseVal.width,root.viewBox.baseVal.height],notes:res,systems});'
         '</script>', encoding='utf-8')
 
@@ -283,6 +284,7 @@ def main():
             xs = [n['x'] for n in notes]
             ys = [n['y'] for n in notes]
             split_events.append({**e, 'hand': hand, 'staff': 2 if hand == 'left' else 1,
+                                 'systemId': svg_by_id[notes[0]['id']]['system'],
                                  'notes': notes,
                                  'x': sum(xs) / len(xs), 'y': sum(ys) / len(ys)})
     split_events.sort(key=lambda e: (e['frame'], e['hand']))
@@ -356,8 +358,8 @@ def main():
 
     timeline = {'fps': fps, 'durationInFrames': duration, 'scoreWidth': a.width,
                 'scoreHeight': round(height, 2), 'events': events, 'focusPath': focus,
-                'status': 'measured_preview_only',
-                'systemBounds': [{k: v * scale for k, v in b.items()} for b in data['systems']]}
+                'status': 'measured_preview_only', 'noteheadGeometry': 'glyph-center/v1',
+                'systemBounds': [{k: v if k == 'id' else v * scale for k, v in b.items()} for b in data['systems']]}
     (out / 'timeline.json').write_text(json.dumps(timeline, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
     hands = {'right': sum(1 for e in events for n in e['notes'] if svg_by_id[n['id']]['staff'] == 1),

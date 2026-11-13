@@ -12,10 +12,24 @@ export type AiyoupuTimeline = {
   events: (ScoreAttack & {hand: 'left' | 'right'})[];
   cameraPath?: {cameraX: number; cameraY: number}[];
   focusPath?: {focusX:number;focusY:number}[];
+  focusHandoffs?: {frame:number;dipFrames:number}[];
+  noteheadGeometry?: 'glyph-center/v1';
   systemBands?: {centerY:number;top:number;bottom:number}[];
   systemBounds?: {top:number;bottom:number;left?:number;right?:number}[];
   status?: string;
 };
+/** Fade only the score plane around a declared row cut, leaving the HUD stable. */
+export function scoreHandoffOpacity(timeline:AiyoupuTimeline,frame:number) {
+  let opacity=1;
+  for(const cut of timeline.focusHandoffs??[]){
+    const distance=cut.frame-frame;
+    if(cut.dipFrames>0&&distance>0&&distance<=cut.dipFrames){
+      const t=distance/cut.dipFrames;
+      opacity=Math.min(opacity,.55+.45*t*t*(3-2*t));
+    }
+  }
+  return opacity;
+}
 export type AiyoupuScoreSceneProps = {
   aspectRatio?:AspectRatio; theme?:ScoreTheme; backgroundSrc?:string;
   timeline: AiyoupuTimeline; scoreSrc: string; audioSrc?: string;
@@ -87,13 +101,13 @@ export const AiyoupuScoreScene: React.FC<AiyoupuScoreSceneProps> = ({
     {backgroundScene==='deep-sapphire'&&<DeepSapphire width={width} height={height}/>}
     {modern&&backgroundSrc&&<Img src={staticFile(backgroundSrc)} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover'}}/>}
     {audioSrc&&!disableAudio&&<Audio src={staticFile(audioSrc)} volume={modern?1:f=>interpolate(f,[Math.max(0,D-6),D],[1,0],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})}/>}
-    <div style={modern?{position:'absolute',inset:0,perspective:runway?.perspective??preset.perspective,perspectiveOrigin:'50% 50%',zIndex:10,mixBlendMode:texture?(texture==='black-multiply'?undefined:'screen'):(theme==='custom'?'screen':undefined)}:{display:'contents'}}>
+    <div style={modern?{position:'absolute',inset:0,perspective:runway?.perspective??preset.perspective,perspectiveOrigin:'50% 50%',zIndex:10,opacity:scoreHandoffOpacity(timeline,frame),mixBlendMode:texture?(texture==='black-multiply'?undefined:'screen'):(theme==='custom'?'screen':undefined)}:{display:'contents'}}>
     <div style={{position:'absolute',left:cameraX,top:cameraY,width:timeline.scoreWidth,height:timeline.scoreHeight,transformOrigin:modern?`${focus!.focusX}px ${focus!.focusY}px`:'0 0',transformStyle:modern?'preserve-3d':undefined,transform:runway?`rotateZ(${z}deg) rotateY(${runway.rotateY}deg) rotateX(${rx}deg) scale(${scale}) scaleX(${runway.stretchX})`:`rotateZ(${z}deg) rotateX(${rx}deg) scale(${scale})`}}>
       {!modern&&<div style={{position:'absolute',left:-3000,top:-3000,width:Math.max(8000,timeline.scoreWidth+6000),height:Math.max(16000,timeline.scoreHeight+6000),background:surface}}/>}
       <div style={modern?{position:'absolute',inset:0,background:texture?(texture==='black-multiply'?surface:'#000000'):(runway?'#eae2d8':(theme==='custom'?'#000000':surface)),isolation:'isolate',transformStyle:'flat',boxShadow:runway&&!texture?'22px 30px 50px rgba(0,0,0,0.65), 0 0 1px rgba(0,0,0,.4)':undefined,borderRadius:runway?6:undefined,maskImage:runway&&!texture?'linear-gradient(to right, black 86%, rgba(0,0,0,0.4) 94%, transparent 100%)':undefined}:{display:'contents'}}>
       <Img src={staticFile(scoreSrc)} style={{position:'absolute',left:scoreImage.x??0,top:scoreImage.y??0,width:scoreImage.width??timeline.scoreWidth,height:scoreImage.height??timeline.scoreHeight,mixBlendMode:scoreImage.blendMode??textureStyle?.blend??(modern?palette.blend:'multiply'),filter:scoreImage.filter??textureStyle?.filter??(runway?portraitRunwayScoreFilter():(modern?palette.filter:undefined))}}/>
-      <ScoreNoteLeap events={melody} color={rightColor} coreColor="#fff6ff" glowColor="#b895ff" glowStrength={1.2} trailFrames={16} {...notePreset} {...rightStyle} width={timeline.scoreWidth} height={timeline.scoreHeight} style={{...rightStyle.style,position:'absolute',inset:0}}/>
-      <ScoreNoteLeap events={bass} color={leftColor} coreColor="#fff5db" glowColor="#ff9a46" glowStrength={1.2} arcHeight={34} trailFrames={16} {...notePreset} {...leftStyle} width={timeline.scoreWidth} height={timeline.scoreHeight} style={{...leftStyle.style,position:'absolute',inset:0}}/>
+      <ScoreNoteLeap events={melody} color={rightColor} coreColor="#fff6ff" glowColor="#b895ff" glowStrength={1.2} trailFrames={16} {...notePreset} {...rightStyle} preciseLandings={timeline.noteheadGeometry==='glyph-center/v1'} width={timeline.scoreWidth} height={timeline.scoreHeight} style={{...rightStyle.style,position:'absolute',inset:0}}/>
+      <ScoreNoteLeap events={bass} color={leftColor} coreColor="#fff5db" glowColor="#ff9a46" glowStrength={1.2} arcHeight={34} trailFrames={16} {...notePreset} {...leftStyle} preciseLandings={timeline.noteheadGeometry==='glyph-center/v1'} width={timeline.scoreWidth} height={timeline.scoreHeight} style={{...leftStyle.style,position:'absolute',inset:0}}/>
       </div>
     </div>
     </div>

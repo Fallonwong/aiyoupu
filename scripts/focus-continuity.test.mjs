@@ -4,6 +4,7 @@
 // shape check, so it needs its own assertions.
 import assert from 'node:assert/strict';
 import {focusContinuityReport, assertFocusContinuity, repairFocusContinuity} from './focus-continuity.mjs';
+import {buildReadingCamera} from './reading-camera.mjs';
 
 const base = {fps: 30, scoreWidth: 1000, scoreHeight: 500, durationInFrames: 120,
   events: [{hand: 'right', frame: 0, x: 100, y: 200, notes: [{x: 100, y: 200, pitch: 'C5'}]}]};
@@ -65,6 +66,46 @@ check('repair leaves a back-to-back landing pair alone rather than deforming it'
   const result = repairFocusContinuity({...base, durationInFrames: 40, focusPath: tight}, {windowFrames: 14});
   // Only three frames exist between the two landings; the pair must survive.
   assert.equal(result.timeline.focusPath[10].focusX, 300, 'landing value changed');
+});
+
+// Geometry and cadence of the reported failure, with synthetic notes only.
+const anchors=[...Array.from({length:27},(_,i)=>[i*9,450+i*40,0]),[250,365,1],[258,405,1],[266,440,1]];
+const wrap={...base,durationInFrames:275,scoreWidth:1600,scoreHeight:1693,
+  systemBounds:[{top:25,bottom:425},{top:480,bottom:820}],
+  events:anchors.map(([frame,x,row])=>({frame,x,y:row?650:225,hand:'right'}))};
+
+check('strict review catches a fast multi-frame rewind and repeated same-row braking',()=>{
+  let i=0;
+  const focusPath=Array.from({length:wrap.durationInFrames},(_,f)=>{
+    while(i+1<anchors.length&&f>=anchors[i+1][0])i++;
+    const [a,x,row]=anchors[i],[b,endX,endRow]=anchors[i+1]??anchors[i];
+    const t=a===b?0:(f-a)/(b-a),u=t*t*(3-2*t);
+    return {focusX:x+(endX-x)*u,focusY:225+425*(row+(endRow-row)*u)};
+  });
+  const report=focusContinuityReport({...wrap,focusPath});
+  assert.equal(report.hops.length,0);
+  assert.equal(report.shortRuns.length,0);
+  assert.ok(report.sweeps.some(s=>s.start>234&&s.end<=250));
+  assert.ok(report.stopGo.some(s=>s.end<234));
+  assert.throws(()=>assertFocusContinuity({...wrap,focusPath},{strict:true}),e=>e.code==='FOCUS_MOTION_REVIEW_REQUIRED');
+});
+
+check('measured rebuild preserves attack anchors and uses a handoff only at a real row entrance',()=>{
+  const rebuilt={...wrap,...buildReadingCamera(wrap)};
+  assert.deepEqual(rebuilt.focusHandoffs,[{frame:250,dipFrames:5}]);
+  assert.equal(rebuilt.focusPath[249].focusX,1490);
+  assert.equal(rebuilt.focusPath[250].focusX,365);
+  for(const [frame,x] of anchors)assert.equal(rebuilt.focusPath[frame].focusX,x);
+  assert.equal(assertFocusContinuity(rebuilt,{strict:true}).status,'continuous');
+  assert.throws(()=>assertFocusContinuity({...rebuilt,focusHandoffs:[{frame:249,dipFrames:5}]},{strict:true}),e=>e.code==='FOCUS_HANDOFF_INVALID');
+});
+
+check('a nearby row with enough musical time still pans instead of cutting',()=>{
+  const input={...wrap,events:[{frame:0,x:400,y:225},{frame:60,x:370,y:650}]};
+  const result={...input,...buildReadingCamera(input)};
+  assert.deepEqual(result.focusHandoffs,[]);
+  assert.ok(result.focusPath[55].focusY>225&&result.focusPath[55].focusY<650);
+  assert.equal(assertFocusContinuity(result,{strict:true}).status,'continuous');
 });
 
 console.log('\nfocus-continuity: ' + checks + ' groups passed');

@@ -19,14 +19,14 @@ import {scoreEvents,midiScoreEvents,mappedTimeline,validateTimeMap,secondsAt} fr
 import {parseMidi} from './midi.mjs';
 import {qualityRequest} from './quality-review.mjs';
 import {checkSourceScope} from './source-scope.mjs';
-import {focusPath} from './camera-path.mjs';
+import {buildReadingCamera} from './reading-camera.mjs';
 import {focusContinuityReport,assertFocusContinuity,repairFocusContinuity} from './focus-continuity.mjs';
 import {requireQuality,validateProduction,evaluateQuality} from './quality-v2.mjs';
 import {notationAudit} from './notation-audit.mjs';
 import {exportWorkbench} from './workbench-export-v2.mjs';
 import {buildScoreStrip} from './score-strip.mjs';
 import {directionMain,DIRECTION_USAGE} from './direction-cli.mjs';
-import {runtimeSourceFingerprint} from './direction-engine.mjs';
+import {runtimeSourceFingerprint,requireHandoffRuntime} from './direction-engine.mjs';
 
 const scripts=path.dirname(fileURLToPath(import.meta.url));
 export const readJSON=(p)=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
@@ -90,6 +90,7 @@ export function bindJob(a){
   // the same assets while keeping the Remotion host project for runtime code.
   const assetProject=path.resolve(a['asset-project']??project);
   const {props,score,audio}=songInputs(assetProject,propsFile),sourceType=a['source-type']??'svg';
+  if(!a.draft&&props.aspectRatio)assertFocusContinuity(props.timeline,{strict:true});
   const productionFile=path.resolve(need(a,'production'));validateProduction(readJSON(productionFile),props);
   let userReview=null;
   let audioEvidence=null;
@@ -147,6 +148,7 @@ export function bindJob(a){
   if(userReview&&!quality&&audio&&!a.draft)throw failure('DIRECTION_JOB_NEEDS_FORMAL_BIND','This derived direction job lacks a v2 quality packet','Continue with aiyoupu bind using the frozen layout, production, audio evidence, and --quality; do not relabel this draft as a formal job.');
   if(!fs.existsSync(path.join(project,entry)))throw failure('SONG_ENTRY_MISSING','Checked song entry is not installed','Use aiyoupu install --project or --standalone first.');
   const runtimeFiles=runtimeSources(project,entry);
+  if(props.timeline.focusHandoffs?.length||props.timeline.noteheadGeometry==='glyph-center/v1')requireHandoffRuntime(props,runtimeSourceFingerprint(project,entry));
   if(props.visualPreset==='TeachingLandscape'&&(!entry.endsWith('song-v2.tsx')||!runtimeFiles.some(p=>path.basename(p)==='AiyoupuScoreSceneV2.tsx')))
     throw failure('TEACHING_ENTRY_REQUIRED','TeachingLandscape needs the V2 song entry and scene','Install the V2 files into this project; historical entries remain for old jobs.');
   const files=[productionFile,...(quality?.files??[]),...runtimeFiles,propsFile,score,layoutFile,...(props.backgroundSrc?[publicAsset(project,props.backgroundSrc)]:[]),...(props.overlay?.enabled?[publicAsset(project,props.overlay.src)]:[]),...(audio?[audio]:[]),...(a.alignment?[path.resolve(a.alignment)]:[]),...(a['score-review']?[path.resolve(a['score-review'])]:[]),...reviewFiles,...(a['score-approval']?[path.resolve(a['score-approval'])]:[])];
@@ -213,6 +215,17 @@ export function keyframes(job,a){
     const start=Math.max(0,Math.floor(special.frame-t.fps*.2)),end=Math.min(t.durationInFrames-1,start+Math.min(Math.ceil(3*t.fps),Math.floor(t.durationInFrames/2))-1),clip=path.join(dir,'motion-preview.mp4');
     executeLogged(process.execPath,[cli,'render',job.entry,job.composition,clip,`--frames=${start}-${end}`,'--concurrency=2',...common],{cwd:job.project,log:clip+'.command.json'});clips.push(clip);
   }
+  // Capture the first representative row transition even without a tie/slur.
+  // This uses the same frozen render props as the approval stills.
+  const firstCut=t.focusHandoffs?.[0]?.frame;
+  const firstPan=t.focusPath?.findIndex((p,i)=>i>0&&Math.abs(p.focusY-t.focusPath[i-1].focusY)>.05);
+  const wrap=[firstCut,firstPan].filter(f=>Number.isInteger(f)&&f>0).sort((x,y)=>x-y)[0];
+  if(wrap!==undefined&&a['motion-clip']!==false){
+    const start=Math.max(0,wrap-Math.ceil(.6*t.fps)),end=Math.min(t.durationInFrames-1,wrap+Math.ceil(1.4*t.fps));
+    const clip=path.join(dir,'row-transition.mp4');
+    executeLogged(process.execPath,[cli,'render',job.entry,job.composition,clip,`--frames=${start}-${end}`,'--concurrency=2',...common],{cwd:job.project,log:clip+'.command.json'});
+    clips.push(clip);
+  }
   if(job.production?.milestone==='first-four-pilot'){
     const clip=path.join(dir,'first-four.mp4'),remux=wholeTeachingPilot&&job.audioSrc;
     const raw=remux?path.join(dir,'first-four-render-source.mp4'):clip;
@@ -268,10 +281,10 @@ export async function main(argv){
   }
   const report=focusContinuityReport(timeline);
   if(a.out)writeJSON(a.out,report);
-  let gate='pass';try{assertFocusContinuity(timeline,{strict:!!a.strict});}catch(e){gate=e.code;}
+  let gate=report.checked?'pass':'FOCUS_PATH_REQUIRED';try{assertFocusContinuity(timeline,{strict:!!a.strict});}catch(e){gate=e.code;}
   return {...report,commandGate:gate,exitCode:gate==='pass'?0:3};
 }
-if(command==='camera-path'){const t=readJSON(need(a,'timeline'));t.focusPath=focusPath({timeline:t,systems:readJSON(need(a,'systems')),transitionFrames:Number(a['transition-frames']??14)});writeJSON(need(a,'out'),t);return {status:'camera_proposed',file:path.resolve(a.out)};}
+if(command==='camera-path'){const t=readJSON(need(a,'timeline'));Object.assign(t,buildReadingCamera(t,a.systems?readJSON(a.systems):undefined,{transitionFrames:Number(a['transition-frames']??14)}));writeJSON(need(a,'out'),t);return {status:'camera_proposed',file:path.resolve(a.out),handoffs:t.focusHandoffs};}
   if(command==='quality'){const packet=readJSON(need(a,'quality'));const result=evaluateQuality({timeline:readJSON(need(a,'timeline')),audio:need(a,'audio'),check:packet.check,review:packet.review,sourceScope:packet.sourceScope,originalSourceSha256:a.source?sha256(fs.readFileSync(a.source)):undefined});writeJSON(need(a,'out'),result);return {...result,exitCode:result.status==='passed_within_scope'?0:3};}
   if(command==='geometry')return nativeGeometry({svg:need(a,'svg'),timeline:need(a,'timeline'),mapping:need(a,'mapping'),browser:need(a,'browser'),out:need(a,'out')});
   if(command==='music-from-check'){const result=fromStructuredScore(readJSON(need(a,'check')),readJSON(need(a,'placement')),{fps:Number(a.fps??30)});writeJSON(need(a,'out'),result.timeline);writeJSON(`${a.out}.mapping.json`,result.mapping);return {status:'notation_compiled_unreviewed',timeline:path.resolve(a.out),mapping:path.resolve(`${a.out}.mapping.json`),next:'Measure native SVG geometry, create comparison, then ask the user to approve the notation.'};}

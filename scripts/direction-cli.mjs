@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {failure} from './audio.mjs';
 import {preparePreview,validatePreparedPreview,previewManifest,extractPresets,materializeDirection,deriveJob,renderStill,directionPrompt,DIRECTION_SCHEMA,PREVIEW_SCHEMA} from './direction-engine.mjs';
 import {engraveMusicXML,midiToMusicXML} from './workbench-engrave-bridge.mjs';
+import {buildReadingCamera} from './reading-camera.mjs';
 
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8').replace(/^\uFEFF/,''));
 function parse(argv){const a={};for(let i=0;i<argv.length;i++){const arg=argv[i];if(arg==='--help'||arg==='-h')return {help:true};if(!arg.startsWith('--'))throw failure('INVALID_ARGUMENT',arg,'Use --name value arguments.');const key=arg.slice(2),next=argv[i+1];if(next&&!next.startsWith('--')){a[key]=next;i++;}else a[key]=true;}return a;}
@@ -46,6 +47,7 @@ export async function directionMain(sub,argv=process.argv.slice(2)){
     xml=a.midi?midiToMusicXML(path.resolve(String(a.midi)),path.join(temp,'score.musicxml')).musicxml:path.resolve(String(a.musicxml));
     const prepared=engraveMusicXML(xml,path.join(temp,'engraved'));
     timeline=read(prepared.timeline);score=prepared.svg;
+    Object.assign(timeline,buildReadingCamera(timeline));
     return preparePreview({timeline,score,audio:a.audio?path.resolve(String(a.audio)):null,title:a.title??'',subtitle:a.subtitle??'',label:a.label??'',chineseTitle:a.chinese??a.title??'',direction,out,skillRoot});
    }finally{fs.rmSync(temp,{recursive:true,force:true});}
   }

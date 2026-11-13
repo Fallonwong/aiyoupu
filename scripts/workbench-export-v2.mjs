@@ -26,7 +26,7 @@ export function exportWorkbench({job:jobFile,approval,out,layout,midi,sourceJob,
     if(job.draft||job.executionProtocol!=='aiyoupu-checked/v2'||job.quality?.status!=='passed_within_scope'||!audio)fail('Current production needs both approvals and quality evidence');
     const evidence=validateAudioEvidence(job.audioProduction.evidence,audio,props.timeline);
     if(!['sampled-score-export','provided-recording'].includes(job.audioProduction.kind)||evidence.kind!==job.audioProduction.kind||evidence.kind==='sampled-score-export'&&evidence.engine?.profile!=='MuseScore Basic')fail('Audio engine evidence differs from the approved source');
-    scope='approved-inputs-preview-only';proof={sourceVersion:'2.2.0',sourceJobSha256:hash(jobFile)};
+    scope='approved-inputs-preview-only';proof={sourceJobSha256:hash(jobFile)};
   }
   if(!layout||!midi||job.fingerprints[path.resolve(layout)]!==hash(layout))fail('Supply frozen measured layout and MIDI');
   const evidence=read(layout),t=props.timeline;
@@ -48,7 +48,7 @@ export function exportWorkbench({job:jobFile,approval,out,layout,midi,sourceJob,
   if(fs.existsSync(audioOut))throw failure('OUTPUT_EXISTS',audioOut,'Choose new filenames.');
   const project={title:props.chineseTitle??props.title,subtitle:props.subtitle??'',svg:xml,width:t.scoreWidth,height:t.scoreHeight,
     duration:t.durationInFrames/t.fps,events,midiCount:midiNotes.length,unmatched:0,pageCount:1,sample:false};
-  const data={schema:'aiyoupu-workbench-project/v2',displayName:'AI有谱',skill:'aiyoupu',skillVersion:'2.2.0',project,
+  const data={schema:'aiyoupu-workbench-project/v2',displayName:'AI有谱',skill:'aiyoupu',skillVersion:'2.3.0',project,
     aiyoupu:{scope,formalVideoSource:'Remotion offline renderer with both content approvals',scoreSha256:hash(score),
       audio:{file:audioName,sha256:hash(audio),engine:'MuseScore Basic',loading:'Select this unchanged companion file in the optional audio input'},
       performanceDuration:Math.max(...events.map(e=>e.time+e.duration)),staffCounts:{treble:events.filter(e=>e.staff===1).length,bass:events.filter(e=>e.staff===2).length},proof}};

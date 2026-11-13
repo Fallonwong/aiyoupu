@@ -12,6 +12,7 @@ export type ScoreNoteLeapProps = {
   glowColor?:string; glowStrength?:number; starburst?:boolean; trailWidth?:number;
   taperTrail?:boolean;
   followChordNotes?:boolean;
+  preciseLandings?:boolean;
   /** Only the struck notehead breathes; no moving head or air trail. */
   pulseOnly?:boolean;
   /** Consecutive frame count for a struck note's breathing pulse. */
@@ -26,7 +27,7 @@ export type ScoreNoteLeapProps = {
 export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
   events:writtenEvents=[],color='#ffd477',coreColor='#fff9e9',width=1600,height=320,arcHeight=42,
   trailFrames=5,highlightFrames=10,holdHighlightUntilNext=false,glowColor=color,
-  glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,pulseOnly=false,
+  glowStrength=0,starburst=false,trailWidth=2,taperTrail=true,followChordNotes=false,preciseLandings=false,pulseOnly=false,
   pulseFrames=18,
   pulseScale=1,
   rippleRing=false,rippleFrames=14,rippleMaxRadius=38,rippleColor,
@@ -74,7 +75,7 @@ export const ScoreNoteLeap:React.FC<ScoreNoteLeapProps> = ({
   }
 
   const semantic=events.some(e=>(e.notes??[e]).some(n=>n.tieStart||n.tieStop||n.attack===false||n.durationFrames!==undefined));
-  const chord=followChordNotes||semantic?scoreChordGeometry(events,frame,arcHeight,trailFrames):null;
+  const chord=followChordNotes||semantic?scoreChordGeometry(events,frame,arcHeight,trailFrames,18,preciseLandings):null;
   const visibleSegments=pulseOnly?[]:chord?.segments??segments;
   const visibleHeads=pulseOnly?[]:chord?.heads??(head?[head]:[]);
   const visibleTails=pulseOnly?[]:chord?.tails??[tail];

@@ -38,4 +38,15 @@ assert.equal(compiled.events[1].notes[0].attack,false);
 assert.equal(compiled.events[0].notes[0].soundingEndFrame,60);
 const shortMember=[event(0,[note(100,{y:20,pitch:'E4',durationFrames:10}),note(100)]),event(30,[note(200)])];
 assert(scoreChordGeometry(shortMember,20,58,14).heads.every(p=>p.y>20),'an expired chord member must not keep flying');
-console.log(JSON.stringify({status:'PASS',checks:['ties','untied repeated notes','slurs','mixed tied chord','rests','release','system breaks']}));
+const exact=(events,frame)=>scoreChordGeometry(events,frame,58,14,18,true);
+const fractional=[event(0,[note(100)]),event(7.98,[note(150)]),event(15.96,[note(200)])];
+assert.deepEqual(exact(fractional,8).heads,[{x:150,y:100}],'first visible attack frame must hit the glyph center');
+assert.equal(exact(fractional,8).tails.at(-1).at(-1).x,150,'trail must not overshoot the visible landing');
+const wraps=[{...event(239.49,[note(1500,{durationFrames:15.96})]),systemId:0},
+  {...event(255.45,[note(370,{y:650,durationFrames:8})]),systemId:1}];
+assert.deepEqual(exact(wraps,254).heads,[{x:1500,y:100}],'last note on old row stays lit while sounding');
+assert.equal(exact(wraps,254).segments.length,0,'no cross-row trail');
+assert.deepEqual(exact(wraps,256).heads,[{x:370,y:650}],'new row first attack lands even without a following arc');
+assert.equal(exact(rest,20).heads.length,0,'a real rest remains dark');
+assert.ok(!exact(tied,30).heads.some(p=>p.x===200&&p.y===100),'tie still does not re-attack');
+console.log(JSON.stringify({status:'PASS',checks:['ties','untied repeated notes','slurs','mixed tied chord','rests','release','system breaks','fractional landings','row exit and entrance']}));

@@ -79,7 +79,7 @@ User-reviewed comparisons can remain pending in the Agent-check layer: no bulk a
 node <skill>/scripts/aiyoupu-legacy.mjs keyframes --job <job.json> --out <frames-dir> --browser <existing-Chromium.exe>
 ```
 
-Actual Remotion stills, frame timestamps, a short audio audition and a bounded motion clip for tie/slur inputs are retained with command logs. Inspect coverage of both hands/chords/line changes/connections/camera extremes; add representative views when needed. Still PNGs cannot prove legato. **Show the review, return WAITING_FOR_KEYFRAME_APPROVAL, END THE TURN.**
+Actual Remotion stills, frame timestamps, a short audio audition, and motion clips for the first row transition and any tie/slur example are retained with command logs. Play the row transition and cover other risky transitions with additional clips as needed. Inspect both hands, chords and camera extremes. Still PNGs cannot prove legato or smooth motion. **Show the review, return WAITING_FOR_KEYFRAME_APPROVAL, END THE TURN.**
 
 ```sh
 node <skill>/scripts/aiyoupu-legacy.mjs approve --request <frames-dir/review/request.json> --response <user-response.json> --out <frame-approval.json>

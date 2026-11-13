@@ -1,6 +1,6 @@
 {
   "name": "aiyoupu",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -21,19 +21,19 @@
     },
     "DEVELOPMENT.md": {
       "bytes": 2873,
-      "sha256": "5a8a84364f2c5d1595674011458a999e9189b4b8bf7c55157b59f5db12908861"
+      "sha256": "293cd49e2381455fa515bf0d6d1502e3925d7577438988c8080003b11c7c75b8"
     },
     "README.md": {
-      "bytes": 5826,
-      "sha256": "f874fb5f11766412e57babe8df6120f406aa06b63e8cb33cd8f272eac68d3211"
+      "bytes": 6236,
+      "sha256": "94cfa5ee49ff73b41482534cccfa1dd72ef48d324c3ad0c240e3a6a2060e34b2"
     },
     "README_使用说明.md": {
-      "bytes": 3544,
-      "sha256": "99882a806d06c5421c4ddd04866628769c945fc168b34610a6ffc8ced3a003f3"
+      "bytes": 3562,
+      "sha256": "0e93097dc7297227264213f89bfec8f8ad374fd37bb3a379cb8dcff08bf6b6d5"
     },
     "SKILL.md": {
-      "bytes": 15462,
-      "sha256": "2f17e7850e766a4d64b2fa3d4d31c086d0013b6d913f9ae8c42bff89bea1df1f"
+      "bytes": 15853,
+      "sha256": "3e3499178e6099f68f8d0744589df4ad35d279d4f99074d8a5fc66904b573e18"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -128,12 +128,12 @@
       "sha256": "8040e454567310495ca814df693336948be02b374b5bf51ccf03591f520335eb"
     },
     "components/AiyoupuScoreScene.tsx": {
-      "bytes": 13544,
-      "sha256": "f1bd3e6af03a8d6b8cf1ffe552f9046c2d5bf7a2d1851a0a0e7adf5d34469821"
+      "bytes": 14268,
+      "sha256": "7c8ce53b0c23e05d44114527ab7bd2b0521cd3b9f29042fa84b3cff4fc33d782"
     },
     "components/AiyoupuScoreSceneV2.tsx": {
-      "bytes": 10318,
-      "sha256": "ab61c08ec741ac9caaa3c2db672c9143dc4367ae4a032728d20327b93a89d4b3"
+      "bytes": 10540,
+      "sha256": "10cababd300d37c6a09861f7779945ea39eea48738a61d215a565622c9462406"
     },
     "components/CosmicNebula.tsx": {
       "bytes": 9179,
@@ -148,12 +148,12 @@
       "sha256": "9e18f2bc06e204f7501c5d1e88e632b38415e3c727790729630d54ecb659e24b"
     },
     "components/ScoreChordGeometry.ts": {
-      "bytes": 6732,
-      "sha256": "8236fe206695bf93770ecf8002a4e0003ac5beaa74134757508f2173c4b34431"
+      "bytes": 7310,
+      "sha256": "773caf3c7909b4934459dcf373d27247bc6453f49eacd86c2a3efb6709b48be3"
     },
     "components/ScoreNoteLeap.tsx": {
-      "bytes": 9281,
-      "sha256": "d29744fdacb356f295ee88b5985b88085ac0b01ce0d4a11f26c51bc59507e44a"
+      "bytes": 9350,
+      "sha256": "0e6087f4019d56028416c6a67f316b986f83709054d5ca511b11c831a5fca0bf"
     },
     "components/ScoreVideoConfig.ts": {
       "bytes": 8904,
@@ -272,28 +272,28 @@
       "sha256": "130bd91e6c98471442868b8d3eddf308bd5cdb1dfea8694fee5ea0faf2d5046c"
     },
     "references/music-motion-semantics.md": {
-      "bytes": 1659,
-      "sha256": "359648818a27fd4ba8adf098ff73e2748edf0104d4346daa49c5ac84a848d774"
+      "bytes": 1997,
+      "sha256": "348a71399e06eb674e77f4fb3aa84d6b9a1448f474e206aedfb95117cc7c63b2"
     },
     "references/performance-quality.md": {
       "bytes": 8728,
       "sha256": "76816a6e8b8f760d6e160e43f10372b6b79824a28249aeeae05c682b9e585cfe"
     },
     "references/portrait-runway.md": {
-      "bytes": 4242,
-      "sha256": "de211b3e017f555e31411a13f4a94ff932520678d97ed9db79a7abe1750c2c66"
+      "bytes": 4092,
+      "sha256": "6fb55cd2db84f2d48549c80145ee790019961b04bbd5d2ae2601b9aa01bcd3de"
     },
     "references/production.md": {
-      "bytes": 5928,
-      "sha256": "e276f783e6f6686ec9a53d055b0ea8d8833bba51d92ac6ef83f97a58a11a32fd"
+      "bytes": 5573,
+      "sha256": "cbdf52c9594216ec7a55c02bf61d704f30ac4dbc52c365654901f596b8f57fc0"
     },
     "references/public-score-sources-v2.md": {
       "bytes": 1786,
       "sha256": "c5241e62aa13ec46417097334fcbb3c3442d8bdde16a020f4ec939df0a8b37c0"
     },
     "references/rendering.md": {
-      "bytes": 8977,
-      "sha256": "2a29ddad08e8485b73a0d8f06cd2eb49bb3f0f1c9bdca6925bef4894116870a9"
+      "bytes": 9041,
+      "sha256": "24f36afdbda2a9a4016f17abc090ae55cc25072cb7f5777014762881a82c7a98"
     },
     "references/score-strip.md": {
       "bytes": 4465,
@@ -308,8 +308,8 @@
       "sha256": "9d6dba6406e7cda542fb11430b982b839076e0891d4938dd1f233bd0b240857a"
     },
     "references/upgrade-status.md": {
-      "bytes": 3968,
-      "sha256": "12c1788683f2577119d2cc77e9399d6fde5d6950012c97d952d5bd76101ff4f5"
+      "bytes": 3994,
+      "sha256": "98e67acb0dd35906d986eb484fe9eee7b0b24a6917746e3763cc4ada8724ac1f"
     },
     "references/visual-presets.md": {
       "bytes": 7513,
@@ -332,8 +332,8 @@
       "sha256": "01617a232a24bf94122cc6d76f53a03d91e62492a89d527e220cdd51c705ec18"
     },
     "scripts/aiyoupu.mjs": {
-      "bytes": 46510,
-      "sha256": "e45f384709b843e2ce5806e52f0a99e15a042b56f8058022732531b7ab3ec045"
+      "bytes": 47673,
+      "sha256": "1e2d414ce0914ecf8ce1fef16a0d637fd5d3db678ca6d3a8976b5df50c6f6a75"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11394,
@@ -368,12 +368,12 @@
       "sha256": "73eea33f7de50f5322f67930e85f5ebd482908229e20b7928d1fb836745334ba"
     },
     "scripts/direction-cli.mjs": {
-      "bytes": 7421,
-      "sha256": "3a90913d0342e63a47d7ac2d0268b447afb5bb090619173e5a4ab11e7b587098"
+      "bytes": 7536,
+      "sha256": "2db5739348245b603bb1527b00311fea823867d1c930ec5cb1f586a5c4840f1f"
     },
     "scripts/direction-engine.mjs": {
-      "bytes": 21091,
-      "sha256": "ea88a0520075a1f1063f3c01a09439e1bc41e2e01f4cde784ade8aee84685b06"
+      "bytes": 22119,
+      "sha256": "16613854eeb68a37e9d2e43d2a7d8fad6b7483d51ca3b52485be9d49147929a6"
     },
     "scripts/doctor.mjs": {
       "bytes": 4014,
@@ -396,16 +396,16 @@
       "sha256": "2bf64fcb616dbc49b125ed0ba2cd0a86c2fe9e9b5d0d43df8fd386d88b17626d"
     },
     "scripts/focus-continuity.mjs": {
-      "bytes": 9166,
-      "sha256": "55766d7d04165db6c9b19191a11063861e1bda51b03022bf48e616814c575ff0"
+      "bytes": 12527,
+      "sha256": "ef1be9abc19d31671e30e386bdcfcf1f5d25c916976fac720f0d896183709fc4"
     },
     "scripts/gates.mjs": {
       "bytes": 4386,
       "sha256": "7c0b82d665ca5283c6f897b8d575c0fd365ff8d4897a2d13d27873563ad45147"
     },
     "scripts/geometry-v2.mjs": {
-      "bytes": 4339,
-      "sha256": "1b2da64de9269cb640dcb01996b4155145209462bc24743b08b3dfd348938d16"
+      "bytes": 4571,
+      "sha256": "bab36f3c2b4bad116ba77262f4844bd011ab4d20f7db6760865b4767d51e21e6"
     },
     "scripts/geometry.mjs": {
       "bytes": 4324,
@@ -459,13 +459,17 @@
       "bytes": 11382,
       "sha256": "108034c482f599d28c882338c4e9e39d0e4e897aef40c714c026c92906e15981"
     },
+    "scripts/reading-camera.mjs": {
+      "bytes": 4518,
+      "sha256": "b89a72640653c5dc7ec7eceb01c2cd5daf09b537c0cb2c8d171155e7a0b8b681"
+    },
     "scripts/review.mjs": {
       "bytes": 15742,
       "sha256": "a3e9bb719f1001b58952849cf98e03eb440ccebebace338cd5767a50a3925b79"
     },
     "scripts/score-strip.mjs": {
-      "bytes": 12022,
-      "sha256": "f80cf237c9adc58b25adfc6ad4590b7471601f54e35cf8567cf6ab1dd1931779"
+      "bytes": 12244,
+      "sha256": "508d6bc1087685bee1da828936ee64e19b4c72531ec1841708ee0c07ed995859"
     },
     "scripts/score.mjs": {
       "bytes": 4355,
@@ -488,16 +492,16 @@
       "sha256": "7f3bfd769805fc8b66c1991c5eb5dbc11e1dc61c4012ebe06766d8c6f0e5b6ae"
     },
     "scripts/workbench-core.mjs": {
-      "bytes": 21839,
-      "sha256": "203d8f4b3360aaa92d1aabad2345b0dc719be1c2dd6088471771367ad7869885"
+      "bytes": 21880,
+      "sha256": "73a7a3ab0b6baa230ffb460b6d62cab41443785436bb2093ff7d07aacfcd6283"
     },
     "scripts/workbench-engrave-bridge.mjs": {
       "bytes": 4414,
       "sha256": "b48d79b25cc902bc0fa6c435dd517c431bb6ba9f200ee92bfd69202ea0615ddf"
     },
     "scripts/workbench-export-v2.mjs": {
-      "bytes": 5510,
-      "sha256": "b41cd1cac83c75f6cb7e4f8a6a1103068c76d44054359d23b768b07afe019c42"
+      "bytes": 5488,
+      "sha256": "9fd1aad977b6a29e9264955c286f77d8dbda9c04a4ff63888a878cf0d79c0451"
     },
     "scripts/workbench-launch-child.mjs": {
       "bytes": 732,
@@ -508,8 +512,8 @@
       "sha256": "462deaffec461609bff72fe9254847bd227760a16a6cfa18580b6df2426f0ef5"
     },
     "scripts/workbench-prepare.py": {
-      "bytes": 19704,
-      "sha256": "5610116617e846e36092475ed9adebe72222fa5ac945f7a71b70d29120de3d4a"
+      "bytes": 19931,
+      "sha256": "5661d4c9aa00ccee39d063deb06ce57e77f962502a52ca66fea4ddb15b350811"
     },
     "scripts/workbench-server.mjs": {
       "bytes": 6834,
@@ -592,8 +596,8 @@
       "sha256": "e32e4d3077a764899b1bf2f26e95fcc1d85787d0964d20eebdd1c951f05fcb4c"
     },
     "workbench/react-bundle.js": {
-      "bytes": 600298,
-      "sha256": "cbb69d9fde1f8316fa6693a62a1207a83b1339c5abbaa6ff8374a72809d4c56b"
+      "bytes": 600989,
+      "sha256": "db5bc80c1385375bb26a6515bdedd27a9218ac4deaaa0abceda39fd6cf158119"
     }
   },
   "displayName": "AI有谱",

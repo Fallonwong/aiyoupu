@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
-import {AiyoupuScoreScene as LegacyScene,type AiyoupuScoreSceneProps as LegacySceneProps} from './AiyoupuScoreScene';
+import {AiyoupuScoreScene as LegacyScene,scoreHandoffOpacity,type AiyoupuScoreSceneProps as LegacySceneProps} from './AiyoupuScoreScene';
 import {ScoreNoteLeap} from './ScoreNoteLeap';
 export type {AiyoupuTimeline} from './AiyoupuScoreScene';
 export type AiyoupuScoreSceneProps=LegacySceneProps & {visualPreset?:'TeachingLandscape'};
@@ -60,7 +60,8 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
     while(transitionStart>0&&movingRow(focusPath[transitionStart],focusPath[transitionStart-1]))transitionStart--;
     while(transitionEnd+1<focusPath.length&&movingRow(focusPath[transitionEnd+1],focusPath[transitionEnd]))transitionEnd++;
   }
-  const inTransition=multiSystem&&transitionEnd>transitionStart;
+  const inTransition=multiSystem&&transitionEnd>transitionStart&&
+    !timeline.focusHandoffs?.some(cut=>cut.frame>transitionStart&&cut.frame<=transitionEnd);
   const previousFocus=inTransition?focusPath[Math.max(0,transitionStart-1)]:focus;
   const nextFocus=inTransition?focusPath[Math.min(focusPath.length-1,transitionEnd+1)]:focus;
   const bands=timeline.systemBands??[];
@@ -110,13 +111,13 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
         <Img src={staticFile(scoreSrc)} style={{position:'absolute',inset:0,width:timeline.scoreWidth,height:timeline.scoreHeight,mixBlendMode:'multiply',objectFit:'fill',objectPosition:'0 0'}}/>
         {showNotes&&(['right','left'] as const).map(hand=><ScoreNoteLeap key={hand} {...(hand==='right'?props.rightStyle:props.leftStyle)}
           events={timeline.events.filter(e=>e.hand===hand)} width={timeline.scoreWidth} height={timeline.scoreHeight}
-          color={hand==='right'?'#b895ff':'#E95514'} followChordNotes starburst={false} rippleRing={false} inactiveNoteOpacity={0} pulseOnly={false} style={{position:'absolute',inset:0}}/>)}
+          color={hand==='right'?'#b895ff':'#E95514'} followChordNotes preciseLandings={timeline.noteheadGeometry==='glyph-center/v1'} starburst={false} rippleRing={false} inactiveNoteOpacity={0} pulseOnly={false} style={{position:'absolute',inset:0}}/>)}
       </div>
     </div>;
   };
   return <AbsoluteFill style={{background:'#ffffff',overflow:'hidden',color:'#171717',fontFamily:'Arial, "Microsoft YaHei", sans-serif'}}>
     {audioSrc&&!props.disableAudio&&<Audio src={staticFile(audioSrc)}/>}
-    <div style={{position:'absolute',left:0,right:0,top:stageTop,bottom:stageBottom,overflow:'hidden',zIndex:10}}>
+    <div style={{position:'absolute',left:0,right:0,top:stageTop,bottom:stageBottom,overflow:'hidden',zIndex:10,opacity:scoreHandoffOpacity(timeline,frame)}}>
       {scoreLayer('current',inTransition?nextFocus:focus,incoming?1:0,incoming)}
       {inTransition&&!incoming&&scoreLayer('previous',previousFocus,1,true)}
     </div>
