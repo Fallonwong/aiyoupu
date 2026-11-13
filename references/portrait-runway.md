@@ -21,7 +21,7 @@
 />
 ```
 
-timeline.focusPath 仍由真实几何与映射后的表演时间生成，每帧一项；焦点Y取双谱表中心，不能追单个音高。生成方式仍为 camera-path --timeline FILE --systems FILE --out FILE。布局应提供足够长的横向连续谱带，渲染后呈纵深跑道。普通多行谱仍执行原有12–16帧换行过渡；此预设不重排谱面，不保证把离散谱行变成连续道路，换行处必须审看。
+timeline.focusPath 仍由真实几何与映射后的表演时间生成，每帧一项；焦点Y取双谱表中心，不能追单个音高。先用 score-strip 准备连续谱带，不能用普通多行谱的换行来替代。多行跟谱的过渡规则见 [制作与运镜](production.md)。
 
 镜头参数：1080×1920，中心(540,960)，透视1700，rotateZ=-72°、rotateY=60°、rotateX=0°。120帧内以Smoothstep从scale=.90靠近到1.18，焦点前视70谱面像素逐渐归零；随后跟随focusPath。introFrames=0可取消开场推进。所有时间参数均为帧；30fps下120帧=4秒，24fps下同样4秒应设96帧。camera.scale/rotateZ/rotateX仍可覆盖对应值。
 

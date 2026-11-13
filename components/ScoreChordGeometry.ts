@@ -40,12 +40,12 @@ const notesOf = (e: ScoreAttack): Point[] => {
   return [...new Map(notes.map(n => [`${n.x}:${n.y}`, n])).values()]
     .sort((a, b) => a.y - b.y || a.x - b.x);
 };
-const connected = (a: ScoreAttack, b: ScoreAttack) => {
+const connected = (a: ScoreAttack, b: ScoreAttack, precise = false) => {
   const sa = (a as ScoreAttack & {systemId?: string | number}).systemId;
   const sb = (b as ScoreAttack & {systemId?: string | number}).systemId;
   return !(sa !== undefined && sb !== undefined && sa !== sb)
     && (a.notes??[a]).some(n=>n.durationFrames===undefined||a.frame+n.durationFrames>=b.frame-.1)
-    && b.x >= a.x - 200 && Math.abs(b.y - a.y) <= 200;
+    && (precise && sa!==undefined && sb!==undefined || b.x >= a.x - 200 && Math.abs(b.y - a.y) <= 200);
 };
 const pairsOf = (a: Point[], b: Point[], span=0) => {
   // A tied member still sounding through another chord's attack must not
@@ -85,7 +85,7 @@ const flightPoints = (pairs: ReturnType<typeof pairsOf>, t: number, arc: number,
  * Inputs are ordered attacks for ONE hand, with all coordinates in score pixels.
  */
 export const scoreChordGeometry = (
-  events: ScoreAttack[] = [], frame = 0, arcHeight = 42, trailFrames = 16, fusionDistance = 18,
+  events: ScoreAttack[] = [], frame = 0, arcHeight = 42, trailFrames = 16, fusionDistance = 18, preciseLandings = false,
 ): ChordFlightGeometry => {
   events=scoreAttackEvents(events);
   const result: ChordFlightGeometry = {heads: [], tails: [], segments: []};
@@ -93,21 +93,27 @@ export const scoreChordGeometry = (
   let current = events.findIndex(e => e.frame > frame);
   current = current < 0 ? events.length - 1 : current - 1;
   const a = events[current], b = events[current + 1];
+  const landing=preciseLandings&&Math.ceil(a.frame)===frame;
   const sounding=notesOf(a).filter(n=>n.durationFrames===undefined||frame<a.frame+n.durationFrames);
-  if (!b || frame === a.frame) result.heads = sounding.map(n=>({x:n.x,y:n.y}));
-  else if (connected(a, b)) {
+  if (landing) result.heads=notesOf(a).map(n=>({x:n.x,y:n.y}));
+  else if (!b || frame === a.frame) result.heads = sounding.map(n=>({x:n.x,y:n.y}));
+  else if (connected(a, b, preciseLandings)) {
     const t = (frame - a.frame) / (b.frame - a.frame);
     const points = flightPoints(pairsOf(notesOf(a), notesOf(b),b.frame-a.frame), t, arcHeight, fusionDistance);
     result.heads = [...new Map(points.map(p => [`${p.x}:${p.y}`, p])).values()];
   }
+  // A break blocks flight, not the light at a note that is still sounding.
+  // No destination core is created until that hand actually attacks again.
+  if(preciseLandings&&!result.heads.length&&b)
+    result.heads=sounding.filter(n=>n.durationFrames!==undefined).map(n=>({x:n.x,y:n.y}));
   if (trailFrames <= 0) return result;
   const start = frame - trailFrames;
   for (let i = current; i >= 0; i--) {
     // Stop after the first segment crossing the start of the visible tail window.
     const from = events[i], to = events[i + 1];
-    if (to && !connected(from, to)) break;
-    if (to && to.frame > start && connected(from, to)) {
-      const lo = Math.max(start, from.frame), hi = Math.min(frame, to.frame);
+    if (to && !connected(from, to, preciseLandings)) break;
+    if (to && to.frame > start && connected(from, to, preciseLandings)) {
+      const lo = Math.max(start, from.frame), hi = Math.min(landing?a.frame:frame, to.frame);
       const pairs = pairsOf(notesOf(from), notesOf(to),to.frame-from.frame);
       if (hi > lo) for (let branch = 0; branch < pairs.length; branch++) {
         const count = Math.max(2, Math.ceil((hi - lo) * 3) + 1);

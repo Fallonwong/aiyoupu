@@ -1,6 +1,6 @@
 # AI有谱: implemented behavior and limits
 
-The current package is **V2.2 (v2.2.0)**. Actual-song end-to-end production acceptance remains outstanding. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
+The current package is **V2.3 (v2.3.0)**. Actual-song end-to-end production acceptance remains outstanding. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
 
 ## Implemented
 
@@ -8,7 +8,7 @@ The current package is **V2.2 (v2.2.0)**. Actual-song end-to-end production acce
 - Evidence-bound original-source coverage inventory and explicit excerpt mapping. This checks declared scope, not OCR correctness or pitch correspondence.
 - Unapproved review worksheet with original source, original audio, all written notes and separately entered observations. Candidate-only worksheets retain null final map identity and an unresolved blocker.
 - Formal audible jobs recompute full human content/time review, source scope where needed, and all input hashes. No approval from three onsets, DTW, a passed summary or an Agent-generated review. Freeze underlying evidence and reachable code. A local JSON declaration is not identity authentication.
-- Configuration confirmation, first-four direction review plus full-song risk positions, portrait/landscape presets, grand-staff-centered dynamic pivot, Smoothstep system changes, paper/dark/custom backgrounds, palette indicators, title and avatar layering. Existing default rendering is retained when aspect is omitted.
+- Configuration confirmation, first-four direction review plus full-song risk positions, portrait/landscape presets, grand-staff-centered dynamic pivot, speed-checked row pans or brief score-only handoffs, paper/dark/custom backgrounds, palette indicators, title and avatar layering. Existing default rendering is retained when aspect is omitted.
 - Decoded output/master audio preservation check. This tests transport, not musical correctness.
 
 ## Partially implemented / experimental

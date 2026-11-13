@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {cameraSpeedLimit,cameraTravel} from './reading-camera.mjs';
 // Camera continuity is a measured property of the path, not a promise in prose.
 // A path that holds one coordinate for several frames and then jumps is the
 // literal "slideshow" camera: the score only moves when a new attack arrives.
@@ -45,12 +46,60 @@ export function focusContinuityReport(timeline) {
     return { schema: 'aiyoupu-focus-continuity/v1', checked: false, reason: 'focusPath contains a non-finite sample' };
   }
   const { hopX, hopY } = continuityThresholds(timeline);
+  const bounds=timeline.systemBounds;
+  const rowChanges=new Set();
+  let lastRow;
+  for(const e of [...(timeline.events??[])].sort((a,b)=>a.frame-b.frame)){
+    const row=e.systemId??bounds?.findIndex(b=>e.y>=b.top&&e.y<=b.bottom);
+    if(row===undefined||row===-1)continue;
+    if(lastRow!==undefined&&row!==lastRow)rowChanges.add(Math.ceil(e.frame));
+    lastRow=row;
+  }
+  const declared=timeline.focusHandoffs;
+  const validHandoff=h=>h&&Number.isInteger(h.frame)&&h.frame>0&&h.frame<path.length&&
+    Number.isInteger(h.dipFrames)&&h.dipFrames>=0&&h.dipFrames<=5&&rowChanges.has(h.frame)&&
+    Math.abs(movement(path,h.frame).dy)>hopY;
+  const invalidHandoffs=declared!==undefined&&(!Array.isArray(declared)||
+    declared.some(h=>!validHandoff(h))||new Set(declared.map(h=>h.frame)).size!==declared.length);
+  const cuts=new Set(!invalidHandoffs?(declared??[]).map(h=>h.frame):[]);
+  const sweeps=[];
+  const speeds=[0,...path.slice(1).map((_,i)=>{
+    const {dx,dy}=movement(path,i+1);return cuts.has(i+1)?0:cameraTravel(dx,dy,timeline);
+  })];
+  const speedLimit=cameraSpeedLimit(timeline.fps);
+  for(let f=1;f<speeds.length;f++){
+    if(speeds[f]<=speedLimit)continue;
+    const start=f;
+    let peak=speeds[f];
+    while(f+1<speeds.length&&speeds[f+1]>speedLimit)peak=Math.max(peak,speeds[++f]);
+    sweeps.push({start,end:f,peakPercentPerFrame:+(100*peak).toFixed(2)});
+  }
+  // Repeated troughs in same-direction, same-row motion are visible even
+  // when every frame has a different position. Ignore isolated pauses.
+  const troughs=[],fps=timeline.fps||30;
+  for(let f=4;f<path.length-3;f++){
+    const steps=Array.from({length:7},(_,i)=>movement(path,f+i-3));
+    if(steps.some((d,i)=>cuts.has(f+i-3)||Math.abs(d.dy)>STATIC_EPS))continue;
+    const dir=Math.sign(steps[0].dx);
+    if(!dir||steps.some(d=>d.dx*dir<0))continue;
+    const s=steps.map(d=>Math.abs(d.dx)),side=Math.min(Math.max(...s.slice(0,3)),Math.max(...s.slice(4)));
+    if(s[3]>=s[2]||s[3]>s[4]||s[3]>.32*side||cameraTravel(side,0,timeline)<.0015*30/fps)continue;
+    troughs.push(f);
+  }
+  const stopGo=[];
+  for(let i=0;i<troughs.length;){
+    let j=i;
+    while(j+1<troughs.length&&troughs[j+1]-troughs[j]<=.7*fps)j++;
+    if(j-i>=2)stopGo.push({start:troughs[i],end:troughs[j],count:j-i+1});
+    i=j+1;
+  }
   const hops = [];
   let staticFrames = 0;
   let maxStepX = 0;
   let maxStepY = 0;
   for (let i = 1; i < path.length; i++) {
     const { dx, dy } = movement(path, i);
+    if(cuts.has(i)) continue;
     maxStepX = Math.max(maxStepX, Math.abs(dx));
     maxStepY = Math.max(maxStepY, Math.abs(dy));
     if (isStatic(path, i)) {
@@ -71,9 +120,9 @@ export function focusContinuityReport(timeline) {
   }
   const shortRuns = [];
   for (let i = 1; i < path.length;) {
-    if (isStatic(path, i)) { i++; continue; }
+    if (cuts.has(i)||isStatic(path, i)) { i++; continue; }
     let end = i;
-    while (end + 1 < path.length && !isStatic(path, end + 1)) end++;
+    while (end + 1 < path.length && !cuts.has(end + 1) && !isStatic(path, end + 1)) end++;
     const span = end - i + 1;
     const travelX = Math.abs(path[end].focusX - path[i - 1].focusX);
     const travelY = Math.abs(path[end].focusY - path[i - 1].focusY);
@@ -93,7 +142,11 @@ export function focusContinuityReport(timeline) {
     thresholds: { hopX: Number(hopX.toFixed(3)), hopY: Number(hopY.toFixed(3)), staticEps: STATIC_EPS },
     hops,
     shortRuns,
-    status: hops.length ? 'discontinuous' : shortRuns.length ? 'abrupt' : 'continuous',
+    handoffs:[...cuts],
+    invalidHandoffs:!!invalidHandoffs,
+    sweeps,
+    stopGo,
+    status: invalidHandoffs ? 'invalid_handoffs' : hops.length ? 'discontinuous' : shortRuns.length ? 'abrupt' : sweeps.length||stopGo.length ? 'motion_review_required' : 'continuous',
   };
 }
 
@@ -111,6 +164,7 @@ const NEXT_STEP = 'Regenerate the path with the camera-path command (or directio
 export function assertFocusContinuity(timeline, { strict = false } = {}) {
   const report = focusContinuityReport(timeline);
   if (!report.checked) return report;
+  if(report.invalidHandoffs)throw failure('FOCUS_HANDOFF_INVALID','A declared row handoff does not match an attack and a row change','Rebuild the path with camera-path.');
   if (report.hops.length) {
     throw failure(
       'FOCUS_PATH_DISCONTINUOUS',
@@ -124,6 +178,10 @@ export function assertFocusContinuity(timeline, { strict = false } = {}) {
       'focusPath covers a visible distance inside ' + report.shortRuns.length + ' move(s) of at most two frames; first from frame ' + report.shortRuns[0].start + '. No easing can be seen at that speed.',
       NEXT_STEP,
     );
+  }
+  if(strict&&(report.sweeps.length||report.stopGo.length)){
+    const range=[...report.sweeps,...report.stopGo].sort((a,b)=>a.start-b.start)[0];
+    throw failure('FOCUS_MOTION_REVIEW_REQUIRED',`Fast sweep or repeated braking at frames ${range.start}–${range.end}`,'Rebuild with camera-path and review a rendered clip across the affected frames.');
   }
   return report;
 }
@@ -150,6 +208,8 @@ export function repairFocusContinuity(timeline, { windowFrames = 14, maxPasses =
   if (!path || path.length < 2) throw failure('FOCUS_PATH_REQUIRED', 'focusPath needs at least two frames', 'Prepare the score first.');
   const before = focusContinuityReport(timeline);
   if (!before.checked) throw failure('FOCUS_PATH_REQUIRED', before.reason, 'Prepare the score first.');
+  if(before.handoffs.length||before.invalidHandoffs)
+    throw failure('FOCUS_HANDOFF_REBUILD_REQUIRED','This path declares row handoffs','Regenerate it with camera-path rather than smoothing across a declared handoff.');
   const current = path.map(p => ({ focusX: p.focusX, focusY: p.focusY }));
   const yCap = Math.max(2, Math.round(windowFrames));
   let repaired = 0;

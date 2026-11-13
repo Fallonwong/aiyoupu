@@ -56,7 +56,7 @@ export function preparePreview({timeline,score,audio,title='',subtitle='',label=
  if(fs.statSync(path.join(previewDir,'assets','fallontalk-logo.png'),{throwIfNoEntry:false})?.isFile())files.brand={file:'assets/fallontalk-logo.png',sha256:fileHash(path.join(previewDir,'assets','fallontalk-logo.png'))};
  const manifest={schema:PREVIEW_SCHEMA,title,subtitle,label,chineseTitle,timeline:base.timeline,timelineSha256:hashObject(base.timeline),scoreSrc:'assets/'+path.basename(score),audioSrc:audio?'assets/'+path.basename(audio):null,provenance:{kind:'agent-prepared'},defaultDirection:d,files};
  fs.writeFileSync(path.join(previewDir,'preview.json'),JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});
- return {status:'preview_created',preview:path.join(previewDir,'preview.json'),score:path.join(previewDir,files.score.file),audio:audio?path.join(previewDir,files.audio.file):null,noteCount:timeline.events.reduce((n,e)=>n+(e.notes?.length??0),0),eventCount:timeline.events.length,durationInFrames:timeline.durationInFrames};
+ return {status:'preview_created',preview:path.join(previewDir,'preview.json'),score:path.join(previewDir,files.score.file),audio:audio?path.join(previewDir,files.audio.file):null,noteCount:timeline.events.reduce((n,e)=>n+(e.notes?.length??0),0),eventCount:timeline.events.length,durationInFrames:timeline.durationInFrames,workbenchHint:'想更直观地看效果，可以对我说「打开工作台」，边播放边看运镜、光点和换行，也可以切换风格。'};
 }
 
 function directionPaths(preview,outRoot=path.dirname(preview)){return {outRoot:path.resolve(outRoot),directions:path.join(path.resolve(outRoot),'directions')};}
@@ -121,6 +121,18 @@ export function attachRuntimeSources(record,runtimeSources){
  return {...record,runtimeSources};
 }
 
+export function requireHandoffRuntime(props,runtimeSources){
+ const precise=props.timeline.noteheadGeometry==='glyph-center/v1';
+ if(!props.timeline.focusHandoffs?.length&&!precise)return;
+ const files=['AiyoupuScoreScene.tsx',...(props.visualPreset==='TeachingLandscape'?['AiyoupuScoreSceneV2.tsx']:[]),
+  ...(precise?['ScoreNoteLeap.tsx','ScoreChordGeometry.ts']:[])];
+ for(const file of files){
+  const expected=fileHash(path.join(skillRootOf(),'components',file));
+  if(!Object.entries(runtimeSources.files).some(([name,hash])=>path.basename(name)===file&&hash===expected))
+   throw failure('HANDOFF_RUNTIME_UPDATE_REQUIRED','The render project lacks the matching row transition or note landing renderer','Reuse the current dependencies in a fresh runtime folder; preserve the old project and rederive the job.');
+ }
+}
+
 export function deriveJob({preview,directionFile,out,project,entry=null,composition='Aiyoupu-Song',assetProject,scoreApproval=null}){
  const saved=directionFile?loadDirection(directionFile):null,id=saved?.id??'D-derive';
  let material;
@@ -148,6 +160,7 @@ export function deriveJob({preview,directionFile,out,project,entry=null,composit
  const cli=path.join(runtimeProject,'node_modules','@remotion','cli','remotion-cli.js');
  if(!fs.existsSync(cli))throw failure('REMOTION_MISSING','The selected project has no @remotion/cli','Reuse a compatible existing Remotion project; this command does not install dependencies.');
  const runtimeSources=runtimeSourceFingerprint(runtimeProject,resolvedEntry);
+ requireHandoffRuntime(material.props,runtimeSources);
  const job={schemaVersion:1,status:'direction_draft',project:runtimeProject,entry:resolvedEntry,composition,propsFile,propsSha256:fileHash(propsFile),timelineSha256:hashObject(material.props.timeline),scoreSrc:material.props.scoreSrc,audioSrc:material.props.audioSrc??null,assetProject:jobDir,direction:{id,file:directionFile?path.resolve(directionFile):null},productionFile,fingerprints:{[propsFile]:fileHash(propsFile),[productionFile]:fileHash(productionFile),...Object.fromEntries([[path.join(publicDir,material.props.scoreSrc),fileHash(path.join(publicDir,material.props.scoreSrc))],...(material.props.audioSrc?[[path.join(publicDir,material.props.audioSrc),fileHash(path.join(publicDir,material.props.audioSrc))]]:[])])},draft:true,executionProtocol:'aiyoupu-direction/v3',scoreReview:'not_supplied',quality:null,production,workbenchSource:{directionId:id,origin:saved?.origin??'agent',preview:material.previewFile??material.preview??null,directionSha256:material.directionSha256,propsSha256:sha256(JSON.stringify(material.props,null,2)+'\n'),requiresNewKeyframeApproval:true}};
  if(scoreApproval){
   const file=path.resolve(scoreApproval),approval=requireApproval(file,'score',{musicSha256:musicIdentity(material.props.timeline)}),record=read(file);

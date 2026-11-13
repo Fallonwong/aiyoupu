@@ -4,7 +4,7 @@ AI有谱帮助你把钢琴乐谱做成跟随音乐演奏的视频。你负责提
 
 ## 安装
 
-1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.2.0)下载 `aiyoupu-2.2.0.zip` 并解压。
+1. 从[下载页](https://github.com/Fallonwong/aiyoupu/releases/tag/v2.3.0)下载 `aiyoupu-2.3.0.zip` 并解压。
 2. 将解压得到的 `aiyoupu` 文件夹放入当前 Agent 的 Skill 目录。Codex 常见位置是用户目录下的 `.agents/skills/`；其他 Agent 使用各自的技能安装目录。如果不清楚位置，可以让 Agent 帮你查找。
 3. 开启新对话，告诉 Agent 使用 `$aiyoupu`。
 
@@ -53,7 +53,7 @@ Agent 会展示整理后的乐谱。重点检查音高、节奏、休止符、�
 
 可以直接在对话中选择，也可以用可选工作台：
 
-1. 让 Agent 打开这首曲子的工作台。
+1. 等预览准备好后，对 Agent 说「打开工作台」。
 2. 点击预设，调整缩放、焦点等参数，播放或拖动进度查看效果。
 3. 满意后点击「保存方向并复制」。
 4. 将复制的提示词粘贴回 Agent，继续制作。

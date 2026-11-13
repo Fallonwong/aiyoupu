@@ -68,7 +68,10 @@ export async function buildScoreStrip({svg,timeline,layout,systems,project,brows
       }
       const src=document.importNode(original,true);document.body.append(src);
       const measure=(root,id)=>{
-        const el=[...root.querySelectorAll('[id]')].find(e=>e.id===id);check(el,'missing glyph '+id);
+        const node=[...root.querySelectorAll('[id]')].find(e=>e.id===id);check(node,'missing glyph '+id);
+        const heads=node.matches('.note')?node.querySelectorAll('.notehead'):null;
+        check(!heads||heads.length===1,'expected one notehead '+id);
+        const el=heads?heads[0]:node;
         const st=getComputedStyle(el);check(!el.closest('defs,symbol')&&st.display!=='none'&&st.visibility!=='hidden'&&Number(st.opacity)>0,'hidden glyph '+id);
         const b=el.getBBox();check(b.width>0&&b.height>0,'empty glyph '+id);
         const matrix=root.getScreenCTM().inverse().multiply(el.getScreenCTM());
@@ -114,7 +117,7 @@ export async function buildScoreStrip({svg,timeline,layout,systems,project,brows
       output.events=t.events.map(e=>{const i=byId.get(e.systemId??e.sys),s=placed[i];return {...transform(e,s),systemId:s.id,notes:e.notes.map(n=>transform(n,s))};});
       if(output.allNotes)output.allNotes=output.allNotes.map(n=>{const s=placed[byId.get(n.systemId??n.sys)];check(s,'allNotes requires systemId');return transform(n,s);});
       output.scoreWidth=x;output.scoreHeight=height;if(output.width!==undefined)output.width=x;
-      delete output.cameraPath;delete output.focusPath;
+      delete output.cameraPath;delete output.focusPath;delete output.focusHandoffs;
       output.systems=placed.map(s=>({...s,centerY:center,focusY:center}));
       document.body.append(root);
       const mapping=l.mapping.map(m=>{
