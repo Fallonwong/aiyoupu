@@ -13,7 +13,7 @@ export const AiyoupuScoreScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
 /** Keep the last engraved system on screen after its final attack. The measured
  * camera path may stop before the final frame, so hold the destination rather
  * than falling back to the empty top-left of the page. */
-const teachingFrameFocus=(timeline:LegacySceneProps['timeline'],frame:number,fallback:{focusX:number;focusY:number})=>{
+const teachingFrameFocus=(timeline:LegacySceneProps['timeline'],frame:number,fallback:{focusX:number;focusY:number;zoom?:number})=>{
   const path=timeline.focusPath;if(!path?.length)return fallback;
   const at=path[Math.max(0,Math.min(path.length-1,frame))];return at??path[path.length-1];
 };
@@ -36,7 +36,8 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
   const titleFont=multiSystem?56:104;
   const titleTop=multiSystem?32:85;
   const stageTop=multiSystem?126:0,stageBottom=multiSystem?96:0;
-  const scoreScale=props.camera?.scale??2.8;
+  const continuousRows=timeline.rowPans!==undefined;
+  const scoreScale=(props.camera?.scale??2.8)*(continuousRows?(focus.zoom??1):1);
   // At a large teaching zoom the score is wider than the stage. Clamp its
   // horizontal focal point so reading never drifts off the engraved page at
   // either end of a line.
@@ -49,14 +50,14 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
   // could cut through the grand staff.
   const focusPath=timeline.focusPath!;
   let transitionStart=frame,transitionEnd=frame;
-  if(multiSystem){
+  if(multiSystem&&!continuousRows){
     while(transitionStart>0&&Math.abs(focusPath[transitionStart].focusY-focusPath[transitionStart-1].focusY)>1e-6)transitionStart--;
     while(transitionEnd+1<focusPath.length&&Math.abs(focusPath[transitionEnd+1].focusY-focusPath[transitionEnd].focusY)>1e-6)transitionEnd++;
   }
   // A row change is measured with a small tolerance so subpixel differences in
   // the prepared path do not keep the last frame in a transition forever.
   const movingRow=(a:{focusY:number},b:{focusY:number})=>Math.abs(a.focusY-b.focusY)>=.5;
-  if(multiSystem){
+  if(multiSystem&&!continuousRows){
     while(transitionStart>0&&movingRow(focusPath[transitionStart],focusPath[transitionStart-1]))transitionStart--;
     while(transitionEnd+1<focusPath.length&&movingRow(focusPath[transitionEnd+1],focusPath[transitionEnd]))transitionEnd++;
   }
@@ -82,7 +83,7 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
     const noteYs=rowEvents.flatMap(e=>(e.notes??[e]).map(n=>n.y));
     // Smooth the measured horizontal steps within this row. Never average
     // across the return to the next row's left edge.
-    const samples=inTransition?[layerFocus]:focusPath.slice(Math.max(0,frame-3),frame+4)
+    const samples=inTransition||continuousRows?[layerFocus]:focusPath.slice(Math.max(0,frame-3),frame+4)
       .filter(p=>Math.abs(p.focusY-layerFocus.focusY)<1e-6&&Math.abs(p.focusX-layerFocus.focusX)<200);
     const constrained=samples.reduce((sum,p)=>sum+p.focusX,0)/samples.length;
     const layerX=timeline.scoreWidth>halfW*2?Math.max(halfW,Math.min(timeline.scoreWidth-halfW,constrained)):timeline.scoreWidth/2;
@@ -96,7 +97,7 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
     const rowMax=engraving?.bottom??(noteYs.length?Math.max(...noteYs):layerFocus.focusY);
     const minFocus=rowMax+16-stageHeight/(2*scoreScale);
     const maxFocus=rowMin-16+stageHeight/(2*scoreScale);
-    const viewY=multiSystem?(minFocus<=maxFocus
+    const viewY=multiSystem&&!continuousRows?(minFocus<=maxFocus
       ?Math.max(minFocus,Math.min(maxFocus,layerFocus.focusY))
       :(rowMin+rowMax)/2):layerFocus.focusY;
     const layerTop=stageHeight/2-viewY;
@@ -105,7 +106,7 @@ const TeachingScene:React.FC<AiyoupuScoreSceneProps>=(props)=>{
     const clipTop=Math.max(0,stageHeight/2+(rowMin-16-viewY)*scoreScale);
     const clipBottom=Math.max(0,stageHeight/2-(rowMax+16-viewY)*scoreScale);
     return <div key={key} aria-hidden={key==='previous'} style={{position:'absolute',inset:0,opacity:layerOpacity,
-      clipPath:multiSystem&&engraving?`inset(${clipTop}px 0 ${clipBottom}px 0)`:undefined}}>
+      clipPath:multiSystem&&engraving&&!continuousRows?`inset(${clipTop}px 0 ${clipBottom}px 0)`:undefined}}>
       <div style={{position:'absolute',left:960-layerX,top:layerTop,width:timeline.scoreWidth,height:timeline.scoreHeight,
         transformOrigin:`${layerX}px ${viewY}px`,transform:`scale(${scoreScale})`,zIndex:10}}>
         <Img src={staticFile(scoreSrc)} style={{position:'absolute',inset:0,width:timeline.scoreWidth,height:timeline.scoreHeight,mixBlendMode:'multiply',objectFit:'fill',objectPosition:'0 0'}}/>

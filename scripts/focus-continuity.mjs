@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {cameraSpeedLimit,cameraTravel} from './reading-camera.mjs';
+import {cameraSpeedLimit,cameraTravel,rowPanSpeedLimit} from './reading-camera.mjs';
 // Camera continuity is a measured property of the path, not a promise in prose.
 // A path that holds one coordinate for several frames and then jumps is the
 // literal "slideshow" camera: the score only moves when a new attack arrives.
@@ -62,16 +62,24 @@ export function focusContinuityReport(timeline) {
   const invalidHandoffs=declared!==undefined&&(!Array.isArray(declared)||
     declared.some(h=>!validHandoff(h))||new Set(declared.map(h=>h.frame)).size!==declared.length);
   const cuts=new Set(!invalidHandoffs?(declared??[]).map(h=>h.frame):[]);
+  const pans=timeline.rowPans??[];
+  const invalidRowPans=!Array.isArray(pans)||pans.some((p,i)=>!p||![p.start,p.frame,p.end].every(Number.isInteger)||
+    p.start<0||p.start>=p.frame||p.end<=p.frame||p.end>=path.length||
+    !rowChanges.has(p.frame)||(i>0&&p.start<pans[i-1]?.end))||
+    path.some(p=>p.zoom!==undefined&&(!Number.isFinite(p.zoom)||p.zoom<.88-1e-9||p.zoom>1));
+  const inPan=new Set();
+  if(!invalidRowPans)for(const p of pans)for(let f=p.start+1;f<=p.end;f++)inPan.add(f);
   const sweeps=[];
   const speeds=[0,...path.slice(1).map((_,i)=>{
-    const {dx,dy}=movement(path,i+1);return cuts.has(i+1)?0:cameraTravel(dx,dy,timeline);
+    const {dx,dy}=movement(path,i+1);return cuts.has(i+1)?0:cameraTravel(dx,dy,timeline)*(inPan.has(i+1)?Math.max(path[i].zoom??1,path[i+1].zoom??1):1);
   })];
   const speedLimit=cameraSpeedLimit(timeline.fps);
+  const tooFast=f=>speeds[f]>(inPan.has(f)?rowPanSpeedLimit(timeline.fps):speedLimit);
   for(let f=1;f<speeds.length;f++){
-    if(speeds[f]<=speedLimit)continue;
+    if(!tooFast(f))continue;
     const start=f;
     let peak=speeds[f];
-    while(f+1<speeds.length&&speeds[f+1]>speedLimit)peak=Math.max(peak,speeds[++f]);
+    while(f+1<speeds.length&&tooFast(f+1))peak=Math.max(peak,speeds[++f]);
     sweeps.push({start,end:f,peakPercentPerFrame:+(100*peak).toFixed(2)});
   }
   // Repeated troughs in same-direction, same-row motion are visible even
@@ -144,9 +152,10 @@ export function focusContinuityReport(timeline) {
     shortRuns,
     handoffs:[...cuts],
     invalidHandoffs:!!invalidHandoffs,
+    invalidRowPans,
     sweeps,
     stopGo,
-    status: invalidHandoffs ? 'invalid_handoffs' : hops.length ? 'discontinuous' : shortRuns.length ? 'abrupt' : sweeps.length||stopGo.length ? 'motion_review_required' : 'continuous',
+    status: invalidRowPans ? 'invalid_row_pans' : invalidHandoffs ? 'invalid_handoffs' : cuts.size ? 'legacy_row_cuts' : hops.length ? 'discontinuous' : shortRuns.length ? 'abrupt' : sweeps.length||stopGo.length ? 'motion_review_required' : 'continuous',
   };
 }
 
@@ -165,6 +174,8 @@ export function assertFocusContinuity(timeline, { strict = false } = {}) {
   const report = focusContinuityReport(timeline);
   if (!report.checked) return report;
   if(report.invalidHandoffs)throw failure('FOCUS_HANDOFF_INVALID','A declared row handoff does not match an attack and a row change','Rebuild the path with camera-path.');
+  if(report.invalidRowPans)throw failure('FOCUS_ROW_PAN_INVALID','Invalid row-pan window or zoom','Rebuild the path with camera-path.');
+  if(strict&&report.handoffs.length)throw failure('FOCUS_LEGACY_ROW_CUT','The timeline still jumps between rows','Use camera-path to rebuild the camera only; keep the score and audio.');
   if (report.hops.length) {
     throw failure(
       'FOCUS_PATH_DISCONTINUOUS',
@@ -208,6 +219,8 @@ export function repairFocusContinuity(timeline, { windowFrames = 14, maxPasses =
   if (!path || path.length < 2) throw failure('FOCUS_PATH_REQUIRED', 'focusPath needs at least two frames', 'Prepare the score first.');
   const before = focusContinuityReport(timeline);
   if (!before.checked) throw failure('FOCUS_PATH_REQUIRED', before.reason, 'Prepare the score first.');
+  if(timeline.rowPans?.length||before.invalidRowPans)
+    throw failure('FOCUS_ROW_PAN_REBUILD_REQUIRED','This path has row-pan metadata','Regenerate with camera-path.');
   if(before.handoffs.length||before.invalidHandoffs)
     throw failure('FOCUS_HANDOFF_REBUILD_REQUIRED','This path declares row handoffs','Regenerate it with camera-path rather than smoothing across a declared handoff.');
   const current = path.map(p => ({ focusX: p.focusX, focusY: p.focusY }));

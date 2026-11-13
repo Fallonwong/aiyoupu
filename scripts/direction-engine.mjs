@@ -123,7 +123,7 @@ export function attachRuntimeSources(record,runtimeSources){
 
 export function requireHandoffRuntime(props,runtimeSources){
  const precise=props.timeline.noteheadGeometry==='glyph-center/v1';
- if(!props.timeline.focusHandoffs?.length&&!precise)return;
+ if(!props.timeline.focusHandoffs?.length&&!props.timeline.rowPans?.length&&!precise)return;
  const files=['AiyoupuScoreScene.tsx',...(props.visualPreset==='TeachingLandscape'?['AiyoupuScoreSceneV2.tsx']:[]),
   ...(precise?['ScoreNoteLeap.tsx','ScoreChordGeometry.ts']:[])];
  for(const file of files){
