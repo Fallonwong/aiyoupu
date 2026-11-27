@@ -138,8 +138,8 @@ export function jianpuMain(argv) {
   if (command === 'review' && data.check.imageAudit) {
     const audit=validateImageAudit(data.check.imageAudit,data.check.source);
     return requestReview({stage:'score',out,sourceType:'jianpu-image',musicSha256:data.symbolic.scoreSha256,
-      files:[data.check.source,data.checkFile,data.svg,data.check.imageAudit,audit.capture,audit.original,audit.comparison],
-      display:[audit.comparison,audit.original,data.svg],
+      files:[data.check.source,data.checkFile,data.svg,data.check.imageAudit,audit.capture,audit.original,audit.comparison,...(options.reference?[options.reference]:[])],
+      display:[...(options.reference?[options.reference]:[]),audit.comparison,audit.original,data.svg],
       notes:['请核对整张原谱与 '+audit.measures.length+' 小节逐节对照。','确认使用原录音、采样钢琴或静音，再锁定本版谱面。']});
   }
   if (command === 'review') return requestReview({

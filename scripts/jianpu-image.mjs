@@ -50,15 +50,39 @@ export function cropJianpuImage({image, regions, out, ffmpeg='ffmpeg', ffprobe='
   fs.mkdirSync(out,{recursive:false});
   const original = path.join(out,'original'+path.extname(image).toLowerCase());
   fs.copyFileSync(image,original,fs.constants.COPYFILE_EXCL);
+  // Rotate the whole page once, then crop each region from the rotated page.
+  // Region boxes are measured in original-image pixels; cropping first and
+  // rotating the small crop would shift every off-center box relative to its
+  // source coordinates and the comparison page.
+  const theta=angle*Math.PI/180;
+  const rotw=Math.ceil(width*Math.abs(Math.cos(theta))+height*Math.abs(Math.sin(theta)));
+  const roth=Math.ceil(width*Math.abs(Math.sin(theta))+height*Math.abs(Math.cos(theta)));
+  let pageSource=original,pageWidth=width,pageHeight=height;
+  if(angle){
+    pageSource=path.join(out,'rotated'+path.extname(image).toLowerCase());
+    executeLogged(ffmpeg,['-v','error','-i',original,'-vf',
+      'rotate='+theta+':ow='+rotw+':oh='+roth+':fillcolor=white','-frames:v','1',pageSource],
+      {log:path.join(out,'rotated.command.json')});
+    pageWidth=rotw;pageHeight=roth;
+  }
+  const transformPoint=(x,y)=>{
+    const dx=x-width/2,dy=y-height/2,c=Math.cos(theta),s=Math.sin(theta);
+    return {x:pageWidth/2+dx*c-dy*s,y:pageHeight/2+dx*s+dy*c};
+  };
+  const rotatedBox=box=>{
+    const pts=[[box.x,box.y],[box.x+box.width,box.y],[box.x,box.y+box.height],[box.x+box.width,box.y+box.height]].map(([x,y])=>transformPoint(x,y));
+    const xs=pts.map(point=>point.x),ys=pts.map(point=>point.y);
+    const left=Math.max(0,Math.floor(Math.min(...xs))),top=Math.max(0,Math.floor(Math.min(...ys)));
+    const right=Math.min(pageWidth,Math.ceil(Math.max(...xs))),bottom=Math.min(pageHeight,Math.ceil(Math.max(...ys)));
+    return {x:left,y:top,width:Math.max(1,right-left),height:Math.max(1,bottom-top)};
+  };
   for(const capture of captures) {
     const tag = capture.kind==='heading'?'heading':capture.kind==='line'?'line-'+capture.system:
       'measure-'+capture.number+(capture.row?'-'+capture.row:'');
     const file = path.join(out,tag+'.png');
-    const b=capture.box;
-    const theta=angle*Math.PI/180;
-    const rotation=angle?',rotate='+theta+':ow=rotw('+theta+'):oh=roth('+theta+'):fillcolor=white':'';
-    executeLogged(ffmpeg,['-v','error','-i',original,'-vf',
-      'crop='+b.width+':'+b.height+':'+b.x+':'+b.y+':exact=1'+rotation+',scale=iw*'+scale+':ih*'+scale+':flags=lanczos',
+    const b=angle?rotatedBox(capture.box):capture.box;
+    executeLogged(ffmpeg,['-v','error','-i',pageSource,'-vf',
+      'crop='+b.width+':'+b.height+':'+b.x+':'+b.y+':exact=1,scale=iw*'+scale+':ih*'+scale+':flags=lanczos',
       '-frames:v','1',file],{log:path.join(out,tag+'.command.json')});
     Object.assign(capture,{page:1,file,sha256:hash(file)});
   }

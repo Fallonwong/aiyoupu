@@ -121,6 +121,7 @@ export function bindJob(a){
     const reportFile=need(a,'score-review');
     scoreReview=readJSON(reportFile);
     if(!!scoreReview.imageAudit!==(sourceType==='jianpu-image'))throw failure('JIANPU_SOURCE_TYPE_REQUIRED','Image source provenance does not match the proof','Use the original source type from the score approval.');
+    if(sourceType==='jianpu-image'&&!scoreReview.bindings?.sourceSha256)throw failure('JIANPU_SOURCE_BINDING_REQUIRED','Jianpu image check must bind the original image source hash','Rebuild the proof with --image-audit from the frozen image comparison.');
     reviewFiles=validateJianpuBind({reportFile,timeline:props.timeline,score,approval:a['score-approval'],layout});
   }else if(['pdf','staff-image','jianpu-image','musicxml','audio'].includes(sourceType)){
     if(!a['score-review'])throw failure('SCORE_REVIEW_REQUIRED','Structured score and visual review evidence required','Run aiyoupu score check/compare and resolve uncertain measures before binding.');
