@@ -24,12 +24,12 @@
       "sha256": "c07fdf1d0f858a39eb13c35ddeb7fec4a49148eb395f28c99d8adf1780d1eecc"
     },
     "README.md": {
-      "bytes": 6657,
-      "sha256": "3aed6819ace1a18cdeb83b263038c58aca90b1d0ac9ad901916cd1cee3cfa123"
+      "bytes": 7208,
+      "sha256": "2816f2f81e7ff83908519a04332ce1e91b7a9cb91af1d9792cf4d8603749e904"
     },
     "README_使用说明.md": {
       "bytes": 3562,
-      "sha256": "9f095a750f9047d621691eff5629632f24958fadf775b8e2c1a2b4c43d60c8c0"
+      "sha256": "a41a7f449e8b6d7b2dc67bb1ffb0537e2e2627fd2eda66be0a8f837021df9d8d"
     },
     "SKILL.md": {
       "bytes": 16690,
@@ -316,8 +316,8 @@
       "sha256": "9d6dba6406e7cda542fb11430b982b839076e0891d4938dd1f233bd0b240857a"
     },
     "references/upgrade-status.md": {
-      "bytes": 3995,
-      "sha256": "da593af6f79fc16e37c2bb01380c1335d66b4a9a67097a486f1df6a5d4e34ca2"
+      "bytes": 4146,
+      "sha256": "d137bac410634c6e93a6a13c03c9828bb5dff24fc130a1ac2d1edbeca841c45d"
     },
     "references/visual-presets.md": {
       "bytes": 7513,
