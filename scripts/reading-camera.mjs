@@ -19,9 +19,11 @@ function readingRun(points) {
   return {...points[0],points,slopes};
 }
 
-export function buildReadingCamera(timeline, systems, {transitionFrames=14}={}) {
+export function buildReadingCamera(timeline, systems, {transitionFrames=14,rowPanScale=1}={}) {
   if(!Number.isInteger(transitionFrames)||transitionFrames<12||transitionFrames>16)
     throw failure('CAMERA_WINDOW','Use 12..16 frames as the base wrap window','Check the actual wrap in a motion preview.');
+  if(!Number.isFinite(rowPanScale)||rowPanScale<1||rowPanScale>1.6)
+    throw failure('CAMERA_WINDOW','Row pan scale must be within 1..1.6','Choose a measured pan that keeps outgoing and incoming notes visible.');
   const bounds=timeline.systemBounds;
   const centers=new Map();
   if(systems!==undefined){
@@ -61,7 +63,7 @@ export function buildReadingCamera(timeline, systems, {transitionFrames=14}={}) 
     const available=b.frame-a.frame;
     if(span<=available)return {start:b.frame-span};
     const fps=timeline.fps||30,frame=Math.ceil(b.frame);
-    const frames=Math.min(Math.round(fps*1.45),Math.max(Math.round(fps*.7),Math.ceil(distance*54*fps/30)));
+    const frames=Math.min(Math.round(fps*1.45*rowPanScale),Math.max(Math.round(fps*.7),Math.ceil(distance*54*fps/30*rowPanScale)));
     const lead=Math.round(frames*.68);
     // Use time on both sides of the entrance; camera and musical time are
     // independent. Midpoints leave a complete reading interval between wraps.

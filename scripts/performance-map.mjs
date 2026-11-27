@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {jianpuSymbolic} from './jianpu-symbolic.mjs';
 import {hashObject,sha256,failure} from './audio.mjs';
 const fail=(code,message)=>{throw failure(code,message,'Retain source notation and explicit playback order; never infer or fill missing notes.');};
 const q=v=>{const [a,b=1]=String(v).split('/').map(Number);if(!Number.isFinite(a/b)||b===0)fail('SCORE_TIME_INVALID',String(v));return a/b;};
@@ -53,7 +54,10 @@ export function secondsAt(map,beat){
   const a=map.anchors[i-1],b=map.anchors[i];return a.seconds+(beat-a.beat)/(b.beat-a.beat)*(b.seconds-a.seconds);
 }
 export function mappedTimeline({symbolic,map,audio,placement,fps=30,tailFrames=15}){
-  validateTimeMap(map,symbolic,audio);if(!(fps>0)||!Number.isFinite(fps)||!Number.isInteger(tailFrames)||tailFrames<0)fail('TIMING_PARAMETERS','Invalid fps/tail');
+  validateTimeMap(map,symbolic,audio);return timelineFromMap({symbolic,map,placement,fps,tailFrames});
+}
+export function timelineFromMap({symbolic,map,placement,fps=30,tailFrames=15}){
+  if(!(fps>0)||!Number.isFinite(fps)||!Number.isInteger(tailFrames)||tailFrames<0)fail('TIMING_PARAMETERS','Invalid fps/tail');
   if(!(placement.scoreWidth>0&&placement.scoreHeight>0))fail('LAYOUT_REQUIRED','Score dimensions required');
   const positions=new Map(placement.notes.map(n=>[n.id,n]));if(positions.size!==placement.notes.length)fail('LAYOUT_REQUIRED','Duplicate placement ID');
   const groups=new Map();let end=0;
@@ -63,16 +67,16 @@ export function mappedTimeline({symbolic,map,audio,placement,fps=30,tailFrames=1
     const frame=secondsAt(map,n.startBeat)*fps,durationFrames=(secondsAt(map,n.endBeat)-secondsAt(map,n.startBeat))*fps;
     const key=`${hand}:${frame}`,g=groups.get(key)??{hand,frame,systemId:p.systemId,notes:[]};
     if(g.systemId!==p.systemId)fail('SYSTEM_MAPPING_CONFLICT',n.id);
-    g.notes.push({id:n.id,writtenId:n.writtenId,pitch:n.pitch,part:n.part,voice:n.voice,staff:n.staff,measureId:n.measureId,occurrence:n.occurrence,pickup:n.pickup,x:p.x,y:p.y,durationFrames,tieStart:n.ties.includes('start'),tieStop:n.ties.includes('stop'),slurs:n.slurs.map(a=>({id:String(a.number),type:a.type})),beams:n.beams,timingMethod:map.anchors.some(a=>Math.abs(a.beat-n.startBeat)<1e-9)?'anchor':'interpolated'});groups.set(key,g);
+    g.notes.push({id:n.id,writtenId:n.writtenId,pitch:n.pitch,part:n.part,voice:n.voice,staff:n.staff,measureId:n.measureId,occurrence:n.occurrence,pickup:n.pickup,x:p.x,y:p.y,durationFrames,tieStart:n.ties.includes('start'),tieStop:n.ties.includes('stop'),slurs:n.slurs.map(a=>({id:String(a.number),type:a.type})),beams:n.beams,...(symbolic.playback?.kind==='jianpu/v1'?{velocity:n.velocity,articulation:n.articulation,...(n.fingering?{fingering:n.fingering}:{})}:{}),timingMethod:map.anchors.some(a=>Math.abs(a.beat-n.startBeat)<1e-9)?'anchor':'interpolated'});groups.set(key,g);
   }
   const events=[...groups.values()].sort((a,b)=>a.frame-b.frame||a.hand.localeCompare(b.hand));for(const e of events){e.x=e.notes.reduce((a,n)=>a+n.x,0)/e.notes.length;e.y=e.notes.reduce((a,n)=>a+n.y,0)/e.notes.length;}
-  return {fps,durationInFrames:Math.ceil(end+tailFrames),scoreWidth:placement.scoreWidth,scoreHeight:placement.scoreHeight,events,status:'needs_content_and_timing_review',sourceMusicxmlSha256:symbolic.sourceSha256,notation:{schema:'aiyoupu-symbolic-events/v2',scoreSha256:symbolic.scoreSha256},timing:{schema:'aiyoupu-time-map/v2',mapSha256:hashObject(map),audioSha256:map.audioSha256},symbolic,map};
+  return {fps,durationInFrames:Math.ceil(end+tailFrames),scoreWidth:placement.scoreWidth,scoreHeight:placement.scoreHeight,events,status:'needs_content_and_timing_review',...(symbolic.playback?.kind==='jianpu/v1'?{sourceJianpuSha256:symbolic.sourceSha256}:{sourceMusicxmlSha256:symbolic.sourceSha256}),notation:{schema:'aiyoupu-symbolic-events/v2',scoreSha256:symbolic.scoreSha256},timing:{schema:'aiyoupu-time-map/v2',mapSha256:hashObject(map),audioSha256:map.audioSha256},symbolic,map};
 }
 export function validateMappedNotation(t,check){
   const s=validateSymbolic(t.symbolic);if(s.sourceSha256!==check.sourceSha256||!check.structuralPassed)fail('NOTATION_MAPPING_REQUIRED','Wrong checked source');
-  const rebuilt=check.schema==='aiyoupu-midi-check/v2'?midiScoreEvents(check.midi,check.sourceSha256,check.assignment):scoreEvents(check,{playback:s.playback});if(rebuilt.scoreSha256!==s.scoreSha256||t.notation?.scoreSha256!==s.scoreSha256||t.timing?.mapSha256!==hashObject(t.map))fail('NOTATION_MAPPING_REQUIRED','Changed notation/map');
+  const rebuilt=check.schema==='aiyoupu-jianpu-check/v1'?jianpuSymbolic(check):check.schema==='aiyoupu-midi-check/v2'?midiScoreEvents(check.midi,check.sourceSha256,check.assignment):scoreEvents(check,{playback:s.playback});if(rebuilt.scoreSha256!==s.scoreSha256||t.notation?.scoreSha256!==s.scoreSha256||t.timing?.mapSha256!==hashObject(t.map))fail('NOTATION_MAPPING_REQUIRED','Changed notation/map');
   const expected=s.events.filter(n=>n.kind==='note'),actual=t.events.flatMap(e=>e.notes.map(n=>({...n,frame:e.frame})));
   if(actual.length!==expected.length||new Set(actual.map(n=>n.id)).size!==expected.length)fail('NOTATION_NOTE_COUNT','Missing/duplicate notes');
-  const src=new Map(expected.map(n=>[n.id,n]));for(const n of actual){const e=src.get(n.id);if(!e||n.pitch!==e.pitch||n.part!==e.part||n.voice!==e.voice||n.staff!==e.staff||n.writtenId!==e.writtenId||n.measureId!==e.measureId||n.occurrence!==e.occurrence||!!n.pickup!==!!e.pickup||!!n.tieStart!==e.ties.includes('start')||!!n.tieStop!==e.ties.includes('stop')||hashObject(n.slurs??[])!==hashObject(e.slurs.map(a=>({id:String(a.number),type:a.type})))||hashObject(n.beams??[])!==hashObject(e.beams)||Math.abs(n.frame-secondsAt(t.map,e.startBeat)*t.fps)>1e-6||Math.abs(n.durationFrames-(secondsAt(t.map,e.endBeat)-secondsAt(t.map,e.startBeat))*t.fps)>1e-6)fail('NOTATION_SEMANTICS_LOST',n.id);}
+  const src=new Map(expected.map(n=>[n.id,n]));for(const n of actual){const e=src.get(n.id);if(!e||n.pitch!==e.pitch||(s.playback?.kind==='jianpu/v1'&&(n.velocity!==e.velocity||n.fingering!==e.fingering||hashObject(n.articulation)!==hashObject(e.articulation)))||n.part!==e.part||n.voice!==e.voice||n.staff!==e.staff||n.writtenId!==e.writtenId||n.measureId!==e.measureId||n.occurrence!==e.occurrence||!!n.pickup!==!!e.pickup||!!n.tieStart!==e.ties.includes('start')||!!n.tieStop!==e.ties.includes('stop')||hashObject(n.slurs??[])!==hashObject(e.slurs.map(a=>({id:String(a.number),type:a.type})))||hashObject(n.beams??[])!==hashObject(e.beams)||Math.abs(n.frame-secondsAt(t.map,e.startBeat)*t.fps)>1e-6||Math.abs(n.durationFrames-(secondsAt(t.map,e.endBeat)-secondsAt(t.map,e.startBeat))*t.fps)>1e-6)fail('NOTATION_SEMANTICS_LOST',n.id);}
   return {status:'notation_and_map_match',writtenNotes:actual.length};
 }

@@ -1,0 +1,618 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JianpuJSON v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "enum": [
+        "aiyoupu-jianpu/v1"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "credits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "tonic": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "step": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G"
+          ]
+        },
+        "accidental": {
+          "type": "integer",
+          "minimum": -2,
+          "maximum": 2
+        },
+        "octave": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "step",
+        "accidental"
+      ]
+    },
+    "meter": {
+      "$ref": "#/$defs/meter"
+    },
+    "tempo": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tempo"
+      },
+      "minItems": 0
+    },
+    "voices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/voice"
+      },
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "measures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/measure"
+      },
+      "minItems": 1
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/note"
+      },
+      "minItems": 1
+    },
+    "tuplets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tuplet"
+      },
+      "minItems": 0
+    },
+    "annotations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/annotation"
+      },
+      "minItems": 0
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/issue"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema",
+    "title",
+    "tonic",
+    "meter",
+    "tempo",
+    "voices",
+    "measures",
+    "notes",
+    "tuplets",
+    "annotations",
+    "issues"
+  ],
+  "$defs": {
+    "fraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "n": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "d": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "n",
+        "d"
+      ]
+    },
+    "meter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "beats": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "beatUnit": {
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128
+          ]
+        }
+      },
+      "required": [
+        "beats",
+        "beatUnit"
+      ]
+    },
+    "anchor": {
+      "anyOf": [
+        {
+          "required": [
+            "noteId",
+            "edge"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "edge": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            },
+            "noteId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "type": "object"
+        },
+        {
+          "required": [
+            "measure",
+            "beat"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "measure": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "beat": {
+              "$ref": "#/$defs/fraction"
+            },
+            "voice": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "sourceBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "x": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "measure": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "page",
+        "x",
+        "y",
+        "width",
+        "height"
+      ]
+    },
+    "voice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row": {
+          "enum": [
+            "upper",
+            "lower"
+          ]
+        },
+        "hand": {
+          "enum": [
+            "right",
+            "left"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "row"
+      ]
+    },
+    "measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "system": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "voices": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "meter": {
+          "$ref": "#/$defs/meter"
+        },
+        "span": {
+          "$ref": "#/$defs/fraction"
+        },
+        "barline": {
+          "enum": [
+            "single",
+            "double",
+            "final"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "system",
+        "voices"
+      ]
+    },
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "voice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "measure": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "beat": {
+          "$ref": "#/$defs/fraction"
+        },
+        "degree": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "accidental": {
+          "type": "integer",
+          "minimum": -2,
+          "maximum": 2
+        },
+        "octave": {
+          "type": "integer",
+          "minimum": -8,
+          "maximum": 8
+        },
+        "duration": {
+          "$ref": "#/$defs/fraction"
+        },
+        "durationLines": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "extensionDashes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "dots": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "tupletId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "beamGroupIds": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "minItems": 0
+        },
+        "lyric": {
+          "$ref": "#/$defs/lyric"
+        },
+        "fingering": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "source": {
+          "$ref": "#/$defs/sourceBox"
+        },
+        "accidentalSign": {
+          "enum": [
+            "doubleFlat",
+            "flat",
+            "natural",
+            "sharp",
+            "doubleSharp"
+          ]
+        },
+        "ink": {
+          "enum": [
+            "gray"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "voice",
+        "measure",
+        "beat",
+        "degree",
+        "accidental",
+        "octave",
+        "duration",
+        "durationLines",
+        "extensionDashes",
+        "dots"
+      ]
+    },
+    "lyric": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "continuesOn": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "punctuation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "tuplet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 128
+        },
+        "ratio": {
+          "$ref": "#/$defs/fraction"
+        },
+        "start": {
+          "$ref": "#/$defs/anchor"
+        },
+        "end": {
+          "$ref": "#/$defs/anchor"
+        },
+        "placement": {
+          "enum": [
+            "above",
+            "below"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bracket": {
+          "enum": [
+            "bracket",
+            "arc",
+            "number"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "count",
+        "ratio",
+        "start",
+        "end",
+        "placement",
+        "bracket"
+      ]
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "dynamic",
+            "crescendo",
+            "diminuendo",
+            "accent",
+            "staccato",
+            "tie",
+            "slur",
+            "tempoText",
+            "tempoMark",
+            "expressionText",
+            "pedal"
+          ]
+        },
+        "start": {
+          "$ref": "#/$defs/anchor"
+        },
+        "end": {
+          "$ref": "#/$defs/anchor"
+        },
+        "placement": {
+          "enum": [
+            "above",
+            "below"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/sourceBox"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "start",
+        "placement"
+      ]
+    },
+    "tempo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "at": {
+          "$ref": "#/$defs/anchor"
+        },
+        "bpm": {
+          "type": "number",
+          "minimum": 1
+        },
+        "transition": {
+          "enum": [
+            "step",
+            "linear"
+          ]
+        },
+        "annotationId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "at",
+        "bpm",
+        "transition"
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/sourceBox"
+        }
+      },
+      "required": [
+        "id",
+        "field",
+        "message",
+        "source"
+      ]
+    }
+  }
+}

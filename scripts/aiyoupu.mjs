@@ -26,6 +26,7 @@ import {notationAudit} from './notation-audit.mjs';
 import {exportWorkbench} from './workbench-export-v2.mjs';
 import {buildScoreStrip} from './score-strip.mjs';
 import {directionMain,DIRECTION_USAGE} from './direction-cli.mjs';
+import {jianpuMain,validateJianpuBind} from './jianpu.mjs';
 import {runtimeSourceFingerprint,requireHandoffRuntime} from './direction-engine.mjs';
 
 const scripts=path.dirname(fileURLToPath(import.meta.url));
@@ -104,7 +105,9 @@ export function bindJob(a){
     if(audio&&audioChoice==='silent')throw failure('AUDIO_DECISION_MISMATCH','User approved silence','Use the reviewed audio decision.');
     if(audio){audioEvidence=validateAudioEvidence(need(a,'audio-evidence'),audio,props.timeline,{draft:!!a.draft});if(audioChoice==='synthesize'&&audioEvidence.kind==='provided-recording')throw failure('AUDIO_DECISION_MISMATCH','Generated audio cannot be relabeled as a user recording','Use actual sampled export evidence.');}
   }
-  if(!['svg','musicxml','midi','audio','pdf','staff-image','jianpu-image'].includes(sourceType))throw failure('SOURCE_TYPE_INVALID',sourceType,'Use a documented source type.');
+  const nativeJianpu=props.timeline.symbolic?.playback?.kind==='jianpu/v1';
+  if((nativeJianpu&&!['jianpu-json','jianpu-image'].includes(sourceType))||(!nativeJianpu&&sourceType==='jianpu-json'))throw failure('JIANPU_SOURCE_TYPE_REQUIRED','Jianpu jobs must bind with their dedicated source type','Use jianpu-json or jianpu-image with the reviewed proof check.');
+  if(!['svg','musicxml','midi','audio','pdf','staff-image','jianpu-image','jianpu-json'].includes(sourceType))throw failure('SOURCE_TYPE_INVALID',sourceType,'Use a documented source type.');
   const image=props.scoreImage??{};
   if((image.x??0)!==0||(image.y??0)!==0||(image.width??props.timeline.scoreWidth)!==props.timeline.scoreWidth||(image.height??props.timeline.scoreHeight)!==props.timeline.scoreHeight)throw failure('LAYOUT_NORMALIZATION_REQUIRED','Score image uses offsets/scales outside the checked SVG coordinate system','Normalize exported SVG and timeline together; the legacy component remains compatible with custom transforms.');
   if(!audio&&!a['silent-confirmed'])throw failure('AUDIO_MISSING','Song props have no audioSrc','Ask whether to synthesize piano-like audio or explicitly confirm a silent preview; do not claim an audible work.');
@@ -114,7 +117,12 @@ export function bindJob(a){
     if(fresh.some((m,i)=>Math.abs(m.x-layout.mapping[i].x)>.01||Math.abs(m.y-layout.mapping[i].y)>.01))throw failure('LAYOUT_STALE','Browser geometry changed','Regenerate geometry from the same actual SVG.');
   }
   let scoreReview=null,reviewFiles=[],directMusicxmlPilot=false;
-  if(['pdf','staff-image','jianpu-image','musicxml','audio'].includes(sourceType)){
+  if(nativeJianpu){
+    const reportFile=need(a,'score-review');
+    scoreReview=readJSON(reportFile);
+    if(!!scoreReview.imageAudit!==(sourceType==='jianpu-image'))throw failure('JIANPU_SOURCE_TYPE_REQUIRED','Image source provenance does not match the proof','Use the original source type from the score approval.');
+    reviewFiles=validateJianpuBind({reportFile,timeline:props.timeline,score,approval:a['score-approval'],layout});
+  }else if(['pdf','staff-image','jianpu-image','musicxml','audio'].includes(sourceType)){
     if(!a['score-review'])throw failure('SCORE_REVIEW_REQUIRED','Structured score and visual review evidence required','Run aiyoupu score check/compare and resolve uncertain measures before binding.');
     scoreReview=readJSON(a['score-review']);
     // A supplied MusicXML pilot can be reviewed directly as editable source + native SVG.
@@ -198,7 +206,8 @@ export function keyframes(job,a){
   if(job.production?.milestone&&!firstFour.length)throw failure('PILOT_MEASURES_REQUIRED','No explicit measure/occurrence data','Map source measures before generating a first-four pilot.');
   const musicalPilotEnd=firstFour.length?Math.min(t.durationInFrames-1,Math.ceil(Math.max(...firstFour.map(m=>m.end)))):t.durationInFrames-1;
   const wholeTeachingPilot=props.visualPreset==='TeachingLandscape'&&firstFour.length>0&&t.events.every(e=>e.notes.every(n=>e.frame+(n.durationFrames??0)<=musicalPilotEnd));
-  const pilotEnd=wholeTeachingPilot?t.durationInFrames-1:musicalPilotEnd;
+  const wholeJianpuPilot=t.symbolic?.playback?.kind==='jianpu/v1'&&firstFour.length>0&&t.events.every(e=>e.notes.every(n=>e.frame+(n.durationFrames??0)<=musicalPilotEnd));
+  const pilotEnd=wholeTeachingPilot||wholeJianpuPilot?t.durationInFrames-1:musicalPilotEnd;
   const frameSet=new Set([Math.min(t.durationInFrames-1,Math.ceil(t.fps*.3)),Math.floor(t.durationInFrames*.5),Math.max(0,t.durationInFrames-Math.ceil(t.fps*.3)-1)]);
   const chosen=[t.events[0],t.events.find(e=>e.notes.length>1),t.events.find(e=>e.notes.some(n=>n.tieStop)),t.events.find(e=>e.hand==='left'),t.events.find((e,i)=>i>0&&Math.abs(e.y-t.events[i-1].y)>200)];
   chosen.filter(Boolean).forEach(e=>frameSet.add(Math.floor(e.frame)));
@@ -228,7 +237,7 @@ export function keyframes(job,a){
     clips.push(clip);
   }
   if(job.production?.milestone==='first-four-pilot'){
-    const clip=path.join(dir,'first-four.mp4'),remux=wholeTeachingPilot&&job.audioSrc;
+    const clip=path.join(dir,'first-four.mp4'),remux=(wholeTeachingPilot||wholeJianpuPilot)&&job.audioSrc;
     const raw=remux?path.join(dir,'first-four-render-source.mp4'):clip;
     executeLogged(process.execPath,[cli,'render',job.entry,job.composition,raw,`--frames=0-${pilotEnd}`,'--concurrency=2',...common],{cwd:job.project,log:raw+'.command.json'});
     if(remux)muxReviewedAudio({video:raw,audio:path.join(job.assetProject??job.project,'public',job.audioSrc),out:clip,durationSeconds:(pilotEnd+1)/t.fps});
@@ -236,7 +245,8 @@ export function keyframes(job,a){
   }
   const manifest=path.join(dir,'frames.json');writeJSON(manifest,{schema:'aiyoupu-keyframes/v1',jobSha256:sha256(fs.readFileSync(a.job)),frames:frames.map((frame,i)=>({frame,seconds:frame/t.fps,file:images[i]})),clips});
   const logs=fs.readdirSync(dir).filter(n=>n.endsWith('.command.json')).map(n=>path.join(dir,n));
-  return requestReview({stage:'keyframes',out:path.join(dir,'review'),files:[path.resolve(a.job),...Object.keys(job.fingerprints),manifest,...images,...clips,...logs],display:[...images,...clips],jobSha256:sha256(fs.readFileSync(a.job)),notes:[`音频来源与混音：${JSON.stringify(job.audioProduction??{kind:job.audioSrc?'legacy-unverified':'silent'})}。请确认本版实际试听。`,'先核对前四小节方向，再核对所附全曲中段/尾段和换行风险帧；首四小节不代表全曲正确。','连音必须试听/观看短片段；静帧无法证明没有重复起音。','确认本版后才允许完整导出。未回复时本回合结束。']});
+  // The review binds the job digest, and loadJob verifies its frozen input files.
+  return requestReview({stage:'keyframes',out:path.join(dir,'review'),files:[path.resolve(a.job),manifest,...images,...clips,...logs],display:[...images,...clips],jobSha256:sha256(fs.readFileSync(a.job)),notes:[`音频来源与混音：${JSON.stringify(job.audioProduction??{kind:job.audioSrc?'legacy-unverified':'silent'})}。请确认本版实际试听。`,'先核对前四小节方向，再核对所附全曲中段/尾段和换行风险帧；首四小节不代表全曲正确。','连音必须试听/观看短片段；静帧无法证明没有重复起音。','确认本版后才允许完整导出。未回复时本回合结束。']});
 }
 function openWorkbench(a){
  const preview=typeof a.preview==='string'?path.resolve(a.preview):null;
@@ -246,8 +256,9 @@ function openWorkbench(a){
 }
 export async function main(argv){
   const [command,...rest]=argv;
+  if(command==='jianpu')return jianpuMain(rest);
   if(['doctor','install','prepare','score'].includes(command)){const child=spawnSync(process.execPath,[path.join(scripts,command==='install'?'install-v2.mjs':`${command}.mjs`),...rest],{stdio:'inherit',windowsHide:true});return {exitCode:child.status??2,delegated:true};}
-  if(!command||command==='--help')return {status:'help',commands:['direction','workbench-export','workbench','workbench-approval','score-strip','quality-request','source-scope','production-check','symbolic','analyze-audio','map-time','camera-path','focus-continuity','quality','audio-plan','audio-render','audio-master','audio-recording','notation-audit','doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','open','gate','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Agent full path: direction prepare/inspect/validate/save/derive/still; optional direction console: workbench open --preview; separate human content gate: workbench review --request. Two real human gates remain: score-request then keyframes, each followed by an actual user response. No automatic installs or approvals.'};
+  if(!command||command==='--help')return {status:'help',commands:['jianpu','direction','workbench-export','workbench','workbench-approval','score-strip','quality-request','source-scope','production-check','symbolic','analyze-audio','map-time','camera-path','focus-continuity','quality','audio-plan','audio-render','audio-master','audio-recording','notation-audit','doctor','install','prepare','score','music','music-from-check','geometry','score-request','approve','open','gate','status','keyframes','synthesize','align','calibrate','bind','preview','render','verify'],usage:'Agent full path: direction prepare/inspect/validate/save/derive/still; optional direction console: workbench open --preview; separate human content gate: workbench review --request. Two real human gates remain: score-request then keyframes, each followed by an actual user response. No automatic installs or approvals.'};
   if(command==='workbench'){
    const [sub,...subRest]=rest,a2=args(subRest);
   if(sub==='open')return await openWorkbench(a2);
@@ -316,9 +327,10 @@ if(command==='camera-path'){const t=readJSON(need(a,'timeline'));Object.assign(t
   if(command==='render'&&!job.draft&&(job.executionProtocol!=='aiyoupu-checked/v2'||job.audioSrc&&!job.quality))throw failure('QUALITY_REBIND_REQUIRED','Legacy job cannot authorize a new production export','Rebind with current configuration, content evidence and execution fingerprints.');
   if(command==='render')requireApproval(a.approval,'keyframes',{jobSha256:sha256(fs.readFileSync(a.job))});
   const cli=runtime(job),cliArgs=[command==='preview'?'studio':'render',job.entry];
-  const remuxTeaching=command==='render'&&job.audioSrc&&readJSON(job.propsFile).visualPreset==='TeachingLandscape';
-  const rawRender=remuxTeaching?path.resolve(need(a,'out')+'.render-source.mp4'):a.out;
-  if(command==='render'){if(a.confirmed!==true)throw failure('EXPORT_CONFIRMATION_REQUIRED','Render requires explicit export intent','Confirm export, then pass --confirmed.');if(fs.existsSync(need(a,'out'))||remuxTeaching&&fs.existsSync(rawRender))throw failure('OUTPUT_EXISTS',a.out,'Choose a new output file.');cliArgs.push(job.composition,path.resolve(rawRender));}
+  const renderProps=readJSON(job.propsFile);
+  const remuxReviewed=command==='render'&&job.audioSrc&&(renderProps.visualPreset==='TeachingLandscape'||renderProps.timeline.symbolic?.playback?.kind==='jianpu/v1');
+  const rawRender=remuxReviewed?path.resolve(need(a,'out')+'.render-source.mp4'):a.out;
+  if(command==='render'){if(a.confirmed!==true)throw failure('EXPORT_CONFIRMATION_REQUIRED','Render requires explicit export intent','Confirm export, then pass --confirmed.');if(fs.existsSync(need(a,'out'))||remuxReviewed&&fs.existsSync(rawRender))throw failure('OUTPUT_EXISTS',a.out,'Choose a new output file.');cliArgs.push(job.composition,path.resolve(rawRender));}
   cliArgs.push(`--props=${job.propsFile}`);
   if(job.assetProject)cliArgs.push(`--public-dir=${path.join(job.assetProject,'public')}`);
   if(a.browser)cliArgs.push(`--browser-executable=${path.resolve(a.browser)}`);
@@ -329,7 +341,7 @@ if(command==='camera-path'){const t=readJSON(need(a,'timeline'));Object.assign(t
     const result=spawnSync(process.execPath,[cli,...cliArgs],{cwd:job.project,stdio:'inherit',windowsHide:true});if(result.status!==0)throw failure('REMOTION_FAILED',String(result.status),'Inspect Studio output.');
   }else executeLogged(process.execPath,[cli,...cliArgs],{cwd:job.project,log:`${a.out}.render-log.json`});
   if(command==='preview')return {status:'preview_closed'};
- if(remuxTeaching)muxReviewedAudio({video:rawRender,audio:path.join(job.assetProject??job.project,'public',job.audioSrc),out:a.out,durationSeconds:readJSON(job.propsFile).timeline.durationInFrames/readJSON(job.propsFile).timeline.fps,ffmpeg:a.ffmpeg??'ffmpeg'});
+ if(remuxReviewed)muxReviewedAudio({video:rawRender,audio:path.join(job.assetProject??job.project,'public',job.audioSrc),out:a.out,durationSeconds:readJSON(job.propsFile).timeline.durationInFrames/readJSON(job.propsFile).timeline.fps,ffmpeg:a.ffmpeg??'ffmpeg'});
   const report=verifyOutput(job,a.out,a);writeJSON(a.report??`${a.out}.verification.json`,report);return report;
 }
 if(isMain(import.meta.url)){

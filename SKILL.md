@@ -3,9 +3,9 @@ name: aiyoupu
 description: Make piano-score videos with original two-hand leaps, glow trails and camera. Review notation revisions, reuse sampled audio tools, and stop for score approval then actual keyframe/audition approval before exporting.
 ---
 
-# AI有谱 V2.3
+# AI有谱 V2.4
 
-The V2.0 rename introduced AI有谱: use $aiyoupu, the aiyoupu CLI, and Aiyoupu composition/component names. This package is v2.3.2. Each new song still requires its own content reviews before delivery. Old task files remain frozen and require explicit migration to new files. Read [migration and invalidated references](history/migration-v2/migration-guide.md). The new camera path applies to newly prepared directions; existing saved jobs stay frozen. For configurations read [visual presets](references/visual-presets.md); for continuous geometry read [score-strip](references/score-strip.md).
+The V2.0 rename introduced AI有谱: use $aiyoupu, the aiyoupu CLI, and Aiyoupu composition/component names. This package is v2.4.0. The Jianpu image-to-video workflow is new in this release. Each new song still requires its own content reviews before delivery. Old task files remain frozen and require explicit migration to new files. Read [migration and invalidated references](history/migration-v2/migration-guide.md). The new camera path applies to newly prepared directions; existing saved jobs stay frozen. For configurations read [visual presets](references/visual-presets.md); for continuous geometry read [score-strip](references/score-strip.md).
 
 
 For flat 16:9 teaching read [TeachingLandscape](references/teaching-landscape-v2.md) and use the V2 config/resolver/scene files. For title-only requests read [public score discovery](references/public-score-sources-v2.md). Workbench export requires both source approvals. Preserve the historical 14 kept / 12 retired options and old defaults. The Songbie source pilot was approved in the previous generation; its renamed V2 preview still needs actual V2 keyframe review and is not an authoritative arrangement. No license is assigned until the owner explicitly decides.
@@ -16,7 +16,7 @@ Use `node <skill>/scripts/aiyoupu.mjs`. The internal `aiyoupu-legacy.mjs` also u
 
 ## Direction workflow: Agent is the full path; the workbench is optional
 
-The Agent must be able to complete the whole production path in the CLI without opening a browser: prepare MusicXML/MIDI, create a versioned direction preview, validate/export a direction, render a real still, save the direction, and derive the job/props for the existing keyframe review. `aiyoupu direction` is that path. `aiyoupu direction prepare --musicxml <score.musicxml> --audio <same-arrangement.mp3> --title <title> --out <preview-dir>` engraves with the installed Verovio/browser tools and measures the noteheads; `--midi` first uses the installed MuseScore 4 CLI. PDF/images require Agent notation recognition and a corrected MusicXML before this command; neither path invents notes. Use `direction validate`, `direction save`, `direction derive`, and `direction still` to produce an actual PNG without the browser UI. A generated score, direction, still or preview is not a human approval.
+The Agent must be able to complete the whole production path in the CLI without opening a browser: prepare MusicXML/MIDI, create a versioned direction preview, validate/export a direction, render a real still, save the direction, and derive the job/props for the existing keyframe review. `aiyoupu direction` is that path. `aiyoupu direction prepare --musicxml <score.musicxml> --audio <same-arrangement.mp3> --title <title> --out <preview-dir>` engraves with the installed Verovio/browser tools and measures the noteheads; `--midi` first uses the installed MuseScore 4 CLI. Staff PDF/images require Agent notation recognition and corrected MusicXML before this command. For numbered-notation images, use the JianpuJSON workflow below. Use `direction validate`, `direction save`, `direction derive`, and `direction still` to produce an actual PNG without the browser UI. A generated score, direction, still or preview is not a human approval.
 
 The direction console is the optional visual chooser for one already-prepared preview:
 
@@ -31,6 +31,10 @@ When a valid direction preview is ready, proactively tell the user: **「想更�
 After a direction is saved, run `direction derive --direction <saved-direction.json> --project <existing Remotion project> --out <job-dir>`. This creates a visual-direction draft and keeps its assets under the job's `public` tree. Continue formal production through `aiyoupu bind` with `--asset-project <job-dir>`, the frozen props/production, real score review and v2 quality evidence; then use the existing `keyframes` command. The derived job explicitly marks a new keyframe review as required. Never reuse a previous keyframe approval. Do not treat `direction_draft` as a formal bound job.
 
 The Agent conversation is the default human content gate: show the actual review material and quote the user's real response. An optional local page may be opened separately with `aiyoupu workbench review --request <review/request.json>` on another port only when every required item can be displayed; the score stage also records the audio choice. It is not part of the direction console, and its click credential still binds the actual displayed content. If the page cannot show all required content, use the Agent conversation instead.
+
+## Numbered-notation image input
+
+Use [the JianpuJSON image path](references/jianpu-json.md#phase-3-image-path) to prepare source crops, read each written measure with Agent vision, and audit the draft. Stop for an unreadable tonic or meter. Show the original and the full SVG comparison, flag unresolved symbols with their source locations, and wait for an actual score approval. Keep the frozen JianpuJSON as the notation and layout source through the existing direction, keyframe and audio review workflow.
 
 ## Optional camera styles
 

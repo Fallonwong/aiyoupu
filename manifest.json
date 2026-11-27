@@ -1,6 +1,6 @@
 {
   "name": "aiyoupu",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "license": "UNASSIGNED_BY_OWNER_REQUEST",
   "baseline": {
     "remotion": "4.0.515",
@@ -9,7 +9,7 @@
   },
   "repository": "https://github.com/Fallonwong/aiyoupu",
   "releaseStatus": "stable",
-  "releaseDate": "2026-11-13",
+  "releaseDate": "2026-11-28",
   "files": {
     ".gitattributes": {
       "bytes": 170,
@@ -32,8 +32,8 @@
       "sha256": "9f095a750f9047d621691eff5629632f24958fadf775b8e2c1a2b4c43d60c8c0"
     },
     "SKILL.md": {
-      "bytes": 16075,
-      "sha256": "61af7c3e1fe29a6031bf081c8f1964d418df98c1c69d0bd1135a2bd2366c3fa0"
+      "bytes": 16690,
+      "sha256": "9a736e54d0704af6c6f6bab007eae41cf0ffa6cd8a7c86a2b90c6b1d0a853a5d"
     },
     "agents/openai.yaml": {
       "bytes": 489,
@@ -267,6 +267,14 @@
       "bytes": 9198,
       "sha256": "4ac39539275731e5823f05f38ebbe6c57c3793cd95b137b82f8cd3870090f4e8"
     },
+    "references/jianpu-json.md": {
+      "bytes": 9353,
+      "sha256": "efde31930e4a0e4676eecc25ee0c732390904d8a264c1036d29593dd99c245b8"
+    },
+    "references/jianpu.schema.json": {
+      "bytes": 12559,
+      "sha256": "f1525a34f9d1693e911b9c281d485d33a242ab85d744e84dbff859c9dcd4c75e"
+    },
     "references/material-preparation.md": {
       "bytes": 11559,
       "sha256": "130bd91e6c98471442868b8d3eddf308bd5cdb1dfea8694fee5ea0faf2d5046c"
@@ -332,8 +340,8 @@
       "sha256": "01617a232a24bf94122cc6d76f53a03d91e62492a89d527e220cdd51c705ec18"
     },
     "scripts/aiyoupu.mjs": {
-      "bytes": 47813,
-      "sha256": "0b10c604398e1ac16b704ca65bb0fe65c90f609a3f821981aa93beed8fdb2b35"
+      "bytes": 49106,
+      "sha256": "7852122cd21eee68d7f741a47a6b86480dc35c7af58ac776e1d9401b26af4d52"
     },
     "scripts/audio-analysis.py": {
       "bytes": 11394,
@@ -368,8 +376,8 @@
       "sha256": "73eea33f7de50f5322f67930e85f5ebd482908229e20b7928d1fb836745334ba"
     },
     "scripts/direction-cli.mjs": {
-      "bytes": 7536,
-      "sha256": "2db5739348245b603bb1527b00311fea823867d1c930ec5cb1f586a5c4840f1f"
+      "bytes": 7740,
+      "sha256": "aee5ff7a296e079595dffab60d48ba29de1c9a70807c6b90dad45097c217abeb"
     },
     "scripts/direction-engine.mjs": {
       "bytes": 22152,
@@ -419,6 +427,30 @@
       "bytes": 6993,
       "sha256": "da85651037150c38b8c36372f7ebf5ef1c119da09c47acba99b4a86f2b617263"
     },
+    "scripts/jianpu-audio.mjs": {
+      "bytes": 8647,
+      "sha256": "63c853e084c0d5f21dfd661ac8681ed0657676b7d66d2bc069406a645043d801"
+    },
+    "scripts/jianpu-check.mjs": {
+      "bytes": 14120,
+      "sha256": "a64949ca07d3b072642e1e1eb20534805d26e230093598c46f03be7d9949284d"
+    },
+    "scripts/jianpu-image.mjs": {
+      "bytes": 12473,
+      "sha256": "75c7e57351add664b31f4215d5aeb9276418afc69d4c2ded7b91594c618f8c83"
+    },
+    "scripts/jianpu-layout.mjs": {
+      "bytes": 14162,
+      "sha256": "5cc4daaa9d5a223886562f73d4884c17a9109deb17c7d80609a3003178718089"
+    },
+    "scripts/jianpu-symbolic.mjs": {
+      "bytes": 5800,
+      "sha256": "90ff6d2d5ebe5789c39185f1d41926c3d92a11b11b8f54e3864f3bf9d7071020"
+    },
+    "scripts/jianpu.mjs": {
+      "bytes": 13963,
+      "sha256": "ce9037d58144790a9dec9b9de8bc8cf64e1dde0d36d8a6616652b829fd9fea57"
+    },
     "scripts/midi.mjs": {
       "bytes": 5690,
       "sha256": "dbbf8660eb26b00ca75817263623719e5d1b222423aa5b9f936a50b5c46104ad"
@@ -436,8 +468,8 @@
       "sha256": "37e5eca197b92bd14a6fd9a7f2283a7a272a97498b9af633d4a9484f114ea445"
     },
     "scripts/performance-map.mjs": {
-      "bytes": 9809,
-      "sha256": "9b475925ec20d0cf7d6e91c12d8e0608f8cbbcf13952f98d3886455a1420b028"
+      "bytes": 10452,
+      "sha256": "b9156b73674d3f760b3da01364694f7c9e5ff6e77f503794da277df23635f3d5"
     },
     "scripts/prepare-canon-sample.mjs": {
       "bytes": 15674,
@@ -452,16 +484,16 @@
       "sha256": "7bf539125d1242122d8c6caa8eacccbaac534c44a35345dfce73e32be25ab2f0"
     },
     "scripts/quality-v2.mjs": {
-      "bytes": 12948,
-      "sha256": "32c13b79548888d39c6093c8758a11ed43f282243953a4b7ea9aa502a282cd91"
+      "bytes": 13590,
+      "sha256": "0115701c190c76f6736348c83600aaf508ee3024e2644c0cfeb90e2bd9af4297"
     },
     "scripts/quality.mjs": {
       "bytes": 11382,
       "sha256": "108034c482f599d28c882338c4e9e39d0e4e897aef40c714c026c92906e15981"
     },
     "scripts/reading-camera.mjs": {
-      "bytes": 5630,
-      "sha256": "4cad2b7606f26372f7882b26b4e3d4e984b88457c97f5b5f246018fa8c04aae0"
+      "bytes": 5882,
+      "sha256": "93945d775850d653d541359a5bd68964d87dfbfefa44a8ab8972fb8af5d8c1ef"
     },
     "scripts/review.mjs": {
       "bytes": 15742,

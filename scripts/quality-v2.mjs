@@ -7,6 +7,7 @@ import {failure,hashObject,sha256,probeMedia} from './audio.mjs';
 import {validateTimeMap,secondsAt,validateMappedNotation} from './performance-map.mjs';
 
 import {checkSourceScope} from './source-scope.mjs';
+import {validateImageAudit} from './jianpu-image.mjs';
 
 const fail=(code,message)=>{throw failure(code,message,'Present actual source/audio evidence; unresolved items cannot authorize production.');};
 
@@ -30,7 +31,16 @@ export function evaluateQuality({timeline,audio,review,check,originalSourceSha25
 
   if(originalSourceSha256&&(review.source.originalSourceSha256!==originalSourceSha256||!Object.values(review.fingerprints).includes(originalSourceSha256)))fail('SOURCE_REVIEW_REQUIRED','Review does not bind the actual original PDF/image');
 
-  if(originalSourceSha256&&originalSourceSha256!==s.sourceSha256){
+  if(originalSourceSha256&&check.schema==='aiyoupu-jianpu-check/v1'){
+
+    if(!check.imageAudit||!evidence(check.imageAudit)||!evidence(check.source))fail('SOURCE_SCOPE_REQUIRED','Jianpu needs the frozen source and image comparison');
+
+    const audit=validateImageAudit(check.imageAudit,check.source);
+
+    if(audit.sourceSha256!==originalSourceSha256||audit.measures.length!==check.score.measures.length||
+      ![audit.original,audit.capture,audit.comparison].every(evidence))fail('SOURCE_SCOPE_MISMATCH','Jianpu image evidence differs from the frozen full-score comparison');
+
+  }else if(originalSourceSha256&&originalSourceSha256!==s.sourceSha256){
 
     if(!sourceScope?.source||!sourceScope.inventory||!evidence(sourceScope.source))fail('SOURCE_SCOPE_REQUIRED','Original PDF/image requires a frozen scope inventory and explicit excerpt mapping where applicable');
 
