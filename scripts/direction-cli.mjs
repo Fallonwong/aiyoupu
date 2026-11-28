@@ -52,6 +52,7 @@ export async function directionMain(sub,argv=process.argv.slice(2)){
    }finally{fs.rmSync(temp,{recursive:true,force:true});}
   }
   timeline=read(path.resolve(need(a,'timeline')));score=path.resolve(need(a,'score'));
+  if(timeline.symbolic?.playback?.kind==='jianpu/v1')throw failure('JIANPU_PREPARE_REQUIRED','Jianpu direction preview needs its frozen proof','Use aiyoupu jianpu prepare with the real score approval.');
   return preparePreview({timeline,score,audio:a.audio?path.resolve(String(a.audio)):null,title:a.title??'',subtitle:a.subtitle??'',label:a.label??'',chineseTitle:a.chinese??a.title??'',direction,out,skillRoot});
  }
  if(sub==='validate'){

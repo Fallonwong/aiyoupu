@@ -1,6 +1,6 @@
 # AI有谱: implemented behavior and limits
 
-The current package is **V2.3 (v2.3.2)**. Actual-song end-to-end production acceptance remains outstanding. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
+The current package is **V2.4 (v2.4.0)**. The Jianpu image-to-video workflow is implemented and audited against two real songs. Actual-song end-to-end formal bind evidence remains outstanding. Actual-song end-to-end production acceptance remains outstanding. V1.2.0 and V2.0 notes below describe earlier releases; their names are retained as history rather than current delivery labels.
 
 ## Implemented
 
